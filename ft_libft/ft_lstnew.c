@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 10:48:49 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/03/19 11:12:59 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:08:05 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*newlist;
 
+	if (content == NULL)
+		return (NULL);
 	newlist = (t_list *)malloc(sizeof(t_list));
-	if (newlist == 0)
-		return (0);
+	if (newlist == NULL)
+		return (NULL);
 	newlist->content = content;
-	newlist->next = 0;
+	newlist->next = NULL;
 	return (newlist);
 }

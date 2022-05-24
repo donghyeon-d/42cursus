@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:18:33 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/03/19 11:23:07 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:17:40 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	while (*s)
-	{
-		write(fd, s, 1);
-		s++;
-	}
+	int	n;
+
+	n = 0;
+	while (s[n])
+		n++;
+	if (n != 0)
+		write(fd, s, n);
 }

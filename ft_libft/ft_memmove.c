@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 20:40:04 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/03/21 15:46:24 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:10:25 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	size_t	i;
 
 	i = 0;
-	if (dst == 0 && src == 0)
+	if (dst == NULL && src == NULL)
 		return (0);
 	if (dst < src)
 	{

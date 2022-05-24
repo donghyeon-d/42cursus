@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 17:27:59 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/03/19 11:32:39 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:03:35 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	len = ft_newstrlen(s1, set);
 	result = (char *)malloc(sizeof(char) * (len + 1));
-	if (result == 0)
-		return (0);
+	if (result == NULL)
+		return (NULL);
 	while (ft_isset(*s1, set))
 		s1++;
 	i = 0;

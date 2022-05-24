@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 21:25:27 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/03/21 14:49:53 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:10:18 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	size_t	i;
 
 	i = 0;
-	if (n == 0 || dst == 0 || src == 0)
+	if (n == 0 || dst == NULL || src == NULL)
 		return (dst);
 	while (i < n)
 	{

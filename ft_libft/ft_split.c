@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 18:24:10 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/03/23 19:17:13 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:19:34 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static char	*ft_word(char const *s, char c)
 		wordlen++;
 	}
 	word = (char *)malloc(sizeof(char) * (wordlen + 1));
-	if (word == 0)
-		return (0);
+	if (word == NULL)
+		return (NULL);
 	i = 0;
 	while (i < wordlen)
 	{
@@ -76,7 +76,7 @@ char	**ft_wordfree(char **str, int i)
 		i--;
 	}
 	free(str);
-	return (0);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
@@ -87,8 +87,8 @@ char	**ft_split(char const *s, char c)
 
 	wordcount = ft_wordcount(s, c);
 	result = (char **)malloc(sizeof(char *) * (wordcount + 1));
-	if (result == 0)
-		return (0);
+	if (result == NULL)
+		return (NULL);
 	i = 0;
 	while (*s)
 	{
@@ -97,13 +97,13 @@ char	**ft_split(char const *s, char c)
 		if (*s)
 		{
 			result[i] = ft_word(s, c);
-			if (result[i] == 0)
+			if (result[i] == NULL)
 				return (ft_wordfree(result, i));
 			i++;
 		}
 		while (!(ft_issep(*s, c)) && *s)
 			s++;
 	}
-	result[i] = 0;
+	result[i] = NULL;
 	return (result);
 }

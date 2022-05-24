@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:18:43 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/03/24 19:32:29 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:09:42 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	*ft_memchr(const void *s, int c, size_t n)
 		locate++;
 		i++;
 	}
-	return (0);
+	return (NULL);
 }

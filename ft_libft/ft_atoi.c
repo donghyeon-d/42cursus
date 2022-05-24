@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 10:51:54 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/03/24 19:26:33 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:05:34 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int					i;
-	int					sign;
-	unsigned long long	result;
+	int				i;
+	int				sign;
+	unsigned long	result;
 
 	i = 0;
 	sign = 1;
@@ -32,9 +32,9 @@ int	ft_atoi(const char *str)
 	while ('0' <= str[i] && str[i] <= '9')
 	{
 		result = result * 10 + (str[i] - '0');
-		if (result > LLONG_MAX + (unsigned long long)1 && sign < 0)
+		if (result > LONG_MAX + (unsigned long)1 && sign < 0)
 			return (0);
-		if (result > LLONG_MAX && sign > 0)
+		if (result > LONG_MAX && sign > 0)
 			return (-1);
 		i++;
 	}

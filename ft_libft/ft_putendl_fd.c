@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:21:14 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/03/19 11:23:03 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:12:47 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	while (*s)
+	int	n;
+
+	n = 0;
+	while (s[n])
+		n++;
+	if (n != 0)
 	{
-		write(fd, s, 1);
-		s++;
+		write(fd, s, n);
+		write(fd, "\n", 1);
 	}
-	write(fd, "\n", 1);
 }

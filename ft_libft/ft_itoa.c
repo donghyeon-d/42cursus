@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:21 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/03/19 10:58:12 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:08:19 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ char	*ft_itoa(int n)
 
 	len = ft_ilen(n);
 	num = (char *)malloc(sizeof(char) * (len + 1));
-	if (num == 0)
-		return (0);
+	if (num == NULL)
+		return (NULL);
 	i = 0;
-	num[len] = 0;
+	num[len] = '\0';
 	if (n == 0)
 		num[0] = '0';
 	if (n < 0)
