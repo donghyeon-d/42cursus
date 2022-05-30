@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:54:29 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/05/26 09:59:51 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/05/30 19:32:27 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,4 @@ int			pop_stack_ac(t_stack_ac *pstack)
 }
 
 
-int			peak_stack_ac(t_stack_ac *pstack);
+// int			peak_stack_ac(t_stack_ac *pstack);

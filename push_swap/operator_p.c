@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <unistd.h>
 #include "pushswap.h"
 
 void	pa(t_l_stack *stack_a, t_l_stack *stack_b)
@@ -12,6 +13,7 @@ void	pa(t_l_stack *stack_a, t_l_stack *stack_b)
 	data = popnode->data;
 	push_l_stack(stack_a, data);
 	free(popnode);
+	write(1, "pa\n", 3);
 }
 
 void	pb(t_l_stack *stack_a, t_l_stack *stack_b)
@@ -27,4 +29,5 @@ void	pb(t_l_stack *stack_a, t_l_stack *stack_b)
 	data = popnode->data;
 	push_l_stack(stack_b, data);
 	free(popnode);
+	write(1, "pb\n", 3);
 }

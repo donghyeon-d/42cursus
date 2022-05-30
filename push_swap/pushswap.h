@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:30:16 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/05/26 21:36:23 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/05/30 21:04:35 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ long long	ft_atoll(char *argv);
 
 // main
 void	error_exit(t_l_stack *stack_a, t_l_stack *stack_b);
-int	make_stack_a(t_l_stack *stack_a, int argc, char *argv[]);
+int	*make_stack(t_l_stack *stack_a, t_l_stack *stack_b, int argc, char *argv[]);
+int	issorted(t_l_stack *stack);
+
+//sort
+int	bubble_sort(t_l_stack *stack);
+int select_sort(t_l_stack *stack_a, t_l_stack *stack_b);
 
 #endif
