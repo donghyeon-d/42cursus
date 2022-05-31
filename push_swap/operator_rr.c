@@ -2,57 +2,62 @@
 #include <stdlib.h>
 #include "pushswap.h"
 
-void	rra(t_l_stack *stack_a)
+void	rra(t_stack *stack_a)
 {
-	t_l_stack_node	*temp;
+	int	data;
+	int	i;
 
-	if (stack_a->currentcount < 2)
+	if (stack_a == NULL)
 		return ;
-	temp = stack_a->bottom;
-	temp->nextnode = stack_a->top;
-	stack_a->top = temp;
-	temp = stack_a->top;
-	while (temp->nextnode != NULL)
-		temp = temp->nextnode;
-	stack_a->bottom = temp;
+	if (stack_a->curr_cnt > 1)
+	{
+		data = stack_a->data[stack_a->bottom];
+		i = -1;
+		while (++i < stack_a->curr_cnt - 1)
+			stack_a->data[i] = stack_a->data[i + 1];
+		stack_a->data[stack_a->top] = data;
+	}
 	write(1, "rra\n", 4);
 }
 
-void	rrb(t_l_stack *stack_b)
+void	rrb(t_stack *stack_b)
 {
-	t_l_stack_node	*temp;
-
-	if (stack_b->currentcount < 2)
+	int	data;
+	int	i;
+	if (stack_a == NULL)
 		return ;
-	temp = stack_b->bottom;
-	temp->nextnode = stack_b->top;
-	stack_b->top = temp;
-	temp = stack_b->top;
-	while (temp->nextnode != NULL)
-		temp = temp->nextnode;
-	stack_b->bottom = temp;
+	if (stack_b->curr_cnt > 1)
+	{
+		data = stack_b->data[stack_b->bottom];
+		i = -1;
+		while (++i < stack_b->curr_cnt - 1)
+			stack_b->data[i] = stack_b->data[i + 1];
+		stack_b->data[stack_b->top] = data;
+	}
 	write(1, "rrb\n", 4);
 }
 
-void	rrr(t_l_stack *stack_a, t_l_stack *stack_b)
+void	rrr(t_stack *stack_a, t_stack *stack_b)
 {
-	t_l_stack_node	*temp;
+	int	data;
+	int	i;
 
-	if (stack_a->currentcount < 2 || stack_b->currentcount < 2)
-		return ;
-	temp = stack_a->bottom;
-	temp->nextnode = stack_a->top;
-	stack_a->top = temp;
-	temp = stack_a->top;
-	while (temp->nextnode != NULL)
-		temp = temp->nextnode;
-	stack_a->bottom = temp;
-	temp = stack_b->bottom;
-	temp->nextnode = stack_b->top;
-	stack_b->top = temp;
-	temp = stack_b->top;
-	while (temp->nextnode != NULL)
-		temp = temp->nextnode;
-	stack_b->bottom = temp;
-	write(1, "rrr\n", 4);
+	if (stack_a != NULL && stack_a->curr_cnt > 1)
+	{
+		data = stack_a->data[stack_a->bottom];
+		i = -1;
+		while (++i < stack_a->curr_cnt - 1)
+			stack_a->data[i] = stack_a->data[i + 1];
+		stack_a->data[stack_a->top] = data;
+	}
+	if (stack_b != NULL && stack_b->curr_cnt > 1)
+	{
+		data = stack_b->data[stack_b->bottom];
+		i = -1;
+		while (++i < stack_b->curr_cnt - 1)
+			stack_b->data[i] = stack_b->data[i + 1];
+		stack_b->data[stack_b->top] = data;
+	}
+	if (stack_a != NULL || stack_b != NULL)
+		write(1, "rrr\n", 4);
 }

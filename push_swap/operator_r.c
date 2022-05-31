@@ -1,45 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operator_r.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/31 17:29:58 by dongchoi          #+#    #+#             */
+/*   Updated: 2022/05/31 18:08:40 by dongchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include "pushswap.h"
 
-void	ra(t_l_stack *stack_a)
+void	ra(t_stack *stack_a)
 {
-	t_l_stack_node	*temp;
+	int	i;
+	int	data;
 
-	if (stack_a->currentcount < 2)
+	if (stack_a == NULL)
 		return ;
-	temp = stack_a->top;
-	stack_a->top = temp->nextnode;
-	stack_a->bottom->nextnode = temp;
-	stack_a->bottom = temp;
+	if (stack_a->curr_cnt > 1)
+	{
+		i = stack_a->curr_cnt;
+		data = stack_a->data[stack_a->top];
+		while (--i)
+			stack_a->data[i] = stack_a->data[i - 1];
+		stack_a->data[0] = data;
+	}
 	write(1, "ra\n", 3);
 }
 
-void	rb(t_l_stack *stack_b)
+void	rb(t_stack *stack_b)
 {
-	t_l_stack_node	*temp;
+	int	i;
+	int	data;
 
-	if (stack_b->currentcount < 2)
+	if (stack_b == NULL)
 		return ;
-	temp = stack_b->top;
-	stack_b->top = temp->nextnode;
-	stack_b->bottom->nextnode = temp;
-	stack_b->bottom = temp;
-	write(1, "rb\n", 3);
+	if (stack_b->curr_cnt > 1)
+	{
+		i = stack_b->curr_cnt;
+		data = stack_b->data[stack_b->top];
+		while (--i)
+			stack_b->data[i] = stack_b->data[i - 1];
+		stack_b->data[0] = data;
+	}
+	write(1, "ra\n", 3);
 }
 
-void	rr(t_l_stack *stack_a, t_l_stack *stack_b)
+void	rr(t_stack *stack_a, t_stack *stack_b)
 {
-	t_l_stack_node	*temp;
+	int	i;
+	int	data;
 
-	if (stack_b->currentcount < 2 || stack_a->currentcount < 2)
-		return ;
-	temp = stack_b->top;
-	stack_b->top = temp->nextnode;
-	stack_b->bottom->nextnode = temp;
-	stack_b->bottom = temp;
-	temp = stack_a->top;
-	stack_a->top = temp->nextnode;
-	stack_a->bottom->nextnode = temp;
-	stack_a->bottom = temp;
-	write(1, "rr\n", 3);
+	if (stack_a != NULL && stack_a->curr_cnt > 1)
+	{
+		i = stack_a->curr_cnt;
+		data = stack_a->data[stack_a->top];
+		while (--i)
+			stack_a->data[i] = stack_a->data[i - 1];
+		stack_a->data[0] = data;
+	}
+	if (stack_b != NULL && stack_b->curr_cnt > 1)
+	{
+		i = stack_b->curr_cnt;
+		data = stack_b->data[stack_b->top];
+		while (--i)
+			stack_b->data[i] = stack_b->data[i - 1];
+		stack_b->data[0] = data;
+	}
+	if (stack_a != NULL || stack_b != NULL)
+		write(1, "rr\n", 3);
 }
