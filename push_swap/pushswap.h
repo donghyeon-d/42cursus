@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:30:16 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/05/31 20:07:12 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/01 20:20:30 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_stack
 	int	max_cnt;
 	int	curr_cnt;
 	int	top;
-	int	bottomx;
+	int	bottom;
 	int	*data;
 }	t_stack;
 
@@ -29,48 +29,26 @@ typedef struct s_list
 	int	curr_cnt;
 	int	data;
 	int error;
-	struct s_list next;
+	struct s_list *next;
 }	t_list;
 
-t_stack_ac	*init_stack(int maxcount);
-int			push_stack(t_stack *stack, int data);
-int			pop_stack(t_stack *stack);
-int			del_stack(t_stack *stack);
-
-t_list	*init_list();
-int		push_list(t_list *list, int data);
-void del_list(t_list *list);
-
-typedef struct s_l_stack_node
-{
-	int				data;
-	struct s_l_stack_node	*nextnode;
-}	t_l_stack_node;
-
-typedef struct s_l_stack
-{
-	int				currentcount;
-	t_l_stack_node	*top;
-	t_l_stack_node	*bottom;
-}	t_l_stack;
-
-// struct
-// t_l_stack	*init_l_stack();
-// int			push_l_stack(t_l_stack *pstack, int data);
-// t_l_stack_node	*pop_l_stack(t_l_stack *pstack);
-// int			peak_l_stack(t_l_stack *pstack);
-// void remove_l_stack(t_l_stack *pstack);
-t_stack	*init_stack(int max_cnt);
+t_stack	*init_stack(int maxcount);
 int		push_stack(t_stack *stack, int data);
 int		pop_stack(t_stack *stack);
 int		del_stack(t_stack *stack);
+void	arr_to_stack(int *arr, int arr_len, t_stack *stack_a);//arr 만들 때 정적으로 배열 만들어 줘야 함. 동적 할당 x // argv -> list -> array 할 때 make_array 함수에서 argc 바꿔주는데 그거 활용할 수 있을듯?!
+void 	display_stack(t_stack *stack);
+
+t_list	*init_list();
+int		push_list(t_list *list, int data);
+void 	del_list(t_list *list);
 
 // operator
 void	sa(t_stack *stack_a);
 void	sb(t_stack *stack_b);
 void	ss(t_stack *stack_a, t_stack *stack_b);
-void	pa(t_stack *stack_a, t_stack *stack_b);
-void	pb(t_stack *stack_a, t_stack *stack_b);
+int		pa(t_stack *stack_a, t_stack *stack_b);
+int		pb(t_stack *stack_a, t_stack *stack_b);
 void	ra(t_stack *stack_a);
 void	rb(t_stack *stack_b);
 void	rr(t_stack *stack_a, t_stack *stack_b);
@@ -79,16 +57,22 @@ void	rrb(t_stack *stack_b);
 void	rrr(t_stack *stack_a, t_stack *stack_b);
 
 // util
-int	ft_strlen(char *str);
 long long	ft_atoll(char *argv);
 
 // main
-void	error_exit(t_l_stack *stack_a, t_l_stack *stack_b);
-int	*make_stack(t_l_stack *stack_a, t_l_stack *stack_b, int argc, char *argv[]);
-int	issorted(t_l_stack *stack);
+void	error_exit(t_stack *stack_a, t_stack *stack_b, int error);
 
-//sort
-int	bubble_sort(t_l_stack *stack);
-int select_sort(t_l_stack *stack_a, t_l_stack *stack_b);
+// make array
+void	valid_list(t_list *list, long long arg);
+int	argv_to_list(t_list *list, int argc, char *argv[]);
+char *list_to_array(t_list *list);
+int	*stack_to_array(t_stack *stack);
+int	*make_array(int *argc, char *argv[]);
+
+//sort 
+int bubble_sort(int *arr, int len);// 오름차순 // [0]이 제일 작음
+int	issorted(t_stack *stack);
+
+void	ft_quicksort(t_stack *stack_a, t_stack *stack_b, int len);
 
 #endif

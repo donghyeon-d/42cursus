@@ -1,9 +1,5 @@
-#include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
-#include <limits.h>
 #include "pushswap.h"
-#include "../ft_libft/libft.h"
 
 t_list	*init_list()
 {
@@ -16,6 +12,7 @@ t_list	*init_list()
 	new_list->error = 0;
 	new_list->data = 0;
 	new_list->next = NULL;
+	return (new_list);
 }
 
 int		push_list(t_list *list, int data)
@@ -29,13 +26,13 @@ int		push_list(t_list *list, int data)
 	node->data = data;
 	node->next = NULL;
 	if (list->curr_cnt == 0)
-		node->next = node;
+		list->next = node;
 	else
 	{
 		node->next = list->next;
 		list->next = node;
 	}
-	list->curr_cnt++;2
+	list->curr_cnt++;
 	return (TRUE);
 }
 

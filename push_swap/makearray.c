@@ -44,7 +44,7 @@ int	argv_to_list(t_list *list, int argc, char *argv[]) // list의 head에는 arg
 		{
 			arg = atoll(temp[j]);
 			valid_list(list, arg);
-			if (push_list(list, (int)arg) || list->error == 1);
+			if (!push_list(list, (int)arg) || list->error == 1);
 				return (FALSE);
 		}
 	}
@@ -60,10 +60,7 @@ char *list_to_array(t_list *list)  // arr[0] =  argv[1]
 		return (NULL);
 	arr = malloc(sizeof(int) * list->curr_cnt);
 	if (arr == NUL)
-	{
-		del_list(list);
 		return (NULL);
-	}
 	i = 0;
 	node = list->next;
 	while (node)
@@ -74,12 +71,25 @@ char *list_to_array(t_list *list)  // arr[0] =  argv[1]
 	return (arr);
 }
 
+int	*stack_to_array(t_stack *stack, int len)
+{
+	int *arr;
+	int	i;
+
+	arr = malloc(sizeof(int) * len);
+	if (arr == NULL)
+		return (NULL);
+	i = -1;
+	while (++i < len)
+		arr[i] = stack->data[stack->top - i];
+	argsort(arr, len);
+	return (arr);
+}
+
+
+
 int	*make_array(int *argc, char *argv[])
 {
-	// list 만들어서 split 하기
-	// argc 조정하기
-	// array만들어서 list에 있는거 꺼내오기
-	// list free
 	t_list	*list;
 	int		*arr;
 
@@ -89,16 +99,14 @@ int	*make_array(int *argc, char *argv[])
 	if (argv_to_list(list, argc, argv) == FALSE)
 	{
 		del_list(list);
+		if (list->error == 1)
+			error_exit(NULL, NULL, 1);
 		return (NULL);
 	}
-	*argc = list->curr_cnt;
+	*argc = list->curr_cnt;//argc 가 바뀔지 확인// argc를 밖에서 다른 변수로 받아서 넣어주기
 	arr = list_to_array(list);
-	if (arr == NUL)
+	free(list);
+	if (arr == NULL)
 		return (NULL);
-	if (list->error == 1)
-	{
-		del_list(list);
-		error_exit(NULL, NULL, 1)
-	}
 	return (arr);
 }

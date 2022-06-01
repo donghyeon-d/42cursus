@@ -4,50 +4,42 @@
 #include <limits.h>
 #include "pushswap.h"
 
-int argsort(int *argument, int argc)
+int bubble_sort(int *arr, int len)// 오름차순
 {
 	int	i;
 	int	j;
 	int	tmp;
 
-	if (int == NULL)
+	if (arr == NULL)
 		return (0);
 	i = -1;
-	while (++i < argc - 2)
+	while (++i < len)
 	{
 		j = -1;
-		while (++j < argc - 2)
+		while (++j + 1 < len)
 		{
-			if (argument[i + j] > argument[i + j + 1])
+			if (arr[j] > arr[j + 1])
 			{
-				tmp = argument[i + j];
-				argument[i + j] = argument[i + j + 1];
-				argument[i + j + 1] = tmp;
+				tmp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = tmp;
 			}
 		}
 	}
 	return (1);
 }
 
-void	ft_pushswap(t_l_stack *stack_a, t_l_stack *stack_b, int *argument, int argc)
+int	issorted(t_l_stack *stack)
 {
-	int pivot1;
-	int pivot2;
 	int	i;
-	int	circul;
 
-	pivot1 = argument[(argc - 1) / 2];
-	pivot2 = argument[(argc - 1) / 3];
+	if (stack == NULL)
+		return (FALSE);
 	i = -1;
-	circul = (argc - 1) / 2;
-	while (stack_a->currentcount > 3)
+	while (++i < stack->curr_cnt)
 	{
-		while (++i < circul)
-		{
-			if (stack_a->top > pivot1)
-				pb(stack_a, stack_b);
-			if (stack_b->top < pivot2)
-				rb(stack_b);
-		}
+		if (stack->data[i] <= stack->data[i + 1]
+			return (FALSE);
 	}
+	return (TRUE);
 }

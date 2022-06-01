@@ -6,9 +6,13 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:54:29 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/05/31 20:31:38 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:38:15 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "pushswap.h"
 
 t_stack	*init_stack(int max_cnt)
 {
@@ -43,15 +47,18 @@ int	push_stack(t_stack *stack, int data)
 	return (TRUE);
 }
 
-int			pop_stack(t_stack *stack)
+int	pop_stack(t_stack *stack)
 {
 	int	data;
 
 	if (stack == NULL || stack->curr_cnt == 0)
 		return (FALSE);
-	data = stack->data[top];
+	data = stack->data[stack->top];
+	stack->curr_cnt--;
 	stack->top--;
-	data = (stack->data)[stack->top];
+	if (stack->curr_cnt == 0)
+		stack->top = 0;
+	return (data);
 }
 
 int	del_stack(t_stack *stack)
@@ -61,13 +68,13 @@ int	del_stack(t_stack *stack)
 	if (stack->data != NULL)
 		free(stack->data);
 	free(stack);
+	return (TRUE);
 }
 
-void arr_to_stack(int *arr, t_stack *stack_a)
+void arr_to_stack(int *arr, int arr_len, t_stack *stack_a)
 {
-	int	i;
-
-	i = stack_a->max_cnt;
-	while (--i >= 0)
-		push_stack(stack_a, arr[i]);
+	if (arr_len > stack_a->max_cnt)
+		return ;
+	while (--arr_len >= 0)
+		push_stack(stack_a, arr[arr_len]);
 }
