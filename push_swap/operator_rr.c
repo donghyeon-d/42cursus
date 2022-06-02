@@ -24,7 +24,7 @@ void	rrb(t_stack *stack_b)
 {
 	int	data;
 	int	i;
-	if (stack_a == NULL)
+	if (stack_b == NULL)
 		return ;
 	if (stack_b->curr_cnt > 1)
 	{

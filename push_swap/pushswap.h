@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:30:16 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/01 20:20:30 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:50:15 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	rrr(t_stack *stack_a, t_stack *stack_b);
 
 // util
 long long	ft_atoll(char *argv);
+char	**ft_split(char const *s, char c);
+char	**ft_wordfree(char **str);
 
 // main
 void	error_exit(t_stack *stack_a, t_stack *stack_b, int error);
@@ -65,8 +67,8 @@ void	error_exit(t_stack *stack_a, t_stack *stack_b, int error);
 // make array
 void	valid_list(t_list *list, long long arg);
 int	argv_to_list(t_list *list, int argc, char *argv[]);
-char *list_to_array(t_list *list);
-int	*stack_to_array(t_stack *stack);
+int *list_to_array(t_list *list);
+int	*stack_to_array(t_stack *stack, int len);
 int	*make_array(int *argc, char *argv[]);
 
 //sort 

@@ -127,6 +127,7 @@ int main()
 
 /* ------------------------------------------------*/
 /* sort.c */
+
 int main()
 {
 	int arr[5] = {5, 2, 3, 1, 4};
@@ -134,7 +135,7 @@ int main()
 	for(int i = 0; i < 5; i++)
 		printf("%d ", arr[i]);
 	printf("\n\n");
-	sort(arr, 5);
+	bubble_sort(arr, 5);
 	for(int i = 0; i < 5; i++)
 		printf("%d ", arr[i]);
 	printf("\n\n");
@@ -164,4 +165,23 @@ int main()
 		printf("%lld\n", digit);
 	}
 	return (0);
+}
+
+
+/* ------------------------------------------------*/
+/* make array.c */
+
+int main(int argc, char *argv[])
+{
+	int	*arr;
+
+	if (argc < 2)
+		return (0);
+	arr = make_array(&argc, argv);
+	// printf("%p", arr);
+		// printf("%d ", arr[0]);
+	for (int i = 0; i < argc; i++)
+		printf("%d ", arr[i]);
+	free(arr);
+	// system("leaks a.out");
 }

@@ -29,16 +29,18 @@ int bubble_sort(int *arr, int len)// 오름차순
 	return (1);
 }
 
-int	issorted(t_l_stack *stack)
+int	issorted(t_stack *stack)
 {
 	int	i;
 
 	if (stack == NULL)
 		return (FALSE);
+	if (stack->curr_cnt < 2)
+		return (TRUE);
 	i = -1;
 	while (++i < stack->curr_cnt)
 	{
-		if (stack->data[i] <= stack->data[i + 1]
+		if (stack->data[i] >= stack->data[i + 1])
 			return (FALSE);
 	}
 	return (TRUE);
