@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 17:29:58 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/05/31 18:08:40 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/02 21:28:44 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	ra(t_stack *stack_a)
 		while (--i)
 			stack_a->data[i] = stack_a->data[i - 1];
 		stack_a->data[0] = data;
-	}
 	write(1, "ra\n", 3);
+	}
 }
 
 void	rb(t_stack *stack_b)
@@ -45,8 +45,8 @@ void	rb(t_stack *stack_b)
 		while (--i)
 			stack_b->data[i] = stack_b->data[i - 1];
 		stack_b->data[0] = data;
+		write(1, "rb\n", 3);
 	}
-	write(1, "ra\n", 3);
 }
 
 void	rr(t_stack *stack_a, t_stack *stack_b)
@@ -54,7 +54,7 @@ void	rr(t_stack *stack_a, t_stack *stack_b)
 	int	i;
 	int	data;
 
-	if (stack_a != NULL && stack_a->curr_cnt > 1)
+	if (stack_a->curr_cnt > 1)
 	{
 		i = stack_a->curr_cnt;
 		data = stack_a->data[stack_a->top];
@@ -62,7 +62,7 @@ void	rr(t_stack *stack_a, t_stack *stack_b)
 			stack_a->data[i] = stack_a->data[i - 1];
 		stack_a->data[0] = data;
 	}
-	if (stack_b != NULL && stack_b->curr_cnt > 1)
+	if (stack_b->curr_cnt > 1)
 	{
 		i = stack_b->curr_cnt;
 		data = stack_b->data[stack_b->top];
@@ -70,6 +70,6 @@ void	rr(t_stack *stack_a, t_stack *stack_b)
 			stack_b->data[i] = stack_b->data[i - 1];
 		stack_b->data[0] = data;
 	}
-	if (stack_a != NULL || stack_b != NULL)
+	if (stack_a->curr_cnt > 1 || stack_b->curr_cnt > 1)
 		write(1, "rr\n", 3);
 }

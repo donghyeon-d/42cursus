@@ -18,7 +18,6 @@ t_list	*init_list()
 int		push_list(t_list *list, int data)
 {
 	t_list	*node;
-	t_list	*tmp;
 
 	node = malloc(sizeof(t_list));
 	if (node == NULL)

@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:54:29 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/01 18:38:15 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/02 20:19:24 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ int	del_stack(t_stack *stack)
 
 void arr_to_stack(int *arr, int arr_len, t_stack *stack_a)
 {
-	if (arr_len > stack_a->max_cnt)
-		return ;
-	while (--arr_len >= 0)
+	int	i;
+
+	i = 0;
+	while (--arr_len >= i)
 		push_stack(stack_a, arr[arr_len]);
 }

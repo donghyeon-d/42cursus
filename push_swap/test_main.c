@@ -185,3 +185,29 @@ int main(int argc, char *argv[])
 	free(arr);
 	// system("leaks a.out");
 }
+
+
+/* ------------------------------------------------*/
+/* make array.c */
+
+int main()
+{
+	t_stack *a;
+	t_stack *b;
+
+	a = init_stack(10);
+	b = init_stack(10);
+	push_stack(a, 10);
+	push_stack(a, 2);
+	push_stack(a, 3);
+	push_stack(a, -5);
+	push_stack(a, 9);
+	// push_stack(a, 1);
+	// push_stack(a, 0);
+	// push_stack(a, -7);
+	// push_stack(a, -10);
+	// push_stack(a, -1);
+
+	ft_quicksort(a, b, 10);
+	// printf("%d", issorted(a);
+}

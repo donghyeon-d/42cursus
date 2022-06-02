@@ -4,7 +4,7 @@ AR = ar
 ARFLAGS = rcs
 RM = rm -rf
 NAME = push_swap
-SRC = stack_l.c utils.c operator_p.c operator_r.c operator_rr.c operator_s.c bubblesort.c
+SRC = stack.c utils.c operator_p.c operator_r.c operator_rr.c operator_s.c ft_split.c list.c makearray.c quicksort.c sort.c 
 ARCHIVE = pushswap.a
 MAIN = pushswap.c
 DIR = ./
@@ -25,7 +25,7 @@ $(NAME) : $(ARCHIVE)
 bonus : $(NAME)
 
 fsan : $(ARCHIVE) $(MAIN)
-	$(CC) $(CFLAGS) -g3 -fsantize=address -o fsan $(ARCHIVE) $(MAIN)
+	$(CC) $(CFLAGS) -g3 -fsanitize=address -o fsan $(ARCHIVE) $(MAIN)
 
 ldb : $(ARCHIVE) $(MAIN)
 	$(CC) $(CFLAGS) -g -o ldb $(ARCHIVE) $(MAIN)

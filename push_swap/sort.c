@@ -38,9 +38,9 @@ int	issorted(t_stack *stack)
 	if (stack->curr_cnt < 2)
 		return (TRUE);
 	i = -1;
-	while (++i < stack->curr_cnt)
+	while (++i < stack->top)
 	{
-		if (stack->data[i] >= stack->data[i + 1])
+		if (stack->data[i] < stack->data[i + 1])
 			return (FALSE);
 	}
 	return (TRUE);

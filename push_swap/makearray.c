@@ -100,7 +100,7 @@ int	*make_array(int *argc, char *argv[])
 	{
 		del_list(list);
 		if (list->error == 1)
-			error_exit(NULL, NULL, 1);
+			error_exit(NULL, NULL, NULL, 1);
 		return (NULL);
 	}
 	*argc = list->curr_cnt;//argc 가 바뀔지 확인// argc를 밖에서 다른 변수로 받아서 넣어주기

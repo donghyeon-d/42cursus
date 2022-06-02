@@ -23,7 +23,7 @@ void	sb(t_stack *stack_b)
 	data = stack_b->data[stack_b->top];
 	stack_b->data[stack_b->top] = stack_b->data[stack_b->top - 1];
 	stack_b->data[stack_b->top - 1] = data;
-	write(1, "sa\n", 3);
+	write(1, "sb\n", 3);
 }
 
 void	ss(t_stack *stack_a, t_stack *stack_b)

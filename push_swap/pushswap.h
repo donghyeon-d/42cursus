@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:30:16 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/02 14:50:15 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/02 18:32:49 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**ft_split(char const *s, char c);
 char	**ft_wordfree(char **str);
 
 // main
-void	error_exit(t_stack *stack_a, t_stack *stack_b, int error);
+void	error_exit(t_stack *stack_a, t_stack *stack_b, int *arr, int error);
 
 // make array
 void	valid_list(t_list *list, long long arg);

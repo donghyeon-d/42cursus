@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:33:32 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/02 18:17:51 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/02 21:32:07 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	quick_b(t_stack *stack_a, t_stack *stack_b, int len)//from a to b // 
 	
 	count = 0;
 	curr_arr = stack_to_array(stack_a, stack_a->curr_cnt);
-	pivot1 = curr_arr[(stack_a->curr_cnt + 1) / 3];
-	pivot2 = curr_arr[(stack_a->curr_cnt + 1) * 2 / 3];
+	pivot1 = curr_arr[(stack_a->top + 1) / 3];
+	pivot2 = curr_arr[(stack_a->top + 1) * 2 / 3];
 	while (len--)
 	{
 		if (stack_a->data[stack_a->top] > pivot2)
@@ -40,7 +40,7 @@ static int	quick_b(t_stack *stack_a, t_stack *stack_b, int len)//from a to b // 
 			if (stack_a->data[stack_a->top] <= pivot1)
 				rr(stack_a, stack_b);
 			else
-				rb(stack_a);
+				rb(stack_b);
 		}
 	}
 	free(curr_arr);
@@ -54,10 +54,12 @@ static int	quick_a(t_stack *stack_a, t_stack *stack_b, int len)//from b to a // 
 	count = 0;
 	while (len--)
 		count += pa(stack_a, stack_b);
+	if (stack_a->data[stack_a->top] > stack_b->data[stack_a->top - 1])
+		sa(stack_a);
 	return (count);
 }
 
-void	small_sort(t_stack *stack_a, int len)
+static void	small_sort(t_stack *stack_a, int len)
 {
 	if (len < 2)
 		return ;
@@ -90,26 +92,4 @@ void	ft_quicksort(t_stack *stack_a, t_stack *stack_b, int len)
 	count_qa = quick_a(stack_a, stack_b, count_qb);
 	if (!issorted(stack_a))
 		ft_quicksort(stack_a, stack_b, count_qa);
-}
-
-int main()
-{
-	t_stack *a;
-	t_stack *b;
-
-	a = init_stack(10);
-	b = init_stack(10);
-	push_stack(a, 10);
-	push_stack(a, 2);
-	push_stack(a, 3);
-	push_stack(a, -5);
-	push_stack(a, 9);
-	push_stack(a, 1);
-	push_stack(a, 0);
-	push_stack(a, -7);
-	push_stack(a, -10);
-	push_stack(a, -1);
-
-	ft_quicksort(a, b, 10);
-	// printf("%d", issorted(a);
 }
