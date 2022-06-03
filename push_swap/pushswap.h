@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:30:16 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/02 18:32:49 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/03 08:53:43 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	*make_array(int *argc, char *argv[]);
 
 //sort 
 int bubble_sort(int *arr, int len);// 오름차순 // [0]이 제일 작음
-int	issorted(t_stack *stack);
+int	issorted_bt(t_stack *stack);
+int	issorted_tb(t_stack *stack);
 
 void	ft_quicksort(t_stack *stack_a, t_stack *stack_b, int len);
 

@@ -31,7 +31,7 @@ ldb : $(ARCHIVE) $(MAIN)
 	$(CC) $(CFLAGS) -g -o ldb $(ARCHIVE) $(MAIN)
 
 clean :
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(ARCHIVE)
 
 fclean : clean
 	$(RM) $(NAME)

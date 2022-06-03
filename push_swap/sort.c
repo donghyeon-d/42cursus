@@ -29,7 +29,7 @@ int bubble_sort(int *arr, int len)// 오름차순
 	return (1);
 }
 
-int	issorted(t_stack *stack)
+int	issorted_bt(t_stack *stack)//bottom에서 top으로 갈수록 커짐
 {
 	int	i;
 
@@ -41,6 +41,23 @@ int	issorted(t_stack *stack)
 	while (++i < stack->top)
 	{
 		if (stack->data[i] < stack->data[i + 1])
+			return (FALSE);
+	}
+	return (TRUE);
+}
+
+int	issorted_tb(t_stack *stack)//top에서 bottom으로 갈수록 커짐
+{
+	int	i;
+
+	if (stack == NULL)
+		return (FALSE);
+	if (stack->curr_cnt < 2)
+		return (TRUE);
+	i = -1;
+	while (++i < stack->top)
+	{
+		if (stack->data[i] > stack->data[i + 1])
 			return (FALSE);
 	}
 	return (TRUE);
