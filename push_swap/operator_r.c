@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   operator_r.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 17:29:58 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/03 14:19:40 by choidongd        ###   ########.fr       */
+/*   Updated: 2022/06/04 15:30:26 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "pushswap.h"
 
-void	ra(t_stack *stack_a)
+int	ra(t_stack *stack_a)
 {
 	int	i;
 	int	data;
 
 	if (stack_a == NULL)
-		return ;
+		return (0);
 	if (stack_a->curr_cnt > 1)
 	{
 		i = stack_a->curr_cnt;
@@ -27,17 +27,18 @@ void	ra(t_stack *stack_a)
 		while (--i)
 			stack_a->data[i] = stack_a->data[i - 1];
 		stack_a->data[0] = data;
-	write(1, "ra\n", 3);
+		write(1, "ra\n", 3);
 	}
+	return (1);
 }
 
-void	rb(t_stack *stack_b)
+int	rb(t_stack *stack_b)
 {
 	int	i;
 	int	data;
 
 	if (stack_b == NULL)
-		return ;
+		return (0);
 	if (stack_b->curr_cnt > 1)
 	{
 		i = stack_b->curr_cnt;
@@ -47,9 +48,10 @@ void	rb(t_stack *stack_b)
 		stack_b->data[0] = data;
 		write(1, "rb\n", 3);
 	}
+	return (1);
 }
 
-void	rr(t_stack *stack_a, t_stack *stack_b)
+int	rr(t_stack *stack_a, t_stack *stack_b)
 {
 	int	i;
 	int	data;
@@ -72,5 +74,5 @@ void	rr(t_stack *stack_a, t_stack *stack_b)
 	}
 	if (stack_a->curr_cnt > 1 || stack_b->curr_cnt > 1)
 		write(1, "rr\n", 3);
+	return (1);
 }
-

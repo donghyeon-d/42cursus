@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:30:16 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/03 14:19:54 by choidongd        ###   ########.fr       */
+/*   Updated: 2022/06/04 15:27:51 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,23 @@ int		del_stack(t_stack *stack);
 void	arr_to_stack(int *arr, int arr_len, t_stack *stack_a);//arr 만들 때 정적으로 배열 만들어 줘야 함. 동적 할당 x // argv -> list -> array 할 때 make_array 함수에서 argc 바꿔주는데 그거 활용할 수 있을듯?!
 void 	display_stack(t_stack *stack);
 
-t_list	*init_list();
+t_list	*init_list(void);
 int		push_list(t_list *list, int data);
 void 	del_list(t_list *list);
 
 // operator
-void	sa(t_stack *stack_a);
-void	sb(t_stack *stack_b);
-void	ss(t_stack *stack_a, t_stack *stack_b);
-int		pa(t_stack *stack_a, t_stack *stack_b);
-int		pb(t_stack *stack_a, t_stack *stack_b);
-void	ra(t_stack *stack_a);
-void	rb(t_stack *stack_b);
-void	rr(t_stack *stack_a, t_stack *stack_b);
-void	rra(t_stack *stack_a);
-void	rrb(t_stack *stack_b);
-void	rrr(t_stack *stack_a, t_stack *stack_b);
-void	oper_rra(t_stack *stack_a, t_stack *stack_b, int p1);
+int	sa(t_stack *stack_a);
+int	sb(t_stack *stack_b);
+int	ss(t_stack *stack_a, t_stack *stack_b);
+int	pa(t_stack *stack_a, t_stack *stack_b);
+int	pb(t_stack *stack_a, t_stack *stack_b);
+int	ra(t_stack *stack_a);
+int	rb(t_stack *stack_b);
+int	rr(t_stack *stack_a, t_stack *stack_b);
+int	rra(t_stack *stack_a);
+int	rrb(t_stack *stack_b);
+int	rrr(t_stack *stack_a, t_stack *stack_b);
+int	oper_rra(t_stack *stack_a, t_stack *stack_b, int c1, int c2);
 
 // util
 long long	ft_atoll(char *argv);
@@ -77,7 +77,7 @@ int bubble_sort(int *arr, int len);// 오름차순 // [0]이 제일 작음
 int	issorted_bt(t_stack *stack);
 int	issorted_tb(t_stack *stack);
 
-void	ft_quicksort(t_stack *stack_a, t_stack *stack_b, int len);
+int	ft_quicksort(t_stack *stack_a, t_stack *stack_b, int len);
 void is_in_array(int *arr, int len, int data);
 
 #endif

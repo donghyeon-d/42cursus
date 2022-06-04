@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 15:26:52 by dongchoi          #+#    #+#             */
+/*   Updated: 2022/06/04 15:27:32 by dongchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "pushswap.h"
 
-t_list	*init_list()
+t_list	*init_list(void)
 {
 	t_list	*new_list;
 
@@ -15,7 +27,7 @@ t_list	*init_list()
 	return (new_list);
 }
 
-int		push_list(t_list *list, int data)
+int	push_list(t_list *list, int data)
 {
 	t_list	*node;
 
@@ -35,10 +47,10 @@ int		push_list(t_list *list, int data)
 	return (TRUE);
 }
 
-void del_list(t_list *list)
+void	del_list(t_list *list)
 {
-	t_list *del;
-	t_list *tmp;
+	t_list	*del;
+	t_list	*tmp;
 
 	tmp = list->next;
 	while (tmp)

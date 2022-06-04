@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 15:33:03 by dongchoi          #+#    #+#             */
+/*   Updated: 2022/06/04 18:06:52 by dongchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <limits.h>
 #include "pushswap.h"
 
-int bubble_sort(int *arr, int len)// 오름차순
+int	bubble_sort(int *arr, int len)
 {
 	int	i;
 	int	j;
@@ -61,4 +73,20 @@ int	issorted_tb(t_stack *stack)//top에서 bottom으로 갈수록 커짐
 			return (FALSE);
 	}
 	return (TRUE);
+}
+
+int	issorted_from_top(t_stack *stack, int len)
+{
+	int	i;
+
+	if (stack == NULL)
+		return (FALSE);
+	if (stack->curr_cnt < 2)
+		return (TRUE);
+	i = -1;
+	while (++i < len)
+	{
+		if (stack->data[stack_top - i]) > stack->data[stack_top - 1 - i])
+			return (FALSE);
+	}
 }

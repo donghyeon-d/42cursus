@@ -1,13 +1,22 @@
-#include <stdio.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   makearray.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 15:28:02 by dongchoi          #+#    #+#             */
+/*   Updated: 2022/06/04 15:29:39 by dongchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <limits.h>
 #include "pushswap.h"
-// #include "../ft_libft/libft.h"
 
 void	valid_list(t_list *list, long long arg)
-{//중복, 인트 맞는지, 인트 범위 인지
-	t_list *node;
+{
+	t_list	*node;
 
 	if (list == NULL)
 		list->error = 1;
@@ -22,7 +31,7 @@ void	valid_list(t_list *list, long long arg)
 	}
 }
 
-int	argv_to_list(t_list *list, int argc, char *argv[]) // list의 head에는 argv[1]
+int	argv_to_list(t_list *list, int argc, char *argv[])
 {
 	int			i;
 	int			j;
@@ -34,8 +43,10 @@ int	argv_to_list(t_list *list, int argc, char *argv[]) // list의 head에는 arg
 	{
 		temp = ft_split(argv[i], ' ');
 		j = 0;
-		while(temp[j])
+		while (temp[j])
 			j++;
+		if (temp[0] == NULL)
+			j = 1;
 		while (--j > -1)
 		{
 			arg = ft_atoll(temp[j]);
@@ -48,7 +59,7 @@ int	argv_to_list(t_list *list, int argc, char *argv[]) // list의 head에는 arg
 	return (TRUE);
 }
 
-int *list_to_array(t_list *list)  // arr[0] =  argv[1]
+int	*list_to_array(t_list *list)
 {
 	int		*arr;
 	int		i;
@@ -71,7 +82,7 @@ int *list_to_array(t_list *list)  // arr[0] =  argv[1]
 
 int	*stack_to_array(t_stack *stack, int len)
 {
-	int *arr;
+	int	*arr;
 	int	i;
 
 	arr = malloc(sizeof(int) * len);
@@ -84,14 +95,12 @@ int	*stack_to_array(t_stack *stack, int len)
 	return (arr);
 }
 
-
-
 int	*make_array(int *argc, char *argv[])
 {
 	t_list	*list;
 	int		*arr;
 
-	list = init_list();//
+	list = init_list(void);
 	if (list == NULL)
 		return (NULL);
 	if (argv_to_list(list, *argc, argv) == FALSE)
@@ -101,7 +110,7 @@ int	*make_array(int *argc, char *argv[])
 			error_exit(NULL, NULL, NULL, 1);
 		return (NULL);
 	}
-	*argc = list->curr_cnt;//argc 가 바뀔지 확인// argc를 밖에서 다른 변수로 받아서 넣어주기
+	*argc = list->curr_cnt;
 	arr = list_to_array(list);
 	del_list(list);
 	if (arr == NULL)

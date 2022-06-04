@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operator_rr.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/04 15:30:35 by dongchoi          #+#    #+#             */
+/*   Updated: 2022/06/04 15:31:59 by dongchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
 #include "pushswap.h"
 
-void	rra(t_stack *stack_a)
+int	rra(t_stack *stack_a)
 {
 	int	data;
 	int	i;
 
 	if (stack_a == NULL)
-		return ;
+		return (0);
 	if (stack_a->curr_cnt > 1)
 	{
 		data = stack_a->data[stack_a->bottom];
@@ -18,14 +30,16 @@ void	rra(t_stack *stack_a)
 		stack_a->data[stack_a->top] = data;
 	}
 	write(1, "rra\n", 4);
+	return (1);
 }
 
-void	rrb(t_stack *stack_b)
+int	rrb(t_stack *stack_b)
 {
 	int	data;
 	int	i;
+
 	if (stack_b == NULL)
-		return ;
+		return (0);
 	if (stack_b->curr_cnt > 1)
 	{
 		data = stack_b->data[stack_b->bottom];
@@ -35,9 +49,10 @@ void	rrb(t_stack *stack_b)
 		stack_b->data[stack_b->top] = data;
 		write(1, "rrb\n", 4);
 	}
+	return (1);
 }
 
-void	rrr(t_stack *stack_a, t_stack *stack_b)
+int	rrr(t_stack *stack_a, t_stack *stack_b)
 {
 	int	data;
 	int	i;
@@ -60,14 +75,22 @@ void	rrr(t_stack *stack_a, t_stack *stack_b)
 	}
 	if (stack_a->curr_cnt > 1 || stack_b->curr_cnt > 1)
 		write(1, "rrr\n", 4);
+	return (1);
 }
 
-void	oper_rra(t_stack *stack_a, t_stack *stack_b, int criteria)
+int	oper_rra(t_stack *stack_a, t_stack *stack_b, int c1, int c2)
 {
-	if (stack_a->data[0] > criteria && stack_b->data[0] > criteria)
-		rrr(stack_a, stack_b);
-	else if (stack_a->data[0] > criteria && stack_b->data[0] <= criteria)
-		rra(stack_a);
-	else if (stack_a->data[0] <= criteria && stack_b->data[0] > criteria)
-		rrb(stack_b);
+	int	ctn;
+
+	ctn = 0;
+	if (stack_a->data[0] <= c1 && stack_b->data[0] >= c2 && \
+	stack_b->curr_cnt != 0 && stack_a->curr_cnt > 1)
+		ctn = rrr(stack_a, stack_b);
+	else if (stack_a->data[0] <= c1 && stack_b->data[0] <= c2 && \
+	stack_a->curr_cnt > 1)
+		ctn = rra(stack_a);
+	else if (stack_a->data[0] > c1 && stack_b->data[0] > c2 && \
+	stack_b->curr_cnt > 1)
+		ctn = rrb(stack_b);
+	return (ctn);
 }

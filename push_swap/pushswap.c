@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:30:37 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/02 20:20:40 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/04 12:28:46 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,13 @@ int	main(int argc, char *argv[])
 		error_exit(stack_a, NULL, argument, 0);
 	arr_to_stack(argument, count, stack_a);
 	bubble_sort(argument, count);
+	display_stack(stack_a);
+	printf("\n");
 	ft_quicksort(stack_a, stack_b, stack_a->curr_cnt);
+	printf("\n");
+	display_stack(stack_a);
+	display_stack(stack_b);
+	printf("\n");
 	del_stack(stack_a);
 	del_stack(stack_b);
 	free(argument);

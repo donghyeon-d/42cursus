@@ -6,14 +6,12 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 17:28:54 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/01 15:56:02 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/04 15:30:02 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <unistd.h>
 #include "pushswap.h"
-
 
 int	pa(t_stack *stack_a, t_stack *stack_b)
 {

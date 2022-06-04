@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:54:29 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/02 20:19:24 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/04 15:26:16 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 t_stack	*init_stack(int max_cnt)
 {
-	t_stack *new_stack;
+	t_stack	*new_stack;
 
 	if (max_cnt <= 0)
 		return (NULL);
@@ -71,7 +71,7 @@ int	del_stack(t_stack *stack)
 	return (TRUE);
 }
 
-void arr_to_stack(int *arr, int arr_len, t_stack *stack_a)
+void	arr_to_stack(int *arr, int arr_len, t_stack *stack_a)
 {
 	int	i;
 
