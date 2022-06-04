@@ -7,14 +7,12 @@
 
 void	valid_list(t_list *list, long long arg)
 {//중복, 인트 맞는지, 인트 범위 인지
-	int	i;
 	t_list *node;
 
 	if (list == NULL)
 		list->error = 1;
 	if (arg > INT_MAX || arg < INT_MIN)
 		list->error = 1;
-	i = -1;
 	node = list->next;
 	while (node != NULL && list->error == 0)
 	{

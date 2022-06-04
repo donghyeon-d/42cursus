@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:30:16 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/03 08:53:43 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:19:54 by choidongd        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	rr(t_stack *stack_a, t_stack *stack_b);
 void	rra(t_stack *stack_a);
 void	rrb(t_stack *stack_b);
 void	rrr(t_stack *stack_a, t_stack *stack_b);
+void	oper_rra(t_stack *stack_a, t_stack *stack_b, int p1);
 
 // util
 long long	ft_atoll(char *argv);
@@ -77,5 +78,6 @@ int	issorted_bt(t_stack *stack);
 int	issorted_tb(t_stack *stack);
 
 void	ft_quicksort(t_stack *stack_a, t_stack *stack_b, int len);
+void is_in_array(int *arr, int len, int data);
 
 #endif

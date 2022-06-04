@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operator_r.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 17:29:58 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/02 21:28:44 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:19:40 by choidongd        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,3 +73,4 @@ void	rr(t_stack *stack_a, t_stack *stack_b)
 	if (stack_a->curr_cnt > 1 || stack_b->curr_cnt > 1)
 		write(1, "rr\n", 3);
 }
+

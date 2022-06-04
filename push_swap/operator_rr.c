@@ -61,3 +61,13 @@ void	rrr(t_stack *stack_a, t_stack *stack_b)
 	if (stack_a->curr_cnt > 1 || stack_b->curr_cnt > 1)
 		write(1, "rrr\n", 4);
 }
+
+void	oper_rra(t_stack *stack_a, t_stack *stack_b, int criteria)
+{
+	if (stack_a->data[0] > criteria && stack_b->data[0] > criteria)
+		rrr(stack_a, stack_b);
+	else if (stack_a->data[0] > criteria && stack_b->data[0] <= criteria)
+		rra(stack_a);
+	else if (stack_a->data[0] <= criteria && stack_b->data[0] > criteria)
+		rrb(stack_b);
+}

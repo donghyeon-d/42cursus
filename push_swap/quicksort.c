@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quicksort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:33:32 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/03 12:15:51 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:21:36 by choidongd        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,23 +76,26 @@ static int	quick_a(t_stack *stack_a, t_stack *stack_b, int len)//from b to a // 
 	return (count);
 }
 
-static void	small_sort(t_stack *stack_a, int len)
+static int	small_sort(t_stack *stack_a, int len)
 {
+	int	cnt;
+
+	cnt = 0;
 	if (len < 2)
-		return ;
+		return (0);
 	if (len == 2)
 	{
 		if (stack_a->data[0] < stack_a->data[1])
-			sa(stack_a);
-		return ;
+			cnt += sa(stack_a);
+		return (cnt);
 	}
 	if (len == 3)
 	{
 		while (stack_a->data[0] < stack_a->data[1] || stack_a->data[0] < stack_a->data[2])
-			ra(stack_a);
+			cnt += ra(stack_a);
 		if (stack_a->data[0] < stack_a->data[1])
-			sa(stack_a);
-		return ;
+			cnt += sa(stack_a);
+		return (cnt);
 	}
 }
 

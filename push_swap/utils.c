@@ -26,10 +26,8 @@ long long	ft_atoll(char *argv)
 	int			i;
 	int			len;
 	int			sign;
-	char		*str;
 
 	num = 0;
-	str = argv;
 	len = ft_strlen(argv);
 	sign = 1;
 	i = 0;
