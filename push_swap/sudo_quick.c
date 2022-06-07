@@ -47,4 +47,5 @@ int	quick_a(t_stack *stack_a, t_stack *stack_b, int len)// len = qb하면서 pa�
 	rrr
 	quick_b(stack_a, stack_b, ra만큼);
 	quick_a(stack_a, stack_b, rb만큼);
+	return(pa);
 }

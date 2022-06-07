@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:30:16 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/04 15:27:51 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/07 09:58:15 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,18 @@ typedef struct s_list
 	int error;
 	struct s_list *next;
 }	t_list;
+
+typedef struct s_sort
+{
+	int *arr;
+	int p1;
+	int p2;
+	int ra;
+	int rb;
+	int pa;
+	int pb;
+	int	len;
+}	t_sort;
 
 t_stack	*init_stack(int maxcount);
 int		push_stack(t_stack *stack, int data);
