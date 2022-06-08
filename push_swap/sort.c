@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 15:33:03 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/04 18:06:52 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 09:56:50 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,10 @@ int	issorted_from_top(t_stack *stack, int len)
 	if (stack->curr_cnt < 2)
 		return (TRUE);
 	i = -1;
-	while (++i < len)
+	while (++i < len - 1)
 	{
-		if (stack->data[stack_top - i]) > stack->data[stack_top - 1 - i])
+		if (stack->data[stack->top - i] > stack->data[stack->top - 1 - i])
 			return (FALSE);
 	}
+	return (TRUE);
 }

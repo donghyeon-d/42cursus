@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:30:16 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/07 09:58:15 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 10:13:54 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ int	rr(t_stack *stack_a, t_stack *stack_b);
 int	rra(t_stack *stack_a);
 int	rrb(t_stack *stack_b);
 int	rrr(t_stack *stack_a, t_stack *stack_b);
-int	oper_rra(t_stack *stack_a, t_stack *stack_b, int c1, int c2);
+int	oper_rra(t_stack *stack_a, t_stack *stack_b, t_sort sort);
+int	oper_rrb(t_stack *stack_a, t_stack *stack_b, t_sort sort);
+int	oper_rrr(t_stack *stack_a, t_stack *stack_b, t_sort sort);
 
 // util
 long long	ft_atoll(char *argv);
@@ -88,8 +90,9 @@ int	*make_array(int *argc, char *argv[]);
 int bubble_sort(int *arr, int len);// 오름차순 // [0]이 제일 작음
 int	issorted_bt(t_stack *stack);
 int	issorted_tb(t_stack *stack);
+int	issorted_from_top(t_stack *stack, int len);
 
-int	ft_quicksort(t_stack *stack_a, t_stack *stack_b, int len);
+void	ft_quicksort(t_stack *stack_a, t_stack *stack_b);
 void is_in_array(int *arr, int len, int data);
 
 #endif

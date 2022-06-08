@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:30:37 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/04 12:28:46 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 11:31:03 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,33 @@
 #include <limits.h>
 #include "pushswap.h"
 // #include "../ft_libft/libft.h"
+
+void display_stack(t_stack *stack)
+{
+	int i;
+
+	if (stack == NULL)
+	{
+		printf("stack is NULL\n");
+		return ;
+	}
+	if (stack->curr_cnt == 0)
+	{
+		printf("stack is empty\n");
+		return ;
+	}
+	i = stack->top;
+	printf("max_cnt : %d\n", stack->max_cnt);
+	printf("cur_cnt : %d\n", stack->curr_cnt);
+	printf("top : %d\n", stack->top);
+	printf("bottom : %d\n", stack->bottom);
+	printf("Top to Bottom : ");
+	while (i >= 0)
+	{
+		printf("%d -> ", stack->data[i--]);
+	}
+	printf("\n");
+}
 
 void	error_exit(t_stack *stack_a, t_stack *stack_b, int *arr, int error)
 {
@@ -51,13 +78,13 @@ int	main(int argc, char *argv[])
 		error_exit(stack_a, NULL, argument, 0);
 	arr_to_stack(argument, count, stack_a);
 	bubble_sort(argument, count);
-	display_stack(stack_a);
-	printf("\n");
-	ft_quicksort(stack_a, stack_b, stack_a->curr_cnt);
-	printf("\n");
-	display_stack(stack_a);
-	display_stack(stack_b);
-	printf("\n");
+	// display_stack(stack_a);
+	// printf("\n");
+	ft_quicksort(stack_a, stack_b);
+	// printf("\n");
+	// display_stack(stack_a);
+	// display_stack(stack_b);
+	// printf("\n");
 	del_stack(stack_a);
 	del_stack(stack_b);
 	free(argument);

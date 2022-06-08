@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 15:28:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/04 15:29:39 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/07 19:31:10 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	*make_array(int *argc, char *argv[])
 	t_list	*list;
 	int		*arr;
 
-	list = init_list(void);
+	list = init_list();
 	if (list == NULL)
 		return (NULL);
 	if (argv_to_list(list, *argc, argv) == FALSE)
