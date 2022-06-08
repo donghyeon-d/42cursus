@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 15:30:35 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/08 16:13:42 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:09:27 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	rra(t_stack *stack_a)
 		while (++i < stack_a->curr_cnt - 1)
 			stack_a->data[i] = stack_a->data[i + 1];
 		stack_a->data[stack_a->top] = data;
-	write(1, "rra\n", 4);
+		write(1, "rra\n", 4);
 	}
 	return (1);
 }
@@ -81,11 +81,10 @@ int	rrr(t_stack *stack_a, t_stack *stack_b)
 int	oper_rrr(t_stack *stack_a, t_stack *stack_b, t_sort sort)
 {
 	int	ra_cnt;
-	int rb_cnt;
+	int	rb_cnt;
 
 	ra_cnt = sort.ra;
 	rb_cnt = sort.rb;
-
 	while (ra_cnt && rb_cnt)
 	{
 		rrr(stack_a, stack_b);

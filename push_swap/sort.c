@@ -6,12 +6,11 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 15:33:03 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/08 17:30:32 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:13:09 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-#define NULL 0
 
 int	bubble_sort(int *arr, int len)
 {
@@ -19,7 +18,7 @@ int	bubble_sort(int *arr, int len)
 	int	j;
 	int	tmp;
 
-	if (arr == NULL)
+	if (arr == 0)
 		return (0);
 	i = -1;
 	while (++i < len)
@@ -42,7 +41,7 @@ int	isascend_from_top(t_stack *stack, int len)
 {
 	int	i;
 
-	if (stack == NULL)
+	if (stack == 0)
 		return (FALSE);
 	if (stack->curr_cnt < 2)
 		return (TRUE);
@@ -55,12 +54,11 @@ int	isascend_from_top(t_stack *stack, int len)
 	return (TRUE);
 }
 
-
 int	isdesend_from_top(t_stack *stack, int len)
 {
 	int	i;
 
-	if (stack == NULL)
+	if (stack == 0)
 		return (FALSE);
 	if (stack->curr_cnt < 2)
 		return (TRUE);

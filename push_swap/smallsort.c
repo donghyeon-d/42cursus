@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:59:42 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/08 16:09:46 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:12:18 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	arg3sort(t_stack *stack_a, int len)
 	}
 	if (len == 3)
 	{
-		while (stack_a->data[0] < stack_a->data[1] || stack_a->data[0] < stack_a->data[2])
+		while (stack_a->data[0] < stack_a->data[1] || \
+		stack_a->data[0] < stack_a->data[2])
 			ra(stack_a);
 		if (stack_a->data[1] < stack_a->data[2])
 			sa(stack_a);
@@ -50,7 +51,7 @@ void	small_sort(t_stack *stack_a, t_stack *stack_b, int len)
 	}
 }
 
-void	small_sort_b(t_stack * stack_a, t_stack *stack_b, int len)
+void	small_sort_b(t_stack *stack_a, t_stack *stack_b, int len)
 {
 	int	cnt;
 

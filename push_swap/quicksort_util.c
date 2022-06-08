@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:59:52 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/08 16:00:01 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:10:57 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static	int	recur_b(t_stack *stack_a, t_stack *stack_b, t_sort *sort, int len)
 	return (error);
 }
 
-int quick_b(t_stack *stack_a, t_stack *stack_b, int len)
+int	quick_b(t_stack *stack_a, t_stack *stack_b, int len)
 {
 	t_sort	sort;
 	int		error;

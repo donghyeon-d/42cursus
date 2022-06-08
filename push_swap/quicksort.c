@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quicksort3.c                                       :+:      :+:    :+:   */
+/*   quicksort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:59:44 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/08 16:11:30 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 20:11:21 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "pushswap.h"
 
-int quick_util(t_stack *stack_a, t_stack *stack_b, int len)
+int	quick_util(t_stack *stack_a, t_stack *stack_b, int len)
 {
 	t_sort	sort;
 	int		error;
@@ -40,10 +40,9 @@ int quick_util(t_stack *stack_a, t_stack *stack_b, int len)
 	return (error);
 }
 
-
 int	quicksort(t_stack *stack_a, t_stack *stack_b)
 {
-	int error;
+	int	error;
 
 	error = 0;
 	if (stack_a->curr_cnt < 4)
@@ -52,4 +51,3 @@ int	quicksort(t_stack *stack_a, t_stack *stack_b)
 		error = quick_util(stack_a, stack_b, stack_a->curr_cnt);
 	return (error);
 }
-
