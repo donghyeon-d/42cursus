@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:30:16 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/08 12:05:31 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:31:35 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define PUSHSWAP_H
 # define TRUE 1
 # define FALSE 0
+// # define NULL 0
+// # define INT_MAX 2147483647
+// # define INT_MIN -2147483648
+// # define LLONG_MAX 9223372036854775807
 
 typedef struct s_stack
 {
@@ -67,16 +71,12 @@ int	rr(t_stack *stack_a, t_stack *stack_b);
 int	rra(t_stack *stack_a);
 int	rrb(t_stack *stack_b);
 int	rrr(t_stack *stack_a, t_stack *stack_b);
-int	oper_rra(t_stack *stack_a, t_stack *stack_b, t_sort sort);
-int	oper_rrb(t_stack *stack_a, t_stack *stack_b, t_sort sort);
 int	oper_rrr(t_stack *stack_a, t_stack *stack_b, t_sort sort);
 
 // util
 long long	ft_atoll(char *argv);
 char	**ft_split(char const *s, char c);
 char	**ft_wordfree(char **str);
-
-// main
 void	error_exit(t_stack *stack_a, t_stack *stack_b, int *arr, int error);
 
 // make array
@@ -88,12 +88,20 @@ int	*make_array(int *argc, char *argv[]);
 
 //sort 
 int bubble_sort(int *arr, int len);// 오름차순 // [0]이 제일 작음
-int	issorted_bt(t_stack *stack);
-int	issorted_tb(t_stack *stack);
-int	issorted_from_top(t_stack *stack, int len);
+int	isascend_from_top(t_stack *stack, int len);
 int	isdesend_from_top(t_stack *stack, int len);
 
-void	ft_quicksort(t_stack *stack_a, t_stack *stack_b);
-void is_in_array(int *arr, int len, int data);
+//smallsort.c
+void	arg3sort(t_stack *stack_a, int len);
+void	small_sort(t_stack *stack_a, t_stack *stack_b, int len);
+void	small_sort_b(t_stack * stack_a, t_stack *stack_b, int len);
 
+//quicksort.cc
+int	quicksort(t_stack *stack_a, t_stack *stack_b);
+int quick_util(t_stack *stack_a, t_stack *stack_b, int len);
+
+//quicksort_util.c
+void	init_sort(t_stack *stack_a, t_sort *sort, int len);
+int	quick_a(t_stack *stack_a, t_stack *stack_b, int len);
+int quick_b(t_stack *stack_a, t_stack *stack_b, int len);
 #endif

@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:30:37 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/08 12:27:12 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 19:56:12 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,7 @@ void display_stack(t_stack *stack)
 	printf("\n");
 }
 
-void	error_exit(t_stack *stack_a, t_stack *stack_b, int *arr, int error)
-{
-	if (error == 1)
-		write(2, "Error\n", 6);
-	if (stack_a != NULL)
-		del_stack(stack_a);
-	if (stack_b != NULL)
-		del_stack(stack_b);
-	if (arr != NULL)
-		free(arr);
-	exit(1);
-}
+
 
 int	main(int argc, char *argv[])
 {
@@ -80,7 +69,9 @@ int	main(int argc, char *argv[])
 	bubble_sort(argument, count);
 	// display_stack(stack_a);
 	// printf("\n");
-	ft_quicksort(stack_a, stack_b);
+	// ft_quicksort(stack_a, stack_b);
+	if (quicksort(stack_a, stack_b) != 0)
+		error_exit(stack_a, stack_b, argument, 1);
 	// printf("\n");
 	// display_stack(stack_a);
 	// display_stack(stack_b);
@@ -88,5 +79,6 @@ int	main(int argc, char *argv[])
 	del_stack(stack_a);
 	del_stack(stack_b);
 	free(argument);
+	// system("leaks push_swap");
 	return (0);
 }

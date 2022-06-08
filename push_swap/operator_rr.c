@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 15:30:35 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/08 11:43:25 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:13:42 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,6 @@ int	rrr(t_stack *stack_a, t_stack *stack_b)
 	return (1);
 }
 
-// int	oper_rra(t_stack *stack_a, t_stack *stack_b, int c1, int c2)
-// {
-// 	int	ctn;
-
-// 	ctn = 0;
-// 	if (stack_a->data[0] <= c1 && stack_b->data[0] >= c2 && \
-// 	stack_b->curr_cnt != 0 && stack_a->curr_cnt > 1)
-// 		ctn = rrr(stack_a, stack_b);
-// 	else if (stack_a->data[0] <= c1 && stack_b->data[0] <= c2 && \
-// 	stack_a->curr_cnt > 1)
-// 		ctn = rra(stack_a);
-// 	else if (stack_a->data[0] > c1 && stack_b->data[0] > c2 && \
-// 	stack_b->curr_cnt > 1)
-// 		ctn = rrb(stack_b);
-// 	return (ctn);
-// }
-
 int	oper_rrr(t_stack *stack_a, t_stack *stack_b, t_sort sort)
 {
 	int	ra_cnt;
@@ -114,47 +97,4 @@ int	oper_rrr(t_stack *stack_a, t_stack *stack_b, t_sort sort)
 	if (rb_cnt != 0)
 		rrb(stack_b);
 	return (1);
-}
-
-int	oper_rrb(t_stack *stack_a, t_stack *stack_b, t_sort sort)
-{
-	int	ra_cnt;
-	int rb_cnt;
-
-	ra_cnt = sort.ra;
-	rb_cnt = sort.rb;
-
-	while (ra_cnt-- && rb_cnt)
-		rrr(stack_a, stack_b);
-	if (ra_cnt--)
-		rra(stack_a);
-	if (rb_cnt--)
-		rrb(stack_b);
-	return (1);
-// 	ctn = 0;
-// // arr[p1] < a bottom < max 
-// // arr[0] < b bottom <= p2
-// 	while (stack_a->data[stack_a->bottom] <= sort.arr[sort.len - 1] && \
-// 	stack_b->data[stack_b->bottom] > sort.p1)
-// 		ctn += rrr(stack_a, stack_b);
-// 	if (stack_a->data[stack_a->bottom] <= sort.arr[sort.len - 1])
-// 		ctn += rra(stack_a);
-// 	if (stack_b->data[stack_b->bottom] > sort.p1)
-// 		ctn += rrb(stack_b);
-	// return (ctn);
-}
-
-int	oper_rra(t_stack *stack_a, t_stack *stack_b, t_sort sort)
-{
-	// int	ra_
-
-	while (stack_a->data[stack_a->bottom] <= sort.arr[sort.len - 1] && \
-	stack_b->data[stack_b->bottom] >= sort.arr[0])
-		rrr(stack_a, stack_b);
-	if (stack_a->data[stack_a->bottom] <= sort.p2)
-		rra(stack_a);
-	if (stack_b->data[stack_b->bottom] >= sort.arr[0] && \
-	stack_b->data[stack_b->bottom] <= sort.p1)
-		rrb(stack_b);
-	return (TRUE);
 }

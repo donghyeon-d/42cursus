@@ -6,12 +6,11 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 15:28:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/07 19:31:10 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:32:40 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <limits.h>
 #include "pushswap.h"
 
 void	valid_list(t_list *list, long long arg)
@@ -20,7 +19,7 @@ void	valid_list(t_list *list, long long arg)
 
 	if (list == NULL)
 		list->error = 1;
-	if (arg > INT_MAX || arg < INT_MIN)
+	if (arg > 2147483647 || arg < -2147483648)
 		list->error = 1;
 	node = list->next;
 	while (node != NULL && list->error == 0)

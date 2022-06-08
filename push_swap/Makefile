@@ -4,12 +4,21 @@ AR = ar
 ARFLAGS = rcs
 RM = rm -rf
 NAME = push_swap
-SRC = stack.c utils.c operator_p.c operator_r.c operator_rr.c operator_s.c ft_split.c list.c makearray.c quicksort.c sort.c 
+SRC = stack.c utils.c operator_p.c operator_r.c operator_rr.c operator_s.c \
+ft_split.c list.c makearray.c quicksort.c sort.c  quicksort_util.c smallsort.c
 ARCHIVE = pushswap.a
 MAIN = pushswap.c
 DIR = ./
 OBJS = $(SRC:.c=.o)
 
+BONUS_NAME = checker
+BONUS_SRC = $(BONUS_DIR)get_next_line.c \
+$(BONUS_DIR)get_next_line_utils.c
+BONUS_ARCHIVE = checker.a
+BONUS_MAIN = $(BONUS_DIR)checker.c
+BONUS_DIR = ./bonus/
+BONUS_OBJS = $(BONUS_SRC:.c=.o)
+# $(BONUS_DIR)ft_strncmp.c
 all : $(NAME)
 
 $(DIR)%.o : $(DIR)%.c
@@ -21,20 +30,22 @@ $(ARCHIVE) : $(OBJS)
 $(NAME) : $(ARCHIVE)
 	$(CC) $(CFLAGS) -o $@ $(MAIN) $(ARCHIVE)
 
+bonus : $(BONUS_NAME)
 
-bonus : $(NAME)
+$(BONUS_DIR)%.o : $(BONUS_DIR)%.c
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(BONUS_DIR)
 
-fsan : $(ARCHIVE) $(MAIN)
-	$(CC) $(CFLAGS) -g3 -fsanitize=address -o fsan $(ARCHIVE) $(MAIN)
+$(BONUS_ARCHIVE) : $(BONUS_OBJS)
+	$(AR) $(ARFLAGS) $@ $?
 
-ldb : $(ARCHIVE) $(MAIN)
-	$(CC) $(CFLAGS) -g -o ldb $(ARCHIVE) $(MAIN)
+$(BONUS_NAME) : $(BONUS_ARCHIVE) $(ARCHIVE)
+	$(CC) $(CFLAGS) -o $@ $(BONUS_MAIN) $(BONUS_ARCHIVE) $(ARCHIVE)
 
 clean :
-	$(RM) $(OBJS) $(ARCHIVE)
+	$(RM) $(OBJS) $(ARCHIVE) $(BONUS_OBJS) $(BONUS_ARCHIVE)
 
 fclean : clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(BONUS_NAME)
 
 re : fclean all
 

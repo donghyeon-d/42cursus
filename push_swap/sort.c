@@ -6,15 +6,12 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 15:33:03 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/08 12:06:04 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 17:30:32 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <limits.h>
 #include "pushswap.h"
+#define NULL 0
 
 int	bubble_sort(int *arr, int len)
 {
@@ -41,41 +38,7 @@ int	bubble_sort(int *arr, int len)
 	return (1);
 }
 
-int	issorted_bt(t_stack *stack)//bottom에서 top으로 갈수록 커짐
-{
-	int	i;
-
-	if (stack == NULL)
-		return (FALSE);
-	if (stack->curr_cnt < 2)
-		return (TRUE);
-	i = -1;
-	while (++i < stack->top)
-	{
-		if (stack->data[i] < stack->data[i + 1])
-			return (FALSE);
-	}
-	return (TRUE);
-}
-
-int	issorted_tb(t_stack *stack)//top에서 bottom으로 갈수록 커짐
-{
-	int	i;
-
-	if (stack == NULL)
-		return (FALSE);
-	if (stack->curr_cnt < 2)
-		return (TRUE);
-	i = -1;
-	while (++i < stack->top)
-	{
-		if (stack->data[i] > stack->data[i + 1])
-			return (FALSE);
-	}
-	return (TRUE);
-}
-
-int	issorted_from_top(t_stack *stack, int len)
+int	isascend_from_top(t_stack *stack, int len)
 {
 	int	i;
 

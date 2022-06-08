@@ -6,11 +6,10 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:54:29 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/04 15:26:16 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 16:19:19 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "pushswap.h"
 
