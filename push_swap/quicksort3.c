@@ -33,29 +33,39 @@ int quick_b(t_stack *stack_a, t_stack *stack_b, int len);
 // 	return (cnt);
 // }
 
-static	void	small_sort(t_stack *stack_a, int len)
+static	void	small_sort(t_stack *stack_a, t_stack *stack_b, int len)
 {
-	int	cnt;
+	// int	cnt;
 
-	cnt = 0;
+	// cnt = 0;
 	if (len == 2)
 	{
 		if (stack_a->data[stack_a->top - 1] < stack_a->data[stack_a->top])
 			sa(stack_a);
 	}
-	if (len == 3)
+	if (len == 3 && !issorted_from_top(stack_a, 3))
 	{
-		while (!issorted_from_top(stack_a, 3))
-		{
-			if (stack_a->data[stack_a->top - 1] < stack_a->data[stack_a->top])
-				cnt += ra(stack_a);
-			if (stack_a->data[stack_a->top - 1] < stack_a->data[stack_a->top])
-				sa(stack_a);
-			if (cnt--)
-				rra(stack_a);
-			if (stack_a->data[stack_a->top - 1] < stack_a->data[stack_a->top])
-				sa(stack_a);
-		}
+		if (stack_a->data[stack_a->top - 1] < stack_a->data[stack_a->top])
+			sa(stack_a);
+		if (issorted_from_top(stack_a, 3))
+			return ;
+		pb(stack_a, stack_b);
+		if (stack_a->data[stack_a->top - 1] < stack_a->data[stack_a->top])
+			sa(stack_a);
+		pa(stack_a, stack_b);
+		if (stack_a->data[stack_a->top - 1] < stack_a->data[stack_a->top])
+			sa(stack_a);
+		// while (!issorted_from_top(stack_a, 3))
+		// {
+		// 	if (stack_a->data[stack_a->top - 1] < stack_a->data[stack_a->top])
+		// 		cnt += ra(stack_a);
+		// 	if (stack_a->data[stack_a->top - 1] < stack_a->data[stack_a->top])
+		// 		sa(stack_a);
+		// 	if (cnt--)
+		// 		rra(stack_a);
+		// 	if (stack_a->data[stack_a->top - 1] < stack_a->data[stack_a->top])
+		// 		sa(stack_a);
+		// }
 	}
 }
 
@@ -75,17 +85,15 @@ static void	small_sort_b(t_stack * stack_a, t_stack *stack_b, int len)
 	}
 	if (len == 3)
 	{
-		while (issorted_from_top(stack_b, 3))
-		{
-			if (stack_b->data[stack_b->top - 1] > stack_b->data[stack_b->top])
-				cnt += ra(stack_b);
-			if (stack_b->data[stack_b->top - 1] > stack_b->data[stack_b->top])
-				sa(stack_b);
-			if (cnt--)
-				rra(stack_b);
-			if (stack_b->data[stack_b->top - 1] > stack_b->data[stack_b->top])
-				sa(stack_b);
-		}
+		if (stack_b->data[stack_b->top - 1] > stack_b->data[stack_b->top])
+			sb(stack_b);
+		pa(stack_a, stack_b);
+		if (stack_b->data[stack_b->top - 1] > stack_b->data[stack_b->top])
+			sb(stack_b);
+		pa(stack_a, stack_b);
+		if (stack_a->data[stack_a->top - 1] < stack_a->data[stack_a->top])
+			sa(stack_a);
+		pa(stack_a, stack_b);
 	}
 }
 
@@ -110,7 +118,7 @@ void	ft_quicksort(t_stack *stack_a, t_stack *stack_b)
 
 	cnt_pb = 0;
 	if (stack_a->curr_cnt < 4)
-		small_sort(stack_a, stack_a->curr_cnt);
+		small_sort(stack_a, stack_b, stack_a->curr_cnt);
 	// else if (stack_a->curr_cnt < 6)
 	// {
 	// 	pb(stack_a, stack_b);
@@ -134,8 +142,8 @@ int quick_b(t_stack *stack_a, t_stack *stack_b, int len)
 	init_sort(stack_a, &sort, len);
 	if (sort.arr == NULL)
 		return (FALSE);
-	if (sort.len < 3)
-		small_sort(stack_a, len);
+	if (sort.len < 4)
+		small_sort(stack_a, stack_b, len);
 	else
 	{
 		while (len--)
@@ -166,7 +174,7 @@ int	quick_a(t_stack *stack_a, t_stack *stack_b, int len)
 	init_sort(stack_b, &sort, len);
 	if (sort.arr == NULL)
 		return (FALSE);
-	if (sort.len < 3)
+	if (sort.len < 4)
 		small_sort_b(stack_a, stack_b, len);
 	else
 	{

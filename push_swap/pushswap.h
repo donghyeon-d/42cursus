@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 09:30:16 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/08 10:13:54 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/08 12:05:31 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int bubble_sort(int *arr, int len);// 오름차순 // [0]이 제일 작음
 int	issorted_bt(t_stack *stack);
 int	issorted_tb(t_stack *stack);
 int	issorted_from_top(t_stack *stack, int len);
+int	isdesend_from_top(t_stack *stack, int len);
 
 void	ft_quicksort(t_stack *stack_a, t_stack *stack_b);
 void is_in_array(int *arr, int len, int data);
