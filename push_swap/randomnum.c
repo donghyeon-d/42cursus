@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	while (i < cnt)
 	{
 		issame = 0;
-		num = rand() % cnt;
+		num = rand() * rand() % cnt;
 		for (int j = 0; j < i; j++)
 		{
 			if (arr[j] == num)
