@@ -21,8 +21,12 @@ void	is_connect(pid_t server_pid)
 	i = -1;
 	while (++i < 8)
 	{
-	if (kill(server_pid, SIGUSR2))
-		exit(1);
+		if (kill(server_pid, SIGUSR2))
+		{
+			write("Can not connect ");
+				
+			exit(1);
+		}
 	}
 }
 
