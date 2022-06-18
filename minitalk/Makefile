@@ -1,0 +1,57 @@
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+NAME = minitalk
+SERVER_SRC = server_signal.c server_transmit.c
+SERVER_OBJECT = $(SERVER_SRC:.c=.o)
+SERVER_MAIN = server.c
+SERVER_NAME = server
+CLIENT_SRC = client_signal.c
+CLIENT_OBJECT = $(CLIENT_SRC:.c=.o)
+CLIENT_MAIN = client.c
+CLIENT_NAME = client
+UTILS_SRC = utils.c
+UTILS_OBJECT = $(UTILS_SRC:.c=.o)
+BONUS_SERVER_SRC = server_signal_bonus.c server_transmit_bonus.c
+BONUS_SERVER_OBJECT = $(BONUS_SERVER_SRC:.c=.o)
+BONUS_SERVER_MAIN = server_bonus.c
+BONUS_SERVER_NAME = server_bonus
+BONUS_CLIENT_SRC = clinet_signal_bonus.c
+BONUS_CLIENT_OBJECT = $(BONUS_CLIENT_SRC:.c=.o)
+BONUS_CLIENT_MAIN = client_bonus.c
+BONUS_CLIENT_NAME = client_bonus
+BONUS_UTILS_SRC = utils_bonus.c
+BONUS_UTILS_OBJECT = $(BONUS_UTILS_SRC:.c=.o)
+HEADER_DIR = .
+
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(HEADER_DIR)
+
+ifdef WITH_BONUS
+OFILES = $(SRC_OBJECT) $(BONUS_OBJECT)
+else
+OFILES = $(SERVER_OBJECT) $(CLIENT_OBJECT) $(UTILS_OBJECT)
+endif
+
+all : $(NAME)
+
+$(NAME) : $(SERVER_NAME) $(CLIENT_NAME)
+
+$(SERVER_NAME) : $(SERVER_OBJECT) $(UTILS_OBJECT)
+	$(CC) $(CFLAGS) -o $(SERVER_NAME) $(SERVER_MAIN) $(SERVER_OBJECT) $(UTILS_OBJECT)
+
+$(CLIENT_NAME) : $(CLIENT_OBJECT) $(UTILS_OBJECT)
+	$(CC) $(CFLAGS) -o $(CLIENT_NAME) $(CLIENT_MAIN) $(CLIENT_OBJECT) $(UTILS_OBJECT)
+
+bonus : $(BONUS_SERVER_OBJECT) $(BONUS_CLIENT_OBJECT) $(BONUS_UTILS_OBJECT)
+	$(CC) $(CFLAGS) -o $(BONUS_SERVER_NAME) $(BONUS_SERVER_MAIN) $(BONUS_SERVER_OBJECT) $(BONUS_UTILS_OBJECT)
+	$(CC) $(CFLAGS) -o $(BONUS_CLIENT_NAME) $(BONUS_CLIENT_MAIN) $(BONUS_CLIENT_OBJECT) $(BONUS_UTILS_OBJECT)
+
+clean :
+	rm -f $(SERVER_OBJECT) $(CLIENT_OBJECT) $(UTILS_OBJECT) $(BONUS_SERVER_OBJECT) $(BONUS_CLIENT_OBJECT) $(BONUS_UTILS_OBJECT)
+
+fclean : clean
+	rm -f $(SERVER_NAME) $(CLIENT_NAME)
+
+re : fclean all
+
+.PHONY : all clean fclean re bonus
