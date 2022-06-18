@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 15:15:45 by choidongd         #+#    #+#             */
+/*   Updated: 2022/06/18 15:21:56 by choidongd        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <signal.h>
 #include <unistd.h>
 #include "server.h"
 
 void	init_data(t_data *data)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	data->client_data = 0;
 	data->reverse_data = 0;
 	data->bit_cnt = 0;
@@ -18,12 +31,12 @@ void	init_data(t_data *data)
 	}
 }
 
-int main()
+int	main(void)
 {
-	struct sigaction server_usr;
+	struct sigaction	server_usr;
 
-	init_data(&get);
-	get.transmit_cnt = 0;
+	init_data(&g_get);
+	g_get.transmit_cnt = 0;
 	server_usr.sa_handler = server_siguser;
 	server_usr.sa_sigaction = ft_sigaction_usr;
 	server_usr.sa_flags = SIGINFO;
@@ -36,4 +49,5 @@ int main()
 		sigaction(SIGUSR2, &server_usr, NULL);
 		pause();
 	}
+	return (0);
 }

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client_signal.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/18 15:06:19 by choidongd         #+#    #+#             */
+/*   Updated: 2022/06/18 15:20:59 by choidongd        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
 #include "client.h"
 
-void client_siguser(int sig)
+void	client_siguser(int sig)
 {
 	if (sig == SIGUSR1)
 		write(1, "Sending a message\n", 18);
@@ -12,8 +24,8 @@ void client_siguser(int sig)
 
 void	transmit_text(pid_t server_pid, char *text)
 {
-	int	i;
-	int	j;
+	int				i;
+	int				j;
 	unsigned char	charactor;
 
 	i = -1;
@@ -29,7 +41,7 @@ void	transmit_text(pid_t server_pid, char *text)
 				kill((pid_t)server_pid, SIGUSR2);
 			charactor /= 2;
 			usleep(100);
-			get.transmit_cnt++;
+			g_get.transmit_cnt++;
 		}
 	}
 }
@@ -51,7 +63,7 @@ void	transmit_contol(pid_t server_pid, char control)
 			error += kill(server_pid, SIGUSR2);
 		signal /= 2;
 		usleep(100);
-		get.transmit_cnt++;
+		g_get.transmit_cnt++;
 	}
 	if (error < 0)
 	{
