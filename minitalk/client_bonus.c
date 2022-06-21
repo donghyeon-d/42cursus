@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:07:01 by choidongd         #+#    #+#             */
-/*   Updated: 2022/06/21 10:05:03 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:43:19 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <signal.h>
 #include <stdlib.h>
-#include "client.h"
+#include "client_bonus.h"
 
 int	main(int argc, char *argv[])
 {

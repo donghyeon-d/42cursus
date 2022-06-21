@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   server_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/18 15:09:06 by choidongd         #+#    #+#             */
-/*   Updated: 2022/06/20 13:25:36 by dongchoi         ###   ########.fr       */
+/*   Created: 2022/06/18 15:17:10 by choidongd         #+#    #+#             */
+/*   Updated: 2022/06/21 15:39:59 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#ifndef SERVER_BONUS_H
+# define SERVER_BONUS_H
 # define START_OF_HEADING 1
 # define END_OF_TEXT 3
 # define END_OF_TRANSMISSION 4
@@ -30,11 +30,23 @@ typedef struct s_data
 
 t_data	g_get;
 
-void	client_siguser(int sig);
-void	transmit_text(pid_t server_pid, char *text);
-void	transmit_contol(pid_t server_pid, char control);
+//main.c
+void	init_data(t_data *data);
+
+//server_transmit.c
+void	reverse_data(unsigned char *from, unsigned char *to);
+void	receive_start(pid_t client_pid);
+void	receive_check(void);
+void	transmit_end(pid_t client_pid);
+void	receive_character(void);
+
+//server_signal.c
+void	utf_check(unsigned char reverse_data);
+void	server_siguser(int sum);
+void	ft_sigaction_usr(int sig, siginfo_t *usr_info, void *v);
+
+//util.c
 char	*ft_itoa(int n);
 void	ft_putnbr(int n);
-int		ft_atoi(const char *str);
 
 #endif
