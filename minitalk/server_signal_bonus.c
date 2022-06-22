@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server_signal.c                                    :+:      :+:    :+:   */
+/*   server_signal_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 15:13:14 by choidongd         #+#    #+#             */
-/*   Updated: 2022/06/18 15:21:28 by choidongd        ###   ########.fr       */
+/*   Updated: 2022/06/22 20:13:06 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	utf_check(unsigned char reverse_data)
 	else if (reverse_data >> 4 == 14)
 		g_get.utf_byte = 3;
 	else if (reverse_data >> 3 == 30)
-		g_get.utf_byte = 3;
+		g_get.utf_byte = 4;
 }
 
 void	server_siguser(int sig)
