@@ -1,7 +1,8 @@
 # 1. 무엇을 하는 과제인가
 
 - 나만의 함수 라이브러리 만들기
-- 허용된 함수 : malloc, write
+- 허용된 함수 : malloc, write, free
+<br><br>
 
 
 # 2. 새롭게 배우는 개념은 무엇인가?
@@ -11,15 +12,15 @@
 - 공식 Reference를 찾아보고 구현하는 역량 기르기
 - C언어와 더 친숙해지기 (const, sizt_t, 연결리스트, 함수포인터)
 - Makefile 활용하기
+<br><br>
 
-
-# 3. 새롭게 깨달은 것
+# 3. 과제하면서 습득한 것
 
 - 주어진 subject를 확실하게 파악해야 실수를 최소화할 수 있음.
 - 함수를 파악하기 위해서는 공식 매뉴얼을 보는 것이 필요함.
 - 비교 대상이 있으면 정확하게 비교해보면서 구현하면 더 좋음(함수 원형과 비교하면서 출력해봤으면 더 좋았을 듯)
 - 복잡한 함수를 만들때는 간단한 함수들을 활용해서 만들면, 더 간결하고 보기 좋게 구현할 수 있음 (물론 함수호출이 너무 많으면 처리 시간 증가함)
-
+<br><br>
 
 # 4. 함수 설명
 
@@ -27,8 +28,8 @@
 
 ### 확인 함수 (What is)
 
-- [ft_isalpha](https://blockdmask.tistory.com/448) : 알파벳인지 확인. 대문자 1, 소문자2, 아니면 0 리턴
-- [ft_isdigit](https://ya-ya.tistory.com/83) : 숫자인지 확인. 맞으면 4, 아니면 0 리턴
+- ft_isalpha : 알파벳인지 확인. 대문자 1, 소문자2, 아니면 0 리턴
+- ft_isdigit : 숫자인지 확인. 맞으면 4, 아니면 0 리턴
 - ft_isalnum : 알파벳인지 숫자인지 확인. 맞으면1 아니면 0 리턴
 - ft_isascii : ascii 값이면 1 아니면 0
 - ft_isprint : ascii 기준으로 printable 값인지 확인. 맞으면 1 아니면 0 (32 ≤ c ≤ 126)
@@ -38,7 +39,7 @@
 ### 문자열 함수 (str)
 
 - ft_strlen : 문자열의 길이를 반환
-- [ft_strlcpy](https://velog.io/@meong9090/42seoul-strlcpy%EB%8A%94-%EC%96%B4%EB%96%A4-%ED%95%A8%EC%88%98%EC%9D%BC%EA%B9%8C) : size = dst+null 길이. size를 작게 입력하면 src의 일부만 복사되는데, 그건 함수 사용자의 몫임. 리턴값은 src의 길이
+- ft_strlcpy : size = dst+null 길이. size를 작게 입력하면 src의 일부만 복사되는데, 그건 함수 사용자의 몫임. 리턴값은 src의 길이
 - ft_strlcat : dst에 src를 dstsize - strlen(dst) - 1 만큼 이어 붙임. 마지막엔 null.
     - return : dstlen + srclen (dst_len ≥ destsize → srclen + dstsize)
 - ft_strchr : str 에서 c 찾기. 찾으면 찾은 자리 주소 리턴, 못찾으면 null(0) 리턴
@@ -50,17 +51,17 @@
 
 ### 메모리 함수 (mem)
 
-- ft_memset : [(참고)](https://www.notion.so/bfe0148fda4e49158b0229d7a88f9849)
+- ft_memset : memory를 바이트 단위로 접근하여 0으로 초기화
 - ft_bzero(void *s, size_t n) : s를 0으로 n길이의 바이트만큼 채우는 것. memset(s, 0, n)
-- ft_memcpy : src를 dst에 n 길이만큼 복사. src와 dst가 겹쳐도 신경 안씀(덮어 씌운걸 가지고 또 덮어 쓸 수 있음) [참고](https://minsoftk.tistory.com/29)
+- ft_memcpy : src를 dst에 n 길이만큼 복사. src와 dst가 겹쳐도 신경 안씀(덮어 씌운걸 가지고 또 덮어 쓸 수 있음)
 - ft_memmove : src를 dst에 n 길이만큼 복사. src와 dst가 겹치는거 신경써줌(temp에 빼놨다가 dst에 옮겨줌)
 - ft_memchr : byte 단위로 c가 나오는 부분을 찾음. 찾으면 그 자리 리턴, 못찾거나 n개 이내로 못찾으면 NULL리턴.
     - unsgined char 형 사용해야하는 이유 [(참고)](https://kldp.org/node/75686)
         - unsigned char 는 모든 bit를 투명하게 볼 수 있는 특성을 제공함. 다른 type은 내부 비트의 일부를 값을 표현하기 위한 용도가 아닌 다른 용도로 사용할 수 있으나, unsigned char 는 그게 안됨
         - char 보다 더 많은 수를 표현할 수 있음(확장 ascii) → signed char 와 unsigned char 사이의 값 변환이 1:1로 이루어지지 않을 수 있음.
         - ⇒ 임의의 메모리에 바이트 단위로 접근해서 값을 다룰 때는 무조건 unsigned char를 이용해야함. 그래야 모든 가능성을 다 확인할 수 있음
-- ft_memcmp : byte 단위로 n byte만큼 두 포인터를 비교함. [참고](https://kirkim.github.io/c/2021/02/15/memcmp.html)
-- ft_atoi : str을 int 형으로 바꿔줌. [범위 참고(슬랙)](https://42born2code.slack.com/archives/CU6MU5TB7/p1609838354265300)
+- ft_memcmp : byte 단위로 n byte만큼 두 포인터를 비교함. 
+- ft_atoi : str을 int 형으로 바꿔줌. 
 - ft_calloc : count * size 만큼의 메모리를 할당해주고, 그 공간을 0으로 초기화해줌
 
 # [Part 2] Additional functions
@@ -147,5 +148,5 @@
 
 ## [테스터 돌려본 후]
 
-- [참고](https://42born2code.slack.com/archives/CU6MU5TB7/p1609842365301000)
-- split에서 word에서 에러났을 때 free해줘야돼
+- 자잘하게 메모리 참조 오류, 범위 설정 등을 실수한 것이 있었음. main함수 만들어서 다양하게 테스트해보면 더 좋을 듯
+- malloc을 반복적으로하는 함수(예.ft_split)에서 중간에 malloc 실패시 전체를 free해줘야 함

@@ -1,51 +1,43 @@
-노션에 정리한내용
 노션 링크 : [링크](https://www.notion.so/GNL-get_next_line-26200c3617194be4928d43b1f7df29f9)
 
 # GNL(get_next_line)
+# 과제 개요
+## 1. 무엇을 하는 과제인가?
+- fd를 읽으면서 개행(\n) 단위로 char *로 리턴해주는 함수 만들기
+- 파일의 문자를 읽을 때 한번에 읽어오지 않으며, 함수를 여러번 호출해도 잃어버리는 문자가 없어야 하고, 여러 fd를 번갈아 읽어도 잃어버리는 문자가 없어야 함
+- 허용된 함수 : read, malloc, free
+- 전역변수 사용 금지, static 변수 1개 사용 가능
 
-[read 함수 reference link](https://linux.die.net/man/3/read) 
+<br>
 
-- 노션에 정리한거 참고 [https://www.notion.so/Get-Next-Line-c7a311e63bd2483ab5bf404791e917c6](https://www.notion.so/Get-Next-Line-c7a311e63bd2483ab5bf404791e917c6)
-- [파일 디스크립터 설명 참고](https://minsoftk.tistory.com/40) [https://minsoftk.tistory.com/40](https://minsoftk.tistory.com/40)
+## 2. 새롭게 배우는 개념은 무엇인가?
+- 파일디스크립트 이해 및 사용
+- read함수 사용
+- 연결리스트 활용
 
-# read 함수 [(참고)](https://linux.die.net/man/3/read)
+<br>
 
-- 프로토타입 ssize_t read(int fildescripter**, void ***buf**, size_t** nbyte**);**
-- 헤더
-    - **#include <[unistd.h](https://linux.die.net/include/unistd.h)>**
-- 동작
-    - nbyte = 0 일 때, 0 리턴하고 아무 동작 안함
-- 리턴
-    - 읽기 성공하면 (양수)읽은 바이트 수 리턴
-    - 실패, 에러 발생하면 -1 리턴 (fd가 잘못 들어왔을 때 등)
-- buf에 저장되는 글자에는 ‘\0’ 포함되어있지 않음. 그냥 글자 그대로만 가져와줌
+## 3. 과제하면서 습득한 것
+- lldb를 사용한 디버깅
+- C 컴파일 옵션 -g3 -fasnitize=address를 사용한 메모리 참조 오류 검사
+- 연결리스트의 개념을 확실히 익히고 자유롭게 사용할 수 있게 됨 (2중 연결리스트를 사용하여 구현함)
 
-# open, close 함수
-
-- 프로토타입 int open(const char **path***, int** *oflag***, ... );**
-- 헤더
-    - **#include <[sys/stat.h](https://linux.die.net/include/sys/stat.h)>**
-    - #include <[fcntl.h](https://linux.die.net/include/fcntl.h)>
-- oflag
-    - O_RDONLY
-        - Open for reading only.
-    - O_WRONLY
-        - Open for writing only.
-    - O_RDWR
-        - Open for reading and writing. The result is undefined if this flag is applied to a FIFO.
-- Return
-    - 가장 작은 수의 fd를 반환함(3부터)
-    - 실패하면 -1 반환
-- file descripter
-    - 0 : stdin
-    - 1 : stdout
-    - 2 : error
+<br>
 
 # 구현 방식
 
 ## 구조체연결리스트 사용
-
-- 구조체 멤버 (char *content, t_list *next, t_list *next_fd, ssize_t fd)
+`char	*get_next_line(int fd)`
+- 구조체 
+``` C
+typedef struct s_list
+{
+	char			*content;
+	ssize_t			fd;
+	struct s_list	*next;
+	struct s_list	*next_fd;
+}	t_list;
+```
     - content : 읽은 것을 저장해 놓을 부분. 개행까지는 head→next→content부터 next로 넣기
     - next : 다음 읽어온 content
     - next_fd : fd를 확인하고, fd별로 헤드를 따로 만들어줌
@@ -70,12 +62,14 @@ i 뒤부터 head→content에 넣음
 3. fd_head→content 가 비어있으면 필요 없으니까 free
 4. head→next_fd 가 NULL이면 굳이 static 변수도 필요 없으니까 head free
 
+<br>
+
 # 봉착된 문제
 
 ## \n, \0, NULL 찾기
 
 - 처음에 구현했던 것
-    - int check_n(char *s) 함수를 만들어서 str에서 \n의 자리를 찾고, 없으면 -1 해줬음
+    - int check_n(char *s) 함수를 만들어서 str에서 \n의 자리를 찾고, 없으면을 -1 해줬음
     - 파일이 끝나기 전 마지막으로 읽는 지점을 찾기가 어려웠음 (read 함수의 리턴값을 활용하긴 했었는데, 모든 테스트 케이스드를 다 담지는 못했음, str의 길이를 알기 어려웠음)
 - 고쳐서 새로 짜낸 것
     - while (str[i] ≠ ‘\n’ && str[i] ≠ ‘\0’) i++ 함
