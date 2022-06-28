@@ -25,12 +25,14 @@ void	ft_draw_line(t_data *img, t_pos from, t_pos to, int distance)
 
 }
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
 	void	*mlx;
 	t_data	img;
 	void	*mlx_win;
+	t_pos	**map;
 
+	map = make_map(argv[1]);
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1000, 1000, "Hello world!");
 	img.img = mlx_new_image(mlx, IMG_WIDTH, IMG_HEIGHT);
