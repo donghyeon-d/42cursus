@@ -26,4 +26,5 @@ int main(int argc, char *argv[])
 	// map->width = 2;
 	display_map(map);
 	// printf("%d", ft_atoi("-123\n"));
+	// system("leaks a.out");
 }

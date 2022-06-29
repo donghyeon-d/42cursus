@@ -6,16 +6,6 @@
 #include "c.h"
 #include "./ft_libft/libft.h"
 
-void	exit_with_flag(int flag)
-{
-	if (flag == MAP_ERROR)
-		write(1, "Map error\n", 10);
-	exit(1);
-}
-
-// 일단 char **에 다 넣기
-// 사이즈
-
 void	ft_free_double(char **temp)
 {
 	int	i;
@@ -36,6 +26,7 @@ t_map	*ft_init_map(int height)
 		exit(1);
 	map->height = height;
 	map->width = 0;
+	map->distance = 10;
 	map->map_table = ft_calloc(map->height, sizeof(t_pos *));
 	if (map->map_table == NULL)
 		exit(1);
@@ -83,7 +74,6 @@ void	ft_make_map_table(t_map	*map, t_list *read_list)
 	while (++i < map->height)
 	{
 		temp = ft_split(node->content, ' ');
-		map->width = 0;
 		j = -1;
 		map->map_table[i] = ft_calloc(map->width, sizeof(t_pos));
 		if (map->map_table[i] == NULL)
@@ -118,5 +108,6 @@ t_map	*make_map(char *map_file)
 	map = ft_init_map(ft_lstsize(read_list));
 	ft_map_valid_check(map, read_list);
 	ft_make_map_table(map, read_list);
+	ft_lstclear(&read_list, free);
 	return (map);	
 }

@@ -4,59 +4,74 @@
 #include <mlx.h>
 #include "c.h"
 
-void	ft_draw_line(t_data *img, t_pos from, t_pos to, int distance)
+t_env *init_env(void)
 {
-	int	x;
-	int	y;
-	int	z;
-	int	i;
-	int inc;
+	t_env	*new_env;
 
-	// inc = (to.y - from.y) / (to.x - from.x);
+	new_env = ft_calloc(1, sizeof(t_env));
+	new_env->angle_radian = 0.7;
+	new_env->alpha = -0.5;
+	new_env->distance = 60;
+	new_env->altitude = 4;
+	new_env->x_min = 2147483647;
+	new_env->y_min = 2147483647;
+	return (new_env);
+}
 
-	x = from.x - 1;
-	y = from.y - 1;
-	while (++x < to.x * distance)
+void display_map(t_map *map)
+{
+	for (int i = 0; i < map->height; i++)
 	{
-		img->addr[x] = 0xFFFFFF;
-		i = - 1;
-		// while (++i < distance)
+		for (int j = 0; j < map->width; j++)
+			printf("{%d %d %d} ", map->map_table[i][j].x, map->map_table[i][j].y, map->map_table[i][j].z);
+		printf("\n");
 	}
+}
 
+void	ft_add_distance(t_map *map, int distance)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (i < map->height)
+	{
+		while (j < map->width)
+		{
+			map->map_table[i][j].x *= distance;
+			map->map_table[i][j].y *= distance;
+			map->map_table[i][j].z *= distance;
+		}
+	}
 }
 
 int	main(int argc, char *argv[])
 {
-	void	*mlx;
-	t_data	img;
-	void	*mlx_win;
-	t_pos	**map;
+	t_data	*img;
+	// t_map	*map;
+	// t_env	*env;
 
-	map = make_map(argv[1]);
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1000, 1000, "Hello world!");
-	img.img = mlx_new_image(mlx, IMG_WIDTH, IMG_HEIGHT);
-	img.addr = (int*)mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	// for (int i = 0; i)
-	
-	t_pos start = {0, 0, 0};
-	t_pos end = {10, 10, 0};
-	ft_draw_line(&img, start, end, 3);
-	// int count_h = -1;
-	// int count_w;
-	// while (++count_h < IMG_HEIGHT)
-	// {
-		
-	// 	count_w = -1;
-	// 	while (++count_w < IMG_WIDTH)
-	// 	{
-	// 		if (count_w % 2)
-	// 			img.addr[count_h * IMG_WIDTH + count_w] = 0xFFFFFF;
-	// 		else
-	// 			img.addr[count_h * IMG_WIDTH + count_w] = 0xFF0000;
-	// 	}
-	// }
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 100, 100);
-	// my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	mlx_loop(mlx);
+	// map = make_map(argv[1]);
+	if (argc != 2)
+	{
+		write(1, "argument!!\n", 11);
+		return (0);
+	}
+	img = malloc(sizeof(t_data));
+	img->env = init_env();
+	img->mlx = mlx_init();
+	img->win = mlx_new_window(img->mlx, IMG_WIDTH, IMG_HEIGHT, "Hello world!");
+	img->img = mlx_new_image(img->mlx, IMG_WIDTH, IMG_HEIGHT);
+	img->addr = (int*)mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
+	img->map = make_map(argv[1]);
+	display_map(img->map);
+	printf("\n\n");
+	ft_rotate_map(img->map, img->env);
+	display_map(img->map);
+	ft_draw_line_all(img->map, img);
+
+	mlx_put_image_to_window(img->mlx, img->win, img->img, 100, 100);
+	mlx_hook(img->win, X_EVENT_KEY_RELEASE, 0, key_press, (t_data *)img);
+	mlx_hook(img->win, X_EVENT_KEY_EXIT, 0, ft_close_win, (t_data *)img);
+	mlx_loop(img->mlx);
 }
