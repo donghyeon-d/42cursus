@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:47:41 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 11:29:22 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:55:28 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,10 @@
 #include <mlx.h>
 #include "fdf.h"
 
-int	key_press(int keycode, t_data *img)
+int	key_press(int keycode)
 {
 	if (keycode == KEY_ESC)
 		exit(0);
-	else if (keycode == KEY_Z)
-		img->env->distance += 1;
-	else if (keycode == KEY_X)
-		img->env->distance -= 1;
-	ft_rotate_map(img->map, img->env);
-	ft_draw_line_all(img->map, img);
-	mlx_put_image_to_window(img->mlx, img->win, img->img, 100, 100);
 	return (1);
 }
 

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:35:06 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 18:59:59 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/30 19:04:42 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 int	ft_round_off(double num)
 {
@@ -29,7 +29,7 @@ int	ft_round_off(double num)
 	}
 }
 
-void	ft_draw_vertical(t_data *img, t_pos from, t_pos to)
+void	ft_draw_vertical(t_data *img, t_pos from, t_pos to, int color)
 {
 	int		step;
 	int		pixel;
@@ -41,7 +41,7 @@ void	ft_draw_vertical(t_data *img, t_pos from, t_pos to)
 	while (++i < step)
 	{
 		pixel += IMG_WID;
-		img->ad[pixel] = 0xFFFFFF;
+		img->ad[pixel] = color;
 	}
 }
 
@@ -69,7 +69,7 @@ int	ft_find_pixel_point(t_pos from, t_pos to, int i)
 	return (p);
 }
 
-void	ft_draw_line(t_data *img, t_pos from, t_pos to)
+void	ft_draw_line(t_data *img, t_pos from, t_pos to, int color)
 {
 	double	slope;
 	int		step;
@@ -87,14 +87,14 @@ void	ft_draw_line(t_data *img, t_pos from, t_pos to)
 		while (++i < step)
 		{
 			pixel = ft_find_pixel_point(from, to, i);
-			img->ad[pixel] = 0xFFFFFF;
+			img->ad[pixel] = color;
 		}
 	}
 	else
-		ft_draw_vertical(img, from, to);
+		ft_draw_vertical(img, from, to, color);
 }
 
-void	ft_draw_line_all(t_map *map, t_data *img)
+void	ft_draw_line_all(t_map *map, t_data *img, int color)
 {
 	int	i;
 	int	j;
@@ -106,9 +106,9 @@ void	ft_draw_line_all(t_map *map, t_data *img)
 		while (++j < map->width)
 		{
 			if (j + 1 < map->width)
-				ft_draw_line(img, map->table[i][j], map->table[i][j + 1]);
+				ft_draw_line(img, map->table[i][j], map->table[i][j + 1], color);
 			if (i + 1 < map->height)
-				ft_draw_line(img, map->table[i][j], map->table[i + 1][j]);
+				ft_draw_line(img, map->table[i][j], map->table[i + 1][j], color);
 		}
 	}
 }

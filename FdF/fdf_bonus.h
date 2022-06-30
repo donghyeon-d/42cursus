@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:51:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 13:55:38 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/30 19:03:02 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 # include "./ft_libft/libft.h"
 # include "./get_next_line/get_next_line.h"
@@ -62,6 +62,7 @@ typedef struct s_data {
 	void	*win;
 	void	*img;
 	int		*ad;
+	char	*map_file;
 	int		bpp;
 	int		len;
 	int		end;
@@ -69,17 +70,17 @@ typedef struct s_data {
 	t_env	*env;
 }				t_data;
 
-void	ft_draw_line(t_data *img, t_pos from, t_pos to);
-void	ft_draw_line_all(t_map *map, t_data *img);
+void	ft_draw_line(t_data *img, t_pos from, t_pos to, int color);
+void	ft_draw_line_all(t_map *map, t_data *img, int color);
 
 void	display_map(t_map *map);
 
 int		ft_map_valid_check(t_map *map, t_list *read_list);
 t_map	*ft_init_map(int height);
 void	ft_make_map_table(t_map	*map, t_list *read_list);
-t_map	*make_map(char *map_file, t_env *env);
+t_map	*make_map(char *map_file);
 
-int		key_press(int keycode);
+int		key_press(int keycode, t_data *img);
 int		ft_close_win(void *param);
 
 void	ft_rotate_matrix_clockwise(t_pos *dot, t_env *env);

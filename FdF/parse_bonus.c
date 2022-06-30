@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:45:26 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 13:43:16 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/30 11:50:10 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <fcntl.h>
-#include "fdf.h"
+#include "fdf_bonus.h"
+#include "./ft_libft/libft.h"
 
 void	ft_free_double(char **temp)
 {
@@ -57,8 +58,9 @@ int	ft_map_valid_check(t_map *map, t_list *read_list)
 		{
 			map->width++;
 			count++;
+			free(temp[i]);
 		}
-		ft_free_double(temp);
+		free(temp);
 		node = node->next;
 		if (node != NULL)
 			map->width = 0;
@@ -96,7 +98,7 @@ void	ft_make_map_table(t_map	*map, t_list *read_list)
 	}
 }
 
-t_map	*make_map(char *map_file, t_env *env)
+t_map	*make_map(char *map_file)
 {
 	int		fd;
 	char	*read_line;
@@ -112,10 +114,7 @@ t_map	*make_map(char *map_file, t_env *env)
 		ft_lstadd_back(&read_list, ft_lstnew(read_line));
 	}
 	map = ft_init_map(ft_lstsize(read_list));
-	if (!ft_map_valid_check(map, read_list))
-		exit(1);
-	if (map->height * env->distance > IMG_HEI)
-		env->distance = IMG_HEI / map->height;
+	ft_map_valid_check(map, read_list);
 	ft_make_map_table(map, read_list);
 	ft_lstclear(&read_list, free);
 	return (map);

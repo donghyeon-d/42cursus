@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 14:04:30 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/28 11:26:19 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/30 13:25:53 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <limits.h>
 
-int		ft_atoi(const char *str);
+int		ft_atoi(char *str);
 void	ft_bzero(void *s, size_t n);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
