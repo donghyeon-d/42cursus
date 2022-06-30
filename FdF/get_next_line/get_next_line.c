@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 09:48:22 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/28 13:54:34 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/06/30 11:12:10 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	ft_read_addlst(t_gnl_list *fd_text, int fd)
 ssize_t	ft_strsize(t_gnl_list *fd_text)
 {
 	t_gnl_list	*temp;
-	ssize_t	size;
-	ssize_t	i;
+	ssize_t		size;
+	ssize_t		i;
 
 	temp = fd_text;
 	size = 0;
@@ -93,11 +93,11 @@ ssize_t	ft_strsize(t_gnl_list *fd_text)
 
 char	*ft_gnl_lstjoin(t_gnl_list *fd_text)
 {
-	char	*result;
+	char		*result;
 	t_gnl_list	*temp;
-	ssize_t	i;
-	ssize_t	j;
-	ssize_t	size;
+	ssize_t		i;
+	ssize_t		j;
+	ssize_t		size;
 
 	temp = fd_text->next;
 	size = ft_strsize(temp);
@@ -122,8 +122,8 @@ char	*get_next_line(int fd)
 {
 	static t_gnl_list	*head;
 	t_gnl_list			*fd_text;
-	char			*result;
-	ssize_t			content_end;
+	char				*result;
+	ssize_t				content_end;
 
 	content_end = 1;
 	if (fd < 0 || BUFFER_SIZE < 1)

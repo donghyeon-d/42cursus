@@ -1,18 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/30 10:45:26 by dongchoi          #+#    #+#             */
+/*   Updated: 2022/06/30 11:29:39 by dongchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
 #include <fcntl.h>
-#include <mlx.h>
-#include "c.h"
+#include "fdf.h"
 #include "./ft_libft/libft.h"
 
 void	ft_free_double(char **temp)
 {
 	int	i;
-	int	j;
 
 	i = -1;
-	while(temp[++i])
+	while (temp[++i])
 		free(temp[i]);
 	free(temp);
 }
@@ -27,13 +35,13 @@ t_map	*ft_init_map(int height)
 	map->height = height;
 	map->width = 0;
 	map->distance = 10;
-	map->map_table = ft_calloc(map->height, sizeof(t_pos *));
-	if (map->map_table == NULL)
+	map->table = ft_calloc(map->height, sizeof(t_pos *));
+	if (map->table == NULL)
 		exit(1);
 	return (map);
 }
 
-int		ft_map_valid_check(t_map *map, t_list *read_list)
+int	ft_map_valid_check(t_map *map, t_list *read_list)
 {
 	int		i;
 	t_list	*node;
@@ -75,15 +83,15 @@ void	ft_make_map_table(t_map	*map, t_list *read_list)
 	{
 		temp = ft_split(node->content, ' ');
 		j = -1;
-		map->map_table[i] = ft_calloc(map->width, sizeof(t_pos));
-		if (map->map_table[i] == NULL)
+		map->table[i] = ft_calloc(map->width, sizeof(t_pos));
+		if (map->table[i] == NULL)
 			exit(1);
 		j = -1;
 		while (++j < map->width)
 		{
-			map->map_table[i][j].x = j;
-			map->map_table[i][j].y = i;
-			map->map_table[i][j].z = ft_atoi(temp[j]);
+			map->table[i][j].x = (double)j;
+			map->table[i][j].y = (double)i;
+			map->table[i][j].z = (double)ft_atoi(temp[j]);
 		}
 		node = node->next;
 		ft_free_double(temp);
@@ -96,7 +104,7 @@ t_map	*make_map(char *map_file)
 	char	*read_line;
 	t_map	*map;
 	t_list	*read_list;
-	
+
 	fd = open(map_file, O_RDWR);
 	read_line = get_next_line(fd);
 	read_list = ft_lstnew(read_line);
@@ -109,5 +117,5 @@ t_map	*make_map(char *map_file)
 	ft_map_valid_check(map, read_list);
 	ft_make_map_table(map, read_list);
 	ft_lstclear(&read_list, free);
-	return (map);	
+	return (map);
 }
