@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_altitude_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:00:13 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/01 15:53:36 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/02 05:35:37 by choidongd        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static double	ft_dot_add_z_to_y(t_map *map, double altitude)
 
 	i = -1;
 	max = -1;
-	while (i < map->height)
+	while (++i < map->height)
 	{
 		j = -1;
-		while (j < map->width)
+		while (++j < map->width)
 		{
 			map->table[i][j].y += map->table[i][j].z * altitude;
 			if (max < map->table[i][j].y)

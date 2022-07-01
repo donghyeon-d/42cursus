@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_adjust_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:37:47 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/01 15:28:35 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/02 05:35:30 by choidongd        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void	ft_double_to_int(t_map *map)
 	int	j;
 
 	i = -1;
-	while (i < map->height)
+	while (++i < map->height)
 	{
 		j = -1;
-		while (j < map->width)
+		while (++j < map->width)
 		{
 			map->table[i][j].x = (int)map->table[i][j].x;
 			map->table[i][j].y = (int)map->table[i][j].y;

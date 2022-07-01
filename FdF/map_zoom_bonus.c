@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dot_zoom_bonus.c                                   :+:      :+:    :+:   */
+/*   map_zoom_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:03:30 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/01 14:34:15 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/02 05:36:15 by choidongd        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void	ft_dot_add_min(t_data *data, char x, double min)
 	if (min < 0)
 	{
 		min *= -1;
-		while (i < data->map->height)
+		while (++i < data->map->height)
 		{
 			j = -1;
-			while (j < data->map->width)
+			while (++j < data->map->width)
 			{
 				if (x = 'x')
 					data->map->table[i][j].x += min;
@@ -57,10 +57,10 @@ static void	ft_dot_multiple_zoom(t_data *data, double zoom)
 	int	j;
 
 	i = -1;
-	while (i < data->map->height)
+	while (++i < data->map->height)
 	{
 		j = -1;
-		while (j < data->map->width)
+		while (++j < data->map->width)
 		{
 			data->map->table[i][j].x *= zoom;
 			data->map->table[i][j].y *= zoom;
