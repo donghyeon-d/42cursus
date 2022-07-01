@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:47:41 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 19:03:59 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/01 16:06:59 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,48 +15,162 @@
 #include <mlx.h>
 #include "fdf_bonus.h"
 
-void display_map(t_map *map)
+// void display_map(t_map *map)
+// {
+// 	for (int i = 0; i < map->height; i++)
+// 	{
+// 		for (int j = 0; j < map->width; j++)
+// 			printf("{%.2f %.2f %.2f} ", map->table[i][j].x, map->table[i][j].y, map->table[i][j].z);
+// 		printf("\n");
+// 	}
+// }
+
+int	ft_key_offset(int key, t_data *data)
 {
-	for (int i = 0; i < map->height; i++)
+	if (key == KEY_UP)
 	{
-		for (int j = 0; j < map->width; j++)
-			printf("{%.2f %.2f %.2f} ", map->table[i][j].x, map->table[i][j].y, map->table[i][j].z);
-		printf("\n");
+		data->map->offset_y += 0.1;
+		if (data->map->offset_y > IMG_HEI / 2)
+		{
+			//글씨 출력해보자	(못 올림)print : you can't add offset_y
+			data->map->offset_y -= 0.1;
+		}
 	}
+	else if (key == KEY_DOWN)
+	{
+		data->map->offset_y -= 0.1;
+		if (data->map->offset_y < -1 * IMG_HEI / 2)
+		{
+			//글씨 출력해보자	(못 올림)print : you can't add offset_y
+			data->map->offset_y += 0.1;
+		}
+	}
+	else if (key == KEY_LEFT)
+	{
+		data->map->offset_x -= 0.1;
+		if (data->map->offset_x < -1 * IMG_WID / 2)
+		{
+			//글씨 출력해보자	(못 올림)print : you can't add offset_y
+			data->map->offset_y += 0.1;
+		}
+	}
+	else if (key == KEY_RIGHT)
+	{
+		data->map->offset_y += 0.1;
+		if (data->map->offset_y > IMG_HEI / 2)
+		{
+			//글씨 출력해보자	(못 올림)print : you can't add offset_y
+			data->map->offset_y -= 0.1;
+		}
+	}
+	else
+		return (0);
+	ft_handle_map(data);
 }
 
-int	key_press(int keycode, t_data *img)
+int	ft_key_altitude(int key, t_data *data)
 {
-	if (keycode == KEY_ESC)
+	if (key == KEY_Q)
+	{
+		data->env->alt += 0.1;
+		if (IMG_HEI < data->map->y_max * data->env->zoom * data->env->alt)
+		{
+			//글씨 출력해보자	(못 올림)print : you can't add height
+			data->env->alt -= 0.1;
+		}
+	}
+	else if (key == KEY_W)
+	{
+		data->env->alt -= 0.1;
+		if (data->env->alt < 1)
+		{
+			//글씨 출력해보자 (못 내림)
+			data->env->alt += 0.1;
+		}
+	}
+	else
+		return (0);
+	ft_handle_map(data);
+}
+
+int	ft_key_zoom(int key, t_data *data)
+{
+	if (key == KEY_PLUS)
+	{
+		data->env->zoom += 0.1;
+		if (IMG_WID < data->map->x_max * data->env->zoom || \
+		IMG_HEI < data->map->y_max * data->env->zoom)
+		{
+			data->env->zoom -= 0.1;
+			//글씨 출력해보자 
+		}
+	}
+	else if (key == KEY_MINUS)
+	{
+		data->env->zoom -= 0.1;
+		if (data->env->zoom < 10)
+		{
+			data->env->zoom += 0.1;
+			//글씨 출력해보자
+		}
+	}
+	else
+		return (0);
+	ft_handle_map(data);
+}
+
+void	ft_key_rotate(int key, t_data *data)// 계속 증가한다면 어떻게 되지?
+{
+	if (key == KEY_Z)
+		data->env->alpha += 0.03;
+	else if (key == KEY_A)
+		data->env->alpha -= 0.03;
+	else if (key == KEY_X)
+		data->env->beta += 0.03;
+	else if (key == KEY_S)
+		data->env->beta -= 0.03;
+	else if (key == KEY_C)
+		data->env->gamma += 0.03;
+	else if (key == KEY_D)
+		data->env->gamma -= 0.03;
+	else
+		return ;
+	ft_handle_map(data);
+}
+
+void	ft_key_init(int key, t_data *data)
+{
+	if (key == KEY_ENTER)
+	{
+		free(data->map);
+		data->map = make_map(data->map_file);
+		free(data->env);
+		data->env = ft_init_env();
+	}
+	else
+		return ;
+	ft_handle_map(data);
+}
+
+int	key_press(int key, t_data *data)
+{
+	if (key == KEY_ESC)
 		exit(0);
-	else if (keycode == KEY_Z)
-	{
-		ft_draw_line_all(img->map, img, 0x000000);
-		img->env->distance += 1;
-		// mlx_destroy_image(img->mlx, img->img);
-		// img->img = mlx_new_image(img->mlx, IMG_WID, IMG_HEI);
-		// img->ad = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->len, &img->end);
-		free(img->map);
-		img->map = make_map(img->map_file);
-		ft_rotate_map(img->map, img->env);
-		display_map(img->map);
-		ft_draw_line_all(img->map, img, 0xFFFFFF);
-		mlx_put_image_to_window(img->mlx, img->win, img->img, 100, 100);
-	}
-	else if (keycode == KEY_X)
-	{
-		ft_draw_line_all(img->map, img, 0x000000);
-		img->env->distance -= 1;
-		// mlx_destroy_image(img->mlx, img->img);
-		// img->img = mlx_new_image(img->mlx, IMG_WID, IMG_HEI);
-		// img->ad = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->len, &img->end);
-		free(img->map);
-		img->map = make_map(img->map_file);
-		ft_rotate_map(img->map, img->env);
-		display_map(img->map);
-		ft_draw_line_all(img->map, img,0xFFFFFF);
-		mlx_put_image_to_window(img->mlx, img->win, img->img, 100, 100);
-	}
+	else if (key == KEY_Z || key == KEY_X || key == KEY_C || \
+	key == KEY_A || key == KEY_S || key == KEY_D)
+		ft_key_rotate(key, data);
+	else if (key == KEY_PLUS || key == KEY_MINUS)
+		ft_key_zoom(key, data);
+	else if (key == KEY_UP || key == KEY_DOWN || key == KEY_LEFT || key == KEY_DOWN)
+		ft_key_offset(key, data);
+	else if (key == KEY_O || key == KEY_I)
+		ft_key_iso(key, data);
+	else if (key == KEY_ENTER)
+		ft_key_init(key, data);
+	else if (key == KEY_O || key == KEY_I)
+		ft_key_altitude(key, data);
+	else
+		return (0);
 	return (1);
 }
 

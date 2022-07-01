@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:35:06 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 19:04:42 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/01 15:17:10 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,15 @@ void	ft_draw_line(t_data *img, t_pos from, t_pos to, int color)
 		while (++i < step)
 		{
 			pixel = ft_find_pixel_point(from, to, i);
-			img->ad[pixel] = color;
+			if (pixel >= 0 && pixel <= IMG_HEI * IMG_WID)
+				img->ad[pixel] = color;
 		}
 	}
 	else
 		ft_draw_vertical(img, from, to, color);
 }
 
-void	ft_draw_line_all(t_map *map, t_data *img, int color)
+void	ft_draw_line_all(t_data *img, t_map *map, int color)
 {
 	int	i;
 	int	j;
