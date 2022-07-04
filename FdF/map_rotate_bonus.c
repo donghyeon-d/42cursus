@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dot_rotate_bonus.c                                 :+:      :+:    :+:   */
+/*   map_rotate_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:48:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/01 14:34:34 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/04 21:30:13 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 #include "fdf_bonus.h"
 #include "./ft_libft/libft.h"
 
-static void	ft_rotate_x(t_pos *dot, t_env *env)
+static void	ft_rotate_x(t_pos *dot, t_env *env, t_map *map)
 {
 	double	prev_y;
 
 	prev_y = dot->y;
 	dot->y = prev_y * cos(env->alpha) + (dot->z) * sin(env->alpha);
 	dot->z = -prev_y * sin(env->alpha) + (dot->z) * cos(env->alpha);
+	if (dot->y < map->y_min)
+		map->y_min = dot->y;
 }
 
 static void	ft_rotate_y(t_pos *dot, t_env *env, t_map *map)
@@ -45,6 +47,8 @@ static void	ft_rotate_z(t_pos *dot, t_env *env, t_map *map)
 	dot->y = prev_x * sin(env->gamma) + prev_y * cos(env->gamma);
 	if (dot->x < map->x_min)
 		map->x_min = dot->x;
+	if (dot->y < map->y_min)
+		map->y_min = dot->y;
 }
 
 void	ft_adj_map_rotate(t_map *map, t_env *env)
@@ -58,7 +62,7 @@ void	ft_adj_map_rotate(t_map *map, t_env *env)
 		j = -1;
 		while (++j < map->width)
 		{
-			ft_rotate_x(&(map->table[i][j]), env);
+			ft_rotate_x(&(map->table[i][j]), env, map);
 			ft_rotate_y(&(map->table[i][j]), env, map);
 			ft_rotate_z(&(map->table[i][j]), env, map);
 		}

@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:47:41 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/01 16:06:59 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/04 20:53:22 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 // 	}
 // }
 
-int	ft_key_offset(int key, t_data *data)
+void	ft_key_offset(int key, t_data *data)
 {
 	if (key == KEY_UP)
 	{
@@ -64,11 +64,11 @@ int	ft_key_offset(int key, t_data *data)
 		}
 	}
 	else
-		return (0);
+		return ;
 	ft_handle_map(data);
 }
 
-int	ft_key_altitude(int key, t_data *data)
+void	ft_key_altitude(int key, t_data *data)
 {
 	if (key == KEY_Q)
 	{
@@ -89,11 +89,11 @@ int	ft_key_altitude(int key, t_data *data)
 		}
 	}
 	else
-		return (0);
+		return ;
 	ft_handle_map(data);
 }
 
-int	ft_key_zoom(int key, t_data *data)
+void	ft_key_zoom(int key, t_data *data)
 {
 	if (key == KEY_PLUS)
 	{
@@ -115,7 +115,7 @@ int	ft_key_zoom(int key, t_data *data)
 		}
 	}
 	else
-		return (0);
+		return ;
 	ft_handle_map(data);
 }
 
@@ -163,8 +163,8 @@ int	key_press(int key, t_data *data)
 		ft_key_zoom(key, data);
 	else if (key == KEY_UP || key == KEY_DOWN || key == KEY_LEFT || key == KEY_DOWN)
 		ft_key_offset(key, data);
-	else if (key == KEY_O || key == KEY_I)
-		ft_key_iso(key, data);
+	// else if (key == KEY_O || key == KEY_I)
+	// 	ft_key_iso(key, data);
 	else if (key == KEY_ENTER)
 		ft_key_init(key, data);
 	else if (key == KEY_O || key == KEY_I)

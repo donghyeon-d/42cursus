@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:45:26 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/01 15:41:00 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/04 21:50:47 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "fdf_bonus.h"
 #include "./ft_libft/libft.h"
 
-static void	ft_free_double(char **temp)
+void	ft_free_double(char **temp)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ static int	ft_map_valid_check(t_map *map, t_list *read_list)
 	return (TRUE);
 }
 
-static void	ft_make_map_table(t_map	*map, t_list *read_list)
+void	ft_make_map_table(t_map	*map, t_list *read_list)
 {
 	char	**temp;
 	t_list	*node;
@@ -83,17 +83,17 @@ static void	ft_make_map_table(t_map	*map, t_list *read_list)
 	}
 }
 
-static t_map	*ft_init_map(int height)
+t_map	*ft_init_map(int height)
 {
 	t_map	*map;
 
 	map = malloc(sizeof(t_map));
 	if (map == NULL)
 		exit(1);
+	map->height = height;
 	map->table = ft_calloc(map->height, sizeof(t_pos *));
 	if (map->table == NULL)
 		exit(1);
-	map->height = height;
 	map->width = 0;
 	map->offset_x = 0;
 	map->offset_y = 0;
@@ -122,6 +122,7 @@ t_map	*make_map(char *map_file)
 	map = ft_init_map(ft_lstsize(read_list));
 	ft_map_valid_check(map, read_list);
 	ft_make_map_table(map, read_list);
+	// map->read_list = read_list;
 	ft_lstclear(&read_list, free);
 	close(fd);
 	return (map);

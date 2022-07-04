@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_altitude_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:00:13 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/02 05:35:37 by choidongd        ###   ########.fr       */
+/*   Updated: 2022/07/04 21:21:54 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

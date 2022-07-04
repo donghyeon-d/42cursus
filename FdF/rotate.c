@@ -6,12 +6,13 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:48:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 11:35:30 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/04 20:39:20 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include <mlx.h>
+// #include <mlx.h>
+#include "./minilibx/mlx.h"
 #include "fdf.h"
 #include "./ft_libft/libft.h"
 

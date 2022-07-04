@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_offset_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:29:52 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/02 05:35:45 by choidongd        ###   ########.fr       */
+/*   Updated: 2022/07/04 20:55:24 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void	ft_dot_add_offset(t_data *data, char x, double offset)
 		j = -1;
 		while (++j < data->map->width)
 		{
-			if (x = 'x')
+			if (x == 'x')
 				data->map->table[i][j].x += offset;
-			else if (x = 'y')
+			else if (x == 'y')
 				data->map->table[i][j].y += offset;
 			else
 				exit(1);
@@ -50,6 +50,6 @@ static void	ft_dot_add_offset(t_data *data, char x, double offset)
 void	ft_adj_map_offset(t_data *data)
 {
 	ft_adj_offset(data);
-	ft_dot_add_offset(data->map, 'x', data->map->offset_x);
-	ft_dot_add_offset(data->map, 'y', data->map->offset_y);
+	ft_dot_add_offset(data, 'x', data->map->offset_x);
+	ft_dot_add_offset(data, 'y', data->map->offset_y);
 }

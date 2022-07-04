@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:51:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/01 15:49:58 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/04 21:47:20 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_pos {
 
 typedef struct s_map {
 	t_pos	**table;
+	t_list	*read_list;
 	int		height;
 	int		width;
 	double	offset_x;
@@ -110,6 +111,7 @@ t_map	*make_map(char *map_file);
 int		key_press(int keycode, t_data *img);
 int		ft_close_win(void *param);
 
+void	ft_draw_background(t_data *data);
 int		ft_handle_map(t_data *data);
 
 // init.c
@@ -123,5 +125,10 @@ void	ft_adj_map_altitude(t_data *data);
 void	ft_adj_map_offset(t_data *data);
 void	ft_adj_map_rotate(t_map *map, t_env *env);
 void	ft_adj_map_zoom(t_data *data);
+
+
+void	ft_make_map_table(t_map	*map, t_list *read_list);
+void	ft_free_double(char **temp);
+void display_map(t_map *map);
 
 #endif

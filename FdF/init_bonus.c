@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:46:28 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/01 15:04:16 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/04 21:37:34 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ t_env	*ft_init_env(void)
 	if (new_env == NULL)
 		exit(1);
 	new_env->alpha = -0.7;
-	new_env->beta = -0.7;
-	new_env->gamma = -0.7;
-	new_env->alt = 3;
-	new_env->zoom = 50;
+	new_env->beta = 0;//-0.7;
+	new_env->gamma = -7;
+	new_env->alt = 1;
+	new_env->zoom = 10;
 	return (new_env);
 }
 

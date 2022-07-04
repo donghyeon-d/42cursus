@@ -6,12 +6,13 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:47:41 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 13:55:28 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/04 20:38:55 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <mlx.h>
+// #include <mlx.h>
+#include "./minilibx/mlx.h"
 #include "fdf.h"
 
 int	key_press(int keycode)

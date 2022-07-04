@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_zoom_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:03:30 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/02 05:36:15 by choidongd        ###   ########.fr       */
+/*   Updated: 2022/07/04 21:39:49 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <math.h>
 #include "fdf_bonus.h"
 #include "./ft_libft/libft.h"
@@ -28,17 +29,17 @@ static void	ft_dot_add_min(t_data *data, char x, double min)
 			j = -1;
 			while (++j < data->map->width)
 			{
-				if (x = 'x')
+				if (x == 'x')
 					data->map->table[i][j].x += min;
-				else if (x = 'y')
+				else if (x == 'y')
 					data->map->table[i][j].y += min;
 				else
 					exit(1);
 			}
 		}
-		if (x = 'x')
+		if (x == 'x')
 			data->map->x_max += min;
-		else if (x = 'y')
+		else if (x == 'y')
 			data->map->y_max += min;
 	}
 }
@@ -72,8 +73,8 @@ static void	ft_dot_multiple_zoom(t_data *data, double zoom)
 
 void	ft_adj_map_zoom(t_data *data)
 {
-	ft_dot_add_min(data->map, 'x', data->map->x_min);
-	ft_dot_add_min(data->map, 'y', data->map->y_min);
+	ft_dot_add_min(data, 'x', data->map->x_min);
+	ft_dot_add_min(data, 'y', data->map->y_min);
 	ft_adj_zoomsize(data);
-	ft_dot_multiple_zoom(data->map, data->env->zoom);
+	ft_dot_multiple_zoom(data, data->env->zoom);
 }
