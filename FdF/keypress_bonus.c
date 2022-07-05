@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:47:41 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/04 20:53:22 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/05 18:20:23 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,23 +73,25 @@ void	ft_key_altitude(int key, t_data *data)
 	if (key == KEY_Q)
 	{
 		data->env->alt += 0.1;
-		if (IMG_HEI < data->map->y_max * data->env->zoom * data->env->alt)
-		{
-			//글씨 출력해보자	(못 올림)print : you can't add height
-			data->env->alt -= 0.1;
-		}
+		// if (IMG_HEI < data->map->y_max * data->env->zoom * data->env->alt)
+		// {
+		// 	//글씨 출력해보자	(못 올림)print : you can't add height
+		// 	data->env->alt -= 0.1;
+		// }
 	}
 	else if (key == KEY_W)
 	{
 		data->env->alt -= 0.1;
-		if (data->env->alt < 1)
-		{
-			//글씨 출력해보자 (못 내림)
-			data->env->alt += 0.1;
-		}
+		// if (data->env->alt < 0.1)
+		// {
+		// 	//글씨 출력해보자 (못 내림)
+		// 	data->env->alt += 0.1;
+		// }
 	}
 	else
 		return ;
+	// ft_make_map_table(data->map, data->map->read_list);
+	
 	ft_handle_map(data);
 }
 
@@ -98,21 +100,21 @@ void	ft_key_zoom(int key, t_data *data)
 	if (key == KEY_PLUS)
 	{
 		data->env->zoom += 0.1;
-		if (IMG_WID < data->map->x_max * data->env->zoom || \
-		IMG_HEI < data->map->y_max * data->env->zoom)
-		{
-			data->env->zoom -= 0.1;
-			//글씨 출력해보자 
-		}
+		// if (IMG_WID < data->map->x_max * data->env->zoom || \
+		// IMG_HEI < data->map->y_max * data->env->zoom)
+		// {
+		// 	data->env->zoom -= 0.1;
+		// 	//글씨 출력해보자 
+		// }
 	}
 	else if (key == KEY_MINUS)
 	{
 		data->env->zoom -= 0.1;
-		if (data->env->zoom < 10)
-		{
-			data->env->zoom += 0.1;
-			//글씨 출력해보자
-		}
+		// if (data->env->zoom < 10)
+		// {
+		// 	data->env->zoom += 0.1;
+		// 	//글씨 출력해보자
+		// }
 	}
 	else
 		return ;
@@ -135,6 +137,13 @@ void	ft_key_rotate(int key, t_data *data)// 계속 증가한다면 어떻게 되
 		data->env->gamma -= 0.03;
 	else
 		return ;
+	// ft_adj_map_rotate(data->map, data->env);
+	// ft_adj_map_altitude(data);
+	// ft_adj_map_zoom(data);
+	// ft_double_to_int(data->map);
+	// ft_draw_background(data);
+	// ft_draw_line_all(data, data->map, WHITE);
+	// mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	ft_handle_map(data);
 }
 
@@ -167,7 +176,7 @@ int	key_press(int key, t_data *data)
 	// 	ft_key_iso(key, data);
 	else if (key == KEY_ENTER)
 		ft_key_init(key, data);
-	else if (key == KEY_O || key == KEY_I)
+	else if (key == KEY_Q || key == KEY_W)
 		ft_key_altitude(key, data);
 	else
 		return (0);

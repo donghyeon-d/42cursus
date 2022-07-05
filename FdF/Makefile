@@ -1,15 +1,16 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-MLXFLAGS = -L ./mlxlib/ -lmlx -framework OpenGL -framework AppKit
+MLXFLAGS = -L ./minilibx_mms_20210621/ -lmlx -framework OpenGL -framework AppKit
 # MLXFLAGS = -L ./minilibx -lmlx -framework OpenGL -framework AppKit
 MLXLIB = libmlx.dylib
-MLXLIB_DIR = ./mlxlib/
+MLXLIB_DIR = ./minilibx_mms_20210621/
 NAME = fdf
 NAME_BONUS = fdf_bonus
 SRC = fdf.c draw.c keypress.c parse.c rotate.c
 SRC_BONUS = fdf_bonus.c draw_bonus.c handle_bonus.c init_bonus.c \
 keypress_bonus.c map_adjust_bonus.c map_altitude_bonus.c \
-map_offset_bonus.c map_parse_bonus.c map_rotate_bonus.c map_zoom_bonus.c
+map_offset_bonus.c map_parse_bonus.c map_rotate_bonus.c map_zoom_bonus.c \
+map_edge.c
 SRC_OBJECT = $(SRC:.c=.o)
 SRC_OBJECT_BONUS = $(SRC_BONUS:.c=.o)
 HEADER_DIR = .
@@ -19,7 +20,7 @@ GNL = get_next_line.a
 GNL_DIR = ./get_next_line/
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(HEADER_DIR) -Imlx
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(HEADER_DIR)
 
 all : $(NAME)
 
@@ -29,7 +30,7 @@ $(NAME) : $(SRC_OBJECT) $(GNL) $(LIBFT) $(MLXLIB)
 	$(CC) $(CFLAGS) $(MLXFLAGS) -o $@ $^
 
 $(NAME_BONUS) : $(SRC_OBJECT_BONUS) $(GNL) $(LIBFT)
-	$(CC) $(CFLAGS) -g3 -fsanitize=address $(MLXFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) $(MLXFLAGS) -o $@ $^
 
 $(LIBFT) :
 	make -C $(LIBFT_DIR) bonus

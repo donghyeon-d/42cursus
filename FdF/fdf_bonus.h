@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:51:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/04 21:47:20 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/05 18:08:38 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,13 @@ void	ft_adj_map_zoom(t_data *data);
 
 void	ft_make_map_table(t_map	*map, t_list *read_list);
 void	ft_free_double(char **temp);
-void display_map(t_map *map);
+void	display_map(t_map *map);
+
+// void	ft_find_min_edge(t_map *map);
+// void	ft_find_max_edge(t_map *map);
+void	ft_adj_edge(t_map *map, double x, double y);
+void	ft_find_max_min(t_map *map);
+
+void	ft_double_to_int(t_map *map);
 
 #endif

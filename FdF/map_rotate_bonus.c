@@ -6,10 +6,11 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:48:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/04 21:30:13 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/05 18:28:05 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <math.h>
 #include "fdf_bonus.h"
 #include "./ft_libft/libft.h"
@@ -57,6 +58,7 @@ void	ft_adj_map_rotate(t_map *map, t_env *env)
 	int	j;
 
 	i = -1;
+	display_map(map);
 	while (++i < map->height)
 	{
 		j = -1;
@@ -67,4 +69,19 @@ void	ft_adj_map_rotate(t_map *map, t_env *env)
 			ft_rotate_z(&(map->table[i][j]), env, map);
 		}
 	}
+	ft_find_max_min(map);
+	ft_adj_edge(map, map->x_min * -1, 0);
+	// if (map->x_min < 0)
+	// 	ft_adj_edge(map, map->x_min * -1, 0);
+	// else if (map->x_min > 0)
+	// 	ft_adj_edge(map, map->x_min * -1, 0);
+	
+	// printf("min : %.2f %.2f", map->x_min, map->y_min);
+	// if (map->y_min < 0)
+	// 	ft_adj_edge(map, 0, map->y_min * -1);
+	// else if (map->y_min > 0)
+	ft_adj_edge(map, 0, map->y_min * -1);
+	display_map(map);
+	// map->x_min = IMG_WID;
+	// map->y_min = IMG_HEI;
 }

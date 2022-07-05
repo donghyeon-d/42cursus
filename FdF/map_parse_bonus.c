@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:45:26 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/04 21:50:47 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/05 14:07:37 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,10 @@ t_map	*make_map(char *map_file)
 	}
 	map = ft_init_map(ft_lstsize(read_list));
 	ft_map_valid_check(map, read_list);
-	ft_make_map_table(map, read_list);
+	map->read_list = read_list;
+	// ft_make_map_table(map, read_list);
 	// map->read_list = read_list;
-	ft_lstclear(&read_list, free);
+	// ft_lstclear(&read_list, free);
 	close(fd);
 	return (map);
 }

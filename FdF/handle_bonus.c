@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:27:58 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/04 21:49:51 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/05 14:36:14 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@
 
 void display_map(t_map *map)
 {
+	printf("\n");
 	for (int i = 0; i < map->height; i++)
 	{
 		for (int j = 0; j < map->width; j++)
-			printf("{%.0f %.0f %.0f} ", map->table[i][j].x, map->table[i][j].y, map->table[i][j].z);
+			printf("{%.2f %.2f %.2f} ", map->table[i][j].x, map->table[i][j].y, map->table[i][j].z);
 		printf("\n");
 	}
+	printf("\n");
 }
 
 void	ft_draw_background(t_data *data)
@@ -35,9 +37,7 @@ void	ft_draw_background(t_data *data)
 
 int ft_handle_map(t_data *data)
 {
-	// ft_make_map_table(data->map, data->map->read_list);
 	ft_adj_map(data);
-	// display_map(data->map);
 	ft_draw_background(data);
 	ft_draw_line_all(data, data->map, WHITE);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);

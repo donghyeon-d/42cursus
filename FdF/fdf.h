@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:51:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 13:55:38 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/05 13:53:49 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 # include "./ft_libft/libft.h"
 # include "./get_next_line/get_next_line.h"
-# define WIN_HEI 1000
-# define WIN_WID 1200
-# define IMG_HEI 1000
-# define IMG_WID 1200
+# define WIN_HEI 1080
+# define WIN_WID 1920
+# define IMG_HEI 1080
+# define IMG_WID 1920
 // error flag
 # define MAP_ERROR 1
 # define TRUE 1
