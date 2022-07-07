@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:51:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/06 17:16:06 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/07 21:41:06 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define KEY_D 2//rotate z_reverse
 # define KEY_Q 12//altitude +
 # define KEY_W 13//altitude -
-# define KEY_I 34//
+# define KEY_I 34//init
 # define KEY_O 31//
 # define KEY_P 35//
 # define KEY_UP 126//offset up
@@ -55,13 +55,16 @@
 
 //color
 # define WHITE 0xFFFFFF
+# define GRAY 0x666666
 # define BLACK 0x000000
 # define RED 0xFF0000
 # define GREEN 0x00FF00
-# define BLUE 0x00FF00
+# define BLUE 0x0000FF
 
-//distance 점간 거리 - 확대시 키워줌
-//angle_radian 시계방향으로 돌려줄 각도
+//key
+#define X_EVENT_KEY_PRESS		2
+#define X_EVENT_KEY_RELEASE		3
+#define X_EVENT_KEY_EXIT		17
 
 typedef struct s_pos {
 	double	x;
@@ -108,24 +111,16 @@ typedef struct s_data {
 	int		end;
 }				t_data;
 
-// void	ft_draw_line(t_data *img, t_pos from, t_pos to, int color);
-void	ft_draw_line_all(t_data *img, t_map *map);
 
-t_map	*make_map(char *map_file);
+t_map	*ft_make_map(char *map_file);
 
 int		key_press(int keycode, t_data *img);
-int		ft_close_win(void *param);
 
-void	ft_draw_background(t_data *data);
-int		ft_handle_map(t_data *data);
 
 // init.c
-t_env	*ft_init_env(void);
-t_data	*ft_init_data(char *map_file);
 t_map	*ft_init_map(int height);
 
 // map
-void	ft_adj_map(t_data *data);
 void	ft_adj_map_altitude(t_data *data);
 void	ft_adj_map_offset(t_data *data);
 void	ft_adj_map_rotate(t_map *map, t_env *env);
@@ -141,13 +136,53 @@ void	display_map(t_map *map);
 void	ft_adj_edge(t_map *map, double x, double y);
 void	ft_find_max_min(t_map *map);
 
-void	ft_double_to_int(t_map *map);
-
-
-void	ft_string_put(t_data *data);
-
-int	ft_find_pixel_color(t_pos from, t_pos to, int i, int step);
+int		ft_find_pixel_color(t_pos from, t_pos to, int i, int step);
 void	ft_find_z_max_min(t_map *map);
+int		ft_color_vertical(t_pos from, t_pos to, int i, int step);
 void	ft_color_setting(t_map *map);
 
+// key
+int		ft_key_press(int key, t_data *data);
+void	ft_key_mode(int key, t_data *data);
+void	ft_key_init(int key, t_data *data);
+void	ft_key_offset(int key, t_data *data);
+void	ft_key_altitude(int key, t_data *data);
+void	ft_key_zoom(int key, t_data *data);
+void	ft_key_rotate(int key, t_data *data);
+int	ft_close_win(void);
+
+// mlx
+void	ft_string_put(t_data *data);
+
+// draw.c
+void	ft_draw_vertical(t_data *img, t_pos from, t_pos to);
+int		ft_find_pixel_point(t_pos from, t_pos to, int i);
+void	ft_draw_line(t_data *data, t_pos from, t_pos to);
+void	ft_draw_line_all(t_data *img, t_map *map);
+
+// init.c
+t_env	*ft_init_env(void);
+t_data	*ft_init_data(char *map_file);
+void	ft_draw_background(t_data *data);
+
+// map_adjust.c 
+void	ft_handle_map(t_data *data);
+void	ft_adj_map(t_data *data);
+void	ft_double_to_int(t_map *map);
+void	ft_map_clear(t_map *map);
+
+
+
 #endif
+
+
+// int ft_handle_map(t_data *data)
+// {
+// 	ft_adj_map(data);
+// 	ft_draw_background(data);
+// 	ft_draw_line_all(data, data->map);
+// 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+// 	ft_string_put(data);;
+// 	// display_map(data->map);
+// 	return (1);
+// }

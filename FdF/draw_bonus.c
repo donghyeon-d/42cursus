@@ -6,15 +6,14 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:35:06 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/06 16:59:24 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/07 20:21:06 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <math.h>
 #include "fdf_bonus.h"
 
-int	ft_round_off(double num)
+static int	ft_round_off(double num)
 {
 	if (num > 0)
 	{
@@ -35,14 +34,23 @@ void	ft_draw_vertical(t_data *img, t_pos from, t_pos to)
 	int		step;
 	int		pixel;
 	int		i;
-	
-	step = (int)fabs((double)to.y - from.y);
+
 	i = -1;
-	pixel = from.x + IMG_WID * from.y;
+	if (from.y < to.y)
+	{
+		step = (int)(to.y - from.y);
+		pixel = from.x + IMG_WID * from.y;
+	}
+	else
+	{
+		step = (int)(from.y - to.y);
+		pixel = to.x + IMG_WID * to.y;
+	}
 	while (++i < step)
 	{
 		pixel += IMG_WID;
-		img->ad[pixel] = ft_find_pixel_color(from, to, i, step);
+		if (pixel >= 0 && pixel <= IMG_HEI * IMG_WID)
+			img->ad[pixel] = ft_color_vertical(from, to, i, step);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:46:28 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/06 15:04:29 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/07 21:08:31 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ t_env	*ft_init_env(void)
 	new_env = ft_calloc(1, sizeof(t_env));
 	if (new_env == NULL)
 		exit(1);
-	new_env->alpha = -0.7;
-	new_env->beta = 0;//-0.7;
-	new_env->gamma = 7;
-	new_env->alt = 0.1;
+	new_env->alpha = -0.36;
+	new_env->beta = -0.3;
+	new_env->gamma = 6.5;
+	new_env->alt = 0.2;
 	new_env->zoom = 50;
 	return (new_env);
 }
@@ -43,7 +43,16 @@ t_data	*ft_init_data(char *map_file)
 	d->map_file = map_file;
 	if (d->mlx == NULL || d->win == NULL || d->img == NULL || d->ad == NULL)
 		exit(1);
-	d->map = make_map(map_file);
+	d->map = ft_make_map(map_file);
 	d->env = ft_init_env();
 	return (d);
+}
+
+void	ft_draw_background(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < IMG_HEI * IMG_WID)
+		data->ad[i] = 0x000000;
 }

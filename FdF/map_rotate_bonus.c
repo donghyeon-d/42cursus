@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:48:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/06 17:06:21 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/07 19:05:57 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	ft_adj_map_rotate(t_map *map, t_env *env)
 		j = -1;
 		while (++j < map->width)
 		{
-			// map->table[i][j].z *= env->alt;
 			ft_rotate_x(&(map->table[i][j]), env, map);
 			ft_rotate_y(&(map->table[i][j]), env, map);
 			ft_rotate_z(&(map->table[i][j]), env, map);

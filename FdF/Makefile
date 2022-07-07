@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -L ./minilibx_mms_20210621/ -lmlx -framework OpenGL -framework AppKit
 # MLXFLAGS = -L ./minilibx -lmlx -framework OpenGL -framework AppKit
 MLXLIB = libmlx.dylib
@@ -8,7 +8,7 @@ NAME = fdf
 NAME_BONUS = fdf_bonus
 SRC = fdf.c draw.c keypress.c parse.c rotate.c
 SRC_BONUS = fdf_bonus.c draw_bonus.c handle_bonus.c init_bonus.c \
-keypress_bonus.c map_adjust_bonus.c \
+keypress_bonus.c keypress_utils_bonus.c map_adjust_bonus.c \
 map_offset_bonus.c map_parse_bonus.c map_rotate_bonus.c map_zoom_bonus.c \
 map_edge.c color_bonus.c map_altitude_bonus.c
 SRC_OBJECT = $(SRC:.c=.o)
