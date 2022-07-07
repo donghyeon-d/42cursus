@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:51:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/05 18:08:38 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/06 17:16:06 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 # include "./get_next_line/get_next_line.h"
 
 // WIDTH & HEITH
-# define WIN_HEI 1000
-# define WIN_WID 1200
-# define IMG_HEI 1000
-# define IMG_WID 1200
+# define WIN_HEI 1080
+# define WIN_WID 1920
+# define IMG_HEI 1080
+# define IMG_WID 1920
 
 // error flag
 # define MAP_ERROR 1
@@ -44,6 +44,7 @@
 # define KEY_W 13//altitude -
 # define KEY_I 34//
 # define KEY_O 31//
+# define KEY_P 35//
 # define KEY_UP 126//offset up
 # define KEY_DOWN 125//offset down
 # define KEY_LEFT 123//offset left
@@ -57,7 +58,7 @@
 # define BLACK 0x000000
 # define RED 0xFF0000
 # define GREEN 0x00FF00
-# define BLUE 0x0000FF
+# define BLUE 0x00FF00
 
 //distance 점간 거리 - 확대시 키워줌
 //angle_radian 시계방향으로 돌려줄 각도
@@ -76,10 +77,14 @@ typedef struct s_map {
 	int		width;
 	double	offset_x;
 	double	offset_y;
+	double	mid_x;
+	double	mid_y;
 	double	x_min;
 	double	x_max;
 	double	y_min;
 	double	y_max;
+	double	z_min;
+	double	z_max;
 }	t_map;
 
 typedef struct s_env {
@@ -104,7 +109,7 @@ typedef struct s_data {
 }				t_data;
 
 // void	ft_draw_line(t_data *img, t_pos from, t_pos to, int color);
-void	ft_draw_line_all(t_data *img, t_map *map, int color);
+void	ft_draw_line_all(t_data *img, t_map *map);
 
 t_map	*make_map(char *map_file);
 
@@ -137,5 +142,12 @@ void	ft_adj_edge(t_map *map, double x, double y);
 void	ft_find_max_min(t_map *map);
 
 void	ft_double_to_int(t_map *map);
+
+
+void	ft_string_put(t_data *data);
+
+int	ft_find_pixel_color(t_pos from, t_pos to, int i, int step);
+void	ft_find_z_max_min(t_map *map);
+void	ft_color_setting(t_map *map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:37:47 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/05 18:21:07 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/06 17:06:31 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,12 @@ void	ft_double_to_int(t_map *map)
 void	ft_adj_map(t_data *data)
 {
 	ft_make_map_table(data->map, data->map->read_list);
-	// display_map(data->map);
-	// display_map(data->map);
+	display_map(data->map);
 	ft_adj_map_altitude(data);
+	ft_color_setting(data->map);
 	ft_adj_map_rotate(data->map, data->env);
-	// display_map(data->map);
-
-	// ft_dot_multiple(data);
 	ft_adj_map_zoom(data);
-	// display_map(data->map);
-	// ft_adj_map_offset(data);
+	ft_adj_map_offset(data);
+	ft_find_max_min(data->map);
 	ft_double_to_int(data->map);
-	// display_map(data->map);
 }

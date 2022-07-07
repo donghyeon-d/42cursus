@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:03:30 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/05 17:53:53 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/06 12:02:44 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@
 // 	}
 // }
 
-static void ft_adj_zoomsize(t_data *data)
-{
-	ft_find_max_min(data->map);
-	if (IMG_WID < data->map->x_max * data->env->zoom)
-		data->env->zoom = IMG_WID / data->map->x_max;
-	if (IMG_HEI < data->map->y_max * data->env->zoom)
-		data->env->zoom = IMG_WID / data->map->y_max;
-}
+// static void ft_adj_zoomsize(t_data *data)
+// {
+// 	ft_find_max_min(data->map);
+// 	if (IMG_WID < data->map->x_max * data->env->zoom)
+// 		data->env->zoom = IMG_WID * 2 / 3 / data->map->x_max;
+// 	if (IMG_HEI < data->map->y_max * data->env->zoom)
+// 		data->env->zoom = IMG_HEI * 2 / 3 / data->map->y_max;
+// }
 
 static void	ft_dot_multiple_zoom(t_data *data, double zoom)
 {
@@ -72,6 +72,6 @@ static void	ft_dot_multiple_zoom(t_data *data, double zoom)
 
 void	ft_adj_map_zoom(t_data *data)
 {
-	ft_adj_zoomsize(data);
+	// ft_adj_zoomsize(data);
 	ft_dot_multiple_zoom(data, data->env->zoom);
 }

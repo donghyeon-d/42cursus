@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:00:13 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/05 18:24:40 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/06 17:08:49 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,6 @@ void	ft_adj_map_altitude(t_data *data)
 	{
 		j = -1;
 		while (++j < data->map->width)
-		{
-			data->map->table[i][j].y += data->env->alt;
-			// if (data->map->y_max < data->map->table[i][j].y)
-			// 	data->map->y_max = data->map->table[i][j].y;
-			// if (data->map->y_min > data->map->table[i][j].y)
-			// 	data->map->y_min = data->map->table[i][j].y;
-		}
+			data->map->table[i][j].z *= data->env->alt;
 	}
-	printf("%.2f\n", data->env->alt);
-		display_map(data->map);
 }
-// {
-// 	ft_dot_add_z_to_y(data->map, 1);
-// 	if (data->map->y_max * data->env->alt * data->env->zoom > IMG_HEI)
-// 		data->env->alt = IMG_HEI / data->map->y_max / data->map->height;
-// 	ft_dot_add_z_to_y(data->map, -1);
-// 	ft_dot_add_z_to_y(data->map, data->env->alt * -1);
-
-
-// 	// display_map(data->map);
-// 	// ft_find_min_edge(data->map);
-// 	// ft_adj_edge(data->map, data->map->x_min * -1, 0);
-// 	ft_adj_edge(data->map, 0, data->map->y_min * -1);
-// 	data->map->x_min = IMG_WID;
-// 	data->map->y_min = IMG_HEI;
-// 	// display_map(data->map);
-// }

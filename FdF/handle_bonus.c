@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 15:27:58 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/05 14:36:14 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/06 16:37:25 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int ft_handle_map(t_data *data)
 {
 	ft_adj_map(data);
 	ft_draw_background(data);
-	ft_draw_line_all(data, data->map, WHITE);
+	ft_draw_line_all(data, data->map);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	ft_string_put(data);;
+	// display_map(data->map);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:47:41 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/05 18:20:23 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/06 15:06:02 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,38 +29,34 @@ void	ft_key_offset(int key, t_data *data)
 {
 	if (key == KEY_UP)
 	{
-		data->map->offset_y += 0.1;
+		data->map->offset_y -= 5;
 		if (data->map->offset_y > IMG_HEI / 2)
 		{
-			//글씨 출력해보자	(못 올림)print : you can't add offset_y
-			data->map->offset_y -= 0.1;
+			data->map->offset_y += 5;
 		}
 	}
 	else if (key == KEY_DOWN)
 	{
-		data->map->offset_y -= 0.1;
+		data->map->offset_y += 5;
 		if (data->map->offset_y < -1 * IMG_HEI / 2)
 		{
-			//글씨 출력해보자	(못 올림)print : you can't add offset_y
-			data->map->offset_y += 0.1;
+			data->map->offset_y -= 5;
 		}
 	}
 	else if (key == KEY_LEFT)
 	{
-		data->map->offset_x -= 0.1;
+		data->map->offset_x -= 5;
 		if (data->map->offset_x < -1 * IMG_WID / 2)
 		{
-			//글씨 출력해보자	(못 올림)print : you can't add offset_y
-			data->map->offset_y += 0.1;
+			data->map->offset_y += 5;
 		}
 	}
 	else if (key == KEY_RIGHT)
 	{
-		data->map->offset_y += 0.1;
+		data->map->offset_x += 5;
 		if (data->map->offset_y > IMG_HEI / 2)
 		{
-			//글씨 출력해보자	(못 올림)print : you can't add offset_y
-			data->map->offset_y -= 0.1;
+			data->map->offset_x -= 5;
 		}
 	}
 	else
@@ -71,57 +67,44 @@ void	ft_key_offset(int key, t_data *data)
 void	ft_key_altitude(int key, t_data *data)
 {
 	if (key == KEY_Q)
-	{
 		data->env->alt += 0.1;
-		// if (IMG_HEI < data->map->y_max * data->env->zoom * data->env->alt)
-		// {
-		// 	//글씨 출력해보자	(못 올림)print : you can't add height
-		// 	data->env->alt -= 0.1;
-		// }
-	}
 	else if (key == KEY_W)
-	{
 		data->env->alt -= 0.1;
-		// if (data->env->alt < 0.1)
-		// {
-		// 	//글씨 출력해보자 (못 내림)
-		// 	data->env->alt += 0.1;
-		// }
+	ft_adj_map(data);
+	if (data->map->y_max > IMG_HEI || data->map->y_min < 0)
+	{
+		if (data->env->alt > 0)
+			data->env->alt -= 0.1;
+		else
+			data->env->alt += 0.1;
 	}
-	else
-		return ;
-	// ft_make_map_table(data->map, data->map->read_list);
-	
 	ft_handle_map(data);
 }
 
 void	ft_key_zoom(int key, t_data *data)
 {
+	double	wid;
+	double	hei;
+
+	wid = data->map->x_max / data->env->zoom;
+	hei = data->map->y_max / data->env->zoom;
+
 	if (key == KEY_PLUS)
 	{
-		data->env->zoom += 0.1;
-		// if (IMG_WID < data->map->x_max * data->env->zoom || \
-		// IMG_HEI < data->map->y_max * data->env->zoom)
-		// {
-		// 	data->env->zoom -= 0.1;
-		// 	//글씨 출력해보자 
-		// }
+		if (IMG_WID * 2 >= wid * (data->env->zoom + 5) && \
+		IMG_HEI * 2 >= hei * (data->env->zoom + 5))
+			data->env->zoom += 5;
 	}
 	else if (key == KEY_MINUS)
 	{
-		data->env->zoom -= 0.1;
-		// if (data->env->zoom < 10)
-		// {
-		// 	data->env->zoom += 0.1;
-		// 	//글씨 출력해보자
-		// }
+		data->env->zoom -= 5;
+		if (data->env->zoom < 10)
+			data->env->zoom += 5;
 	}
-	else
-		return ;
 	ft_handle_map(data);
 }
 
-void	ft_key_rotate(int key, t_data *data)// 계속 증가한다면 어떻게 되지?
+void	ft_key_rotate(int key, t_data *data)
 {
 	if (key == KEY_Z)
 		data->env->alpha += 0.03;
@@ -135,15 +118,6 @@ void	ft_key_rotate(int key, t_data *data)// 계속 증가한다면 어떻게 되
 		data->env->gamma += 0.03;
 	else if (key == KEY_D)
 		data->env->gamma -= 0.03;
-	else
-		return ;
-	// ft_adj_map_rotate(data->map, data->env);
-	// ft_adj_map_altitude(data);
-	// ft_adj_map_zoom(data);
-	// ft_double_to_int(data->map);
-	// ft_draw_background(data);
-	// ft_draw_line_all(data, data->map, WHITE);
-	// mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	ft_handle_map(data);
 }
 
@@ -161,6 +135,26 @@ void	ft_key_init(int key, t_data *data)
 	ft_handle_map(data);
 }
 
+void	ft_key_mode(int key, t_data *data)
+{
+	if (key == KEY_P)
+	{
+		data->env->alpha = 0;
+		data->env->beta = 0;
+		data->env->gamma = 0;
+		data->env->alt = 1;
+		data->env->zoom = 50;
+	}
+	else if (key == KEY_I)
+	{
+		free(data->map);
+		data->map = make_map(data->map_file);
+		free(data->env);
+		data->env = ft_init_env();
+	}
+	ft_handle_map(data);
+}
+
 int	key_press(int key, t_data *data)
 {
 	if (key == KEY_ESC)
@@ -170,16 +164,16 @@ int	key_press(int key, t_data *data)
 		ft_key_rotate(key, data);
 	else if (key == KEY_PLUS || key == KEY_MINUS)
 		ft_key_zoom(key, data);
-	else if (key == KEY_UP || key == KEY_DOWN || key == KEY_LEFT || key == KEY_DOWN)
+	else if (key == KEY_UP || key == KEY_DOWN || key == KEY_LEFT || key == KEY_RIGHT)
 		ft_key_offset(key, data);
-	// else if (key == KEY_O || key == KEY_I)
+	else if (key == KEY_P || key == KEY_I)
+		ft_key_mode(key, data);
+	// else if (key == KEY_P || key == KEY_I)
 	// 	ft_key_iso(key, data);
 	else if (key == KEY_ENTER)
 		ft_key_init(key, data);
 	else if (key == KEY_Q || key == KEY_W)
 		ft_key_altitude(key, data);
-	else
-		return (0);
 	return (1);
 }
 
