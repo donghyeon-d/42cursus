@@ -6,52 +6,12 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:03:30 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/06 12:02:44 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/08 15:31:02 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <math.h>
 #include "fdf_bonus.h"
-#include "./ft_libft/libft.h"
-
-// static void	ft_dot_add_min(t_data *data, char x, double min)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = -1;
-// 	if (min < 0)
-// 	{
-// 		min *= -1;
-// 		while (++i < data->map->height)
-// 		{
-// 			j = -1;
-// 			while (++j < data->map->width)
-// 			{
-// 				if (x == 'x')
-// 					data->map->table[i][j].x += min;
-// 				else if (x == 'y')
-// 					data->map->table[i][j].y += min;
-// 				else
-// 					exit(1);
-// 			}
-// 		}
-// 		if (x == 'x')
-// 			data->map->x_max += min;
-// 		else if (x == 'y')
-// 			data->map->y_max += min;
-// 	}
-// }
-
-// static void ft_adj_zoomsize(t_data *data)
-// {
-// 	ft_find_max_min(data->map);
-// 	if (IMG_WID < data->map->x_max * data->env->zoom)
-// 		data->env->zoom = IMG_WID * 2 / 3 / data->map->x_max;
-// 	if (IMG_HEI < data->map->y_max * data->env->zoom)
-// 		data->env->zoom = IMG_HEI * 2 / 3 / data->map->y_max;
-// }
 
 static void	ft_dot_multiple_zoom(t_data *data, double zoom)
 {
@@ -72,6 +32,13 @@ static void	ft_dot_multiple_zoom(t_data *data, double zoom)
 
 void	ft_adj_map_zoom(t_data *data)
 {
-	// ft_adj_zoomsize(data);
+	ft_find_xy_max_min(data->map);
+	if (data->env->init == 1)
+	{
+		if (IMG_WID < data->map->x_max * data->env->zoom)
+			data->env->zoom = IMG_WID / (data->map->x_max + 1);
+		if (IMG_HEI < data->map->y_max * data->env->zoom)
+			data->env->zoom = IMG_HEI / (data->map->y_max + 1);
+	}
 	ft_dot_multiple_zoom(data, data->env->zoom);
 }

@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:10:42 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 20:15:55 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/08 15:28:34 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,6 @@ int	ft_find_pixel_color(t_pos from, t_pos to, int i, int step)
 	return (color);
 }
 
-void	ft_find_z_max_min(t_map *map)
-{
-	int	i;
-	int	j;
-
-	map->z_max = -1;
-	map->z_min = 2147483647;
-	i = -1;
-	while (++i < map->height)
-	{
-		j = -1;
-		while (++j < map->width)
-		{
-			if (map->z_max < map->table[i][j].z)
-				map->z_max = map->table[i][j].z;
-			if (map->z_min > map->table[i][j].z)
-				map->z_min = map->table[i][j].z;
-		}
-	}
-}
 
 void	ft_color_setting(t_map *map)
 {

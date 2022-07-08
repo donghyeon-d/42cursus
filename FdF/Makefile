@@ -7,10 +7,10 @@ MLXLIB_DIR = ./minilibx_mms_20210621/
 NAME = fdf
 NAME_BONUS = fdf_bonus
 SRC = fdf.c draw.c keypress.c parse.c rotate.c
-SRC_BONUS = fdf_bonus.c draw_bonus.c handle_bonus.c init_bonus.c \
+SRC_BONUS = fdf_bonus.c draw_bonus.c init_bonus.c \
 keypress_bonus.c keypress_utils_bonus.c map_adjust_bonus.c \
 map_offset_bonus.c map_parse_bonus.c map_rotate_bonus.c map_zoom_bonus.c \
-map_edge.c color_bonus.c map_altitude_bonus.c
+map_find_minmax_bonus.c color_bonus.c map_altitude_bonus.c string_bonus.c
 SRC_OBJECT = $(SRC:.c=.o)
 SRC_OBJECT_BONUS = $(SRC_BONUS:.c=.o)
 HEADER_DIR = .

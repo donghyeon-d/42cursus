@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 14:11:11 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/06 10:40:41 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/08 15:26:05 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,6 @@ void	ft_adj_edge(t_map *map, double x, double y)
 	int	j;
 
 	i = -1;
-	// ft_find_min_edge(map);
-	// ft_find_max_edge(map);
-	// printf("\nft_adj_edge, (x)%.2f, (y)%.2f\n", x, y);
 	while (++i < map->height)
 	{
 		j = -1;
@@ -97,7 +94,6 @@ void	ft_adj_edge(t_map *map, double x, double y)
 		{
 			map->table[i][j].x += x;
 			map->table[i][j].y += y;
-			// printf("%.2f %.2f %.2f\n", map->table[i][j].x, map->table[i][j].y, map->table[i][j].z);
 		}
 	}
 }

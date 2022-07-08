@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:51:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 21:41:06 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/08 15:35:30 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,50 +21,44 @@
 # define WIN_WID 1920
 # define IMG_HEI 1080
 # define IMG_WID 1920
-
 // error flag
-# define MAP_ERROR 1
-# define TRUE 1
-# define FALSE 0
-
+# define TRUE	1
+# define FALSE	0
 // event 
 # define X_EVENT_KEY_PRESS		2
-# define X_EVENT_KEY_RELEASE		3
+# define X_EVENT_KEY_RELEASE	3
 # define X_EVENT_KEY_EXIT		17
-
 //key
-# define KEY_ESC 53//exit
-# define KEY_Z 6//rotate x
-# define KEY_X 7//rotate y
-# define KEY_C 8//rotate z
-# define KEY_A 0//rotate x_reverse
-# define KEY_S 1//rotate y_reverse
-# define KEY_D 2//rotate z_reverse
-# define KEY_Q 12//altitude +
-# define KEY_W 13//altitude -
-# define KEY_I 34//init
-# define KEY_O 31//
-# define KEY_P 35//
-# define KEY_UP 126//offset up
-# define KEY_DOWN 125//offset down
-# define KEY_LEFT 123//offset left
-# define KEY_RIGHT 124//offset right
-# define KEY_PLUS 24//zoom in
-# define KEY_MINUS 27//zoom out
-# define KEY_ENTER 36//init
-
+# define KEY_ESC	53
+# define KEY_Z		6
+# define KEY_X		7
+# define KEY_C		8
+# define KEY_A		0
+# define KEY_S		1
+# define KEY_D		2
+# define KEY_Q		12
+# define KEY_W		13
+# define KEY_I		34
+# define KEY_O		31
+# define KEY_P		35
+# define KEY_UP		126
+# define KEY_DOWN	125
+# define KEY_LEFT	123
+# define KEY_RIGHT	124
+# define KEY_PLUS	24
+# define KEY_MINUS	27
+# define KEY_ENTER	36
 //color
-# define WHITE 0xFFFFFF
-# define GRAY 0x666666
-# define BLACK 0x000000
-# define RED 0xFF0000
-# define GREEN 0x00FF00
-# define BLUE 0x0000FF
-
+# define WHITE	0xFFFFFF
+# define GRAY	0x666666
+# define BLACK	0x000000
+# define RED	0xFF0000
+# define GREEN	0x00FF00
+# define BLUE	0x0000FF
 //key
-#define X_EVENT_KEY_PRESS		2
-#define X_EVENT_KEY_RELEASE		3
-#define X_EVENT_KEY_EXIT		17
+# define X_EVENT_KEY_PRESS		2
+# define X_EVENT_KEY_RELEASE 	3
+# define X_EVENT_KEY_EXIT 		17
 
 typedef struct s_pos {
 	double	x;
@@ -96,6 +90,7 @@ typedef struct s_env {
 	double	gamma;
 	double	alt;
 	double	zoom;
+	int		init;
 }	t_env;
 
 typedef struct s_data {
@@ -111,47 +106,30 @@ typedef struct s_data {
 	int		end;
 }				t_data;
 
-
+// map_parse
 t_map	*ft_make_map(char *map_file);
-
-int		key_press(int keycode, t_data *img);
-
-
-// init.c
-t_map	*ft_init_map(int height);
-
-// map
-void	ft_adj_map_altitude(t_data *data);
-void	ft_adj_map_offset(t_data *data);
-void	ft_adj_map_rotate(t_map *map, t_env *env);
-void	ft_adj_map_zoom(t_data *data);
-
-
 void	ft_make_map_table(t_map	*map, t_list *read_list);
-void	ft_free_double(char **temp);
-void	display_map(t_map *map);
 
-// void	ft_find_min_edge(t_map *map);
-// void	ft_find_max_edge(t_map *map);
-void	ft_adj_edge(t_map *map, double x, double y);
-void	ft_find_max_min(t_map *map);
-
-int		ft_find_pixel_color(t_pos from, t_pos to, int i, int step);
+//find_min_max
+void	ft_find_xy_max_min(t_map *map);
 void	ft_find_z_max_min(t_map *map);
+
+// clor
+int		ft_find_pixel_color(t_pos from, t_pos to, int i, int step);
 int		ft_color_vertical(t_pos from, t_pos to, int i, int step);
 void	ft_color_setting(t_map *map);
 
 // key
 int		ft_key_press(int key, t_data *data);
-void	ft_key_mode(int key, t_data *data);
 void	ft_key_init(int key, t_data *data);
-void	ft_key_offset(int key, t_data *data);
+void	ft_key_mode(int key, t_data *data);
+int		ft_close_win(void);
 void	ft_key_altitude(int key, t_data *data);
-void	ft_key_zoom(int key, t_data *data);
+void	ft_key_offset(int key, t_data *data);
 void	ft_key_rotate(int key, t_data *data);
-int	ft_close_win(void);
+void	ft_key_zoom(int key, t_data *data);
 
-// mlx
+// string.c
 void	ft_string_put(t_data *data);
 
 // draw.c
@@ -163,26 +141,18 @@ void	ft_draw_line_all(t_data *img, t_map *map);
 // init.c
 t_env	*ft_init_env(void);
 t_data	*ft_init_data(char *map_file);
-void	ft_draw_background(t_data *data);
 
 // map_adjust.c 
 void	ft_handle_map(t_data *data);
 void	ft_adj_map(t_data *data);
 void	ft_double_to_int(t_map *map);
-void	ft_map_clear(t_map *map);
+void	ft_draw_background(t_data *data);
 
-
+// map adjust
+void	ft_adj_map_altitude(t_data *data);
+void	ft_adj_map_offset(t_data *data);
+void	ft_adj_map_rotate(t_map *map, t_env *env);
+void	ft_adj_map_zoom(t_data *data);
+void	ft_adj_dot_xy(t_map *map, double x, double y);
 
 #endif
-
-
-// int ft_handle_map(t_data *data)
-// {
-// 	ft_adj_map(data);
-// 	ft_draw_background(data);
-// 	ft_draw_line_all(data, data->map);
-// 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-// 	ft_string_put(data);;
-// 	// display_map(data->map);
-// 	return (1);
-// }

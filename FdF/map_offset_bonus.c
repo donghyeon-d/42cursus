@@ -6,18 +6,15 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:29:52 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/06 14:52:47 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/08 15:30:16 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <math.h>
 #include "fdf_bonus.h"
-#include "./ft_libft/libft.h"
 
-static void ft_adj_mid(t_data *data)
+static void	ft_adj_mid(t_data *data)
 {
-	ft_find_max_min(data->map);
+	ft_find_xy_max_min(data->map);
 	data->map->mid_x = (IMG_WID - data->map->x_max) / 2;
 	data->map->mid_y = (IMG_HEI - data->map->y_max) / 2;
 }
@@ -39,9 +36,6 @@ static void	ft_dot_add_offset(t_data *data, char x, double offset)
 				data->map->table[i][j].y += offset;
 			else
 				exit(1);
-			// if (data->map->table[i][j].x > IMG_WID || \
-			// data->map->table[i][j].x > IMG_HEI)
-			// 	data->map->table[i][j].color = 0x000000;
 		}
 	}
 }

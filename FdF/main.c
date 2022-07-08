@@ -19,11 +19,51 @@
 // 			printf("\n");
 // }
 
+int	ft_isdigit(int c)
+{
+	if ('0' <= c && c <= '9')
+		return (1);
+	else
+		return (0);
+}
+
+
+int	ft_atoi(char *str)
+{
+	int				i;
+	int				sign;
+	long long		result;
+
+	i = -1;
+	sign = 1;
+	result = 0;
+	if ('+' == *str || *str == '-')
+	{
+		if (*str == '-')
+			sign *= -1;
+		str++;
+		if (!ft_isdigit(*str))
+			exit(1);
+	}	
+	while (str[++i])
+	{
+		if (!ft_isdigit(str[i]) && str[i] != '\n')
+			break ;
+		if (str[i] != '\n')
+			result = result * 10 + (str[i] - '0');
+	}
+	if ((str[i] != '\0' && !ft_isdigit(str[i])))
+		exit(1);
+	return ((int)(sign * result));
+}
+
+
 int main(int argc, char *argv[])
 {
-	void *mlx = mlx_init();
-	void *win = mlx_new_window(mlx, IMG_WID, IMG_HEI, "FdF");
-	void *img = mlx_new_image(mlx, IMG_WID, IMG_HEI);
-	mlx_string_put(mlx, win, 0, 0, 0xFFFFFFF, "hello!");
-	mlx_loop(mlx);
+	// void *mlx = mlx_init();
+	// void *win = mlx_new_window(mlx, IMG_WID, IMG_HEI, "FdF");
+	// void *img = mlx_new_image(mlx, IMG_WID, IMG_HEI);
+	// mlx_string_put(mlx, win, 0, 0, 0xFFFFFFF, "hello!");
+	// mlx_loop(mlx);
+	printf("%d\n", ft_atoi(argv[1]));
 }

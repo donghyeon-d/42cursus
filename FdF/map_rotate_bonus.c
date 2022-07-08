@@ -6,14 +6,12 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:48:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 19:05:57 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/08 15:28:53 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <math.h>
 #include "fdf_bonus.h"
-#include "./ft_libft/libft.h"
 
 static void	ft_rotate_x(t_pos *dot, t_env *env, t_map *map)
 {
@@ -58,7 +56,6 @@ void	ft_adj_map_rotate(t_map *map, t_env *env)
 	int	j;
 
 	i = -1;
-	
 	while (++i < map->height)
 	{
 		j = -1;
@@ -69,7 +66,7 @@ void	ft_adj_map_rotate(t_map *map, t_env *env)
 			ft_rotate_z(&(map->table[i][j]), env, map);
 		}
 	}
-	ft_find_max_min(map);
-	ft_adj_edge(map, map->x_min * -1, 0);
-	ft_adj_edge(map, 0, map->y_min * -1);
+	ft_find_xy_max_min(map);
+	ft_adj_dot_xy(map, map->x_min * -1, 0);
+	ft_adj_dot_xy(map, 0, map->y_min * -1);
 }

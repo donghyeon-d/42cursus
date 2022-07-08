@@ -6,14 +6,11 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:00:13 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 21:32:32 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/08 15:12:19 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <math.h>
 #include "fdf_bonus.h"
-#include "./ft_libft/libft.h"
 
 void	ft_adj_map_altitude(t_data *data)
 {

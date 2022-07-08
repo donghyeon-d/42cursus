@@ -6,13 +6,34 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:47:41 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 21:40:30 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/08 15:16:46 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <mlx.h>
 #include "fdf_bonus.h"
+
+int	ft_key_press(int key, t_data *data)
+{
+	if (key == KEY_ESC)
+		exit(0);
+	else if (key == KEY_Z || key == KEY_X || key == KEY_C || \
+	key == KEY_A || key == KEY_S || key == KEY_D)
+		ft_key_rotate(key, data);
+	else if (key == KEY_PLUS || key == KEY_MINUS)
+		ft_key_zoom(key, data);
+	else if (key == KEY_UP || key == KEY_DOWN || \
+	key == KEY_LEFT || key == KEY_RIGHT)
+		ft_key_offset(key, data);
+	else if (key == KEY_P || key == KEY_O)
+		ft_key_mode(key, data);
+	else if (key == KEY_ENTER || key == KEY_I)
+		ft_key_init(key, data);
+	else if (key == KEY_Q || key == KEY_W)
+		ft_key_altitude(key, data);
+	return (1);
+}
 
 void	ft_key_init(int key, t_data *data)
 {
@@ -41,6 +62,7 @@ void	ft_key_mode(int key, t_data *data)
 		data->env->gamma = 0;
 		data->env->alt = 1;
 		data->env->zoom = 50;
+		data->env->init = 1;
 	}
 	else if (key == KEY_P)
 	{
@@ -49,30 +71,11 @@ void	ft_key_mode(int key, t_data *data)
 		data->env->gamma = 0;
 		data->env->alt = 0.3;
 		data->env->zoom = 50;
+		data->env->init = 1;
 	}
 	ft_handle_map(data);
 }
 
-int	ft_key_press(int key, t_data *data)
-{
-	if (key == KEY_ESC)
-		exit(0);
-	else if (key == KEY_Z || key == KEY_X || key == KEY_C || \
-	key == KEY_A || key == KEY_S || key == KEY_D)
-		ft_key_rotate(key, data);
-	else if (key == KEY_PLUS || key == KEY_MINUS)
-		ft_key_zoom(key, data);
-	else if (key == KEY_UP || key == KEY_DOWN || \
-	key == KEY_LEFT || key == KEY_RIGHT)
-		ft_key_offset(key, data);
-	else if (key == KEY_P || key == KEY_O)
-		ft_key_mode(key, data);
-	else if (key == KEY_ENTER || key == KEY_I)
-		ft_key_init(key, data);
-	else if (key == KEY_Q || key == KEY_W)
-		ft_key_altitude(key, data);
-	return (1);
-}
 
 int	ft_close_win(void)
 {
