@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_zoom_bonus.c                                   :+:      :+:    :+:   */
+/*   map_zoom.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 14:03:30 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/11 10:06:20 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/09 16:20:01 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf_bonus.h"
+#include "fdf.h"
 
 static void	ft_dot_multiple_zoom(t_data *data, double zoom)
 {

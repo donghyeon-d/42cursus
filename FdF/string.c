@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_bonus.c                                     :+:      :+:    :+:   */
+/*   string.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:10:19 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/11 10:06:23 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/09 16:22:52 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minilibx_mms_20210621/mlx.h"
-#include "fdf_bonus.h"
+#include "fdf.h"
 
 void	ft_string_put(t_data *data)
 {

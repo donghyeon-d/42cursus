@@ -1,35 +1,44 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-MLXFLAGS = -L ./minilibx_mms_20210621/ -lmlx -framework OpenGL -framework AppKit
-# MLXFLAGS = -L ./minilibx -lmlx -framework OpenGL -framework AppKit
-MLXLIB = libmlx.dylib
 MLXLIB_DIR = ./minilibx_mms_20210621/
+MLXFLAGS = -L $(MLXLIB_DIR) -lmlx -framework OpenGL -framework AppKit
+MLXLIB = libmlx.dylib
 NAME = fdf
 NAME_BONUS = fdf_bonus
-SRC = fdf.c draw.c keypress.c parse.c rotate.c
-SRC_BONUS = fdf_bonus.c draw_bonus.c init_bonus.c \
-keypress_bonus.c keypress_utils_bonus.c map_adjust_bonus.c \
-map_offset_bonus.c map_parse_bonus.c map_rotate_bonus.c map_zoom_bonus.c \
-map_find_minmax_bonus.c color_bonus.c map_altitude_bonus.c string_bonus.c
+SRC = check_filename.c color.c draw.c fdf.c \
+init.c keypress.c keypress_utils.c map_adjust.c \
+map_altitude.c map_find_minmax.c map_offset.c \
+map_parse.c map_rotate.c map_zoom.c string.c
+SRC_BONUS = check_filename_bonus.c color_bonus.c draw_bonus.c fdf_bonus.c \
+init_bonus.c keypress_bonus.c keypress_utils_bonus.c map_adjust_bonus.c \
+map_altitude_bonus.c map_find_minmax_bonus.c map_offset_bonus.c \
+map_parse_bonus.c map_rotate_bonus.c map_zoom_bonus.c string_bonus.c
 SRC_OBJECT = $(SRC:.c=.o)
-SRC_OBJECT_BONUS = $(SRC_BONUS:.c=.o)
+BONUS_OBJECT = $(SRC_BONUS:.c=.o)
 HEADER_DIR = .
 LIBFT = libft.a
 LIBFT_DIR = ./ft_libft/
 GNL = get_next_line.a
 GNL_DIR = ./get_next_line/
 
+ifdef WITH_BONUS
+OFILES = $(BONUS_OBJECT)
+else
+OFILES = $(SRC_OBJECT)
+endif
+
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(HEADER_DIR)
 
 all : $(NAME)
 
-bonus : $(NAME_BONUS)
+bonus : 
+	make WITH_BONUS=1 all
 
-$(NAME) : $(SRC_OBJECT) $(GNL) $(LIBFT) $(MLXLIB)
+$(NAME) : $(OFILES) $(GNL) $(LIBFT) $(MLXLIB)
 	$(CC) $(CFLAGS) $(MLXFLAGS) -o $@ $^
 
-$(NAME_BONUS) : $(SRC_OBJECT_BONUS) $(GNL) $(LIBFT)
+$(NAME_BONUS) : $(OFILES) $(GNL) $(LIBFT) $(MLXLIB)
 	$(CC) $(CFLAGS) $(MLXFLAGS) -o $@ $^
 
 $(LIBFT) :
@@ -45,7 +54,7 @@ $(MLXLIB) :
 	cp $(MLXLIB_DIR)$(MLXLIB) .
 
 clean :
-	rm -rf $(SRC_OBJECT) $(SRC_OBJECT_BONUS) $(GNL) $(LIBFT)
+	rm -rf $(SRC_OBJECT) $(BONUS_OBJECT) $(GNL) $(LIBFT)
 	make -C $(LIBFT_DIR) clean
 	make -C $(GNL_DIR) clean
 	make -C $(MLXLIB_DIR) clean

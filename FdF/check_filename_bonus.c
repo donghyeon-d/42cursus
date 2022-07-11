@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_altitude_bonus.c                               :+:      :+:    :+:   */
+/*   check_filename_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/01 13:00:13 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/11 10:06:07 by dongchoi         ###   ########.fr       */
+/*   Created: 2022/07/08 15:41:25 by dongchoi          #+#    #+#             */
+/*   Updated: 2022/07/11 10:05:40 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
-void	ft_adj_map_altitude(t_data *data)
+int	ft_check_filename(char *filename)
 {
-	int	i;
-	int	j;
+	char	*temp;
 
-	i = -1;
-	while (++i < data->map->height)
-	{
-		j = -1;
-		while (++j < data->map->width)
-			data->map->table[i][j].z *= data->env->alt;
-	}
+	if (filename == NULL || ft_strlen(filename) < 5)
+		return (FALSE);
+	temp = ft_strrchr(filename, '/');
+	if (temp == NULL)
+		temp = filename;
+	else
+		temp++;
+	if (ft_strlen(temp) < 5 || (ft_strrncmp(temp, ".fdf", 4)))
+		return (FALSE);
+	return (TRUE);
 }

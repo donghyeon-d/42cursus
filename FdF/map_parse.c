@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parse_bonus.c                                  :+:      :+:    :+:   */
+/*   map_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:45:26 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/11 10:25:25 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/11 10:24:12 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <fcntl.h>
-#include "fdf_bonus.h"
+#include "fdf.h"
 #include "./ft_libft/libft.h"
 
 static void	ft_free_double(char **temp)

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_bonus.c                                      :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:10:42 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/11 10:05:44 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/09 16:19:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include "fdf_bonus.h"
+#include "fdf.h"
 
 int	ft_color_vertical(t_pos from, t_pos to, int i, int step)
 {

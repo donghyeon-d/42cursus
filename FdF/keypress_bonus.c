@@ -6,12 +6,11 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:47:41 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/08 15:16:46 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/11 10:05:58 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include <mlx.h>
 #include "fdf_bonus.h"
 
 int	ft_key_press(int key, t_data *data)
@@ -75,7 +74,6 @@ void	ft_key_mode(int key, t_data *data)
 	}
 	ft_handle_map(data);
 }
-
 
 int	ft_close_win(void)
 {

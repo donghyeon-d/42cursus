@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:35:06 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/07 20:21:06 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/11 10:05:46 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_round_off(double num)
 	}
 }
 
-void	ft_draw_vertical(t_data *img, t_pos from, t_pos to)
+static void	ft_draw_vertical(t_data *img, t_pos from, t_pos to)
 {
 	int		step;
 	int		pixel;
@@ -49,12 +49,14 @@ void	ft_draw_vertical(t_data *img, t_pos from, t_pos to)
 	while (++i < step)
 	{
 		pixel += IMG_WID;
+		if (to.x > IMG_WID || from.x > IMG_WID || to.x < 0 || from.x < 0)
+			pixel = -1;
 		if (pixel >= 0 && pixel <= IMG_HEI * IMG_WID)
 			img->ad[pixel] = ft_color_vertical(from, to, i, step);
 	}
 }
 
-int	ft_find_pixel_point(t_pos from, t_pos to, int i)
+static int	ft_find_pixel_point(t_pos from, t_pos to, int i)
 {
 	double	slope;
 	int		p;
@@ -80,7 +82,7 @@ int	ft_find_pixel_point(t_pos from, t_pos to, int i)
 	return (p);
 }
 
-void	ft_draw_line(t_data *data, t_pos from, t_pos to)
+static void	ft_draw_line(t_data *data, t_pos from, t_pos to)
 {
 	double	slope;
 	int		step;

@@ -6,14 +6,14 @@
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:35:06 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/30 18:59:59 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/11 09:47:31 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "fdf.h"
 
-int	ft_round_off(double num)
+static int	ft_round_off(double num)
 {
 	if (num > 0)
 	{
@@ -29,28 +29,41 @@ int	ft_round_off(double num)
 	}
 }
 
-void	ft_draw_vertical(t_data *img, t_pos from, t_pos to)
+static void	ft_draw_vertical(t_data *img, t_pos from, t_pos to)
 {
 	int		step;
 	int		pixel;
 	int		i;
 
-	step = (to.y - from.y);
 	i = -1;
-	pixel = from.x + IMG_WID * from.y;
+	if (from.y < to.y)
+	{
+		step = (int)(to.y - from.y);
+		pixel = from.x + IMG_WID * from.y;
+	}
+	else
+	{
+		step = (int)(from.y - to.y);
+		pixel = to.x + IMG_WID * to.y;
+	}
 	while (++i < step)
 	{
 		pixel += IMG_WID;
-		img->ad[pixel] = 0xFFFFFF;
+		if (to.x > IMG_WID || from.x > IMG_WID || to.x < 0 || from.x < 0)
+			pixel = -1;
+		if (pixel >= 0 && pixel <= IMG_HEI * IMG_WID)
+			img->ad[pixel] = ft_color_vertical(from, to, i, step);
 	}
 }
 
-int	ft_find_pixel_point(t_pos from, t_pos to, int i)
+static int	ft_find_pixel_point(t_pos from, t_pos to, int i)
 {
 	double	slope;
 	int		p;
 
 	slope = (to.y - from.y) / (to.x - from.x);
+	if (to.x > IMG_WID || from.x > IMG_WID || to.x < 0 || from.x < 0)
+		return (-1);
 	if (fabs(slope) > 1)
 	{
 		slope = (to.x - from.x) / (to.y - from.y);
@@ -69,12 +82,13 @@ int	ft_find_pixel_point(t_pos from, t_pos to, int i)
 	return (p);
 }
 
-void	ft_draw_line(t_data *img, t_pos from, t_pos to)
+static void	ft_draw_line(t_data *data, t_pos from, t_pos to)
 {
 	double	slope;
 	int		step;
 	int		pixel;
 	int		i;
+	int		color;
 
 	if (to.x - from.x != 0)
 	{
@@ -86,15 +100,17 @@ void	ft_draw_line(t_data *img, t_pos from, t_pos to)
 		i = -1;
 		while (++i < step)
 		{
+			color = ft_find_pixel_color(from, to, i, step);
 			pixel = ft_find_pixel_point(from, to, i);
-			img->ad[pixel] = 0xFFFFFF;
+			if (pixel >= 0 && pixel <= IMG_HEI * IMG_WID)
+				data->ad[pixel] = color;
 		}
 	}
 	else
-		ft_draw_vertical(img, from, to);
+		ft_draw_vertical(data, from, to);
 }
 
-void	ft_draw_line_all(t_map *map, t_data *img)
+void	ft_draw_line_all(t_data *img, t_map *map)
 {
 	int	i;
 	int	j;

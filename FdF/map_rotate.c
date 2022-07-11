@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_rotate_bonus.c                                 :+:      :+:    :+:   */
+/*   map_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 10:48:02 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/11 10:06:18 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/09 16:19:58 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include "fdf_bonus.h"
+#include "fdf.h"
 
 static void	ft_rotate_x(t_pos *dot, t_env *env, t_map *map)
 {

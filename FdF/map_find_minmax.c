@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_find_minmax_bonus.c                            :+:      :+:    :+:   */
+/*   map_find_minmax.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 14:11:11 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/11 10:06:09 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/09 16:19:50 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include "fdf_bonus.h"
+#include "fdf.h"
 
 void	ft_find_xy_max_min(t_map *map)
 {

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_adjust_bonus.c                                 :+:      :+:    :+:   */
+/*   map_adjust.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:37:47 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/11 10:06:04 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/09 16:27:06 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minilibx_mms_20210621/mlx.h"
-#include "fdf_bonus.h"
+#include "fdf.h"
 
 void	ft_double_to_int(t_map *map)
 {

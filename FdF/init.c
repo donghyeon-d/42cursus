@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_bonus.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 12:46:28 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/07/11 10:05:55 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/07/09 16:20:55 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "./minilibx_mms_20210621/mlx.h"
-#include "fdf_bonus.h"
+#include "fdf.h"
 
 t_env	*ft_init_env(void)
 {
