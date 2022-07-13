@@ -32,11 +32,11 @@
 ## 4. 결과물
 **map_file**
 
-![map_file](/screenshot/map_file.png)
+![map_file](./screenshot/map_file.png)
 
 **excute**
 
-![excute](/screenshot/excute.png)
+![excute](./screenshot/excute.png)
 
 <br>
 
