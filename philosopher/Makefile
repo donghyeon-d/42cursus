@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread -g
+CFLAGS = -Wall -Wextra -Werror -pthread
 NAME = philosopher
 NAME_BONUS = philosopher_bonus
 SRC = philosopher.c
@@ -26,6 +26,12 @@ bonus :
 
 $(NAME) : $(OFILES)# $(GNL) $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $^
+
+ldb : $(OFILES)
+	$(CC) $(CFLAGS) -g $^ -o lbd
+
+fsan : $(OFILES)
+	$(CC) $(CFLAGS) -g3 -fsanitize=address $^ -o fsan
 
 $(NAME_BONUS) : $(OFILES) $(GNL) $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $^
