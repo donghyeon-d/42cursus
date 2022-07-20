@@ -1,8 +1,8 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread -g
 NAME = philosopher
 NAME_BONUS = philosopher_bonus
-SRC = philosopher.c
+SRC = philosopher.c monitoring.c pthread_main.c utils.c
 # SRC_BONUS = 
 SRC_OBJECT = $(SRC:.c=.o)
 # BONUS_OBJECT = $(SRC_BONUS:.c=.o)
@@ -31,7 +31,7 @@ ldb : $(OFILES)
 	$(CC) $(CFLAGS) -g $^ -o lbd
 
 fsan : $(OFILES)
-	$(CC) $(CFLAGS) -g3 -fsanitize=address $^ -o fsan
+	$(CC) $(CFLAGS) -g3 -fsanitize=address $^ -o fsan -pthread
 
 $(NAME_BONUS) : $(OFILES) $(GNL) $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $^
