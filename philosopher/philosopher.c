@@ -11,12 +11,14 @@ t_data  *init_data(int argc, char *argv[])
         return (NULL);
     data->philo_cnt = ft_atoi_positive(argv[1]);
     data->time_to_die = ft_atoi_positive(argv[2]);
-    data->time_to_eat = ft_atoi_positive(argv[3]);// * 1000;
-    data->time_to_sleep = ft_atoi_positive(argv[4]);// * 1000;
+    data->time_to_eat = ft_atoi_positive(argv[3]);
+    data->time_to_sleep = ft_atoi_positive(argv[4]);
     data->error = 0;
+    data->end = FALSE;
     data->must_eat = 2147483647;
     data->start = 0;
-    data->time = get_curr_time();
+    gettimeofday(&data->start_time, NULL);
+    data->time = get_curr_time(data->start_time);
     if (argc == 6)
         data->must_eat = ft_atoi_positive(argv[5]);
     if (data->philo_cnt == -1 || data->time_to_die == -1 || \
@@ -40,12 +42,13 @@ int make_philo(t_data *data)
     while (++i < data->philo_cnt)
     {
         data->philo[i].id = i;
-        data->philo->time = data->time;
-        data->philo->status = thinking;
-        data->philo->act = NOT_USE;
-        data->philo->eat_cnt = 0;
-        data->philo->last_eat = data->philo->time;
-        data->end = FALSE;
+        data->philo[i].time = data->time;
+        data->philo[i].status = thinking;
+        data->philo[i].act = NOT_USE;
+        data->philo[i].eat_cnt = 0;
+        data->philo[i].fork[0] = 0;
+        data->philo[i].fork[1] = 0;
+        data->philo[i].last_eat = data->time;
     }
     return (TRUE);
 }
@@ -126,8 +129,6 @@ int make_thread(t_data *data)
         data->t_id = i;
         if (pthread_create(data->philo[i].pth, NULL, pthread_main, (void *)data) != 0)
             return (FALSE);
-        data->philo[i].fork[0] = 0;
-        data->philo[i].fork[1] = 0;
         usleep(100);
     }
     data->start = 1;

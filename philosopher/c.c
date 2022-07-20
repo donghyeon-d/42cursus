@@ -152,3 +152,21 @@ int main(int argc, char *argv[])
         pthread_join(data->philo->philo[i], NULL);
     return (0);
 }
+
+int    put_delay(t_data *data, int delay_time, int thread_id)
+{
+    //시작시간
+    int curr_time;
+    int end_time;
+
+    curr_time = get_curr_time(data->start_time);
+    end_time = get_curr_time(data->start_time);
+    while(end_time - curr_time < delay_time)
+    {
+        usleep(300);
+        if (die_check(data, thread_id) == TRUE)
+            return (TRUE);
+        end_time = get_curr_time(data->start_time);
+    }
+    return (FALSE);
+}

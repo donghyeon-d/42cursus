@@ -1,18 +1,5 @@
 #include "philosopher.h"
 
-int find_thread_id(t_data *data)
-{
-    int i;
-
-    i = 0;
-    while (++i < data->philo_cnt + 1)
-    {
-        if (data->philo[i].act == NOT_USE)
-            return (i);
-    }
-    return (-1);
-}
-
 void *pthread_main(void *data)
 {
     t_data  *d;
@@ -20,9 +7,6 @@ void *pthread_main(void *data)
 
     d = (t_data *)data;
     id = d->t_id;
-    get_time(data);
-    d->philo[id].last_eat = d->time / 1000;
-    d->philo[id].status = thinking;
     while (d->end == FALSE)
     {
         get_forks(d, id);
@@ -34,12 +18,12 @@ void *pthread_main(void *data)
     return (0);
 }
 
-
 int die_check(t_data *data, int thread_id)
 {
     if(data->end == TRUE)
         return (TRUE);
-    get_time(data);
+    usleep(50);
+    data->time = get_curr_time(data->start_time);
     if (data->time - data->philo[thread_id].last_eat > data->time_to_die)
     {
         data->philo->status = die;
@@ -51,7 +35,7 @@ int die_check(t_data *data, int thread_id)
 
 void    print_status(t_data *data, t_status status, int thread_id)
 {
-    get_time(data);
+    data->time = get_curr_time(data->start_time);
     if (status == -1)
         printf("%d %d is died\n", data->time, thread_id + 1);
     else if (status == 0)
@@ -62,52 +46,33 @@ void    print_status(t_data *data, t_status status, int thread_id)
         printf("%d %d has taken a fork\n", data->time, thread_id + 1);
     else if (status == 3)
         printf("%d %d is eating\n", data->time, thread_id + 1);
-    else if (status == 10) /////////////////////////////////////// 나중에 지워야 함
-        printf("%d %d is END ERROR!!\n", data->time, thread_id + 1);
     else
         printf("printf Error\n");
 }
 
 void    get_forks(t_data *data, int thread_id)
 {
-    int left;
     int right;
 
-    if (data->philo[thread_id].status != thinking)
-    {
-        printf("%d get_forks ERROR!!\n", thread_id);
+    if (data->philo[thread_id].status != thinking || data->end == TRUE)
         return ;
-    }
-    if (data->end == TRUE)
-    {
-        printf("%d END get_forks ERROR!!\n", thread_id);
-        return ;
-    }
-    left = thread_id;
-    right = (thread_id + 1)  % data->philo_cnt;
-    if (left == right)
-        usleep(data->time_to_die);//
+    right = (thread_id + 1) % data->philo_cnt;
+    if (thread_id == right)
+        put_delay(data, data->time_to_die + 1, thread_id);
     else if (thread_id % 2 == 1)
     {
-        pthread_mutex_lock(data->forks[left].mutex);
-        // mutex_lock(data->forks, left);
-        data->philo[thread_id].fork[0] = 1;
-        // mutex_lock(data->forks, right);
+        pthread_mutex_lock(data->forks[thread_id].mutex);
         pthread_mutex_lock(data->forks[right].mutex);
-        data->philo[thread_id].fork[1] = 1;
     }
     else if (thread_id % 2 == 0)
     {
-        // mutex_lock(data->forks, right);
         pthread_mutex_lock(data->forks[right].mutex);
-        data->philo[thread_id].fork[1] = 1;
-        pthread_mutex_lock(data->forks[left].mutex);
-        // mutex_lock(data->forks, left);
-        data->philo[thread_id].fork[0] = 1;
+        pthread_mutex_lock(data->forks[thread_id].mutex);
     }
-    // 죽었는지 확인 // 다른데서 끝났는지
     if (!die_check(data, thread_id) && data->end == FALSE)
     {
+        data->philo[thread_id].fork[0] = 1;
+        data->philo[thread_id].fork[1] = 1;
         data->philo[thread_id].status = getting;
         print_status(data, getting, thread_id);
     }
@@ -115,29 +80,19 @@ void    get_forks(t_data *data, int thread_id)
 
 void    start_eating(t_data *data, int thread_id)
 {
-    // 상태 출력
-    //
-    if (data->philo[thread_id].status != getting)
-    {
-        printf("%d start_eating error\n", thread_id); ///////// 나중에 지워주기
-        return ; 
-    }
-    if (data->end == TRUE)
-    {
-        printf("%d END start_eating error\n", thread_id); ///////// 나중에 지워주기
-        return ; 
-    }
+    if (data->philo[thread_id].status != getting || data->end == TRUE)
+        return ;
     if (die_check(data, thread_id))
         return ;
-    get_time(data);
-    data->philo[thread_id].last_eat = data->time / 1000;
+    data->philo[thread_id].last_eat = get_curr_time(data->start_time);
     if (data->end == FALSE)
+    {
         data->philo[thread_id].status = eating;
-    if (data->end == FALSE)
         print_status(data, eating, thread_id);
+        put_delay(data, data->time_to_eat, thread_id);
+    }
     if (data->must_eat != 2147483647)
         data->philo[thread_id].eat_cnt++;
-    usleep(data->time_to_eat);
     if (die_check(data, thread_id))
         return ;
 }
@@ -147,58 +102,40 @@ void    putdown_forks(t_data *data, int thread_id)
     int left;
     int right;
 
-    if (data->philo[thread_id].status != eating) 
-    {
-        printf("%d putdown_forks ERROR!!\n", thread_id);
+    if (data->philo[thread_id].status != eating || data->end == TRUE)
         return ;
-    }
-    if(data->end == TRUE)
-    {
-        printf("%d END putdown_forks ERROR!!\n", thread_id);
-        return ;
-    }
+
     left = thread_id;
     right = (thread_id + 1)  % data->philo_cnt;
-    // if (thread_id % 2 == 1) // 홀수 짝수 상관없이 그냥 내려놔도 될까?
-    // {
-    //     // mutex_unlock(data->forks, left);
-    //     pthread_mutex_unlock(data->forks[left].mutex);
-    //     data->philo[thread_id].fork[0] = 0;
-    //     pthread_mutex_unlock(data->forks[right].mutex);
-    //     // mutex_unlock(data->forks, right);
-    //     data->philo[thread_id].fork[1] = 0;
-    // }
-    // else if (thread_id % 2 == 0)
+    if (thread_id % 2 == 1)
     {
-        // mutex_unlock(data->forks, right);
-        pthread_mutex_unlock(data->forks[right].mutex);
-        data->philo[thread_id].fork[1] = 0;
         pthread_mutex_unlock(data->forks[left].mutex);
-        // mutex_unlock(data->forks, left);
-        data->philo[thread_id].fork[0] = 0;
+        pthread_mutex_unlock(data->forks[right].mutex);
+    }
+    else if (thread_id % 2 == 0)
+    {
+        pthread_mutex_unlock(data->forks[right].mutex);
+        pthread_mutex_unlock(data->forks[left].mutex);
     }
     if (!die_check(data, thread_id) && data->end == FALSE)
+    {
+        data->philo[thread_id].fork[0] = 0;
+        data->philo[thread_id].fork[1] = 0;
         data->philo[thread_id].status = forksdown;
-    printf("%d putdown forks\n", thread_id + 1);
+    }
+        // printf("%d putdown forks\n", thread_id + 1);
 }
 
 void    start_sleeping(t_data *data, int thread_id)
 {
-    if (data->philo[thread_id].status != forksdown)
-    {
-        printf("%d start_sleeping ERROR!!\n", thread_id);
+    if (data->philo[thread_id].status != forksdown || data->end == TRUE)
         return ;
-    }
-    if (data->end == TRUE)
-    {
-        printf("%d END start_sleeping ERROR!!\n", thread_id);
-        return ;
-    }
+
     if (!die_check(data, thread_id) && data->end == FALSE)
     {
         data->philo[thread_id].status = sleeping;
         print_status(data, sleeping, thread_id);
-        usleep(data->time_to_sleep);
+        put_delay(data, data->time_to_sleep, thread_id);
     }
     if (die_check(data, thread_id))
         return ;
@@ -206,38 +143,49 @@ void    start_sleeping(t_data *data, int thread_id)
 
 void    start_thinking(t_data *data, int thread_id)
 {
-    if (data->philo[thread_id].status != sleeping)
-    {
-        printf("%d start_thinking ERROR!!\n", thread_id);
+    int left;
+    int right;
+
+    if (data->philo[thread_id].status != sleeping || data->end == TRUE)
         return ;
-    }
-    if (data->end == TRUE)
-    {
-        printf("%d END start_thinking ERROR!!\n", thread_id);
-        return ;
-    }
+    left = (thread_id - 1 + data->philo_cnt) % data->philo_cnt;
+    right = (thread_id + 1) % data->philo_cnt;
     if (!die_check(data, thread_id) && data->end == FALSE)
     {
         data->philo[thread_id].status = thinking;
         print_status(data, thinking, thread_id);
+    while (data->philo[left].fork[1] == 1 || data->philo[right].fork[0] == 1)
+    {
+        if (die_check(data, thread_id) == TRUE)
+            return ;
+    }
     }   
 }
 
-// 잡기 // 먹기 // 내려놓기 // 생각하기 // 죽음
-
-void    get_time(t_data *data)
+int    get_curr_time(struct timeval start_time)
 {
-    struct  timeval time;
+    struct timeval  end_time;
+    int             time;
 
-    gettimeofday(&time, NULL);
-    data->time = (int)time.tv_usec / 1000;
+	gettimeofday(&end_time, NULL);
+    time = ((end_time.tv_sec * 1000000 + end_time.tv_usec) - \
+        (start_time.tv_sec * 1000000 + start_time.tv_usec)) / 1000;
+    return (time);
 }
 
-int    get_curr_time(void)
+int    put_delay(t_data *data, int delay_time, int thread_id)
 {
-    int             curr_time;
-    struct timeval  time;
+    int curr_time;
+    int end_time;
 
-    gettimeofday(&time, NULL);
-    curr_time = (int)time.tv_usec / 1000;
+    curr_time = get_curr_time(data->start_time);
+    end_time = get_curr_time(data->start_time);
+    while(end_time - curr_time < delay_time)
+    {
+        usleep(20);
+        if (die_check(data, thread_id) == TRUE)
+            return (TRUE);
+        end_time = get_curr_time(data->start_time);
+    }
+    return (FALSE);
 }

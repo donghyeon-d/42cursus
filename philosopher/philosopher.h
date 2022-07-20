@@ -50,7 +50,7 @@ typedef struct  s_data
     int         error;
     int         t_id;
     int         end;
-    // struct  timeval time;
+    struct  timeval start_time;
     int         time;
     int         start;
     pthread_t   *monitor;
@@ -67,7 +67,7 @@ int mutex_unlock(t_forks *forks, int idx);
 int make_thread(t_data *data);
 
 
-int find_thread_id(t_data *data);
+// int find_thread_id(t_data *data);
 void *pthread_main(void *data);
 void get_forks(t_data *data, int thread_id);
 int release_forks(t_data *data, int thread_id);
@@ -77,8 +77,10 @@ void    start_eating(t_data *data, int thread_id);
 void    putdown_forks(t_data *data, int thread_id);
 void    start_sleeping(t_data *data, int thread_id);
 void    start_thinking(t_data *data, int thread_id);
-void    get_time(t_data *data);
-int    get_curr_time(void);
+// void    get_time(t_data *data);
+// int    get_curr_time(void);
+int    get_curr_time(struct timeval start_time);
+int    put_delay(t_data *data, int delay_time, int thread_id);
 
 void    *monitoring_main(void *data);
 
