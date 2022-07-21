@@ -1,14 +1,15 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread -g
+CFLAGS = -Wall -Wextra -Werror -g
 NAME = philosopher
 NAME_BONUS = philosopher_bonus
-SRC = philosopher.c monitoring.c pthread_main.c utils.c
-# SRC_BONUS = 
-SRC_OBJECT = $(SRC:.c=.o)
-# BONUS_OBJECT = $(SRC_BONUS:.c=.o)
-HEADER_DIR = .
-LIBFT = libft.a
-LIBFT_DIR = ../ft_libft/
+DIR = ./src/
+SRC = $(DIR)philosopher.c $(DIR)monitoring.c $(DIR)pthread_main.c $(DIR)utils.c
+DIR_BONUS = ./bonus/
+SRC_BONUS = $(DIR_BONUS)philosopher_bonus.c $(DIR_BONUS)monitoring_bonus.c $(DIR_BONUS)pthread_main_bonus.c $(DIR_BONUS)utils_bonus.c
+OBJECT = $(SRC:.c=.o)
+OBJECT_BONUS = $(SRC_BONUS:.c=.o)
+HEADER_DIR = $(DIR)
+HEADER_DIR_BONUS = $(DIR_BONUS)
 
 ifdef WITH_BONUS
 OFILES = $(BONUS_OBJECT)
@@ -16,15 +17,17 @@ else
 OFILES = $(SRC_OBJECT)
 endif
 
-%.o : %.c
+$(DIR)%.o : $(DIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(HEADER_DIR)
+
+$(DIR_BONUS)%.o : $(DIR_BONUS)%.c
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(HEADER_DIR_BONUS)
 
 all : $(NAME)
 
-bonus : 
-        make WITH_BONUS=1 all
+bonus : $(NAME_BONUS)
 
-$(NAME) : $(OFILES)# $(GNL) $(LIBFT)
+$(NAME) : $(OBJECT)
 	$(CC) $(CFLAGS) -o $@ $^
 
 ldb : $(OFILES)
@@ -33,28 +36,14 @@ ldb : $(OFILES)
 fsan : $(OFILES)
 	$(CC) $(CFLAGS) -g3 -fsanitize=address $^ -o fsan -pthread
 
-$(NAME_BONUS) : $(OFILES) $(GNL) $(LIBFT)
+$(NAME_BONUS) : $(OBJECT_BONUS)
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(LIBFT) :
-	make -C $(LIBFT_DIR) bonus
-	cp $(LIBFT_DIR)$(LIBFT) .
-
-$(GNL) :
-	make -C $(GNL_DIR) all
-	cp $(GNL_DIR)$(GNL) .
-
 clean :
-	rm -rf $(SRC_OBJECT) #$(BONUS_OBJECT) $(GNL) $(LIBFT)
-	# make -C $(LIBFT_DIR) clean
-	# make -C $(GNL_DIR) clean
-	# make -C $(MLXLIB_DIR) clean
+	rm -rf $(OBJECT) $(OBJECT_BONUS)
 
 fclean : clean
 	rm -rf $(NAME) $(NAME_BONUS)
-	# make -C $(LIBFT_DIR) fclean
-	# make -C $(GNL_DIR) fclean
-	# rm -rf $(MLXLIB)
 
 re : fclean all
 
