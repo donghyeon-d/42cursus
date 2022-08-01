@@ -30,11 +30,11 @@ bonus : $(NAME_BONUS)
 $(NAME) : $(OBJECT)
 	$(CC) $(CFLAGS) -o $@ $^
 
-ldb : $(OFILES)
+ldb : $(OBJECT)
 	$(CC) $(CFLAGS) -g $^ -o lbd
 
-fsan : $(OFILES)
-	$(CC) $(CFLAGS) -g3 -fsanitize=address $^ -o fsan -pthread
+fsan : $(OBJECT)
+	$(CC) $(CFLAGS) -g3 -fsanitize=address -o fsan -pthread $^
 
 $(NAME_BONUS) : $(OBJECT_BONUS)
 	$(CC) $(CFLAGS) -o $@ $^

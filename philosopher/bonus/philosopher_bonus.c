@@ -52,10 +52,10 @@ int make_philo(t_data *data)
 
 int make_forks(t_data *data)
 {
-    data->fork = malloc(sizeof(data));
+    data->fork = malloc(sizeof(sem_t));
     if (data->fork == NULL)
         return (FALSE);
-    data->fork = sem_open("/forkss", O_CREAT, S_IRUSR, data->philo_cnt);
+    data->fork = sem_open("/forks", O_CREAT, S_IRUSR, data->philo_cnt);
     if (data->fork == SEM_FAILED)
         return (FALSE);
     return (TRUE);
@@ -100,16 +100,44 @@ void    all_waitpid(t_data *data)
         waitpid(data->philo[i].pid, NULL, 0);
 }
 
+int kill_child(t_data *data)
+{
+    int i;
+
+    i = -1;
+    while (++i < data->philo_cnt)
+    {
+        kill(data->philo[i].pid, SIGINT);
+        waitpid(data->philo[i].pid, NULL, 0);
+    }
+    return (TRUE);
+}
+
+int make_monitor(t_data *data)
+{
+    pid_t   pid;
+
+    pid = fork();
+    if (pid > 0)
+        while (1);
+    else if (pid == 0)
+        data->monitor = pid;
+    else
+        return (FALSE);
+    return (TRUE);
+}
 
 int main(int argc, char *argv[])
 {
     t_data *data;
 
-    sem_unlink("/forkss");
+    sem_unlink("/forks");
     if (argc < 4 || argc > 6)
         return (0);
     data = init_data(argc, argv);
     if (data == NULL)
+        return (1);
+    if (make_monitor(data) == FALSE)
         return (1);
     if (make_philo(data) == FALSE)
         return (1);
@@ -117,8 +145,9 @@ int main(int argc, char *argv[])
         return (1);
     if (make_process(data) == FALSE)
         return (1);
-    waitpid(data->philo[0].pid, NULL, 0);
+    waitpid(data->monitor, NULL, 0);
+    kill_child(data);
     sem_close(data->fork);
-    sem_unlink("/forkss");
+    sem_unlink("/forks");
     return (0);
 }

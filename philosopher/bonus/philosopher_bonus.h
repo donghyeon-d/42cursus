@@ -58,6 +58,7 @@ typedef struct  s_data
     pid_t       monitor;
     t_philo     *philo;
     sem_t       *fork;
+    // sem_t       *die;
 }   t_data;
 
 t_data  *init_data(int argc, char *argv[]);

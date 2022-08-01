@@ -19,14 +19,14 @@ int die_check(t_data *data, int thread_id)
 {
     if(data->end == TRUE || data->philo->status == die)
         return (TRUE);
-    // usleep(100);
     data->time = get_curr_time(data->start_time);
     if (data->time - data->philo[thread_id].last_eat > data->time_to_die)
     {
+        data->end = TRUE;
         data->philo->status = die;
         print_status(data, die, thread_id);
         usleep(200);
-        kill(0, SIGINT);
+        kill(data->monitor, SIGINT);
         return (TRUE);
     }
     return (FALSE);
@@ -42,12 +42,13 @@ int die_check_getfork(t_data *data, int thread_id)
     usleep(50);
     data->time = get_curr_time(data->start_time);
     gap = data->time - data->philo[thread_id].last_eat;
+    die_time = data->time - (gap - data->time_to_die);
     if (gap > data->time_to_die)
     {
+        data->end = TRUE;
         data->philo->status = die;
-        die_time = data->time - (gap - data->time_to_die);
-        printf("%d %d is died", die_time, thread_id + 1);
-        kill(0, SIGCHLD);
+        printf("%d %d is died\n", die_time, thread_id + 1);
+        kill(data->monitor, SIGINT);
         return (TRUE);
     }
     return (FALSE);
@@ -77,11 +78,11 @@ void    get_forks(t_data *data, int thread_id)
     if (data->philo_cnt == 1)
         put_delay(data, data->time_to_die + 1, thread_id);
     sem_wait(data->fork);
-    if (die_check_getfork(data, thread_id) == TRUE)
-        return ;
+    // if (die_check_getfork(data, thread_id) == TRUE)
+        // return ;
     sem_wait(data->fork);
-    if (die_check_getfork(data, thread_id) == TRUE)
-        return ;
+    // if (die_check_getfork(data, thread_id) == TRUE)
+        // return ;
     if (!die_check(data, thread_id) && data->end == FALSE)
     {
         data->philo[thread_id].status = getting;

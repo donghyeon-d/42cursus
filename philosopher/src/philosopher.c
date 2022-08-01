@@ -129,7 +129,7 @@ int make_thread(t_data *data)
         data->t_id = i;
         if (pthread_create(data->philo[i].pth, NULL, pthread_main, (void *)data) != 0)
             return (FALSE);
-        usleep(100);
+        usleep(10);
     }
     data->start = 1;
     return (TRUE);
@@ -173,4 +173,5 @@ int main(int argc, char *argv[])
         // thread active
     // join
     pthread_join(*data->monitor, NULL);
+    return (0);
 }

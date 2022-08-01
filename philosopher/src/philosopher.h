@@ -25,6 +25,7 @@ typedef struct  s_philo
 {
     pthread_t       *pth;
     int             id;
+    struct  timeval start_time;
     int             time;
     t_status        status;
     int             act;
