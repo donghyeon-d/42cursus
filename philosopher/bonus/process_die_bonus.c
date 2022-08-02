@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitoring_bonus.c                                 :+:      :+:    :+:   */
+/*   process_die_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/02 15:33:46 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/08/02 15:44:55 by dongchoi         ###   ########.fr       */
+/*   Created: 2022/08/02 15:51:59 by dongchoi          #+#    #+#             */
+/*   Updated: 2022/08/02 15:52:00 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher_bonus.h"
 
-int	make_monitor(t_data *data)
+int	die_check(t_data *data, int thread_id)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (pid > 0)
+	usleep(150);
+	if (data->end == TRUE || data->philo->status == die)
+		return (TRUE);
+	data->time = get_curr_time(data->start_time, data);
+	if (data->time - data->philo[thread_id].last_eat > data->time_to_die)
 	{
-		while (1)
-			;
+		data->end = TRUE;
+		data->philo->status = die;
+		print_status(data, die, thread_id);
+		kill(data->monitor, SIGINT);
+		return (TRUE);
 	}
-	else if (pid == 0)
-		data->monitor = pid;
-	else
-		return (FALSE);
-	return (TRUE);
+	return (FALSE);
 }

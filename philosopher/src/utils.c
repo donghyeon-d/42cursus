@@ -1,28 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/02 15:04:13 by dongchoi          #+#    #+#             */
+/*   Updated: 2022/08/02 15:04:13 by dongchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosopher.h"
 
-int ft_isdigit(char c)
+int	ft_isdigit(char c)
 {
-    if ('0' <= c && c <= '9')
-        return (1);
-    return (0);
+	if ('0' <= c && c <= '9')
+		return (1);
+	return (0);
 }
 
 int	ft_atoi_positive(char *str)
 {
-	int i;
-	int result;
+	int	i;
+	int	result;
 
 	i = 0;
 	result = 0;
-    if (str == NULL)
-        return (-1);
+	if (str == NULL)
+		return (-1);
 	while (str[i] != '\0')
 	{
-        if (ft_isdigit(str[i]) == 0)
-        {
-            result = -1;
-            break ;
-        }
+		if (ft_isdigit(str[i]) == 0)
+		{
+			result = -1;
+			break ;
+		}
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}

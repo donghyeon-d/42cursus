@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitoring_bonus.c                                 :+:      :+:    :+:   */
+/*   process_main_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/02 15:33:46 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/08/02 15:44:55 by dongchoi         ###   ########.fr       */
+/*   Created: 2022/08/02 16:24:40 by dongchoi          #+#    #+#             */
+/*   Updated: 2022/08/02 16:24:40 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher_bonus.h"
 
-int	make_monitor(t_data *data)
+void	*philo_main(t_data *data, int num)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (pid > 0)
+	while (data->philo[num].status != die && data->end == FALSE)
 	{
-		while (1)
-			;
+		usleep(50);
+		get_forks(data, num);
+		start_eating(data, num);
+		putdown_forks(data, num);
+		start_sleeping(data, num);
+		start_thinking(data, num);
+		if (data->must_eat == data->philo[num].eat_cnt)
+			break ;
 	}
-	else if (pid == 0)
-		data->monitor = pid;
-	else
-		return (FALSE);
-	return (TRUE);
+	exit(0);
 }
