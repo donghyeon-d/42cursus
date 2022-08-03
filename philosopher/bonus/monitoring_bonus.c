@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:33:46 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/08/02 15:44:55 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/08/02 16:56:59 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	make_monitor(t_data *data)
 
 	pid = fork();
 	if (pid > 0)
+		data->monitor = pid;
+	else if (pid == 0)
 	{
 		while (1)
 			;
 	}
-	else if (pid == 0)
-		data->monitor = pid;
 	else
 		return (FALSE);
 	return (TRUE);

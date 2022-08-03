@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 14:48:46 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/08/02 14:59:23 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:33:34 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ int	main(int argc, char *argv[])
 	if (make_thread(data) == FALSE)
 		return (1);
 	pthread_join(*data->monitor, NULL);
+	// system("leaks philosopher");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:03:38 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/08/02 15:03:39 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:37:22 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	start_eating(t_data *data, int thread_id)
 		data->philo[thread_id].eat_cnt++;
 	if (data->end == TRUE || die_check(data, thread_id))
 		return ;
+printf("eat_cnt %d %d\n", thread_id + 1, data->philo[thread_id].eat_cnt);
 }
-// printf("eat_cnt %d %d\n", thread_id + 1, data->philo[thread_id].eat_cnt);
 
 void	putdown_forks(t_data *data, int thread_id)
 {
@@ -86,7 +86,7 @@ void	putdown_forks(t_data *data, int thread_id)
 		data->philo[thread_id].status = forksdown;
 	}
 }
-// printf("%d %d putdown forks\n", 
+// printf("%d %d putdown forks\n",
 // get_curr_time(data->start_time), thread_id + 1);
 
 void	start_sleeping(t_data *data, int thread_id)

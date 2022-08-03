@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:03:42 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/08/02 15:03:42 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:25:48 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
 # define FALSE 0
 # define TRUE 1
 # define USE 0

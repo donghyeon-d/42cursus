@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:43:23 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/08/02 15:50:35 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/08/03 10:19:44 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_data	*init_data(int argc, char *argv[])
 	data->time_to_sleep = ft_atoi_positive(argv[4]);
 	data->end = FALSE;
 	data->must_eat = 2147483647;
-	data->start = 0;
 	data->id = 0;
 	gettimeofday(&data->start_time, NULL);
 	data->time = get_curr_time(data->start_time, data);
@@ -60,9 +59,6 @@ int	make_philo(t_data *data)
 
 int	make_forks(t_data *data)
 {
-	data->fork = malloc(sizeof(sem_t));
-	if (data->fork == NULL)
-		return (FALSE);
 	data->fork = sem_open("/forks", O_CREAT, S_IRUSR, data->philo_cnt);
 	if (data->fork == SEM_FAILED)
 		return (FALSE);
@@ -91,5 +87,6 @@ int	main(int argc, char *argv[])
 	kill_child(data);
 	sem_close(data->fork);
 	sem_unlink("/forks");
+	system("leaks philosopher_bonus");
 	return (0);
 }

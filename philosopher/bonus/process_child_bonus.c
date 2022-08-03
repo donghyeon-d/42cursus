@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:49:29 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/08/02 15:55:19 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:22:21 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,17 @@ int	make_process(t_data *data)
 	int		i;
 	pid_t	pid;
 
-	i = 0;
+	i = -1;
 	pid = 0;
 	gettimeofday(&data->start_time, NULL);
-	while (i < data->philo_cnt)
+	while (++i < data->philo_cnt)
 	{
 		data->id = i;
-		data->philo[i].pid = pid;
 		data->philo[i].use = 1;
 		pid = fork();
 		usleep(100);
 		if (pid > 0)
-			i++;
+			data->philo[i].pid = pid;
 		else if (pid == 0)
 		{
 			philo_main(data, i);
@@ -37,7 +36,6 @@ int	make_process(t_data *data)
 		else
 			return (FALSE);
 	}
-	data->start = 1;
 	return (TRUE);
 }
 

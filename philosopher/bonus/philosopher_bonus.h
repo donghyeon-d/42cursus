@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 15:43:25 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/08/02 15:56:40 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/08/02 17:25:34 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <sys/wait.h>
 # include <signal.h>
 
 # define FALSE 0
@@ -55,7 +54,6 @@ typedef struct s_data {
 	int				end;
 	struct timeval	start_time;
 	int				time;
-	int				start;
 	int				id;
 	pid_t			monitor;
 	t_philo			*philo;
