@@ -4,6 +4,7 @@
         "_pthread_types.h": "c",
         "philosopher.h": "c",
         "philosopher_bonus.h": "c",
-        "__locale": "c"
+        "__locale": "c",
+        "__threading_support": "c"
     }
 }
