@@ -220,12 +220,81 @@ void	from_pipe_to_outfile(int p[2], int fd)
 		print_error_exit();
 }
 
+
+char *get_pipe_argv(char cmd_right, char *outfil)
+{
+	char	*str;
+	int		len;
+
+	write(1, "\npipe> ", 7);
+	str = get_next_line(0);
+	while (*str == '\n')
+	{
+		write(1, "\npipe> ", 7);
+		str = get_next_line(0);
+	}
+	len = ft_strlen(str);
+	str[len - 1] = '\0';
+}
+
 void    pipe_line(t_info *info, char *outfile_left, char *cmd_right)
+{
+	char	*ar[3];
+	pid_t pid;
+
+	if (outfile_left == NULL)
+		// print (zsh: parse error near `|')
+		exit(1);
+	if (cmd_right == NULL) // *cmd_right == '\0'으로 들어오나?
+		cmd_right = get_pipe_command();
+	ar[0] = cmd_right;
+	ar[1] = outfile_left;
+	ar[2] = NULL;
+	pid = fork();
+	if (pid == 0)
+		execve(cmd_right, ar, environ);
+	else if (pid > 0)
+	{
+		waitpid(pid, NULL, 0);
+	}
+	else
+		print_error_exit();
+}
+
+void    pipe_line_next(t_info *info, char *outfile_left, char *cmd_right)
 {
 	int	p[2];
 	int	fd;
+	char	*ar[3];
+	pid_t pid;
 
-
+	if (outfile_left == NULL)
+		// print (zsh: parse error near `|')
+		exit(1);
+	if (cmd_right == NULL) // *cmd_right == '\0'으로 들어오나?
+		cmd_right = get_pipe_command();
+	ar[0] = cmd_right;
+	ar[1] = outfile_left;
+	ar[2] = NULL;
+	pipe(p);
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(p[1], 1);
+		dup2(p[1], 2);
+		execve(cmd_right, ar, environ);
+	}
+	else if (pid > 0)
+	{
+		waitpid(pid, NULL, 0);
+		unlink(info->out_file);
+		fd = open(info->out_file, O_RDWR | O_CREAT);
+		from_pipe_to_outfile(p, fd);
+		if (close(fd) < 0)
+			print_error_exit();
+	}
+	else
+		print_error_exit();
 }
 
 void    form_outfile_to_pipe(int p[2], int fd);

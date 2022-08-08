@@ -27,7 +27,8 @@ void	execute_cmd_next(t_info *info, char *cmd, char **parm);
 void	from_pipe_to_outfile(int p[2], int fd);
 
 /* pipe line */
-void    pipe_line(t_info *info, char *outfile_left, char *cmd_right);
+void    pipe_line(t_info *info, char *outfile_left, char *cmd_right);//execute_outfile
+void    pipe_line_next()
 void    form_outfile_to_pipe(int p[2], int fd);
 
 /* redirect to left < */
@@ -37,6 +38,6 @@ void	redirect_to_left(t_info *info, char *parm_left, char *cmd_right, int next_f
 void	redirect_to_right(t_info *info, char *pipefile_left, char *file_right);
 void	from_file_to_file(int from_fd, int to_fd);
 
-/* he
+/* heer */
 
 #endif
