@@ -100,11 +100,32 @@ void    pipe_child(t_info *info)
     int temp_file;
     char    *str;
 
-    unlink("/tmp/pip_temp_file");
+    // unlink("/tmp/pip_temp_file");
+    if (open("/tmp/pipe_temp_file", O_RDWR) > 0)
+    {
+        exit(1);//
+    }
     temp_file = open("/tmp/pipe_temp_file", O_RDWR | O_CREAT);
     close(info->pipe[0]);
-    while (read(info->pipe[1], str, 1) == 0)
+    open(info->pipe[1], O_RDWR);
+    while (read(info->pipe[1], str, 1) == 1)
         write(temp_file, str, 1);
+}
+
+void    write_to_pipe(t_info *info, int fd)
+{
+    char    str[1];
+    int     temp;
+
+    close(info->pipe[1]);
+    temp = read(fd, str, 1);
+    if (temp == -1)
+        print_error_exit();
+    while (temp == 1)
+    {
+        write(info->pipe[0], str, 1);
+        temp = read(fd, str, 1);
+    }
 }
 
 void    pipeline(t_info *info, char *filename)
@@ -123,6 +144,8 @@ void    pipeline(t_info *info, char *filename)
 
     fd = open(filename, O_RDWR);
     pipe(info->pipe);
+    info->temp_file = "/tmp/pip_temp_file";
+    write_to_pipe(info, fd);
     pid = fork();
     if (pid == 0)//자식
     {
@@ -132,10 +155,6 @@ void    pipeline(t_info *info, char *filename)
     else if (pid > 0)
     {
         info->child = pid;
-        close(info->pipe[1]);
-        // dup2(info->pipe[0], fd);
-        while (read(fd, str, 1) == 0)
-            write(info->pipe[0], str, 1);
         waitpid(info->child, NULL, 0);
         close(fd);
     }
@@ -144,8 +163,66 @@ void    pipeline(t_info *info, char *filename)
 }
 
 
+// void    pipeline(t_info *info, char *filename)
+// {
+//     // file 열고
+//     // pipe 만들고
+//     // 자식프로세스 만들고
+//     // pipe 연결해주고
+//     // 부모에서는 파이프에서 써주고
+//     // 자식에서는 파이프에서 읽어서 임시 파일에 저장했다가
+//     // 부모는 자식 끝날때 까지 기다렸다가
+//     // 자식이 만들었던 임시 파일을 읽어서 fd로 갖고 있어 (모든 파이프 돌아준 다음에 출력하고 임시파일 unlink)
+//     int fd;
+//     char str[1];
+//     pid_t   pid;
+
+//     fd = open(filename, O_RDWR);
+//     pipe(info->pipe);
+//     info->temp_file = "/tmp/pip_temp_file";
+//     write_to_pipe(info, fd);
+//     pid = fork();
+//     if (pid == 0)//자식
+//     {
+//         pipe_child(info);
+//         exit(1);
+//     }
+//     else if (pid > 0)
+//     {
+//         info->child = pid;
+//         close(info->pipe[1]);
+//         // dup2(info->pipe[0], fd);
+//         while (read(fd, str, 1) == 0)
+//             write(info->pipe[0], str, 1);
+//         waitpid(info->child, NULL, 0);
+//         close(fd);
+//     }
+//     else
+//         exit(1);
+// }
+
 
 // t_info  *init_info()
+
+void    get_last_file(t_info *info)
+{
+    t_cmd_node *temp;
+
+    if (info == NULL || info->cmd == NULL || info->cmd->head == NULL)
+        exit(1);
+    temp = info->cmd->head;
+    if (temp->next != NULL)
+        temp = temp->next;
+    info->temp_file = temp;
+}
+
+void    init_info(t_info *info, int argc, char **argv)
+{
+    info->argc = argc;
+    info->argv = argv;
+    info->idx = 1;
+
+}
 
 int main(int argc, char *argv[])
 {
@@ -156,13 +233,16 @@ int main(int argc, char *argv[])
     info = malloc(sizeof(t_info));
     if (info == NULL)
         exit(0);
-    info->temp_file = NULL;
 	arg_check(argc, argv);
+
+    info->temp_file = argv[2];//
 	while (++i < argc)
 	{
+        excute_command(info);
+        if (info->cmd->head != NULL)
+            get_last_file(info);
 		if (argv[i] == '|')
         {
-
             pipeline(info, )
         }
 		else if (argv[i] == '<')

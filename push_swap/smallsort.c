@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   smallsort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:59:42 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/06/08 20:12:18 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/08/08 20:29:00 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ void	small_sort(t_stack *stack_a, t_stack *stack_b, int len)
 
 void	small_sort_b(t_stack *stack_a, t_stack *stack_b, int len)
 {
-	int	cnt;
-
-	cnt = 0;
 	if (len == 1)
 		pa(stack_a, stack_b);
 	if (len == 2)
