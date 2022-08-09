@@ -4,6 +4,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include "get_next_line.h"
 #include "c.h"
 // a.out file1 cmd cmd file2
 
@@ -14,6 +15,8 @@ int		ft_strlen(char *str)
 {
 	int	i;
 
+	if (str == NULL)
+		return (0);
 	i = 0;
 	while (str[i] != '\0')
 		i++;
@@ -74,7 +77,7 @@ int	infile_check(char *filename)
 
     if (filename == NULL)
         return (FALSE);
-    fd = open(filename, O_RDONLY);
+    fd = open(filename, O_RDWR);
     if (fd == -1)
     {
         // print_error_exit();
@@ -127,7 +130,7 @@ void arg_check(int argc, char *argv[])
 // 	ar[0] = "echo";
 // 	ar[1] = info->infile;
 // 	ar[2] = NULL;
-// 	fd = open("./parm.temp", O_RDWR | O_CREAT);
+// 	fd = open("./parm.temp", O_RDWR | O_CREAT, S_IRWXU);
 // 	if (fd == -1)
 // 		print_error_exit();
 // 	cmd_file = ft_strjoin("/bin/", cmd);
@@ -181,20 +184,22 @@ void	execute_cmd_next(t_info *info, char *cmd, char **parm)//cmd랑 parm 만 받
 	int		p[2];
 	int		fd;
 
-	unlink(info->out_file);//
+	// unlink(info->out_file);//
 	pipe(p);
-	fd = open(info->out_file, O_RDWR | O_CREAT);
+	fd = open(info->out_file, O_RDWR | O_CREAT, S_IRWXU);
 	if (fd == -1)
 		print_error_exit();
 	pid = fork();
 	if (pid == 0)
 	{
+		close(p[0]);
 		dup2(p[1], 1);
 		dup2(p[1], 2);
 		execve(cmd, parm, environ);
 	}
 	else if (pid > 0)
 	{
+		close(p[1]);
 		waitpid(pid, NULL, 0);//실패시 else if 조건으로 올려도 될듯
 		from_pipe_to_outfile(p, fd);
 		if (close(fd) < 0)
@@ -202,6 +207,7 @@ void	execute_cmd_next(t_info *info, char *cmd, char **parm)//cmd랑 parm 만 받
 	}
 	else
 		print_error_exit();
+	close(fd);
 }
 
 void	from_pipe_to_outfile(int p[2], int fd)
@@ -221,7 +227,7 @@ void	from_pipe_to_outfile(int p[2], int fd)
 }
 
 
-char *get_pipe_argv(char cmd_right, char *outfil)
+char *get_pipe_command()
 {
 	char	*str;
 	int		len;
@@ -233,105 +239,143 @@ char *get_pipe_argv(char cmd_right, char *outfil)
 		write(1, "\npipe> ", 7);
 		str = get_next_line(0);
 	}
+	if (str == NULL) // *str == '\0'
+		return (NULL); // EOF 일땐 어떻게 해줘야되지?
 	len = ft_strlen(str);
 	str[len - 1] = '\0';
+	return (str);
 }
 
-void    pipe_line(t_info *info, char *outfile_left, char *cmd_right)
+char **file_to_parm(char *file, char *cmd)
 {
-	char	*ar[3];
-	pid_t pid;
+	char **ar;
 
-	if (outfile_left == NULL)
-		// print (zsh: parse error near `|')
-		exit(1);
-	if (cmd_right == NULL) // *cmd_right == '\0'으로 들어오나?
-		cmd_right = get_pipe_command();
-	ar[0] = cmd_right;
-	ar[1] = outfile_left;
-	ar[2] = NULL;
-	pid = fork();
-	if (pid == 0)
-		execve(cmd_right, ar, environ);
-	else if (pid > 0)
-	{
-		waitpid(pid, NULL, 0);
-	}
-	else
+	if (file == NULL || cmd == NULL)
+		return (NULL);
+	ar = malloc(sizeof(char *) * 3);
+	if (ar == NULL)
 		print_error_exit();
+	ar[0] = cmd;
+	ar[1] = file;
+	ar[2] = NULL;
+	return (ar);
 }
 
-void    pipe_line_next(t_info *info, char *outfile_left, char *cmd_right)
+void    pipe_line(t_info *info, char *outfile_left, char *cmd_right, int next_flag)
 {
-	int	p[2];
-	int	fd;
-	char	*ar[3];
-	pid_t pid;
+	char	**ar;
 
 	if (outfile_left == NULL)
 		// print (zsh: parse error near `|')
 		exit(1);
 	if (cmd_right == NULL) // *cmd_right == '\0'으로 들어오나?
 		cmd_right = get_pipe_command();
-	ar[0] = cmd_right;
-	ar[1] = outfile_left;
-	ar[2] = NULL;
-	pipe(p);
-	pid = fork();
-	if (pid == 0)
+	if (cmd_right == NULL)//??
+		exit(1);
+	ar = file_to_parm(outfile_left, cmd_right);
+	if (next_flag)
+		execute_cmd_next(info, cmd_right, ar);
+	else
+		execute_cmd(info, cmd_right, ar);
+	free(ar);
+}
+
+// void    pipe_line_next(t_info *info, char *outfile_left, char *cmd_right)
+// {
+// 	int	p[2];
+// 	int	fd;
+// 	char	*ar[3];
+// 	pid_t pid;
+
+// 	if (outfile_left == NULL)
+// 		// print (zsh: parse error near `|')
+// 		exit(1);
+// 	if (cmd_right == NULL) // *cmd_right == '\0'으로 들어오나?
+// 		cmd_right = get_pipe_command();
+// 	ar[0] = cmd_right;
+// 	ar[1] = outfile_left;
+// 	ar[2] = NULL;
+// 	pipe(p);
+// 	pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		dup2(p[1], 1);
+// 		dup2(p[1], 2);
+// 		execve(cmd_right, ar, environ);
+// 	}
+// 	else if (pid > 0)
+// 	{
+// 		waitpid(pid, NULL, 0);
+// 		unlink(info->out_file);
+// 		fd = open(info->out_file, O_RDWR | O_CREAT, S_IRWXU);
+// 		from_pipe_to_outfile(p, fd);
+// 		if (close(fd) < 0)
+// 			print_error_exit();
+// 	}
+// 	else
+// 		print_error_exit();
+// }
+
+
+void	redirect_to_left(t_info *info, char *cmd_left, char *file_right, int next_flag)
+{
+	char **ar;
+
+	ar = file_to_parm(file_right, cmd_left);
+	if (cmd_left == NULL)
+		execve("/bin/cat", ar, environ);
+	if (file_right == NULL)
 	{
-		dup2(p[1], 1);
-		dup2(p[1], 2);
-		execve(cmd_right, ar, environ);
-	}
-	else if (pid > 0)
-	{
-		waitpid(pid, NULL, 0);
-		unlink(info->out_file);
-		fd = open(info->out_file, O_RDWR | O_CREAT);
-		from_pipe_to_outfile(p, fd);
-		if (close(fd) < 0)
+		if (write(1, "zsh: parse error near `\n\'", 25) < 0)
 			print_error_exit();
+		exit(1);// $? zsh: command not found: 1
 	}
+	if (next_flag)
+		execute_cmd_next(info, cmd_left, ar);
 	else
-		print_error_exit();
+		execute_cmd(info, cmd_left, ar);
+	free(ar);
 }
 
-void    form_outfile_to_pipe(int p[2], int fd);
 
-void	redirect_to_left(t_info *info, char *parm_left, char *cmd_right, int next_flag)
-{
-	char	*ar[3];
-	pid_t	pid;
+// void	redirect_to_left(t_info *info, char *parm_left, char *cmd_right, int next_flag)
+// {
+// 	char	**ar;
+// 	pid_t	pid;
 
-	if (parm_left == NULL)
+// 	if (parm_left == NULL)
 
-	ar[0] = cmd_right;
-	ar[1] = parm_left;
-	ar[2] = NULL;
-	pid = fork();
-	if (parm_left == NULL)
+// 	ar = file_to_parm(parm_left,)
+// 	ar[0] = cmd_right;
+// 	ar[1] = parm_left;
+// 	ar[2] = NULL;
+// 	pid = fork();
+// 	if (parm_left == NULL)
 
-	else if (pid == 0)
-	{
-		if (next_flag)
-			pipe_cmd(info, cmd_right, ar);
-		else
-			execve(cmd_right, ar, environ);
-	}
-	else if (pid > 0)
-	{
-		waitpid(pid, NULL, 0);
-	}
-	else
-		print_error_exit();
-}
+// 	else if (pid == 0)
+// 	{
+// 		if (next_flag)
+// 			pipe_cmd(info, cmd_right, ar);
+// 		else
+// 			execve(cmd_right, ar, environ);
+// 	}
+// 	else if (pid > 0)
+// 	{
+// 		waitpid(pid, NULL, 0);
+// 	}
+// 	else
+// 		print_error_exit();
+// }
+
+
 
 void	from_file_to_file(int from_fd, int to_fd) // gnl로 받아야되나
 {
 	int		n;
 	char	*str;
 
+	if (from_fd < 0 || to_fd < 0)
+		print_error_exit();
 	str = get_next_line(from_fd); // gnl 안에서 errno(exit) 설정 필요
 	n = ft_strlen(str);
 	while (str != NULL)
@@ -361,36 +405,90 @@ void	from_file_to_file(int from_fd, int to_fd) // gnl로 받아야되나
 // }
 
 // pipe한다음에 outfile을 파일로 저장해줌
-void	redirect_to_right(t_info *info, char *pipefile_left, char *file_right)
+void	redirect_to_right(t_info *info, char *outfile_left, char *file_right, int next_flag)
 {
 	int	from_fd;
 	int	to_fd;
 
 	if (file_right == NULL) // zsh: parse error near `\n'
-		exit(0);
-	if (pipefile_left == NULL)
+		exit(1);// $? zsh: command not found: 1
+	if (outfile_left == NULL)
 		from_fd = 1;
 	else
-		from_fd = open(pipefile_left, O_RDWR);
-	to_fd = open(file_right, O_RDWR | O_CREAT);
-	if (to_fd < 0 || from_fd < 0)
-		print_error_exit();
+		from_fd = open(outfile_left, O_RDWR | O_CREAT, S_IRWXU);
+	to_fd = open(file_right, O_RDWR | O_CREAT, S_IRWXU);
 	from_file_to_file(from_fd, to_fd);
+	if (close(from_fd) < 0 || close(to_fd) < 0)
+		print_error_exit();
+	if (next_flag)
+	{
+		from_fd = open(file_right, O_RDWR | O_CREAT, S_IRWXU);
+		to_fd = open(outfile_left, O_RDWR | O_CREAT, S_IRWXU);
+		from_file_to_file(from_fd, to_fd);
+		if (close(from_fd) < 0 || close(to_fd) < 0)
+			print_error_exit();
+	}
+	else
+		execve("/bin/cat", file_to_parm(file_right, "/bin/cat"), environ);
+	// {
+	// 	char **ar = file_to_parm(file_right, "/bin/cat");
+	// 	execute_cmd(info, "/bin/cat", ar);
+	// }
 }
 
+/* >> */
+void	append_to_right(t_info *info, char *outfile_left, char *file_right, int next_flag)
+{
+	int	from_fd;
+	int	to_fd;
+
+	if (file_right == NULL) // zsh: parse error near `\n'
+		exit(1);// $? zsh: command not found: 1
+	if (outfile_left == NULL)
+		from_fd = 1;
+	else
+		from_fd = open(outfile_left, O_RDWR | O_CREAT, S_IRWXU);
+	to_fd = open(file_right, O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
+	from_file_to_file(from_fd, to_fd);
+	if (close(from_fd) < 0 || close(to_fd) < 0)
+		print_error_exit();
+	if (next_flag)
+	{
+		from_fd = open(file_right, O_RDWR | O_CREAT, S_IRWXU);
+		to_fd = open(outfile_left, O_RDWR | O_CREAT, S_IRWXU);
+		from_file_to_file(from_fd, to_fd);
+		if (close(from_fd) < 0 || close(to_fd) < 0)
+			print_error_exit();
+	}
+	else
+		execve("/bin/cat", file_to_parm(file_right, "/bin/cat"), environ);
+}
+
+// cat abc > abc
 
 int main(int argc, char *argv[])
 {
 	int i;
-    t_info *info;
+	t_info *info;
 
+	unlink("./parm.temp");
+	unlink("./zzz");
 	i = 0;
-    info = malloc(sizeof(t_info));
-    if (info == NULL)
-        exit(0);
+	info = malloc(sizeof(t_info));
+	if (info == NULL)
+		exit(0);
+	info->out_file = "./parm.temp";
+	char **ar = file_to_parm("./abc", "/bin/cat");
+	execute_cmd_next(info, "/bin/cat", ar);
+	redirect_to_right(info, info->out_file, "./zzz", 0);
+	unlink(info->out_file);
+	unlink("./zzz");
+
+
 	// arg_check(argc, argv);
-    info->infile = argv[1];
-	info->out_file = argv[3];
-	execute_cmd(info, argv[2]);
+    // info->infile = argv[1];
+	// info->out_file = argv[3];
+	// execute_cmd(info, argv[2]);
 	// execve("/bin/cat", argv, environ);
 }
+
