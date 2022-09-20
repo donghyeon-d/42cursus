@@ -1,47 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   paircheck.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/12 15:47:57 by hhwang            #+#    #+#             */
+/*   Updated: 2022/09/14 23:21:27 by choidongd        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
-#include "stack.h"
-#include "c.h"
+#include "a.h"
 
-// () 체크
-// () 사이에 "" '' 있는지 체크
-// "" 사이에 ' 있으면 무시, '' 사이에 " 있으면 무시
+int	parentheses_pair_check(char *input)
+{
+	int	i;
+	int	cnt;
 
+	if (input == NULL)
+		return (-1);
+	i = 0;
+	cnt = 1;
+	while (input[++i] != '\0')
+	{
+		if (input[i] == '(')
+			cnt++;
+		else if (input[i] == ')')
+		{
+			cnt--;
+			if (cnt == 0)
+			{
+				i++;
+				break ;
+			}
+		}
+		else if (input[i] == '\"' || input[i] == '\'')
+			i += quote_pair_long(&input[i]) - 1;
+	}
+	return (i);
+}
 
-// 괄호 시작되는 지점에서 input 넘겨주기
-// (부터 )까지의 길이 반환해주기
-// "" 안에 있는 ) 는 무시함
-// int	parentheses_pair_long(char *input)
-// {
-// 	int	input_len;
-// 	int	i;
-
-// 	if (input == NULL)
-// 		return (-1);
-// 	input_len = ft_strlen(input);
-// 	i = 0;
-//     while (++i < input_len)
-//     {
-//         if (input[i] == ')')
-//             break ;
-//         else if (input[i] == '\"')
-//         {
-//             while (input[++i] != '\"' && i < input_len)
-//                 ;
-//         }
-//         else if (input[i] == '\'')
-//         {
-//             while (input[++i] != '\'' && i < input_len)
-//                 ;
-//         }
-//     }
-//     if (i >= input_len)
-//         i = -1;
-//     return (i);
-// }
-
-// 괄호 시작되는 지점에서 input 넘겨주기
-// (부터 )까지의 길이 반환해주기
-// "" 안에 있는 ) 는 무시함
 int	parentheses_pair_long(char *input)
 {
 	int	input_len;
@@ -51,40 +50,40 @@ int	parentheses_pair_long(char *input)
 		return (-1);
 	input_len = ft_strlen(input);
 	i = 0;
-    while (++i < input_len)
-    {
-        if (input[i] == ')')
-            break ;
-        else if (input[i] == '\"' || input[i] == '\'')
-            i += quote_pair_long(&input[i]);
-    }
-    if (i >= input_len)
-        print_error_exit(parentheses);
-    return (i);
+	while (++i < input_len)
+	{
+		if (input[i] == ')')
+		{
+			i++;
+			break ;
+		}
+		else if (input[i] == '\"' || input[i] == '\'')
+			i += quote_pair_long(&input[i]);
+	}
+	return (i);
 }
 
-// "의 시작 지점에서 함수 호출, "가 끝나는 지점까지의 길이 반환, 못찾으면 -1
-// "" 안에 있는 ' () 는 무시함(그냥 문자로 취급함)
-int quote_pair_long(char *input)
+int	quote_pair_long(char *input)
 {
-	int	input_len;
 	int	i;
 
-	if (input == NULL)
+	if (input == NULL || (input[0] != '\'' && input[0] != '\"'))
 		return (-1);
-	input_len = ft_strlen(input);
 	i = 0;
-    if (input[i] == '\"')
-    {
-        while (input[++i] != '\"' && i < input_len)
-            ;
-    }
-    else if (input[i] == '\'')
-    {
-        while (input[++i] != '\'' && i < input_len)
-            ;
-    }
-    if (i >= input_len)
-        print_error_exit(quote);
-    return (i);
+	if (input[i] == '\"')
+	{
+		while (input[++i] != '\"' && input[i] != '\0')
+			;
+	}
+	else if (input[i] == '\'')
+	{
+		while (input[++i] != '\'' && input[i] != '\0')
+			;
+	}
+	if (input[i] == '\0')
+		return (i);
+	i++;
+	if (input[i] == '\'' || input[i] == '\"')
+		i += quote_pair_long(&(input[i]));
+	return (i);
 }

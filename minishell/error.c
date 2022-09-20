@@ -1,17 +1,47 @@
-#include <stdio.h>
-#include "c.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/24 20:24:35 by dongchoi          #+#    #+#             */
+/*   Updated: 2022/09/12 14:54:23 by dongchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void    print_error_exit(t_error error)
+#include <unistd.h>
+#include "a.h"
+
+void	print_error_exit(t_error error)
 {
-    if (error == quote)
-        write(1, "quote is not closed\n", 20);
-    else if (error == parentheses)
-        write(1, "parentheses is not closed\n", 26);
-    exit(1);
+	if (error == quote)
+		write(2, "quote is not closed\n", 20);
+	else if (error == parentheses)
+		write(2, "parentheses is not closed\n", 26);
+	else if (error == redirection)
+		write(2, "bash: parse error near `\\n'\n", 27);
+	else if (error == rdr_nofile)
+		write(2, "bash: syntax error near unexpected token `newline'\n", 51);
+	else if (error == nocmd)
+	{
+		g_status = 127;
+		write(2, "minishell: command not found\n", 29);
+	}
+	else if (error == no_delimiter)
+		write(2, "bash: syntax error near unexpected token\n", 41);
 }
 
-void    system_error_exit(void)
+void	custom_error(t_cmd *cmd, char *line, int flag)
 {
-    perror("Error : ");// 확인해서 바꿔주기
-    exit(errno); // 전역 변수 아니고 perror 에서 출력될거를 받아와서 숫자 찾아도 되긴 할 듯
+	write(2, "minishell: ", 11);
+	write(2, cmd->argv[0], ft_strlen(cmd->argv[0]));
+	write(2, ": ", 2);
+	if (flag == 1)
+	{
+		write(2, cmd->argv[1], ft_strlen(cmd->argv[1]));
+		write(2, ": ", 2);
+	}
+	write(2, line, ft_strlen(line));
+	write(2, "\n", 1);
 }
