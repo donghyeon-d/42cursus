@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/14 10:48:49 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/09/20 17:47:33 by choidongd        ###   ########.fr       */
+/*   Created: 2022/09/20 17:33:23 by choidongd         #+#    #+#             */
+/*   Updated: 2022/09/20 17:52:29 by choidongd        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+int ft_strcmp(const char *s1, const char *s2)
 {
-	t_list	*newlist;
+    int i;
 
-	if (content == NULL)
-		return (NULL);
-	newlist = (t_list *)malloc(sizeof(t_list));
-	if (newlist == NULL)
-		return (NULL);
-	newlist->content = content;
-	newlist->next = NULL;
-	return (newlist);
+    i = 0;
+    while (s1[i] != '\0' && s2[i] != '\0')
+    {
+        if (s1[i] != s2[i])
+            break ;
+        i++;
+    }
+    return (s1[i] - s2[i]);
 }

@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dongchoi <dongchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 10:51:54 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/05/24 10:05:34 by dongchoi         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:46:16 by choidongd        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# include <limits.h>
 #include "libft.h"
 
 int	ft_atoi(const char *str)
