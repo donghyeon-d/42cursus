@@ -6,7 +6,7 @@ MLXLIB = libmlx.dylib
 NAME = cub3d
 NAME_BONUS = cub3d_bonus
 # SRC = c.c key.c
-SRC = cub3d.c color.c draw.c init.c key.c wall_dist.c wall_height.c texture.c
+SRC = cub3d.c color.c draw.c init.c key.c wall_dist.c wall_height.c texture.c key_move.c
 # SRC_BONUS = check_filename_bonus.c color_bonus.c draw_bonus.c fdf_bonus.c \
 init_bonus.c keypress_bonus.c keypress_utils_bonus.c map_adjust_bonus.c \
 map_altitude_bonus.c map_find_minmax_bonus.c map_offset_bonus.c \

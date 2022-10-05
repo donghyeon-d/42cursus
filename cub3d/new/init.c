@@ -22,8 +22,8 @@ t_info	*ft_create_info()
 	new->carmera_x = 0;
 	new->mlx = mlx_init();
 	new->win = mlx_new_window(new->mlx, IMG_WID, IMG_HEI, "cub3d");
-	new->img = mlx_new_image(new->mlx, IMG_WID, IMG_HEI);
-	new->ad = (int *)mlx_get_data_addr(new->img, &new->bpp, &new->len, &new->end);
+	// new->img = mlx_new_image(new->mlx, IMG_WID, IMG_HEI);
+	// new->ad = (int *)mlx_get_data_addr(new->img, &new->bpp, &new->len, &new->end);
 	new->moveSpeed = 0.05;
 	new->rotSpeed = 0.05;
 	new->floor_color = 0x000000;

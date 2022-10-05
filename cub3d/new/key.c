@@ -8,19 +8,6 @@ int	ft_close_win(void)
 	return (0);
 }
 
-void	ft_key_move(int key, t_info *info)
-{
-	if (key == KEY_W && info->posY < info->map_hei - 1)
-		info->posY += info->moveSpeed;
-	else if (key == KEY_S && info->posY > 1)
-		info->posY -= info->moveSpeed;
-	else if (key == KEY_A && info->posX < info->map_wid - 1)
-		info->posX -= info->moveSpeed;
-	else if (key == KEY_D && info->posX > 1)
-		info->posX += info->moveSpeed;
-	screen_all(info, info->ray);
-}
-
 void	ft_key_rotate(int key, t_info *info)
 {
 	int	x;

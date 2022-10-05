@@ -41,6 +41,9 @@
 #define SOUTH 2
 #define	WEST 3
 
+#define TRUE 1
+#define FALSE 0
+
 // int	worldMap[10][10] = 
 // {
 // 	{1,1,1,1,1,1,1,1,1,1},
@@ -112,7 +115,7 @@ typedef struct	s_info
 	int		map_wid;
 	int		map_hei;
 	// int		**texture;
-	t_img	*texture;
+	t_img	**texture;
 	char	**file;
 	t_ray	*ray;
 }	t_info;
@@ -162,5 +165,8 @@ void	screen_all(t_info *info, t_ray *ray);
 // texture.c
 void	ft_img_copy_to_texture(t_info *info, t_img *img, char *file);
 void	ft_load_texture(t_info *info);
+
+// key_move.c
+void	ft_key_move(int key, t_info *info);
 
 #endif

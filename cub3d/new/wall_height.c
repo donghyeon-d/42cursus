@@ -6,7 +6,7 @@ void	ft_get_wall_height(t_info *info, t_ray *ray, int x)
 
 	dist_to_wall = ray->wallDist;
 	ray->line_height = (int)(IMG_HEI / dist_to_wall);
-	ray->line_start = (IMG_HEI - dist_to_wall) / 2;
+	ray->line_start = (int)(-ray->line_height / 2 + IMG_HEI / 2);
 	// ray->line_start = -dist_to_wall / 2 + IMG_HEI / 2;//(int)((IMG_HEI - ray->line_height) / 2);
 	if (ray->line_start < 0)
 		ray->line_start = 0;

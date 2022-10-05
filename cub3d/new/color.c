@@ -49,9 +49,10 @@ int		ft_get_color(t_info *info, t_img *img, int x, int y)
 	double step = 1.0 * img->hei / info->ray->line_height;
 	// Starting texture coordinate
 	double texPos = (info->ray->line_start - IMG_HEI / 2 + info->ray->line_height / 2) * step;
+	if (y != 0)
+		texPos += step * y;
 	texY = (int)texPos & (img->hei - 1);
-	texPos += step;
-	color = img->ad[img->hei * texY + texX];
+	color = img->ad[img->wid * texY + texX];
 	return (color);
 }
 

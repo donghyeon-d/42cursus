@@ -80,8 +80,12 @@ int	main()
 	info->map_wid = 10;
 	info->file = malloc(sizeof(char *) * 4);
 	// info->file[0] = "../pics/bluestone."; // 파일에서 읽어서 넣기
-	// info->texture = malloc(sizeof(t_img) * 4);
+	info->texture = malloc(sizeof(t_img *) * 4);
+	for (int i = 0; i < 4; i++)
+		info->texture[i] = malloc(sizeof(t_img));
 	ft_load_texture(info);
+	info->img = mlx_new_image(info->mlx, IMG_WID, IMG_HEI);
+	info->ad = (int *)mlx_get_data_addr(info->img, &info->bpp, &info->len, &info->end);
 	ray = ft_create_ray(info);
 	make_map(info);
 	info->ray = ray;
