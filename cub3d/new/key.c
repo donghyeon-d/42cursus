@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
 #include "cub3d.h"
@@ -10,28 +11,24 @@ int	ft_close_win(void)
 
 void	ft_key_rotate(int key, t_info *info)
 {
-	int	x;
-	int	y;
-	int plane_x;
-	int plane_y;
+	double	x;
+	double plane_x;
 
 	x = info->dirX;
-	y = info->dirY;
 	plane_x = info->planeX;
-	plane_y = info->planeY;
 	if (key == KEY_LEFT)
 	{
-		info->dirX = x * cos(info->rotSpeed) - y * sin(info->rotSpeed);
-		info->dirY = x * sin(info->rotSpeed) + y * cos(info->rotSpeed);
-		info->planeX = plane_x * cos(info->rotSpeed) - plane_y * sin(info->rotSpeed);
-		info->planeY = plane_x * sin(info->rotSpeed) + plane_y * cos(info->rotSpeed);
+		info->dirX = x * cos(info->rotSpeed) - info->dirY * sin(info->rotSpeed);
+		info->dirY = info->dirY * cos(info->rotSpeed) + x * sin(info->rotSpeed);
+		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * sin(info->rotSpeed);
+		info->planeY = plane_x * sin(info->rotSpeed) + info->planeY * cos(info->rotSpeed);
 	}
 	else if (key == KEY_RIGHT)
 	{
-		info->dirX = x * cos(info->rotSpeed) + y * sin(info->rotSpeed);
-		info->dirY = y * cos(info->rotSpeed) - x * sin(info->rotSpeed);
-		info->planeX = plane_x * cos(info->rotSpeed) + plane_y * sin(info->rotSpeed);
-		info->planeY = plane_y * cos(info->rotSpeed) - plane_x * sin(info->rotSpeed);
+		info->dirX = info->dirX * cos(info->rotSpeed) + info->dirY * sin(info->rotSpeed);
+		info->dirY = info->dirY * cos(info->rotSpeed) - x * sin(info->rotSpeed);
+		info->planeX = info->planeX * cos(info->rotSpeed) + info->planeY * sin(info->rotSpeed);
+		info->planeY = info->planeY * cos(info->rotSpeed) - plane_x * sin(info->rotSpeed);
 	}
 	screen_all(info, info->ray);
 }

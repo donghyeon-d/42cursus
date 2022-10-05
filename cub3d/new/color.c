@@ -5,23 +5,23 @@
 // ray->step
 
 
-int	ft_get_wallside(t_info *info, t_ray *ray)
-{
-	if (ray->wallside == 0) // x면
-	{
-		if (info->posY < ray->mapY)
-			return (SOUTH);
-		else
-			return (NORTH);
-	}
-	else // y면
-	{
-		if (info->posX < ray->mapX)
-			return (WEST);
-		else
-			return (EAST);
-	}
-}
+// int	ft_get_wallside(t_info *info, t_ray *ray)
+// {
+// 	if (ray->wallside == 0) // x면
+// 	{
+// 		if (info->posY < ray->mapY)
+// 			return (SOUTH);
+// 		else
+// 			return (NORTH);
+// 	}
+// 	else // y면
+// 	{
+// 		if (info->posX < ray->mapX)
+// 			return (WEST);
+// 		else
+// 			return (EAST);
+// 	}
+// }
 
 int		ft_get_color(t_info *info, t_img *img, int x, int y)
 {

@@ -58,6 +58,7 @@ void	screen_all(t_info *info, t_ray *ray)
 		ray->mapY = (int)(info->posY);
 		ray->color = 0;
 	}
+	printf("%d %f %f\n", ray->wallside, info->dirX, info->dirY);
 	mlx_put_image_to_window(info->mlx, info->win, info->img, 0, 0);
 }
 
@@ -75,7 +76,7 @@ int	main()
 	info->planeX = 0;
 	info->planeY = 0.66;
 	info->moveSpeed = 0.05;
-	info->rotSpeed = 0.2;
+	info->rotSpeed = 0.05;
 	info->map_hei = 10;
 	info->map_wid = 10;
 	info->file = malloc(sizeof(char *) * 4);
