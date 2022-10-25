@@ -11,9 +11,11 @@ class PhoneBook {
 		int		cnt;
 	
 	public:
-		PhoneBook( void );
-		void	add(Contact contact);
+		PhoneBook(void);
+		~PhoneBook(void);
+		void	add(void);
 		void	search(void);
+		void	exitBook(void);
 };
 
 # endif

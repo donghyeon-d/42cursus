@@ -21,9 +21,12 @@ class Contact {
 	public:
 		bool	initFirstName(std::string str);
 		bool	initLastName(std::string str);
-		void	initNickName(std::string str);
+		bool	initNickName(std::string str);
 		bool	initPhoneNumber(std::string str);
-		void	initDarkestSecret(std::string str);
+		bool	initDarkestSecret(std::string str);
+		bool	isEmptyField();
+		void	printContactSearch();
+		void	printContactIndex();
 };
 
 # endif

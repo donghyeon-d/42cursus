@@ -1,8 +1,8 @@
 CXX = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = megaphone
+NAME = phonebook
 DIR = ./
-SRC = megaphone.cpp
+SRC = main.cpp Contact.cpp PhoneBook.cpp
 OBJECT = $(SRC:.cpp=.o)
 
 %.o : %.cpp
