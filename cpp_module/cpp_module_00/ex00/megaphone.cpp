@@ -4,9 +4,11 @@
 void	ft_to_large(char *str)
 {
 	int i;
+	int	len;
 
 	i = -1;
-	while (++i < (int)strlen(str))
+	len = (int)strlen(str);
+	while (++i < len)
 		str[i] = toupper(str[i]);
 }
 
