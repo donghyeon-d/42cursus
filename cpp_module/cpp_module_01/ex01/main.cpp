@@ -2,12 +2,14 @@
 
 int main()
 {
-	Zombie zombie1("aaa");
-	zombie1.announce();
-	randomChump("bbb");
-	Zombie *zombie2 = newZombie("ccc");
-	zombie2->announce();
-	delete zombie2;// delete안하면 distructer 실행이 안됨. 그래서 좀비인듯..?
-	// system("leaks BraiiiiiiinnnzzzZ");
+	int N (10);
+	Zombie *zombies = zombieHorde(N, "zozommbibi");
+	for (int i = 0; i < N; i++)
+	{
+		std::cout << "zombies[" << i << "] : ";
+		zombies[i].announce();
+	}
+	delete[] zombies;
+	// system("leaks zombieHorde");
 	return (0);
 }

@@ -1,8 +1,8 @@
 CXX = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = zombieHorde
+NAME = brain
 DIR = ./
-SRC = main.cpp Zombie.cpp zombieHorde.cpp
+SRC = main.cpp
 OBJECT = $(SRC:.cpp=.o)
 
 %.o : %.cpp
