@@ -8,10 +8,10 @@ int main()
     while (1)
     {
         std::cout << "command : ";
-        std::cin >> text;
+        std::getline(std::cin, text);
         if (std::cin.eof())
         {
-            std::cout << "^D == EXIT" << std::endl;    
+            std::cout << "^D == EXIT" << std::endl;
             break ;
         }
         if (text.compare("ADD") == 0)
@@ -23,7 +23,5 @@ int main()
         else
             std::cout << "You can command ADD, SEARCH, EXIT" << std::endl;
     }
-    // if (std::cin.eof())
-    //         std::cout << "^D == EXIT" << std::endl;
     return (0);
 }

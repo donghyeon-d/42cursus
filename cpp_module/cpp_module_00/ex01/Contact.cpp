@@ -79,7 +79,7 @@ bool	Contact::isEmptyField(void)
 
 static void	printStringSubstr(std::string str)
 {
-	if (str.size() > 9)
+	if (str.size() > 10)
 		std::cout << str.substr(0, 9) << ".";
 	else
 	{
