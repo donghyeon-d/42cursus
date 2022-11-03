@@ -6,20 +6,21 @@
 int main()
 {
 	{
-		Weapon	club = Weapon("crude spiked club");
+		Weapon	club = Weapon("pipe");
 
-		HumanA bob("Bob", &club);
+		HumanA bob("Bob", club);
 		bob.attack();
-		club.setType("some other type of club");
+		club.setType("fork");
 		bob.attack();
 	}
 	{
-		Weapon club = Weapon("crude spiked club");
+		Weapon club = Weapon("pipe");
 
-		HumanB jim("Jum");
-		jim.setWeapon(&club);
+		HumanB jim("Jim");
 		jim.attack();
-		club.setType("some other type of club");
+		jim.setWeapon(club);
+		jim.attack();
+		club.setType("fork");
 		jim.attack();
 	}
 	// system("leaks a.out");
