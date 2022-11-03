@@ -3,11 +3,12 @@
 Zombie::Zombie( std::string name )
 {
 	this->name = name;
+	std::cout << this->name << " is constructed" << std::endl;
 }
 
 Zombie::~Zombie()
 {
-	std::cout << "distruct : " << this->name << std::endl;
+	std::cout << this->name << " is destructed" << std::endl;
 }
 
 void	Zombie::announce(void)

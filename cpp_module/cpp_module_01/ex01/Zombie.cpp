@@ -2,7 +2,7 @@
 
 Zombie::Zombie()
 {
-	std::cout << "construct default" << std::endl;
+	std::cout << "default constructor : Zombie has no name" << std::endl;
 }
 
 Zombie::Zombie( std::string name )
@@ -14,7 +14,7 @@ Zombie::Zombie( std::string name )
 
 Zombie::~Zombie()
 {
-	std::cout << "distruct : " << this->name << std::endl;
+	std::cout << this->name << " is destructed" << std::endl;
 }
 
 void	(Zombie::setName)( std::string name )

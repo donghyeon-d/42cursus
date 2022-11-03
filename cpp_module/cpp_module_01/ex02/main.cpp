@@ -9,8 +9,7 @@ int main()
 	std::cout << "<----- memory address ----->" << std::endl;
 	std::cout << "[%p]stringVariable : " << &stringVariable << std::endl;
 	std::cout << "[%p]stringPTR      : " << stringPTR << std::endl;
-	std::cout << "[%p]stringREF      : " << &stringREF << std::endl;
-	std::cout << std::endl;
+	std::cout << "[%p]stringREF      : " << &stringREF << "\n" << std::endl;
 
 	std::cout << "<----- value ----->" << std::endl;
 	std::cout << "[%s]stringVariable : " << stringVariable << std::endl;
