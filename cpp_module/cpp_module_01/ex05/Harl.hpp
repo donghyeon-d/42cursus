@@ -9,10 +9,10 @@
 #define HARL_HPP
 
 typedef enum status {
-	debug = 0,
-	info,
-	warning,
-	error,
+	DEBUG = 0,
+	INFO,
+	WARNING,
+	ERROR,
 } e_status;
 
 class Harl {
