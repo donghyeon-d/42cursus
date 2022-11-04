@@ -1,6 +1,4 @@
-#include <fstream>
-#include <iostream>
-#include <string>
+
 #include "MyFile.hpp"
 
 int main(int argc, char *argv[])
@@ -14,13 +12,20 @@ int main(int argc, char *argv[])
 	std::string fileName(argv[1]);
 	std::string s1(argv[2]);
 	std::string s2(argv[3]);
-	std::string newFileName(fileName);
-	newFileName.append(".replace");
 
-	MyFile readFile(fileName);
-	MyFile writeFile(newFileName);
-	readFile.readToBuf();
+	MyFile myFile(fileName);
+	
+	if (myFile.readToBuf() == false)
+	{
+		std::cout << "file open error : read" << std::endl;
+		return (1);
+	}
+	myFile.replaceBuf(s1, s2);
+	if (myFile.writeNewFile() == false)
+	{
+		std::cout << "file open error : write" << std::endl;
+		return (1);
+	}
 
-	readFile.replaceBuf(s1, s2);
-	writeFile.writeToFile(readFile.getBuf(), readFile.getBufSize());
+	// writeFile.writeToFile(myFile.getBuf(), myFile.getBufSize());
 }

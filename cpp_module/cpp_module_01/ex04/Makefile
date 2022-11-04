@@ -1,5 +1,5 @@
 CXX = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 NAME = a.out
 DIR = ./
 SRC = main.cpp MyFile.cpp

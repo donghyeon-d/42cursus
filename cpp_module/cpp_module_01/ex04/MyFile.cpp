@@ -1,8 +1,9 @@
 #include "MyFile.hpp"
 
-MyFile::MyFile(const std::string &fileName)
+MyFile::MyFile(std::string fileName)
 {
 	this->fileName = fileName;
+	this->newFile = fileName.append(".replace");
 }
 
 MyFile::~MyFile()
@@ -40,15 +41,30 @@ bool	MyFile::writeToFile(const std::string &text, const int &len)
 	return (true);
 }
 
+bool	MyFile::writeNewFile()
+{
+	std::fstream writeFile(this->newFile, std::fstream::out);//std::fstream::app | 
+	if (writeFile.is_open() == false) {
+		std::cout << "File error : can't open" << std::endl;
+		return (false);
+	}
+	else
+	{
+		writeFile << this->buf;
+	}
+	return (true);
+}
+
 void	MyFile::replaceBuf(std::string s1, std::string s2)
 {
 	int index(this->buf.find(s1, 0));
 
 	while (index != -1)
 	{
+		std::cout << "index " << index << std::endl;
 		this->buf.erase(index, s1.length());
 		this->buf.insert(index, s2);
-		index = this->buf.find(s1, index);
+		index = this->buf.find(s1, index + s2.length());
 	}
 }
 
