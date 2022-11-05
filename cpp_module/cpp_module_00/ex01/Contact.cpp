@@ -1,3 +1,4 @@
+#include <iomanip>
 #include <iostream>
 #include "Contact.hpp"
 
@@ -5,9 +6,10 @@ bool	Contact::initFirstName(std::string str)
 {
 	if (str.empty())
 		return (false);
-	for (unsigned long i = 0; i < str.size(); i++)
+	int size(str.size());
+	for (int i = 0; i < size; i++)
 	{
-		if (!isalpha(str[i]))
+		if (!isalpha(str.at(i)))
 		{
 			std::cout << "Wrong First Name. only alphabet" << std::endl;
 			return (false);
@@ -21,9 +23,10 @@ bool	Contact::initLastName(std::string str)
 {
 	if (str.empty())
 		return (false);
-	for (unsigned long i = 0; i < str.size(); i++)
+	int size(str.size());
+	for (int i = 0; i < size; i++)
 	{
-		if (!isalpha(str[i]))
+		if (!isalpha(str.at(i)))
 		{
 			std::cout << "Wrong Last Name. only alphabet" << std::endl;
 			return (false);
@@ -47,7 +50,7 @@ bool	Contact::initPhoneNumber(std::string str)
 		return (false);
 	for (unsigned long i = 0; i < str.size(); i++)
 	{
-		if (!isnumber(str[i]) && str[i] != '-')
+		if (!isnumber(str.at(i)) && str.at(i) != '-')
 		{
 			std::cout << "Wrong Phone number. only number or '-'" << std::endl;
 			return (false);
@@ -79,14 +82,11 @@ bool	Contact::isEmptyField(void)
 
 static void	printStringSubstr(std::string str)
 {
+	std::cout << std::setw(10);
 	if (str.size() > 10)
-		std::cout << str.substr(0, 9) << ".";
+		std::cout << str.substr(0, 9).append(".");
 	else
-	{
-		for (unsigned long i = 0; i < 10 - str.size(); i++)
-			std::cout << " ";
 		std::cout << str;
-	}
 }
 
 void	Contact::printContactSearch(void)

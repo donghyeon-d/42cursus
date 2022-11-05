@@ -1,16 +1,4 @@
-#include <string.h>
 #include <iostream>
-
-void	ft_to_large(char *str)
-{
-	int i;
-	int	len;
-
-	i = -1;
-	len = (int)strlen(str);
-	while (++i < len)
-		str[i] = toupper(str[i]);
-}
 
 int main(int argc, char *argv[]) 
 {
@@ -20,8 +8,13 @@ int main(int argc, char *argv[])
 	{
 		for (int i = 1; i < argc; i++)
 		{
-			ft_to_large(argv[i]);
-			std::cout << argv[i] << ' ';
+			std::string megaphone(argv[i]);
+			int size(megaphone.size());
+			for (int j = 0; j < size; j++)
+				megaphone[j] = std::toupper(megaphone[j]);
+			std::cout << megaphone;
+			if (i != argc - 1)
+				std::cout << ' ';
 		}
 		std::cout << std::endl;
 	}

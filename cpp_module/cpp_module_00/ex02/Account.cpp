@@ -1,4 +1,3 @@
-#include <unistd.h>
 #include <iostream>
 #include "Account.hpp"
 
@@ -62,7 +61,31 @@ Account::~Account( void )
 
 void	Account::_displayTimestamp( void )
 {
-    std::cout << "[19920104_091532] ";
+    std::time_t t = std::time(0);
+	std::tm time = *std::localtime(&t);
+	
+	std::cout << "[" << time.tm_year + 1900;
+
+	if (time.tm_mon < 10)
+		std::cout << 0;
+	std::cout << time.tm_mon + 1;
+
+	if (time.tm_mday < 10)
+		std::cout << 0;
+	std::cout << time.tm_mday << "_";
+
+	if (time.tm_hour < 10)
+		std::cout << 0;
+	std::cout << time.tm_hour;
+
+	if (time.tm_min < 10)
+		std::cout << 0;
+	std::cout << time.tm_min;
+
+	if (time.tm_sec < 10)
+		std::cout << 0;
+	std::cout << time.tm_sec << "]";
+    // std::cout << "[19920104_091532]";
 }
 
 void	Account::displayStatus( void ) const

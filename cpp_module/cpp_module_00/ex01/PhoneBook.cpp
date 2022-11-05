@@ -1,3 +1,5 @@
+#include <iomanip>
+#include <sstream>
 #include <iostream>
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
@@ -19,13 +21,13 @@ static void	init_cin(void)
 	std::cin.ignore();
 	std::cin.clear();
 	std::clearerr(stdin);
-	std::cout << std::endl;
+	std::cout << "^D" << std::endl;
 }
 
 void	PhoneBook::exitBook(void)
 {
 	std::cout << "GOOD BYE!! YOU LOST CONTACT FOREVER!!" << std::endl;
-	exit(0);
+	std::exit(0);
 }
 
 void	PhoneBook::add(void)
@@ -87,40 +89,26 @@ void	PhoneBook::search(void)
 	// print phonebook list
 	for (int i = 0; i < this->cnt; i++)
 	{
-		std::cout << "         " << i + 1 << "|";
+		std::cout << std::setw(10) << i + 1 << "|";
 		this->contact[i].printContactSearch();
 		std::cout << std::endl;
 	}
 
 	// input index number
 	std::cout << "Enter contact index : ";
+	int index;
+	std::stringstream ss;
 	std::string indexBuffer;
-	std::getline(std::cin, indexBuffer);
-	if (std::cin.eof())
+	if (!std::getline(std::cin, indexBuffer))
 	{
-		std::cout << "Wrong index! Try First" << std::endl;
-		std::cin.clear();
-		std::clearerr(stdin);
+		init_cin();
 		return ;
-	}
-	std::size_t inputLen;
-	int	index(-1);
-	try
-	{
-		index = std::stoi(indexBuffer, &inputLen, 10);
-	}
-	catch (std::invalid_argument)
-	{
-		std::cout << "Wrong index! Try First" << std::endl;
-		return ;
-	}
-	catch(std::out_of_range)
-	{
-		std::cout << "Wrong index! Try First" << std::endl;
-		return ;
-	}
-	// print contact[index]
-	if (inputLen > 1)
+	};
+
+	// print infomation
+	ss << indexBuffer;
+	ss >> index;
+	if (indexBuffer.length() > 1)
 		std::cout << "Wrong index! Try First" << std::endl;
 	else if (0 < index && index < this->cnt + 1)
 		this->contact[index - 1].printContactIndex();
