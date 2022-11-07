@@ -3,47 +3,48 @@
 
 Harl::Harl()
 {
-	Harl::set();
+}
+
+Harl::~Harl()
+{
 }
 
 void	Harl::debug(void)
 {
-	std::cout << "debug" << std::endl;
+	std::cout << "[DEBUG] I love having exra bacon for my 7XL-double-chees-triple-pickle-special-ketchup burger. I really do!" << std::endl;
 }
 void	Harl::info(void)
 {
-	std::cout << "info" << std::endl;
+	std::cout << "[INFO] I cannot believe adding extra bacon costs more money. You didn't put enough bacon in my buger! If you did, I wouldn't be asking for more!" << std::endl;
 }
 void	Harl::warning(void)
 {
-	std::cout << "warning" << std::endl;
+	std::cout << "[WARNING] I t hink I deserve to have some extra bacon for free. I've been coming for years whereas you started working here since last month." << std::endl;
 }
 void	Harl::error(void)
 {
-	std::cout << "error" << std::endl;
+	std::cout << "[ERROR] This is unacceptable! I want to speak to the managet now." << std::endl;
 }
 
-void	Harl::set(void)
-{
-	Harl::functionPoint[0] = Harl::debug;
-	Harl::functionPoint[1] = Harl::info;
-	Harl::functionPoint[2] = Harl::warning;
-	Harl::functionPoint[3] = Harl::error;
-}
 
 
 
 void	Harl::complain(std::string level)
 {
-	void (Harl::*functionPointer[4])(void);
-	std::stringstream ss(level);
-	// e_status status;
-	// ss. >> status;
-	e_status status(level);
-	level.compare(status);
-	// void	(Harl::functionPoint[4])(void);
-	functionPointer[DEBUG] = Harl::debug;
-	functionPointer[INFO] = Harl::info;
-	functionPointer[WARNING] = Harl::warning;
-	functionPointer[ERROR] = Harl::error;
+	void (Harl::*f[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	std::string input[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	
+	int i(0);
+	while (level.compare(input[i]) && i < 4)
+		i++;
+	switch (i)
+	{
+	case 4:
+		std::cout << "Wrong input!" << std::endl;
+		break;
+	default:
+		(this->*f[i])();
+		break;
+	}
+	// (this->*f[i])();
 }
