@@ -48,7 +48,8 @@ bool	Contact::initPhoneNumber(std::string str)
 {
 	if (str.empty())
 		return (false);
-	for (unsigned long i = 0; i < str.size(); i++)
+	int size(str.size());
+	for (int i = 0; i < size; i++)
 	{
 		if (!isnumber(str.at(i)) && str.at(i) != '-')
 		{

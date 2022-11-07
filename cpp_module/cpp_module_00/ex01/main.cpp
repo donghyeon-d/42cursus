@@ -8,8 +8,7 @@ int main()
     while (1)
     {
         std::cout << "command : ";
-        std::getline(std::cin, text);
-        if (std::cin.eof())
+        if (!std::getline(std::cin, text))
         {
             std::cout << "^D == EXIT" << std::endl;
             break ;

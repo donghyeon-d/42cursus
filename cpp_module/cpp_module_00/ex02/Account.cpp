@@ -84,8 +84,8 @@ void	Account::_displayTimestamp( void )
 
 	if (time.tm_sec < 10)
 		std::cout << 0;
-	std::cout << time.tm_sec << "]";
-    // std::cout << "[19920104_091532]";
+	std::cout << time.tm_sec << "] ";
+    // std::cout << "[19920104_091532] ";
 }
 
 void	Account::displayStatus( void ) const
