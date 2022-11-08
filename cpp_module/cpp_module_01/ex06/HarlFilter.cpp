@@ -26,9 +26,6 @@ void	HarlFilter::error(void)
 	std::cout << "[ ERROR ]\nThis is unacceptable!\nI want to speak to the managet now.\n" << std::endl;
 }
 
-
-
-
 void	HarlFilter::complain(std::string level)
 {
 	void (HarlFilter::*f[4])(void) = {&HarlFilter::debug, &HarlFilter::info, &HarlFilter::warning, &HarlFilter::error};
@@ -39,13 +36,17 @@ void	HarlFilter::complain(std::string level)
 		i++;
 	switch (i)
 	{
-	case 4:
-		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+	case 0:
+		(this->*f[0])();
+	case 1:
+		(this->*f[1])();
+	case 2:
+		(this->*f[2])();
+	case 3:
+		(this->*f[3])();
 		break;
 	default:
-		for (int j = 0; j + i < 4; j++)
-			(this->*f[i + j])();
+		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 		break;
 	}
-	// (this->*f[i])();
 }

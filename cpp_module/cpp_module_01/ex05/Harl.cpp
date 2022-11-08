@@ -39,11 +39,11 @@ void	Harl::complain(std::string level)
 		i++;
 	switch (i)
 	{
-	case 4:
-		std::cout << "Wrong input!" << std::endl;
-		break;
-	default:
-		(this->*f[i])();
-		break;
+		case 4:
+			std::cout << "Wrong input!" << std::endl;
+			break;
+		default:
+			(this->*f[i])();
+			break;
 	}
 }

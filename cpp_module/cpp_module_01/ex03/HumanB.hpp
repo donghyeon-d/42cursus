@@ -1,12 +1,5 @@
 #include "Weapon.hpp"
 
-#ifndef IOSTREAM
-# define IOSTREAM
-
-#include <iostream>
-
-#endif
-
 #ifndef HUMANB_HPP
 #define HUMANB_HPP
 
@@ -20,7 +13,7 @@ class HumanB {
 		HumanB( const std::string name );
 		~HumanB( void );
 		void	attack( void );
-		void	setWeapon( Weapon *weapon );
+		void	setWeapon( Weapon &weapon );
 		std::string	getWeapon( void );
 };
 

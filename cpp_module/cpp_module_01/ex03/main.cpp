@@ -6,32 +6,34 @@ int main()
 {
 	{
 		Weapon	club = Weapon("pipe");
-		Weapon	club1 = Weapon("chair");
+		// Weapon	weapon = Weapon("chair");
 
 		HumanA bob("Bob", club);
 		bob.attack();
 		club.setType("fork");
 		bob.attack();
-		bob.setWeapon(club1);
-		bob.attack();
-		club.setType("desk");
-		bob.attack();
+		// bob.setWeaponTest(weapon);
+		// bob.attack();
+		// weapon.setType("desk");
+		// bob.attack();
+		// std::cout << "club.getType() : " << club.getType() << std::endl;
+		// std::cout << "weapon.getType() : " << weapon.getType() << std::endl;
 	}
-	std::cout << "\n\n";
+	std::cout << "\n";
 	{
 		Weapon club = Weapon("pipe");
-		Weapon	club1 = Weapon("chair");
+		// Weapon	weapon = Weapon("chair");
 
 		HumanB jim("Jim");
 		jim.attack();
-		jim.setWeapon(&club);
+		jim.setWeapon(club);
 		jim.attack();
 		club.setType("fork");
 		jim.attack();
-		jim.setWeapon(&club1);
-		jim.attack();
-		club1.setType("desk");
-		jim.attack();
+		// jim.setWeapon(weapon);
+		// jim.attack();
+		// weapon.setType("desk");
+		// jim.attack();
 	}
 	// system("leaks a.out");
 }
