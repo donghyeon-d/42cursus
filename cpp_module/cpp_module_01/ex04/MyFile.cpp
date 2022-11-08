@@ -10,70 +10,59 @@ MyFile::~MyFile()
 {
 }
 
-bool	MyFile::readToBuf()
+std::string MyFile::getFileName()
 {
+	return (this->fileName);
+}
+
+void		MyFile::setFileName(std::string fileName)
+{
+	this->fileName = fileName;
+}
+
+std::string MyFile::getNewFileName()
+{
+	return (this->newFile);
+}
+
+void		MyFile::setNewFileName()
+{
+	this->newFile = fileName.append(".replace");
+}
+
+bool	MyFile::replace(std::string s1, std::string s2)
+{
+	if (s1.empty() || s2.empty())
+		return (false);
+	// read file to buf
 	std::fstream readFile(this->fileName, std::fstream::in);
 	if (readFile.is_open() == false) {
 		std::cout << "File error : can't open" << std::endl;
 		return (false);
 	}
-	else {
-		readFile.seekg(0, std::ios::end);
-		int size = readFile.tellg();
-		this->buf.resize(size);
-		readFile.seekg(0, std::ios::beg);
-		readFile.read(&this->buf[0], size);
-	}
-	return (true);
-}
+	readFile.seekg(0, std::ios::end);
+	int size = readFile.tellg();
+	std::string buf;
+	buf.resize(size);
+	readFile.seekg(0, std::ios::beg);
+	readFile.read(&buf[0], size);
 
-bool	MyFile::writeToFile(const std::string &text, const int &len)
-{
-	std::fstream writeFile(this->fileName, std::fstream::out);//std::fstream::app | 
-	if (writeFile.is_open() == false) {
-		std::cout << "File error : can't open" << std::endl;
-		return (false);
-	}
-	else
-	{
-		writeFile << text.substr(0, len);
-	}
-	return (true);
-}
-
-bool	MyFile::writeNewFile()
-{
-	std::fstream writeFile(this->newFile, std::fstream::out);//std::fstream::app | 
-	if (writeFile.is_open() == false) {
-		std::cout << "File error : can't open" << std::endl;
-		return (false);
-	}
-	else
-	{
-		writeFile << this->buf;
-	}
-	return (true);
-}
-
-void	MyFile::replaceBuf(std::string s1, std::string s2)
-{
-	int index(this->buf.find(s1, 0));
-
+	// buf에서 찾아서 바꾸기
+	int index(buf.find(s1, 0));
 	while (index != -1)
 	{
-		std::cout << "index " << index << std::endl;
-		this->buf.erase(index, s1.length());
-		this->buf.insert(index, s2);
-		index = this->buf.find(s1, index + s2.length());
+		buf.erase(index, s1.length());
+		buf.insert(index, s2);
+		index = buf.find(s1, index + s2.length());
 	}
-}
 
-std::string	MyFile::getBuf()
-{
-	return (this->buf);
-}
-
-int		MyFile::getBufSize()
-{
-	return (this->buf.length());
+	// newfile에 넣기
+	std::fstream writeFile(this->newFile, std::fstream::out);
+	if (writeFile.is_open() == false) {
+		std::cout << "File error : can't open" << std::endl;
+		return (false);
+	}
+	else
+		writeFile << buf;
+	return (true);
 }

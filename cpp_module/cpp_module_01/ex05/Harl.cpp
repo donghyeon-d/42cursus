@@ -46,5 +46,4 @@ void	Harl::complain(std::string level)
 		(this->*f[i])();
 		break;
 	}
-	// (this->*f[i])();
 }

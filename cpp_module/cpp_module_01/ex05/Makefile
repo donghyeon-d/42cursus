@@ -1,5 +1,5 @@
 CXX = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = Harl
 DIR = ./
 SRC = main.cpp Harl.cpp

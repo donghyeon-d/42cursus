@@ -3,7 +3,7 @@
 int main()
 {
 	int N (10);
-	Zombie *zombies = zombieHorde(N, "zozommbibi");
+	Zombie *zombies = zombieHorde(N, "ZOMBIE");
 	for (int i = 0; i < N; i++)
 	{
 		std::cout << "zombies[" << i << "] : ";

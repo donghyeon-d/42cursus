@@ -1,5 +1,5 @@
 CXX = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = harlFilter
 DIR = ./
 SRC = main.cpp HarlFilter.cpp
