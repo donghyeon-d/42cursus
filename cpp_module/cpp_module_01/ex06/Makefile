@@ -1,8 +1,8 @@
 CXX = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = a.out
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+NAME = harlFilter
 DIR = ./
-SRC = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+SRC = main.cpp HarlFilter.cpp
 OBJECT = $(SRC:.cpp=.o)
 
 %.o : %.cpp

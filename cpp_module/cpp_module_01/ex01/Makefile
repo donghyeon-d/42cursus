@@ -6,7 +6,7 @@ SRC = main.cpp Zombie.cpp zombieHorde.cpp
 OBJECT = $(SRC:.cpp=.o)
 
 %.o : %.cpp
-	$(CXX) $(CPPFLAGS) -c $<
+	$(CXX) $(CPPFLAGS) -c $< -I $(DIR)
 
 all : $(NAME)
 

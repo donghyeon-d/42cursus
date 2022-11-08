@@ -1,6 +1,6 @@
 CXX = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g
-NAME = a.out
+NAME = Harl
 DIR = ./
 SRC = main.cpp Harl.cpp
 OBJECT = $(SRC:.cpp=.o)

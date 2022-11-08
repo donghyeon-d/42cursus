@@ -26,6 +26,4 @@ int main(int argc, char *argv[])
 		std::cout << "file open error : write" << std::endl;
 		return (1);
 	}
-
-	// writeFile.writeToFile(myFile.getBuf(), myFile.getBufSize());
 }
