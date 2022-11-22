@@ -1,9 +1,4 @@
-#ifndef IOSTREAM
-# define IOSTREAM
-
 #include <iostream>
-
-#endif
 
 #ifndef WEAPON_HPP
 #define WEAPON_HPP
@@ -17,8 +12,8 @@ class Weapon {
 		Weapon( void );
 		Weapon( const std::string type );
 		~Weapon( void );
-		std::string	getType( void );
-		void		setType( const std::string newType );
+		const std::string	&getType( void );
+		void		setType( std::string newType );
 };
 
 #endif

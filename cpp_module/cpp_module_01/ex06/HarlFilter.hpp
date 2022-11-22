@@ -1,9 +1,4 @@
-#ifndef IOSTRAM
-#define	IOSTRAM
-
 #include <iostream>
-
-#endif
 
 #ifndef HARLFILTER_HPP
 #define HARLFILTER_HPP

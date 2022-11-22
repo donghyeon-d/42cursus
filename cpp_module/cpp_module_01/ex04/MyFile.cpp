@@ -1,5 +1,7 @@
 #include "MyFile.hpp"
 
+MyFile::MyFile() {}
+
 MyFile::MyFile(std::string fileName)
 {
 	this->fileName = fileName;
@@ -10,7 +12,7 @@ MyFile::~MyFile()
 {
 }
 
-std::string MyFile::getFileName()
+const std::string &MyFile::getFileName()
 {
 	return (this->fileName);
 }
@@ -20,20 +22,28 @@ void		MyFile::setFileName(std::string fileName)
 	this->fileName = fileName;
 }
 
-std::string MyFile::getNewFileName()
+const std::string &MyFile::getNewFileName()
 {
 	return (this->newFile);
 }
 
 void		MyFile::setNewFileName()
 {
+	if (this->getFileName().empty() == 0)
+	{
+		std::cout << "fileName is empty" << std::endl;
+		return ;
+	}
 	this->newFile = fileName.append(".replace");
 }
 
 bool	MyFile::replace(std::string s1, std::string s2)
 {
-	if (s1.empty() || s2.empty())
+	if (s1.empty() || s2.empty()) {
+		std::cout << "s1 or s2 is empty string" << std::endl;
 		return (false);
+	}
+
 	// read file to buf
 	std::fstream readFile(this->fileName, std::fstream::in);
 	if (readFile.is_open() == false) {

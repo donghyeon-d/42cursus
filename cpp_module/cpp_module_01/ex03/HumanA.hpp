@@ -14,7 +14,7 @@ class HumanA {
 		~HumanA( void );
 		void	attack( void );
 		void	setWeaponTest( Weapon newWeapon );
-		std::string	getWeapon( void );
+		const std::string	&getWeapon( void );
 };
 
 #endif

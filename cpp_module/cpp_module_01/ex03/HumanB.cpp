@@ -22,7 +22,7 @@ void	HumanB::setWeapon( Weapon &weapon )
 	this->weapon = &weapon;
 }
 
-std::string	HumanB::getWeapon( void )
+const std::string	&HumanB::getWeapon( void )
 {
 	return (this->weapon->getType());
 }

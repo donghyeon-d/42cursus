@@ -13,12 +13,12 @@ Weapon::~Weapon( )
 {
 }
 
-std::string Weapon::getType( void )
+const std::string &Weapon::getType( void )
 {
 	return (this->type);
 }
 
-void	Weapon::setType( const std::string newType)
+void	Weapon::setType( std::string newType )
 {
 	this->type = newType;
 }

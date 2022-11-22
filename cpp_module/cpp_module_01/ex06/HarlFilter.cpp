@@ -1,4 +1,3 @@
-#include <sstream>
 #include "HarlFilter.hpp"
 
 HarlFilter::HarlFilter()

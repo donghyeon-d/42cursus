@@ -1,10 +1,4 @@
-#ifndef IOSTREAM
-# define IOSTREAM
-
 #include <iostream>
-
-#endif
-
 
 #ifndef ZOMBIE_HPP
 # define ZOMBIE_HPP

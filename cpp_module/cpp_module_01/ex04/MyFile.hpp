@@ -11,11 +11,12 @@ class MyFile {
 		std::string		newFile;
 
 	public:
+		MyFile();
 		MyFile(std::string fileName);
 		~MyFile();
-		std::string getFileName();
+		const std::string &getFileName();
 		void		setFileName(std::string fileName);
-		std::string getNewFileName();
+		const std::string &getNewFileName();
 		void		setNewFileName();
 		bool		replace(std::string s1, std::string s2);
 	};
