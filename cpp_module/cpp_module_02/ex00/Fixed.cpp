@@ -15,7 +15,7 @@ Fixed::Fixed(const Fixed &ref)
 Fixed &Fixed::operator=(const Fixed &ref)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->setRawBits(ref.getRawBits());
+	setRawBits(ref.getRawBits());
 	return (*this);
 }
 
