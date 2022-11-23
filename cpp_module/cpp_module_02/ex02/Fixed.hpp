@@ -16,7 +16,6 @@ class Fixed
 
 		int	getRawBits( void ) const;
 		void setRawBits( int const raw );
-		void setRawBits( float const raw );
 		float toFloat( void ) const;
 		int toInt( void ) const;
 
@@ -34,10 +33,10 @@ class Fixed
 		Fixed operator*(const Fixed &ref) const;
 		Fixed operator/(const Fixed &ref) const;
 
-		Fixed &operator+=(const Fixed &ref) const;
-		Fixed &operator-=(const Fixed &ref) const;
-		Fixed &operator*=(const Fixed &ref) const;
-		Fixed &operator/=(const Fixed &ref) const;
+		// Fixed &operator+=(const Fixed &ref) const;
+		// Fixed &operator-=(const Fixed &ref) const;
+		// Fixed &operator*=(const Fixed &ref) const;
+		// Fixed &operator/=(const Fixed &ref) const;
 };
 
 std::ostream& operator<<( std::ostream& os, const Fixed &ref );
