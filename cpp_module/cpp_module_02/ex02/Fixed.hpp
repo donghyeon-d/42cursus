@@ -40,10 +40,12 @@ class Fixed
 		Fixed &operator--( void );
 		Fixed operator++( int );
 		Fixed operator--( int );
-		// Fixed &operator+=(const Fixed &ref) const;
-		// Fixed &operator-=(const Fixed &ref) const;
-		// Fixed &operator*=(const Fixed &ref) const;
-		// Fixed &operator/=(const Fixed &ref) const;
+
+		// [ Min, Max ]
+		static Fixed &min( Fixed &ref1, Fixed &ref2 );
+		static Fixed &min( const Fixed &ref1, const Fixed &ref2 );
+		static Fixed &max( Fixed &ref1, Fixed &ref2 );
+		static Fixed &max( const Fixed &ref1, const Fixed &ref2 );
 };
 
 std::ostream& operator<<( std::ostream& os, const Fixed &ref );

@@ -21,7 +21,7 @@ Fixed::~Fixed()
 Fixed::Fixed( const int d )
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->setRawBits((d & 0b11111111111111111111111) << 8);
+	setRawBits((d & 0b11111111111111111111111) << 8);
 }
 
 Fixed::Fixed( const float f )
@@ -42,7 +42,7 @@ Fixed::Fixed( const float f )
 			pointNum -= 1;
 		}
 	}
-	this->setRawBits(d + fraction);
+	setRawBits(d + fraction);
 }
 
 int	Fixed::getRawBits( void ) const
@@ -80,7 +80,7 @@ int Fixed::toInt( void ) const
 Fixed &Fixed::operator=(const Fixed &ref)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->setRawBits(ref.getRawBits());
+	setRawBits(ref.getRawBits());
 	return (*this);
 }
 
@@ -152,14 +152,14 @@ Fixed Fixed::operator-(const Fixed &ref) const
 Fixed Fixed::operator*(const Fixed &ref) const
 {
 	Fixed temp;
-	temp.setRawBits(getRawBits() * ref.getRawBits());
+	temp.setRawBits((getRawBits() * ref.getRawBits()) >> 8);
 	return (temp);
 }
 
 Fixed Fixed::operator/(const Fixed &ref) const
 {
 	Fixed temp;
-	temp.setRawBits(getRawBits() / ref.getRawBits());
+	temp.setRawBits((getRawBits() << 8) / ref.getRawBits());
 	return (temp);
 }
 
@@ -193,6 +193,42 @@ Fixed Fixed::operator--( int )
 	this->setRawBits(this->getRawBits() - 1);
 	return (temp);
 }
+
+
+// [ Min, Max ]
+Fixed &Fixed::min( Fixed &ref1, Fixed &ref2 )
+{
+	if (ref1.getRawBits() < ref2.getRawBits())
+		return (ref1);
+	else
+		return (ref2);
+}
+
+Fixed &Fixed::min( const Fixed &ref1, const Fixed &ref2 )
+{
+	if (ref1.getRawBits() < ref2.getRawBits())
+		return (const_cast<Fixed &>(ref1));
+	else
+		return (const_cast<Fixed &>(ref2));
+}
+
+Fixed &Fixed::max( Fixed &ref1, Fixed &ref2 )
+{
+	if (ref1.getRawBits() > ref2.getRawBits())
+		return (ref1);
+	else
+		return (ref2);
+}
+
+Fixed &Fixed::max( const Fixed &ref1, const Fixed &ref2 )
+{
+	if (ref1.getRawBits() > ref2.getRawBits())
+		return (const_cast<Fixed &>(ref1));
+	else
+		return (const_cast<Fixed &>(ref2));
+}
+
+
 
 
 std::ostream& operator<<( std::ostream& os, const Fixed &ref )
