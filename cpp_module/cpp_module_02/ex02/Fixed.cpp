@@ -84,6 +84,9 @@ Fixed &Fixed::operator=(const Fixed &ref)
 	return (*this);
 }
 
+
+// [ comparison operator ] 
+
 bool Fixed::operator==( Fixed &ref ) const
 {
 	if (getRawBits() == ref.getRawBits())
@@ -129,6 +132,9 @@ bool Fixed::operator<=( Fixed &ref ) const
 		return (false);
 }
 
+
+// [ Arithmetic operator ] 
+
 Fixed Fixed::operator+(const Fixed &ref) const
 {
 	Fixed temp;
@@ -154,6 +160,37 @@ Fixed Fixed::operator/(const Fixed &ref) const
 {
 	Fixed temp;
 	temp.setRawBits(getRawBits() / ref.getRawBits());
+	return (temp);
+}
+
+
+// [ Increment, decrement ]
+
+Fixed &Fixed::operator++( void )
+{
+	this->setRawBits(this->getRawBits() + 1);
+	return (*this);
+}
+
+Fixed &Fixed::operator--( void )
+{
+	this->setRawBits(this->getRawBits() - 1);
+	return (*this);
+}
+
+Fixed Fixed::operator++( int )
+{
+	Fixed temp(0);
+	temp.setRawBits(this->getRawBits());
+	this->setRawBits(this->getRawBits() + 1);
+	return (temp);
+}
+
+Fixed Fixed::operator--( int )
+{
+	Fixed temp(0);
+	temp.setRawBits(this->getRawBits());
+	this->setRawBits(this->getRawBits() - 1);
 	return (temp);
 }
 

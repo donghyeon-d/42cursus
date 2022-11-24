@@ -21,6 +21,7 @@ class Fixed
 
 		Fixed &operator=(const Fixed &ref);
 
+		// comparison operator
 		bool operator==( Fixed &ref ) const;
 		bool operator!=( Fixed &ref ) const;
 		bool operator>( Fixed &ref ) const;
@@ -28,11 +29,17 @@ class Fixed
 		bool operator>=( Fixed &ref ) const;
 		bool operator<=( Fixed &ref ) const;
 
-		Fixed operator+(const Fixed &ref) const;
-		Fixed operator-(const Fixed &ref) const;
-		Fixed operator*(const Fixed &ref) const;
-		Fixed operator/(const Fixed &ref) const;
+		// [ Arithmetic operator ] 
+		Fixed operator+( const Fixed &ref ) const;
+		Fixed operator-( const Fixed &ref ) const;
+		Fixed operator*( const Fixed &ref ) const;
+		Fixed operator/( const Fixed &ref ) const;
 
+		// [ Increment, decrement ]
+		Fixed &operator++( void );
+		Fixed &operator--( void );
+		Fixed operator++( int );
+		Fixed operator--( int );
 		// Fixed &operator+=(const Fixed &ref) const;
 		// Fixed &operator-=(const Fixed &ref) const;
 		// Fixed &operator*=(const Fixed &ref) const;
