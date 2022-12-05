@@ -2,7 +2,7 @@ CXX = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = a.out
 DIR = ./
-SRC = main.cpp Fixed.cpp
+SRC = main.cpp Fixed.cpp bsp.cpp Point.cpp
 OBJECT = $(SRC:.cpp=.o)
 
 %.o : %.cpp

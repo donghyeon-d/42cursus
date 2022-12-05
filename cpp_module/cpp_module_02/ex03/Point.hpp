@@ -14,11 +14,10 @@ class Point
 		Point(const float x, const float y);
 		Point(const Point &point);
 		~Point();
-		Point &operator=(const Point &point); // private에 뭐가 더 있으면 수정하기
+		Point &operator=(const Point &point);
 		const Fixed &getPointX() const;
 		const Fixed &getPointY() const;
 };
-
 
 
 #endif
