@@ -28,28 +28,14 @@ Fixed &Fixed::operator=(const Fixed &ref)
 Fixed::Fixed( const int d )
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->setRawBits((d & 0b11111111111111111111111) << 8);
+	this->setRawBits(d * (1 << 8));
+	// this->setRawBits((d & 0b11111111111111111111111) << 8);
 }
 
 Fixed::Fixed( const float f )
 {
 	std::cout << "Float constructor called" << std::endl;
-
-	int d(f); // 정수 부분
-	float pointNum(f - d); // 소수 부분 (0.xxx)
-	d = (d & 0b11111111111111111111111) << 8;
-	int fraction(0);
-	for (int i = 0; i < 8; i++)
-	{
-		pointNum *= 2;
-		fraction = fraction << 1;
-		if (pointNum > 1)
-		{
-			fraction += 1;
-			pointNum -= 1;
-		}
-	}
-	this->setRawBits(d + fraction);
+	this->setRawBits(f * (1 << 8));
 }
 
 int	Fixed::getRawBits( void ) const
@@ -65,23 +51,12 @@ void Fixed::setRawBits( int const raw )
 
 float Fixed::toFloat( void ) const
 {
-	int d(getRawBits() >> 8);
-
-	int fraction(getRawBits() & 0b11111111);
-	float pointNum(0);
-	for (int i = 0; i < 8; i++)
-	{
-		if (fraction & 1)
-			pointNum += 1;
-		pointNum /= 2;
-		fraction >>= 1;
-	}
-	return (d + pointNum);
+	return((float)getRawBits() / (1 << 8));
 }
 
 int Fixed::toInt( void ) const
 {
-	return (getRawBits() >> 8);
+	return (roundf((float)getRawBits() / (1 << 8)));
 }
 
 std::ostream& operator<<( std::ostream& os, const Fixed &ref )
