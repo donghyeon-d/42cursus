@@ -153,16 +153,14 @@ Fixed &Fixed::operator--( void )
 
 Fixed Fixed::operator++( int )
 {
-	Fixed temp(0);
-	temp.setRawBits(this->getRawBits());
+	Fixed temp(*this);
 	operator++();
 	return (temp);
 }
 
 Fixed Fixed::operator--( int )
 {
-	Fixed temp(0);
-	temp.setRawBits(this->getRawBits());
+	Fixed temp(*this);
 	operator--();
 	return (temp);
 }
