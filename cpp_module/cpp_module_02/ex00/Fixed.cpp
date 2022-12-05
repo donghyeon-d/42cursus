@@ -27,30 +27,10 @@ Fixed::~Fixed()
 int	Fixed::getRawBits( void ) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
-	// return (this->_fixedPointNum >> 8);
 	return (_fixedPointNum);
 }
 
 void Fixed::setRawBits( int const raw )
 {
 	_fixedPointNum = raw;
-	// _fixedPointNum = (raw & 0b11111111111111111111111) << 8; //23bit
 }
-
-// int	Fixed::getRawBits( void ) const
-// {
-// 	std::cout << "getRawBits member function called" << std::endl;
-// 	return (this->_fixedPointNum >> 8);
-// }
-
-// void Fixed::setRawBits( int const raw )
-// {
-// 	// int num(0);
-// 	// int pos(0);
-// 	// while ((raw >> (pos + 1)) > 0)
-// 	// {
-// 	// 	num += raw & (1 << pos);
-// 	// 	pos++;
-// 	// }
-// 	_fixedPointNum = (raw & 0b11111111111111111111111) << 8; //23bit
-// }

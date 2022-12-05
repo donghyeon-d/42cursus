@@ -2,7 +2,7 @@ CXX = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = a.out
 DIR = ./
-SRC = main.cpp ClapTrap.cpp
+SRC = main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJECT = $(SRC:.cpp=.o)
 
 %.o : %.cpp

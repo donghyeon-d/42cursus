@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 #include "Fixed.hpp"
 
 Fixed::Fixed() :_fixedPointNum(0)
@@ -21,28 +20,48 @@ Fixed::~Fixed()
 Fixed::Fixed( const int d )
 {
 	std::cout << "Int constructor called" << std::endl;
-	setRawBits((d & 0b11111111111111111111111) << 8);
+
+	int rawBits(0);
+	int rD(d);
+	if (d < 0)
+	{
+		rD *= -1;
+		rawBits |= SIGN_BIT;
+	}
+	rawBits |= ((rD & VALID_INT_RANGE) << 8);
+	this->setRawBits(rawBits);
 }
 
 Fixed::Fixed( const float f )
 {
 	std::cout << "Float constructor called" << std::endl;
 
-	int d(f); // 정수 부분
-	float pointNum(f - d); // 소수 부분 (0.xxx)
-	d = (d & 0b11111111111111111111111) << 8;
-	int fraction(0);
-	for (int i = 0; i < 8; i++)
+	float rFloat(f);
+	int result(0);
+	if (f < 0)
 	{
-		pointNum *= 2;
-		fraction = fraction << 1;
-		if (pointNum > 1)
-		{
-			fraction += 1;
-			pointNum -= 1;
-		}
+		rFloat *= -1;
+		result |= SIGN_BIT;
 	}
-	setRawBits(d + fraction);
+	if (f != 0)
+	{
+		int d(rFloat);
+		float pointNum(rFloat - d); // 소수 부분 (0.xxx)
+		d = (d & VALID_INT_RANGE) << 8;
+		int fraction(0);
+		for (int i = 0; i < 8; i++)
+		{
+			pointNum *= 2;
+			fraction = fraction << 1;
+			if (pointNum > 1)
+			{
+				fraction += 1;
+				pointNum -= 1;
+			}
+		}
+		result |= d + fraction;
+	}
+	setRawBits(result);
 }
 
 int	Fixed::getRawBits( void ) const
@@ -58,9 +77,15 @@ void Fixed::setRawBits( int const raw )
 
 float Fixed::toFloat( void ) const
 {
-	int d(getRawBits() >> 8);
-
-	int fraction(getRawBits() & 0b11111111);
+	int rawBits(getRawBits());
+	int sign(1);
+	if (rawBits < 0)
+	{
+		sign = -1;
+		rawBits &= ~SIGN_BIT;
+	}
+	int d(rawBits >> 8);
+	int fraction(rawBits & VALID_FRACTION_RANGE);
 	float pointNum(0);
 	for (int i = 0; i < 8; i++)
 	{
@@ -69,11 +94,13 @@ float Fixed::toFloat( void ) const
 		pointNum /= 2;
 		fraction >>= 1;
 	}
-	return (d + pointNum);
+	return (sign * (d + pointNum));
 }
 
 int Fixed::toInt( void ) const
 {
+	if (getRawBits() < 0)
+		return (((getRawBits() & ~SIGN_BIT) >> 8) * -1);
 	return (getRawBits() >> 8);
 }
 
@@ -168,13 +195,31 @@ Fixed Fixed::operator/(const Fixed &ref) const
 
 Fixed &Fixed::operator++( void )
 {
-	this->setRawBits(this->getRawBits() + 1);
+	int rawBit(getRawBits());
+	if (rawBit & SIGN_BIT)
+		rawBit--;
+	else
+		rawBit++;
+	if (rawBit & SIGN_BIT && (rawBit & ~SIGN_BIT) == 0)
+		rawBit &= ~SIGN_BIT;
+	setRawBits(rawBit);
 	return (*this);
 }
 
 Fixed &Fixed::operator--( void )
 {
-	this->setRawBits(this->getRawBits() - 1);
+	int rawBit(getRawBits());
+	if (rawBit == 0 && !(rawBit & SIGN_BIT))
+	{
+		rawBit |= SIGN_BIT;
+	}
+	if (rawBit & SIGN_BIT)
+		rawBit++;
+	else
+		rawBit--;
+	if (rawBit & SIGN_BIT && (rawBit & ~SIGN_BIT) == 0)
+		rawBit &= ~SIGN_BIT;
+	setRawBits(rawBit);
 	return (*this);
 }
 
@@ -182,7 +227,7 @@ Fixed Fixed::operator++( int )
 {
 	Fixed temp(0);
 	temp.setRawBits(this->getRawBits());
-	this->setRawBits(this->getRawBits() + 1);
+	operator++();
 	return (temp);
 }
 
@@ -190,7 +235,7 @@ Fixed Fixed::operator--( int )
 {
 	Fixed temp(0);
 	temp.setRawBits(this->getRawBits());
-	this->setRawBits(this->getRawBits() - 1);
+	operator--();
 	return (temp);
 }
 

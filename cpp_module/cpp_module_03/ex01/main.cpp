@@ -1,22 +1,16 @@
-#include "ClapTrap.hpp"
+#include <iostream>
+#include "ScavTrap.hpp"
 
 int main()
 {
-	ClapTrap tom("Tom");
-	ClapTrap denise("Denise");
-	ClapTrap tom_copy(tom);
+    ScavTrap A("A");
+    ScavTrap AA(A);
+    ScavTrap B("B");
+    ScavTrap BB;
+    BB = B;
 
-	tom.attack("Denise");
-	denise.takeDamage(5);
-	denise.takeDamage(5);
-	denise.beRepaired(5);
-	
-	ClapTrap paul("Paul");
-
-	for (int i = 0; i < 11; i++)
-	{ 
-		std::cout << "attack count [" << i << "] : ";
-		paul.attack("air");
-	}
-	paul.beRepaired(5);
+    A.attack("B");
+    B.takeDamage(20);
+    B.guardGate();
+    B.beRepaired(10);
 }

@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 #include "Fixed.hpp"
 
 Fixed::Fixed() :_fixedPointNum(0)
@@ -28,14 +27,48 @@ Fixed &Fixed::operator=(const Fixed &ref)
 Fixed::Fixed( const int d )
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->setRawBits(d * (1 << 8));
-	// this->setRawBits((d & 0b11111111111111111111111) << 8);
+
+	int rawBits(0);
+	int rD(d);
+	if (d < 0)
+	{
+		rD *= -1;
+		rawBits |= SIGN_BIT;
+	}
+	rawBits |= ((rD & VALID_INT_RANGE) << 8);
+	this->setRawBits(rawBits);
 }
 
 Fixed::Fixed( const float f )
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->setRawBits(f * (1 << 8));
+
+	float rFloat(f);
+	int result(0);
+	if (f < 0)
+	{
+		rFloat *= -1;
+		result |= SIGN_BIT;
+	}
+	if (f != 0)
+	{
+		int d(rFloat);
+		float pointNum(rFloat - d); // 소수 부분 (0.xxx)
+		d = (d & VALID_INT_RANGE) << 8;
+		int fraction(0);
+		for (int i = 0; i < 8; i++)
+		{
+			pointNum *= 2;
+			fraction = fraction << 1;
+			if (pointNum > 1)
+			{
+				fraction += 1;
+				pointNum -= 1;
+			}
+		}
+		result |= d + fraction;
+	}
+	setRawBits(result);
 }
 
 int	Fixed::getRawBits( void ) const
@@ -51,12 +84,31 @@ void Fixed::setRawBits( int const raw )
 
 float Fixed::toFloat( void ) const
 {
-	return((float)getRawBits() / (1 << 8));
+	int rawBits(getRawBits());
+	int sign(1);
+	if (rawBits < 0)
+	{
+		sign = -1;
+		rawBits &= ~SIGN_BIT;
+	}
+	int d(rawBits >> 8);
+	int fraction(rawBits & VALID_FRACTION_RANGE);
+	float pointNum(0);
+	for (int i = 0; i < 8; i++)
+	{
+		if (fraction & 1)
+			pointNum += 1;
+		pointNum /= 2;
+		fraction >>= 1;
+	}
+	return (sign * (d + pointNum));
 }
 
 int Fixed::toInt( void ) const
 {
-	return (roundf((float)getRawBits() / (1 << 8)));
+	if (getRawBits() < 0)
+		return (((getRawBits() & ~SIGN_BIT) >> 8) * -1);
+	return (getRawBits() >> 8);
 }
 
 std::ostream& operator<<( std::ostream& os, const Fixed &ref )
