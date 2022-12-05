@@ -10,7 +10,7 @@ int main()
     BB = B;
 
     A.attack("B");
-    B.takeDamage(20);
+    B.takeDamage(A.getAttackDamage());
     B.guardGate();
     B.beRepaired(10);
 }

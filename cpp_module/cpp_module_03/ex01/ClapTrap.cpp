@@ -1,11 +1,11 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : _hitPoint(10), _energyPoint(10), _AttackDamage(0)
+ClapTrap::ClapTrap() : _hitPoint(10), _energyPoint(10), _attackDamage(0)
 {
 	std::cout << "ClapTrap  { Constructor } called. No name" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoint(10), _energyPoint(10), _AttackDamage(0)
+ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoint(10), _energyPoint(10), _attackDamage(0)
 {
 	std::cout << "ClapTrap { Constructor } called. name is " << name << std::endl;
 }
@@ -18,7 +18,7 @@ ClapTrap::ClapTrap(const ClapTrap &clapTrap)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap { Destructor } called. Name " << _name << std::endl;
+	std::cout << "ClapTrap { Destructor } called" << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &clapTrap)
@@ -26,7 +26,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &clapTrap)
 	_name = clapTrap._name;
 	_hitPoint = clapTrap._hitPoint;
 	_energyPoint = clapTrap._energyPoint;
-	_AttackDamage = clapTrap._AttackDamage;
+	_attackDamage = clapTrap._attackDamage;
 	return (*this);
 }
 
@@ -38,7 +38,7 @@ void ClapTrap::attack(const std::string& target)
 		std::cout << "ClapTrap " << _name << " : Hit point is 0, can't attack" << std::endl;
 	else
 	{
-		std::cout << "ClapTrap " << _name << " : attacks " << target << ", causing " << _AttackDamage << " points of damage!" << std::endl;
+		std::cout << "ClapTrap " << _name << " : attacks " << target << ", causing " << _attackDamage << " points of damage!" << std::endl;
 		_energyPoint--;
 	}
 }
@@ -78,4 +78,24 @@ void ClapTrap::beRepaired(unsigned int amount)
 		std::cout << "ClapTrap " << _name << " : is repaired " << amount << " HP, HP : " << _hitPoint << std::endl;
 		_energyPoint--;
 	}
+}
+
+std::string ClapTrap::getName()
+{
+	return (_name);
+}
+
+unsigned int ClapTrap::getHitPoint()
+{
+	return (_hitPoint);
+}
+
+unsigned int ClapTrap::getEnergyPoint()
+{
+	return (_energyPoint);
+}
+
+unsigned int ClapTrap::getAttackDamage()
+{
+	return (_attackDamage);
 }

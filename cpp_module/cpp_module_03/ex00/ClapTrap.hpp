@@ -2,7 +2,6 @@
 
 #ifndef CLAPTRAP_HPP
 #define CLAPTRAP_HPP
-#define CLAPTRAP_MAX_HP 10
 
 class ClapTrap
 {
@@ -10,7 +9,7 @@ class ClapTrap
 		std::string _name; // argument
 		unsigned int _hitPoint; // 10
 		unsigned int _energyPoint; // 10
-		unsigned int _AttackDamage; // 0
+		unsigned int _attackDamage; // 0
 
 	public:
 		ClapTrap();
@@ -21,6 +20,10 @@ class ClapTrap
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
+		std::string getName();
+		unsigned int getHitPoint();
+		unsigned int getEnergyPoint();
+		unsigned int getAttackDamage();
 };
 
 
