@@ -101,7 +101,7 @@ float Fixed::toFloat( void ) const
 
 int Fixed::toInt( void ) const
 {
-	return (getRawBits() / (1 << _fractionalBit));
+	return (getRawBits() >> _fractionalBit);
 	// if (getRawBits() < 0)
 	// 	return (((getRawBits() & ~SIGN_BIT) >> 8) * -1);
 	// return (getRawBits() >> 8);

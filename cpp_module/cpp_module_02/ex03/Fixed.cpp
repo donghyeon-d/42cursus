@@ -47,7 +47,7 @@ float Fixed::toFloat( void ) const
 
 int Fixed::toInt( void ) const
 {
-	return (getRawBits() / (1 << _fractionalBit));
+	return (getRawBits() >> _fractionalBit);
 }
 
 Fixed &Fixed::operator=(const Fixed &ref)
