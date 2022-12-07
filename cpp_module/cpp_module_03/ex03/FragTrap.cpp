@@ -29,10 +29,10 @@ FragTrap::~FragTrap()
 
 FragTrap &FragTrap::operator=(const FragTrap &fragTrap)
 {
-    _name = fragTrap.getName();
-	_hitPoint = fragTrap.getHitPoint();
-	_energyPoint = fragTrap.getEnergyPoint();
-	_attackDamage = fragTrap.getAttackDamage();
+	_name = fragTrap._name;
+	_hitPoint = fragTrap._hitPoint;
+	_energyPoint = fragTrap._energyPoint;
+	_attackDamage = fragTrap._attackDamage;
     std::cout << "FragTrap { Assignment operator } called. name is " << _name << std::endl;
     return (*this);
 }
@@ -40,4 +40,30 @@ FragTrap &FragTrap::operator=(const FragTrap &fragTrap)
 void FragTrap::highFivesGuys(void)
 {
 	std::cout << "Positive hige fives!!" << std::endl;
+}
+
+
+
+
+
+
+
+std::string FragTrap::getName() const
+{
+	return (_name);
+}
+
+unsigned int FragTrap::getHitPoint() const
+{
+	return (_hitPoint);
+}
+
+unsigned int FragTrap::getEnergyPoint() const
+{
+	return (_energyPoint);
+}
+
+unsigned int FragTrap::getAttackDamage() const
+{
+	return (_attackDamage);
 }

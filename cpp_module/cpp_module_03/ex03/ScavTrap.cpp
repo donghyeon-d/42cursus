@@ -29,10 +29,10 @@ ScavTrap::~ScavTrap()
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &scavTrap)
 {
-    _name = scavTrap.getName();
-	_hitPoint = scavTrap.getHitPoint();
-	_energyPoint = scavTrap.getEnergyPoint();
-	_attackDamage = scavTrap.getAttackDamage();
+    _name = scavTrap._name;
+	_hitPoint = scavTrap._hitPoint;
+	_energyPoint = scavTrap._energyPoint;
+	_attackDamage = scavTrap._attackDamage;
     std::cout << "ScavTrap { Assignment operator } called. name is " << _name << std::endl;
     return (*this);
 }
@@ -40,4 +40,31 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &scavTrap)
 void    ScavTrap::guardGate()
 {
     std::cout << "ScavTrap " << _name << " : Gate Keeper mode!" << std::endl;
+}
+
+
+
+
+
+
+
+
+std::string ScavTrap::getName() const
+{
+	return (_name);
+}
+
+unsigned int ScavTrap::getHitPoint() const
+{
+	return (_hitPoint);
+}
+
+unsigned int ScavTrap::getEnergyPoint() const
+{
+	return (_energyPoint);
+}
+
+unsigned int ScavTrap::getAttackDamage() const
+{
+	return (_attackDamage);
 }

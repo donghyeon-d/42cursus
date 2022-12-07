@@ -80,22 +80,22 @@ void ClapTrap::beRepaired(unsigned int amount)
 	}
 }
 
-std::string ClapTrap::getName()
+std::string ClapTrap::getName() const
 {
 	return (_name);
 }
 
-unsigned int ClapTrap::getHitPoint()
+unsigned int ClapTrap::getHitPoint()  const
 {
 	return (_hitPoint);
 }
 
-unsigned int ClapTrap::getEnergyPoint()
+unsigned int ClapTrap::getEnergyPoint()  const
 {
 	return (_energyPoint);
 }
 
-unsigned int ClapTrap::getAttackDamage()
+unsigned int ClapTrap::getAttackDamage()  const
 {
 	return (_attackDamage);
 }

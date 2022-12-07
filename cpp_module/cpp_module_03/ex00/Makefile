@@ -1,17 +1,17 @@
 CXX = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = a.out
 DIR = ./
 SRC = main.cpp ClapTrap.cpp
 OBJECT = $(SRC:.cpp=.o)
 
 %.o : %.cpp
-	$(CXX) $(CPPFLAGS) -c $< -I $(DIR)
+	$(CXX) $(CXXFLAGS) -c $< -I $(DIR)
 
 all : $(NAME)
 
 $(NAME) : $(OBJECT)
-	$(CXX) $(CPPFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean :
 	rm -rf $(OBJECT)
