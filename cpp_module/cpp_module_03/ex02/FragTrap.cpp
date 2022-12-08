@@ -13,7 +13,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 	_hitPoint = 100;
     _energyPoint = 100;
     _attackDamage = 30;
-    std::cout << "FragTrap  { Constructor } called. name is " << name << std::endl;
+    std::cout << "FragTrap  { Constructor } called. name is " << _name << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &fragTrap)

@@ -13,7 +13,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
     _hitPoint = 100;
     _energyPoint = 50;
     _attackDamage = 20;
-    std::cout << "ScavTrap { Constructor } called. name is " << name << std::endl;
+    std::cout << "ScavTrap { Constructor } called. name is " << _name << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &scavTrap)

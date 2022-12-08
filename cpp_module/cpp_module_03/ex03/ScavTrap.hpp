@@ -1,5 +1,8 @@
 #ifndef SCAVTRAP_HPP
 #define SCAVTRAP_HPP
+#define SCAV_HP 100
+#define SCAV_EP 50
+#define SCAV_AD 20
 
 #include <iostream>
 #include "ClapTrap.hpp"
@@ -12,14 +15,8 @@ class ScavTrap : public virtual ClapTrap
         ScavTrap(const ScavTrap &scavTrap);
         ~ScavTrap();
         ScavTrap &operator=(const ScavTrap &scavTrap);
+        void    attack(const std::string& target);
         void    guardGate();
-
-                std::string getName() const;
-		unsigned int getHitPoint() const;
-		unsigned int getEnergyPoint() const;
-		unsigned int getAttackDamage() const;
 };
-
-
 
 #endif

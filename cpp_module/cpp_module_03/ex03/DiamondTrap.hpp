@@ -17,12 +17,13 @@ class DiamondTrap : public FragTrap, public ScavTrap
 		DiamondTrap(const DiamondTrap &diamondTrap);
 		~DiamondTrap();
 		DiamondTrap &operator=(const DiamondTrap &diamondTrap);
+		void whoAmI();
+		void printInfo() const;
+
 		std::string getName() const;
 		unsigned int getHitPoint() const;
 		unsigned int getEnergyPoint() const;
 		unsigned int getAttackDamage() const;
-
-		void whoAmI();
 };
 
 #endif

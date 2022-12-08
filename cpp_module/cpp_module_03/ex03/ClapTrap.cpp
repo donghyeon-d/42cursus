@@ -7,7 +7,7 @@ ClapTrap::ClapTrap() : _hitPoint(10), _energyPoint(10), _attackDamage(0)
 
 ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoint(10), _energyPoint(10), _attackDamage(0)
 {
-	std::cout << "ClapTrap { Constructor } called. name is " << name << std::endl;
+	std::cout << "ClapTrap { Constructor } called. name is " << _name << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &clapTrap)
@@ -23,10 +23,10 @@ ClapTrap::~ClapTrap()
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &clapTrap)
 {
-	_name = clapTrap._name;
-	_hitPoint = clapTrap._hitPoint;
-	_energyPoint = clapTrap._energyPoint;
-	_attackDamage = clapTrap._attackDamage;
+	_name = clapTrap.getName();
+	_hitPoint = clapTrap.getHitPoint();
+	_energyPoint = clapTrap.getEnergyPoint();
+	_attackDamage = clapTrap.getAttackDamage();
 	return (*this);
 }
 

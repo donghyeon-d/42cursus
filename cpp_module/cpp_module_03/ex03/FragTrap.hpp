@@ -1,5 +1,8 @@
 #ifndef FRAGTRAP_HPP
 #define FRAGTRAP_HPP
+#define FRAG_HP 100
+#define FRAG_EP 100
+#define FRAG_AD 30
 
 #include <iostream>
 #include "ClapTrap.hpp"
@@ -13,12 +16,6 @@ class FragTrap : public virtual ClapTrap
         ~FragTrap();
         FragTrap &operator=(const FragTrap &fragTrap);
 		void highFivesGuys(void);
-
-        std::string getName() const;
-		unsigned int getHitPoint() const;
-		unsigned int getEnergyPoint() const;
-		unsigned int getAttackDamage() const;
 };
-
 
 #endif
