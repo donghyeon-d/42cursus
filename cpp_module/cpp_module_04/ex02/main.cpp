@@ -1,5 +1,6 @@
 #include "Brain.hpp"
 #include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 
@@ -29,6 +30,12 @@ int main()
 		Cat B;
 		B = A;
 		B.printIdeasFromBrain();
+	}
+
+	{
+		Animal animal;
+		AAnimal Aanimal;
+		std::cout << Aanimal.makeSound() << std::endl;
 	}
 
 	// system("leaks a.out");

@@ -1,12 +1,11 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = a.out
-DIR = ./
 SRC = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongCat.cpp WrongAnimal.cpp
 OBJECT = $(SRC:.cpp=.o)
 
 %.o : %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -I $(DIR)
+	$(CXX) $(CXXFLAGS) -c $<
 
 all : $(NAME)
 
