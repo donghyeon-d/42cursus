@@ -1,13 +1,13 @@
 #include "Dog.hpp"
 
-Dog::Dog()
+Dog::Dog() : Animal()
 {
 	std::cout << "Dog()" << std::endl;
 	_type = "Dog";
 	_brain = new Brain();
 }
 
-Dog::Dog(const Dog &dog)
+Dog::Dog(const Dog &dog) : Animal()
 {
 	std::cout << "Dog(copy)" << std::endl;
 	_brain = new Brain();
@@ -16,14 +16,14 @@ Dog::Dog(const Dog &dog)
 
 Dog::~Dog()
 {
-	std::cout << "~Cat()" << std::endl;
+	std::cout << "~Dog()" << std::endl;
 	delete _brain;
 }
 
 Dog &Dog::operator=(const Dog &dog)
 {
 	_type = dog.getType();
-	_brain = dog._brain;
+	*_brain = *(dog._brain);
 	return (*this);
 }
 

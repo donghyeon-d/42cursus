@@ -6,7 +6,7 @@ Cat::Cat() : Animal()
 	_type = "Cat";
 }
 
-Cat::Cat(const Cat &cat)
+Cat::Cat(const Cat &cat) : Animal()
 {
 	std::cout << "Cat(copy)" << std::endl;
 	*this = cat;

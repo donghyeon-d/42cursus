@@ -1,12 +1,12 @@
 #include "Dog.hpp"
 
-Dog::Dog()
+Dog::Dog() : Animal()
 {
 	std::cout << "Dog()" << std::endl;
 	_type = "Dog";
 }
 
-Dog::Dog(const Dog &dog)
+Dog::Dog(const Dog &dog) : Animal()
 {
 	std::cout << "Dog(copy)" << std::endl;
 	*this = dog;
@@ -14,7 +14,7 @@ Dog::Dog(const Dog &dog)
 
 Dog::~Dog()
 {
-	std::cout << "~Cat()" << std::endl;
+	std::cout << "~Dog()" << std::endl;
 }
 
 Dog &Dog::operator=(const Dog &dog)
