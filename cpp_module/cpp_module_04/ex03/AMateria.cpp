@@ -1,5 +1,6 @@
 #include <iostream>
 #include "AMateria.hpp"
+#include "Character.hpp"
 
 AMateria::AMateria()
 {
@@ -25,6 +26,7 @@ AMateria::~AMateria()
 AMateria &AMateria::operator=(AMateria const &aMateria)
 {
 	_type = aMateria.getType();
+	return (*this);
 }
 
 std::string const &AMateria::getType() const
@@ -32,7 +34,7 @@ std::string const &AMateria::getType() const
 	return (_type);
 }
 
-void AMateria::use(ICaracter &target)
+void AMateria::use(ICharacter &target)
 {
-	std::cout << "Define concrete Materia" << std::endl;
+	std::cout << "Define concrete Materia. you can't use to " << target.getName() << std::endl;
 }

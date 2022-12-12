@@ -2,7 +2,7 @@
 #define AMATERIA_HPP
 
 #include <string>
-class ICaracter;
+class ICharacter;
 
 class AMateria
 {
@@ -21,7 +21,7 @@ class AMateria
 		std::string const &getType() const;
 
 		virtual AMateria *clone() const = 0;
-		virtual void use(ICaracter &target);
+		virtual void use(ICharacter &target);
 
 };
 

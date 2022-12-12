@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Character.hpp"
 #include "Ice.hpp"
 
 Ice::Ice()
@@ -7,10 +8,10 @@ Ice::Ice()
 	_type = "ice";
 }
 
-Ice::Ice(Ice &ice)
+Ice::Ice(Ice const &ice)
 {
 	std::cout << "Ice(copy)" << std::endl;
-	_type = "ice";
+	*this = ice;
 }
 
 Ice::~Ice()
@@ -18,13 +19,13 @@ Ice::~Ice()
 	std::cout << "~Ice()" << std::endl;
 }
 
-Ice &Ice::operator=(Ice *ice)
+Ice &Ice::operator=(Ice const &ice)
 {
-	_type = ice->getType();
+	_type = ice.getType();
 	return (*this);
 }
 
-void Ice::use(ICaracter &target)
+void Ice::use(ICharacter &target)
 {
 	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }

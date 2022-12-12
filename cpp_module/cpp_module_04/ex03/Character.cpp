@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Character.hpp"
+#include "Cure.hpp"
+#include "Ice.hpp"
 
 
 Character::Character() : _itemCount(0)
@@ -28,7 +30,7 @@ Character::~Character()
 	for (int i = 0; i < MAX_ITEM; i++)
 	{
 		if (_inventory[i] != 0)
-				delete _inventory[i];
+			delete _inventory[i];
 	}
 }
 
@@ -39,9 +41,10 @@ Character &Character::operator=(Character const &character)
 	{
 		if (_inventory[i] != 0)
 			delete _inventory[i];
-		_inventory[i] = character._inventory[i];
+		_inventory[i] = character._inventory[i]->clone();
 	}
 	_itemCount = character.getItemCount();
+	return (*this);
 }
 
 
@@ -62,7 +65,14 @@ void Character::equip(AMateria *m)
 		std::cout << "Full Inventory" << std::endl;
 		return ;
 	}
-	_inventory[getItemCount()] = m;
+	for (int i = 0; i < MAX_ITEM; i++)
+	{
+		if (_inventory[i] == 0)
+		{
+			_inventory[i] = m;
+			break ;
+		}
+	}
 	_itemCount++;
 }
 
@@ -73,11 +83,16 @@ void Character::unequip(int idx)
 		std::cout << "Empty Inventory" << std::endl;
 		return ;
 	}
-	_inventory[getItemCount() - 1] = 0;
+	_inventory[idx] = 0;
 	_itemCount--;
 }
 
 void Character::use(int idx, ICharacter &target)
 {
+	if (getItemCount() == 0)
+	{
+		std::cout << "Empty Inventory" << std::endl;
+		return ;
+	}
 	_inventory[idx]->use(target);
 }

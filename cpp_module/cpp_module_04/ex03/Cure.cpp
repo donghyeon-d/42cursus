@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Cure.hpp"
+#include "Character.hpp"
 
 Cure::Cure()
 {
@@ -7,10 +8,10 @@ Cure::Cure()
 	_type = "cure";
 }
 
-Cure::Cure(Cure &cure)
+Cure::Cure(Cure const &cure)
 {
 	std::cout << "Cure(copy)" << std::endl;
-	_type = "cure";
+	*this = cure;
 }
 
 Cure::~Cure()
@@ -18,13 +19,13 @@ Cure::~Cure()
 	std::cout << "~Cure()" << std::endl;
 }
 
-Cure &Cure::operator=(Cure *cure)
+Cure &Cure::operator=(Cure const &cure)
 {
-	_type = cure->getType();
+	_type = cure.getType();
 	return (*this);
 }
 
-void Cure::use(ICaracter &target)
+void Cure::use(ICharacter &target)
 {
 	std::cout << "* Heals " << target.getName() << "'s wounds *" << std::endl;
 }

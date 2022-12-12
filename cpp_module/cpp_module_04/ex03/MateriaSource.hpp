@@ -4,19 +4,20 @@
 #include "IMateriaSource.hpp"
 
 
-class MateriaSource
+class MateriaSource : public IMateriaSource
 {
 	private :
 		AMateria *_sourceList[MAX_LEARN];
-		int _sourceListIndex;
+		int _sourceListCount;
 
 	public :
 		MateriaSource();
 		MateriaSource(MateriaSource const &materiaSource);
 		~MateriaSource();
 		MateriaSource &operator=(MateriaSource const &materiaSource);
-		void learnMateria(AMateria*);
+		void learnMateria(AMateria *newMateria);
 		AMateria *createMateria(std::string const &type);
+		int getSourceListCount() const;
 };
 
 #endif
