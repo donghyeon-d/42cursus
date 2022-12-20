@@ -61,38 +61,41 @@ int Character::getItemCount() const
 void Character::equip(AMateria *m)
 {
 	if (getItemCount() == MAX_ITEM)
+		std::cout << "Inventory is Full" << std::endl;
+	else
 	{
-		std::cout << "Full Inventory" << std::endl;
-		return ;
-	}
-	for (int i = 0; i < MAX_ITEM; i++)
-	{
-		if (_inventory[i] == 0)
+		for (int i = 0; i < MAX_ITEM; i++)
 		{
-			_inventory[i] = m;
-			break ;
+			if (_inventory[i] == 0)
+			{
+				_inventory[i] = m;
+				break ;
+			}
 		}
+		_itemCount++;
 	}
-	_itemCount++;
 }
 
 void Character::unequip(int idx)
 {
-	if (getItemCount() == 0)
-	{
+	if (idx > MAX_ITEM - 1 || idx < 0)
+		std::cout << "Invalid index" << std::endl;
+	else if (_inventory[idx] == 0)
 		std::cout << "Empty Inventory" << std::endl;
-		return ;
+	else
+	{
+		std::cout << "Check unequiped item is saved" << std::endl;
+		_inventory[idx] = 0;
+		_itemCount--;
 	}
-	_inventory[idx] = 0;
-	_itemCount--;
 }
 
 void Character::use(int idx, ICharacter &target)
 {
-	if (getItemCount() == 0)
-	{
+	if (idx > MAX_ITEM - 1 || idx < 0)
+		std::cout << "Invalid index" << std::endl;
+	else if (_inventory[idx] == 0)
 		std::cout << "Empty Inventory" << std::endl;
-		return ;
-	}
-	_inventory[idx]->use(target);
+	else
+		_inventory[idx]->use(target);
 }

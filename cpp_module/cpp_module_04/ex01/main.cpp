@@ -17,7 +17,6 @@ int main()
 			delete animal[i];
 	}
 
-
 	{
 		Cat A;
 		std::string a ("My Name is Tom");

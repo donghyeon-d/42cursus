@@ -2,13 +2,13 @@
 #include "Character.hpp"
 #include "Ice.hpp"
 
-Ice::Ice()
+Ice::Ice() : AMateria()
 {
 	std::cout << "Ice()" << std::endl;
 	_type = "ice";
 }
 
-Ice::Ice(Ice const &ice)
+Ice::Ice(Ice const &ice) : AMateria()
 {
 	std::cout << "Ice(copy)" << std::endl;
 	*this = ice;

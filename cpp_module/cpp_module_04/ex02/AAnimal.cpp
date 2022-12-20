@@ -22,10 +22,10 @@ AAnimal &AAnimal::operator=(const AAnimal &Aanimal)
 	return (*this);
 }
 
-void AAnimal::makeSound() const
-{
-	std::cout << "AAnimal instance can't make sound" << std::endl;
-}
+// void AAnimal::makeSound() const
+// {
+// 	std::cout << "AAnimal instance can't make sound" << std::endl;
+// }
 
 std::string AAnimal::getType() const
 {

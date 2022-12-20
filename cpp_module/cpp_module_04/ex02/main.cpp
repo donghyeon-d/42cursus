@@ -20,22 +20,22 @@ int main()
 
 
 	{
-		Cat A;
+		Dog A;
 		std::string a ("My Name is Tom");
 		A.addIdeaToBrain(a);
 		a = "What's your Name?";
 		A.addIdeaToBrain(a);
 		A.printIdeasFromBrain();
 
-		Cat B;
+		Dog B;
 		B = A;
 		B.printIdeasFromBrain();
 	}
 
 	{
-		Animal animal;
-		AAnimal Aanimal;
-		std::cout << Aanimal.makeSound() << std::endl;
+		// Animal animal;
+		// AAnimal Aanimal;
+		// std::cout << Aanimal.makeSound() << std::endl;
 	}
 
 	// system("leaks a.out");

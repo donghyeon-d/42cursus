@@ -36,3 +36,19 @@ std::string Dog::getType() const
 {
 	return (_type);
 }
+
+void	Dog::addIdeaToBrain(std::string &idea)
+{
+	_brain->addIdea(idea);
+}
+
+void	Dog::printIdeasFromBrain() const
+{
+	_brain->printIdeas();
+}
+
+int		Dog::getIdeaCount() const
+{
+	return (_brain->getIdeasCount());
+}
+

@@ -29,7 +29,7 @@ MateriaSource &MateriaSource::operator=(MateriaSource const &materiaSource)
 	{
 		if (_sourceList[i] != 0)
 			delete _sourceList[i];
-		_sourceList[i] = materiaSource._sourceList[i];
+		_sourceList[i] = materiaSource._sourceList[i]->clone();
 	}
 	_sourceListCount = materiaSource.getSourceListCount();
 	return (*this);
@@ -43,11 +43,12 @@ int MateriaSource::getSourceListCount() const
 void MateriaSource::learnMateria(AMateria *newMateria)
 {
 	if (getSourceListCount() == 4)
-	{
 		std::cout << "Full learn materia list" << std::endl;
+	else
+	{
+		_sourceList[getSourceListCount()] = newMateria;
+		_sourceListCount++;
 	}
-	_sourceList[getSourceListCount()] = newMateria;
-	_sourceListCount++;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)
@@ -55,13 +56,14 @@ AMateria *MateriaSource::createMateria(std::string const &type)
 	int i(0);
 	while (i < MAX_LEARN)
 	{
-		// std::cout << "!! " << _sourceList[i]->getType() << std::endl;
 		if (_sourceList[i] == 0 || type == _sourceList[i]->getType())
 			break ;
 		i++;
 	}
 	if (_sourceList[i] == 0 || i == MAX_LEARN)
-			return 0;
-	AMateria *newMateria = _sourceList[i]->clone();
-	return (newMateria);
+	{
+		std::cout << "Unknown type" << std::endl;
+		return (0);
+	}
+	return (_sourceList[i]->clone());
 }

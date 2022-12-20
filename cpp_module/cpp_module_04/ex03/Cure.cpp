@@ -2,13 +2,13 @@
 #include "Cure.hpp"
 #include "Character.hpp"
 
-Cure::Cure()
+Cure::Cure() : AMateria()
 {
 	std::cout << "Cure()" << std::endl;
 	_type = "cure";
 }
 
-Cure::Cure(Cure const &cure)
+Cure::Cure(Cure const &cure) : AMateria()
 {
 	std::cout << "Cure(copy)" << std::endl;
 	*this = cure;
