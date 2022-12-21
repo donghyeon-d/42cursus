@@ -9,7 +9,7 @@ Form::Form()
 Form::Form(const Form &form)
 	: _name(form.getName()), _signed(form.getSigned()), _signGrade(form.getSignGrade()), _executeGrade(form.getExecuteGrade())
 {
-	std::cout << "From(copy) : constant member cannot be copied" << std::endl;
+	std::cout << "From(copy)" << std::endl;
 }
 
 Form::Form(std::string name, int signGrade, int executeGrade)
@@ -25,7 +25,7 @@ Form::~Form()
 
 Form &Form::operator=(const Form &form)
 {
-	std::cout << "name, signGrade, executeGrade is constant" << std::endl;
+	std::cout << "Error : constant attribute" << std::endl;
 	form.getName(); // error 
 	return (*this);
 }
