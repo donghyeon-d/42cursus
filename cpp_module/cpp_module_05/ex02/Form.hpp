@@ -23,7 +23,7 @@ class Form
 		class GradeTooLowException : public std::exception
 		{
 			public :
-			const char* what() const throw();
+				const char* what() const throw();
 		};
 		Form();
 		Form(const Form &form);
@@ -35,7 +35,7 @@ class Form
 		int getSignGrade() const;
 		int getExecuteGrade() const;
 		void beSigned(Bureaucrat &bureaucrat);
-		virtual void execute(Bureaucrat const &executor) = 0;
+		virtual void execute(Bureaucrat const &executor) const = 0;
 };
 
 std::ostream& operator<<(std::ostream& os, const Form &form);

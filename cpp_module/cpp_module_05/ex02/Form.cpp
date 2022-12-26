@@ -3,30 +3,29 @@
 Form::Form()
 	: _signed(false), _signGrade(150), _executeGrade(150)
 {
-	std::cout << "From() : no name" << std::endl;
+	std::cout << "Form() : no name" << std::endl;
 }
 
 Form::Form(const Form &form)
 	: _name(form.getName()), _signed(form.getSigned()), _signGrade(form.getSignGrade()), _executeGrade(form.getExecuteGrade())
 {
-	std::cout << "From(copy) : constant member cannot be copied" << std::endl;
+	std::cout << "Form(copy) : constant member cannot be copied" << std::endl;
 }
 
 Form::Form(std::string name, int signGrade, int executeGrade)
 	: _name(name), _signed(false), _signGrade(signGrade), _executeGrade(executeGrade)
 {
-	std::cout << "From() : name " << _name << std::endl;
+	std::cout << "Form() : name " << _name << std::endl;
 }
 
 Form::~Form()
 {
-	std::cout << "~From()" << std::endl;
+	std::cout << "~Form()" << std::endl;
 }
 
 Form &Form::operator=(const Form &form)
 {
-	std::cout << "name, signGrade, executeGrade is constant" << std::endl;
-	form.getName(); // error 
+	std::cout << form.getName() << "has constant attributes" << std::endl;
 	return (*this);
 }
 
@@ -62,7 +61,7 @@ int Form::getExecuteGrade() const
 void Form::beSigned(Bureaucrat &bureaucrat)
 {
 	if (_signed == true)
-		std::cout << "[Form] " << "already signed" << std::endl;
+		std::cout << "[" << getName() << "] already signed" << std::endl;
 	else
 	{
 		try
@@ -73,7 +72,7 @@ void Form::beSigned(Bureaucrat &bureaucrat)
 		}
 		catch (Form::GradeTooLowException &exception)
 		{
-			std::cout << "[Form] " << exception.what() << std::endl;
+			std::cout << "[" << getName() << "] " << bureaucrat.getName() << " is " << exception.what() << std::endl;
 		}
 	}
 }

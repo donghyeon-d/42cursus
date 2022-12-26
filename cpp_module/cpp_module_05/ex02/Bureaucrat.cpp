@@ -106,11 +106,6 @@ void Bureaucrat::downGrade()
 	}
 }
 
-std::ostream& operator<<(std::ostream& os, const Bureaucrat &bureaucrat)
-{
-	os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
-	return (os);
-}
 
 void Bureaucrat::signForm(Form &form)
 {
@@ -132,4 +127,22 @@ void Bureaucrat::signForm(Form &form)
 			"because " << form.getName() << " is Too Low Grade" << std::endl;
 		}
 	}
+}
+
+void Bureaucrat::executeForm(Form const &form)
+{
+	if (form.getSigned() == false)
+		std::cout << "need sing" << std::endl;
+	else
+	{
+		form.execute(*this);
+		if (form.getSigned())
+			std::cout << getName() << " executed " << form.getName() << std::endl;
+	}
+}
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat &bureaucrat)
+{
+	os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
+	return (os);
 }
