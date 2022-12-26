@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat()
+Bureaucrat::Bureaucrat() : _grade(150)
 {
 	std::cout << "Bureaucrat() : no parm, no grade" << std::endl;
 }
@@ -23,10 +23,9 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 	}
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat)
+Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat) : _name(bureaucrat.getName()), _grade(bureaucrat.getGrade())
 {
 	std::cout << "Bureaucrat(copy)" << std::endl;
-	*this = bureaucrat;
 }
 
 Bureaucrat::~Bureaucrat()
@@ -36,8 +35,7 @@ Bureaucrat::~Bureaucrat()
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &bureaucrat)
 {
-	std::cout << "name is constant" << std::endl;
-	_grade = bureaucrat.getGrade();
+	std::cout << bureaucrat.getName() << " has constant attributes" << std::endl;
 	return (*this);
 }
 
@@ -132,7 +130,7 @@ void Bureaucrat::signForm(Form &form)
 void Bureaucrat::executeForm(Form const &form)
 {
 	if (form.getSigned() == false)
-		std::cout << "need sing" << std::endl;
+		std::cout << "need sign" << std::endl;
 	else
 	{
 		form.execute(*this);

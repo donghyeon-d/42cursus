@@ -15,9 +15,9 @@ int main()
         Bureaucrat Tom("Tom", 150);
         std::cout << "- Try sign - " << std::endl;
         Tree.beSigned(Tom);
+        std::cout << "After Tom : " << Tree << std::endl;
         Tree.beSigned(Paul);
-        if (Tree.getSigned() == true)
-            std::cout << "T sign complete" << std::endl;
+        std::cout << "After Paul : " << Tree << std::endl;
         std::cout << "- Try execute - " << std::endl;
         Tree.execute(Paul);
         ShrubberyCreationForm TreeNoSigned("TreeNoSigned");
@@ -31,9 +31,9 @@ int main()
         Bureaucrat Tom("Tom", 150);
         std::cout << "- Try sign - " << std::endl;
         Robotomy.beSigned(Tom);
+        std::cout << "After Tom : " << Robotomy << std::endl;
         Robotomy.beSigned(Paul);
-        if (Robotomy.getSigned() == true)
-            std::cout << "Robotomy sign complete" << std::endl;
+        std::cout << "After Paul : " << Robotomy << std::endl;
         std::cout << "- Try execute - " << std::endl;
         Robotomy.execute(Paul);
         RobotomyRequestForm RobotomyNoSigned("RobotomyNoSigned");
@@ -47,9 +47,9 @@ int main()
         Bureaucrat Tom("Tom", 150);
         std::cout << "- Try sign - " << std::endl;
         PresidentialPardon.beSigned(Tom);
+        std::cout << "After Tom : " << PresidentialPardon << std::endl;
         PresidentialPardon.beSigned(Paul);
-        if (PresidentialPardon.getSigned() == true)
-            std::cout << "PresidentialPardon sign complete" << std::endl;
+        std::cout << "After Paul : " << PresidentialPardon << std::endl;
         std::cout << "- Try execute - " << std::endl;
         PresidentialPardon.execute(Paul);
         PresidentialPardonForm PresidentialPardonNoSigned("PresidentialPardonNoSigned");

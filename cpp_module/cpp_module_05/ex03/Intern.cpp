@@ -30,13 +30,24 @@ std::string Intern::getName() const
 Form *Intern::makeForm(std::string formName, std::string targetName)
 {
 	Form *newForm(0);
-	if (formName.compare("PresidentialPardonForm") == 0)
-		newForm = new PresidentialPardonForm(targetName);
-	else if (formName.compare("RobotomyRequestForm") == 0)
-		newForm = new RobotomyRequestForm(targetName);
-	else if (formName.compare("ShrubberyCreationForm") == 0)
-		newForm = new ShrubberyCreationForm(targetName);
-	else
-		std::cout << "Form Name doesn't exist" << std::endl;
+	std::string form[3] = {"PresidentialPardonForm", "RobotomyRequestForm", "ShrubberyCreationForm"};
+	int i(0);
+	while (i < 3 && formName.compare(form[i]) != 0)
+		i++;
+	switch (i)
+	{
+		case 0:
+			newForm = new PresidentialPardonForm(targetName);
+			break;
+		case 1:
+			newForm = new RobotomyRequestForm(targetName);
+			break;
+		case 2:
+			newForm = new ShrubberyCreationForm(targetName);
+			break;
+		default:
+			std::cout << "Form Name doesn't exist" << std::endl;
+			break;
+	}
 	return (newForm);
 }

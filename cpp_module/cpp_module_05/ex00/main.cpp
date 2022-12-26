@@ -23,11 +23,12 @@ int main()
         std::cout << "\n\n< --- Assignment, set test --- >" << std::endl;
         Bureaucrat C("C", 10);
         std::cout << "Grade : " << C << std::endl;
-        Bureaucrat D(C);
+        Bureaucrat D;
+        D = C;
         std::cout << "Grade : " << D << std::endl;
-        D.setGrade(-1);
+        C.setGrade(-1);
         std::cout << "Grade : " << D << std::endl;
-        D.setGrade(151);
+        C.setGrade(151);
         std::cout << "Grade : " << D << std::endl;
     }
 }
