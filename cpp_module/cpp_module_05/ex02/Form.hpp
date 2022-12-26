@@ -28,7 +28,7 @@ class Form
 		Form();
 		Form(const Form &form);
 		Form(std::string name, int signGrade, int executeGrade);
-		~Form();
+		virtual ~Form();
 		Form &operator=(const Form &form);
 		std::string getName() const;
 		bool getSigned() const;
