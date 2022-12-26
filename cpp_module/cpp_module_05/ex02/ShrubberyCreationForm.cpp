@@ -5,7 +5,12 @@ ShrubberyCreationForm::ShrubberyCreationForm() : Form("ShrubberyCreationForm", 1
 	std::cout << "ShrubberyCreationForm()" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm & shrubberyCreationForm) : Form(shrubberyCreationForm)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("ShrubberyCreationForm", 145, 137), _target(target)
+{
+	std::cout << "ShrubberyCreationForm(target)" << std::endl;
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm & shrubberyCreationForm) : Form("ShrubberyCreationForm", 145, 137), _target(shrubberyCreationForm.getTarget())
 {
 	std::cout << "ShrubberyCreationForm(copy) : " << shrubberyCreationForm.getName() << std::endl;
 }
@@ -20,11 +25,18 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	std::cout << "Error(" << shrubberyCreationForm.getName() << ") : constant attribute" << std::endl;
 }
 
-void ShrubberyCreationForm::creatShrubbery(Bureaucrat &bureaucrat) const
+std::string ShrubberyCreationForm::getTarget()
 {
+	return (_target);
+}
+
+void ShrubberyCreationForm::execute(Bureaucrat const &executor)
+{
+	if (getSigned() == false)
+		
 	try
 	{
-		if (bureaucrat.getGrade() > get)
+		if (bureaucrat.getGrade() > getSignGrade())
 		std::string fileName(bureaucrat.getName() + "_shrubbery");
 		std::fstream writeFile(fileName, std::fstream::out);
 		if (writeFile.is_open() == false)

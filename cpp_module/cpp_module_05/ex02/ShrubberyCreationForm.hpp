@@ -5,13 +5,18 @@
 
 class ShrubberyCreationForm : public Form
 {
+	private :
+		std::string _target;
+
 	public :
 		ShrubberyCreationForm();
+		ShrubberyCreationForm(std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &shrubberyCreationForm);
 		ShrubberyCreationForm(std::string name, int signGrade, int executeGrade);
 		~ShrubberyCreationForm();
 		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &shrubberyCreationForm);
-		void creatShrubbery(Bureaucrat &bureaucrat) const;
+		std::string getTarget();
+		void execute(Bureaucrat &bureaucrat) const;
 		class GradeTooHighException : public std::exception
 		{	
 			public :
