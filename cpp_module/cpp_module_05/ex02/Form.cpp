@@ -16,6 +16,10 @@ Form::Form(std::string name, int signGrade, int executeGrade)
 	: _name(name), _signed(false), _signGrade(signGrade), _executeGrade(executeGrade)
 {
 	std::cout << "Form() : name " << _name << std::endl;
+	if (signGrade > 150 || executeGrade > 150)
+		throw Form::GradeTooLowException();
+	else if (signGrade < 1 || executeGrade < 1)
+		throw Form::GradeTooHighException();
 }
 
 Form::~Form()

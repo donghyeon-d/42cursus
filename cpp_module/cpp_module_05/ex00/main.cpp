@@ -4,7 +4,19 @@
 int main()
 {
     {
-        std::cout << "< --- UpGrade test --- >" << std::endl;
+        try
+        {
+            std::cout << "< --- Instantiate test --- >" << std::endl;
+            Bureaucrat A("A", -1);
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+    }
+
+    {
+        std::cout << "\n\n< --- UpGrade test --- >" << std::endl;
         Bureaucrat A("A", 1);
         std::cout << "A Grade : " << A << std::endl;
         A.upGrade();
