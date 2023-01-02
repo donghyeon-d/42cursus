@@ -98,7 +98,7 @@ void Bureaucrat::downGrade()
 }
 
 
-void Bureaucrat::signForm(Form &form)
+void Bureaucrat::signForm(AForm &form)
 {
 	if (form.getSigned() == true)
 		std::cout << getName() << " couldn't sign " << form.getName() << 
@@ -120,7 +120,7 @@ void Bureaucrat::signForm(Form &form)
 	}
 }
 
-void Bureaucrat::executeForm(Form const &form)
+void Bureaucrat::executeForm(AForm const &form)
 {
 	if (form.getSigned() == false)
 		std::cout << "need sign" << std::endl;

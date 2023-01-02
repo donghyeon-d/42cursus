@@ -1,68 +1,68 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form()
+AForm::AForm()
 	: _signed(false), _signGrade(150), _executeGrade(150)
 {
-	std::cout << "Form() : no name" << std::endl;
+	std::cout << "AForm() : no name" << std::endl;
 }
 
-Form::Form(const Form &form)
+AForm::AForm(const AForm &form)
 	: _name(form.getName()), _signed(form.getSigned()), _signGrade(form.getSignGrade()), _executeGrade(form.getExecuteGrade())
 {
-	std::cout << "Form(copy) : constant member cannot be copied" << std::endl;
+	std::cout << "AForm(copy) : constant member cannot be copied" << std::endl;
 }
 
-Form::Form(std::string name, int signGrade, int executeGrade)
+AForm::AForm(std::string name, int signGrade, int executeGrade)
 	: _name(name), _signed(false), _signGrade(signGrade), _executeGrade(executeGrade)
 {
-	std::cout << "Form() : name " << _name << std::endl;
+	std::cout << "AForm() : name " << _name << std::endl;
 	if (signGrade > 150 || executeGrade > 150)
-		throw Form::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 	else if (signGrade < 1 || executeGrade < 1)
-		throw Form::GradeTooHighException();
+		throw AForm::GradeTooHighException();
 }
 
-Form::~Form()
+AForm::~AForm()
 {
-	std::cout << "~Form()" << std::endl;
+	std::cout << "~AForm()" << std::endl;
 }
 
-Form &Form::operator=(const Form &form)
+AForm &AForm::operator=(const AForm &form)
 {
 	std::cout << form.getName() << "has constant attributes" << std::endl;
 	return (*this);
 }
 
-const char *Form::GradeTooHighException::what() const throw()
+const char *AForm::GradeTooHighException::what() const throw()
 {
 	return ("Too High for signing");
 }
 
-const char *Form::GradeTooLowException::what() const throw()
+const char *AForm::GradeTooLowException::what() const throw()
 {
 	return ("Too Low for signing");
 }
 
-std::string Form::getName() const
+std::string AForm::getName() const
 {
 	return (_name);
 }
 
-bool Form::getSigned() const
+bool AForm::getSigned() const
 {
 	return (_signed);
 }
 
-int Form::getSignGrade() const
+int AForm::getSignGrade() const
 {
 	return (_signGrade);
 }
-int Form::getExecuteGrade() const
+int AForm::getExecuteGrade() const
 {
 	return (_executeGrade);
 }
 
-void Form::beSigned(Bureaucrat &bureaucrat)
+void AForm::beSigned(Bureaucrat &bureaucrat)
 {
 	if (_signed == true)
 		std::cout << "[" << getName() << "] already signed" << std::endl;
@@ -71,17 +71,17 @@ void Form::beSigned(Bureaucrat &bureaucrat)
 		try
 		{
 			if (bureaucrat.getGrade() > getSignGrade())
-				throw Form::GradeTooLowException();
+				throw AForm::GradeTooLowException();
 			_signed = true;
 		}
-		catch (Form::GradeTooLowException &exception)
+		catch (AForm::GradeTooLowException &exception)
 		{
 			std::cout << "[" << getName() << "] " << bureaucrat.getName() << " is " << exception.what() << std::endl;
 		}
 	}
 }
 
-std::ostream& operator<<(std::ostream& os, const Form &form)
+std::ostream& operator<<(std::ostream& os, const AForm &form)
 {
 	os << "Form info : Name(" << form.getName() << "), Signed(" << form.getSigned() 
 	<< "), Sign grade(" << form.getSignGrade() << "), Execute grade(" << form.getExecuteGrade()

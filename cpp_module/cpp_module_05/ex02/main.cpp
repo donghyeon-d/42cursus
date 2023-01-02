@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -35,6 +35,11 @@ int main()
         Robotomy.beSigned(Paul);
         std::cout << "After Paul : " << Robotomy << std::endl;
         std::cout << "- Try execute - " << std::endl;
+        Robotomy.execute(Paul);
+        Robotomy.execute(Paul);
+        Robotomy.execute(Paul);
+        Robotomy.execute(Paul);
+        Robotomy.execute(Paul);
         Robotomy.execute(Paul);
         RobotomyRequestForm RobotomyNoSigned("RobotomyNoSigned");
         RobotomyNoSigned.execute(Paul);

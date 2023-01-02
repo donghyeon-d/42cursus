@@ -2,9 +2,9 @@
 #define PRESIDENTIALPARDONFORM_HPP
 #define PRESIDENTIALPARDONSIGN 25
 #define PRESIDENTIALPARDONEXEC 5
-#include "Form.hpp"
+#include "AForm.hpp"
 
-class PresidentialPardonForm : public Form
+class PresidentialPardonForm : public AForm
 {
 	private :
 		std::string _target;
@@ -18,12 +18,12 @@ class PresidentialPardonForm : public Form
 		PresidentialPardonForm &operator=(const PresidentialPardonForm &presidentialPardonForm);
 		std::string getTarget() const;
 		void execute(Bureaucrat const &bureaucrat) const;
-		class GradeTooHighException : public Form::GradeTooHighException
+		class GradeTooHighException : public AForm::GradeTooHighException
 		{	
 			public :
 				const char* what() const throw();
 		};
-		class GradeTooLowException : public Form::GradeTooLowException
+		class GradeTooLowException : public AForm::GradeTooLowException
 		{
 			public :
 			const char* what() const throw();

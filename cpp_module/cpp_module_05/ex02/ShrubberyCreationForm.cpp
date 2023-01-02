@@ -1,17 +1,17 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm() : Form("ShrubberyCreationForm", SHRUBBERYSIGN, SHRUBBERYEXEC)
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", SHRUBBERYSIGN, SHRUBBERYEXEC)
 {
 	std::cout << "ShrubberyCreationForm()" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("ShrubberyCreationForm", SHRUBBERYSIGN, SHRUBBERYEXEC), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("ShrubberyCreationForm", SHRUBBERYSIGN, SHRUBBERYEXEC), _target(target)
 {
 	std::cout << "ShrubberyCreationForm(target)" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm & shrubberyCreationForm)
-: Form("ShrubberyCreationForm", SHRUBBERYSIGN, SHRUBBERYEXEC), _target(shrubberyCreationForm.getTarget())
+: AForm("ShrubberyCreationForm", SHRUBBERYSIGN, SHRUBBERYEXEC), _target(shrubberyCreationForm.getTarget())
 {
 	std::cout << "ShrubberyCreationForm(copy) : " << shrubberyCreationForm.getName() << std::endl;
 }

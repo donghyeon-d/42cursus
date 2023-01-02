@@ -2,10 +2,10 @@
 #define SHRUBBERYCREATIONFORM_HPP
 #define SHRUBBERYSIGN 145
 #define SHRUBBERYEXEC 137
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <fstream>
 
-class ShrubberyCreationForm : public Form
+class ShrubberyCreationForm : public AForm
 {
 	private :
 		std::string _target;
@@ -19,12 +19,12 @@ class ShrubberyCreationForm : public Form
 		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &shrubberyCreationForm);
 		std::string getTarget() const;
 		void execute(Bureaucrat const &bureaucrat) const;
-		class GradeTooHighException : public Form::GradeTooHighException
+		class GradeTooHighException : public AForm::GradeTooHighException
 		{	
 			public :
 				const char* what() const throw();
 		};
-		class GradeTooLowException : public Form::GradeTooLowException
+		class GradeTooLowException : public AForm::GradeTooLowException
 		{
 			public :
 			const char* what() const throw();

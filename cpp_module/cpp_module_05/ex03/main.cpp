@@ -1,12 +1,12 @@
 #include <iostream>
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Intern.hpp"
 
 int main()
 {
     {
         std::cout << "< --- Intern Test --- >" << std::endl;
-        Form *newForm;
+        AForm *newForm;
         Intern intern;
         Bureaucrat Paul("Paul", 1);
         newForm = intern.makeForm("ShrubberyCreationForm", "Tree");

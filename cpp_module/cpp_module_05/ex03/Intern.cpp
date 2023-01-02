@@ -27,9 +27,9 @@ std::string Intern::getName() const
 	return (_name);
 }
 
-Form *Intern::makeForm(std::string formName, std::string targetName)
+AForm *Intern::makeForm(std::string formName, std::string targetName)
 {
-	Form *newForm(0);
+	AForm *newForm(0);
 	std::string form[3] = {"PresidentialPardonForm", "RobotomyRequestForm", "ShrubberyCreationForm"};
 	int i(0);
 	while (i < 3 && formName.compare(form[i]) != 0)

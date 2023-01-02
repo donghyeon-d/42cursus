@@ -1,17 +1,17 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm() : Form("PresidentialPardonForm", PRESIDENTIALPARDONSIGN, PRESIDENTIALPARDONEXEC)
+PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", PRESIDENTIALPARDONSIGN, PRESIDENTIALPARDONEXEC)
 {
 	std::cout << "PresidentialPardonForm()" << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target) : Form("PresidentialPardonForm", PRESIDENTIALPARDONSIGN, PRESIDENTIALPARDONEXEC), _target(target)
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("PresidentialPardonForm", PRESIDENTIALPARDONSIGN, PRESIDENTIALPARDONEXEC), _target(target)
 {
 	std::cout << "PresidentialPardonForm(target)" << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &presidentialPardonForm)
-: Form("PresidentialPardonForm", PRESIDENTIALPARDONSIGN, PRESIDENTIALPARDONEXEC), _target(presidentialPardonForm.getTarget())
+: AForm("PresidentialPardonForm", PRESIDENTIALPARDONSIGN, PRESIDENTIALPARDONEXEC), _target(presidentialPardonForm.getTarget())
 {
 	std::cout << "PresidentialPardonForm(copy) : " << presidentialPardonForm.getName() << std::endl;
 }

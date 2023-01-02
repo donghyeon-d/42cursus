@@ -1,17 +1,17 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm() : Form("RobotomyRequestForm", ROBOTOMYREQUESTSIGN, ROBOTOMYREQUESTEXEC)
+RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", ROBOTOMYREQUESTSIGN, ROBOTOMYREQUESTEXEC)
 {
 	std::cout << "RobotomyRequestForm()" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form("RobotomyRequestForm", ROBOTOMYREQUESTSIGN, ROBOTOMYREQUESTEXEC), _target(target)
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("RobotomyRequestForm", ROBOTOMYREQUESTSIGN, ROBOTOMYREQUESTEXEC), _target(target)
 {
 	std::cout << "RobotomyRequestForm(target)" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &robotomyRequestForm)
-: Form("RobotomyRequestForm", ROBOTOMYREQUESTSIGN, ROBOTOMYREQUESTEXEC), _target(robotomyRequestForm.getTarget())
+: AForm("RobotomyRequestForm", ROBOTOMYREQUESTSIGN, ROBOTOMYREQUESTEXEC), _target(robotomyRequestForm.getTarget())
 {
 	std::cout << "RobotomyRequestForm(copy) : " << robotomyRequestForm.getName() << std::endl;
 }
@@ -34,6 +34,7 @@ std::string RobotomyRequestForm::getTarget() const
 
 void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
+	static int randFlag(0);
 	if (getSigned() == false)
 		std::cout << "Need sign to execute" << std::endl;
 	else
@@ -42,8 +43,17 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 		{
 			if (executor.getGrade() > getExecuteGrade())
 				throw RobotomyRequestForm::GradeTooLowException();
-			std::cout << getTarget() << " has been robotomized successfully 50% of the time : " << executor.getName() << std::endl;
-		
+			std::cout << "drilllllll...." << std::endl;
+			if (randFlag == 0)
+			{
+				std::srand(std::time(0));
+				randFlag = 1;
+			}
+			int num(std::rand());
+			if (num % 2)
+				std::cout << getTarget() << " has been robotomized : success!!" << std::endl;
+			else
+				std::cout << getTarget() << " has been robotomized : fail!!" << std::endl;
 		}
 		catch (RobotomyRequestForm::GradeTooLowException &exception)
 		{

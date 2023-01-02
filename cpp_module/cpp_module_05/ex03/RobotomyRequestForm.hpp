@@ -2,9 +2,9 @@
 #define ROBOTOMYREQUESTFORM_HPP
 #define ROBOTOMYREQUESTSIGN 72
 #define ROBOTOMYREQUESTEXEC 45
-#include "Form.hpp"
+#include "AForm.hpp"
 
-class RobotomyRequestForm : public Form
+class RobotomyRequestForm : public AForm
 {
 	private :
 		std::string _target;
@@ -18,12 +18,12 @@ class RobotomyRequestForm : public Form
 		RobotomyRequestForm &operator=(const RobotomyRequestForm &robotomyRequestForm);
 		std::string getTarget() const;
 		void execute(Bureaucrat const &bureaucrat) const;
-		class GradeTooHighException : public Form::GradeTooHighException
+		class GradeTooHighException : public AForm::GradeTooHighException
 		{	
 			public :
 				const char* what() const throw();
 		};
-		class GradeTooLowException : public Form::GradeTooLowException
+		class GradeTooLowException : public AForm::GradeTooLowException
 		{
 			public :
 			const char* what() const throw();

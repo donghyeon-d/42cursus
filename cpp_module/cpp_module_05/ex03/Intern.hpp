@@ -1,7 +1,7 @@
 #ifndef INTERN_HPP
 #define INTERN_HPP
 #include <iostream>
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -17,7 +17,7 @@ class Intern
 		~Intern();
 		Intern &operator=(Intern const &intern);
 		std::string getName() const;
-		Form *makeForm(std::string formName, std::string targetName);
+		AForm *makeForm(std::string formName, std::string targetName);
 };
 
 #endif
