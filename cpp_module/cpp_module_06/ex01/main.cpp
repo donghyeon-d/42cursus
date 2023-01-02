@@ -14,12 +14,16 @@ Data* deserialize(uintptr_t raw)
 
 int main()
 {
-    Data *a = new Data(10);
+    Data *a = new Data;
+    a->_data = 10;
     Data *p;
     uintptr_t a1 = serialize(a);
     p = deserialize(serialize(a));
 
+    std::cout << a << std::endl;
+    std::cout << p << std::endl;
     std::cout << a1 << std::endl;
-    std::cout << "a : " << a->getData() << std::endl;
-    std::cout << "p : " << p->getData() << std::endl;
+    std::cout << "a : " << a->_data << std::endl;
+    std::cout << "p : " << p->_data << std::endl;
+    delete a;
 }

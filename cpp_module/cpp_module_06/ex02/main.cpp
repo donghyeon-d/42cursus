@@ -9,7 +9,13 @@
 
 Base *generate(void)
 {
-    std::srand(static_cast<unsigned int>(std::time(0)));
+    static int srandFlag(0);
+
+    if (srandFlag == 0)
+    {
+        std::srand(static_cast<unsigned int>(std::time(0)));
+        srandFlag = 1;
+    }
     Base *newBase(0);
     int num(std::rand());
     num %= 3;
@@ -50,20 +56,23 @@ void identify(Base &p)
     {
         A &a = dynamic_cast<A&>(p);
         std::cout << a.getType() << std::endl;
+        return ;
     }
     catch (std::exception &e)
     {}
-try 
+    try 
     {
         B &b = dynamic_cast<B&>(p);
         std::cout << b.getType() << std::endl;
+        return ;
     }
     catch (std::exception &e)
     {}
-try 
+    try 
     {
         C &c = dynamic_cast<C&>(p);
         std::cout << c.getType() << std::endl;
+        return ;
     }
     catch (std::exception &e)
     {}
