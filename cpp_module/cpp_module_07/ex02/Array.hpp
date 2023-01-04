@@ -11,23 +11,27 @@ class Array
 
     public :
         Array() : _arr(0), _size(0)
-        {}
+        {
+            std::cout << "Array()" << std::endl;
+        }
 
         Array(unsigned int n)  : _arr(new T[n]), _size(n)
-        {}
+        {std::cout << "Array(n)" << std::endl;}
 
-        Array(const Array &array)
+        Array(const Array &array) : _arr(0), _size(0)
         {
+            std::cout << "Array(copy)" << std::endl;
             *this = array;
         }
 
         Array& operator=(const Array &array)
         {
+            std::cout << "Array(==)" << std::endl;
             if (_arr != 0)
                 delete[] _arr;
             _size = array._size;
             _arr = new T[_size];
-            for (int i = 0; i < array._size; i++)
+            for (unsigned int i = 0; i < array.size(); i++)
                 _arr[i] = array._arr[i];
             return (*this);
         }
@@ -47,18 +51,31 @@ class Array
                 }
         };
 
-        T operator[](unsigned int idx)
+        const T& operator[](unsigned int idx) const
         {
-            if (_arr == 0 || idx > _size - 1)
+            if (idx > _size - 1)
+                throw ArrayInvalidIndexException();
+            else
+                return (_arr[idx]);
+        }
+
+        T& operator[](unsigned int idx)
+        {
+            if (idx > _size - 1)
                 throw ArrayInvalidIndexException();
             else
                 return (_arr[idx]);
         }
         
-        int size() const
+
+        unsigned int size() const
         {
             return (_size);
         }
 };
+
+template <>
+class Array<const>
+
 
 #endif
