@@ -2,25 +2,26 @@
 #include "iter.hpp"
 #define LENGTH 5
 
-void print_arr(int arr[], int length)
+void printArr(int arr[], int length)
 {
+    std::cout << "[func printArr]" << std::endl;
     for (int i = 0; i < length; i++)
         std::cout << "[" << i << "] : " << arr[i] << std::endl;
 }
 
-void print_one(int &i)
+void printOne(const int i)
 {
     std::cout << i << std::endl;
 }
 
-void print_one(const int &i)
-{
-    std::cout << i << std::endl;
-}
-
-void mul_ten(int &i)
+void multipleTen(int &i)
 {
     i *= 10;
+}
+
+void pointer(int *i)
+{
+    std::cout << "pointer : " << i << std::endl;
 }
 
 int main()
@@ -30,18 +31,19 @@ int main()
         int *arr = new int[LENGTH];
         for (int i = 0; i < LENGTH; i++)
             arr[i] = i;
-        print_arr(arr, LENGTH);
+        printArr(arr, LENGTH);
 
-        iter(arr, LENGTH, mul_ten);
-
-        print_arr(arr, LENGTH);
+        iter(arr, LENGTH, printOne); // variable
+        iter(arr, LENGTH, multipleTen); // reference
+        iter(arr, LENGTH, printOne); // variable
+        iter(arr, LENGTH, pointer); // pointer
     }
 
     {
         std::cout << "\n\n< --- const int test --- >" << std::endl;
         const int arr[LENGTH] = {0,1,2,3,4};
 
-        iter(arr, LENGTH, print_one);
+        iter(arr, LENGTH, printOne);
     }
 
     return (0);
