@@ -72,10 +72,16 @@ class Array
         {
             return (_size);
         }
+
+        void    displayArray() const
+        {
+            for (int i = 0; i < static_cast<int>(_size); i++)
+            {
+                std::cout << "[" << i << "] : " << _arr[i] << std::endl;
+            }
+        }
 };
 
-template <>
-class Array<const>
 
 
 #endif
