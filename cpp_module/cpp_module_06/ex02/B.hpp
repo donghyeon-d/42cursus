@@ -4,13 +4,9 @@
 
 class B : public Base
 {
-    private :
-        char _type;
-
     public :
         B();
         ~B();
-        char getType() const;
 };
 
 #endif
