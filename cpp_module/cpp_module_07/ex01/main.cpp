@@ -1,7 +1,7 @@
 #include <iostream>
 #include "iter.hpp"
-#include "f.hpp"
-// #include "Data.hpp"
+#include "func.hpp"
+#include "Data.hpp"
 #define LENGTH 5
 
 int main()
@@ -26,8 +26,15 @@ int main()
     }
 
     {
-
+        std::cout << "\n\n< --- Class Data test --- >" << std::endl;
+        Data data[5];
+        for (int i = 0; i < 5; i++)
+            data[i].setNum(i);
+        std::cout << "[print one]" << std::endl;
+        iter(data, LENGTH, printOne);
+        iter(data, LENGTH, increament);
+        std::cout << "\n[after increament print one]" << std::endl;
+        iter(data, LENGTH, printOne);
     }
-
-    // return (0);
+    return (0);
 }

@@ -1,5 +1,5 @@
-#ifndef F_HPP
-#define F_HPP
+#ifndef FUNK_HPP
+#define FUNK_HPP
 
 template <typename T>
 void	printOne(T element)

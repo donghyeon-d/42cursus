@@ -22,6 +22,7 @@ Data::~Data()
 
 Data Data::operator++(int x)
 {
+	x++;
 	Data temp(*this);
 	setNum(_num + 1);
 	return (temp);

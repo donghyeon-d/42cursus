@@ -17,4 +17,6 @@ class Data
 		int getNum() const;
 };
 
+std::ostream& operator<<( std::ostream& os, const Data &ref );
+
 #endif
