@@ -18,7 +18,7 @@ int main( void )
         std::cout << "max( ar, br ) = " << ::max( ar, br ) << std::endl;
     }
 
-{
+    {
         std::cout << "\n\n< --- const int test --- >" << std::endl;
         const int a = 2, b = 3;
 
@@ -39,6 +39,8 @@ int main( void )
         std::cout << "ap = " << ap << ", bp = " << bp << std::endl;
         std::cout << "min( ap, bp ) = " << ::min( ap, bp ) << std::endl;
         std::cout << "max( ap, bp ) = " << ::max( ap, bp ) << std::endl;
+        delete ap;
+        delete bp;
     }
 
     {
