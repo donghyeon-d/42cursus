@@ -1,27 +1,29 @@
 #include <iostream>
 #include <sstream>
 #include <climits>
-#include <cmath>
 #include "Convert.hpp"
 
 Convert::~Convert()
 {}
 
 Convert::Convert()
-: _nan(false), _inf(false), _infm(false), _infp(false), _else(false)
+: _nan(false), _inf(false), _infm(false), _infp(false), _else(false), _i_imp(false)
 {}
 
 Convert::Convert(char *str)
-: _nan(false), _inf(false), _infm(false), _infp(false), _else(false)
+: _nan(false), _inf(false), _infm(false), _infp(false), _else(false), _c_imp(false)
 {
     _literal = static_cast<std::string>(str);
-    if (_literal.compare("nan") == 0)
+    if (_literal.compare("nanf") == 0 || _literal.compare("inff") == 0 ||
+        _literal.compare("-inff") == 0 || _literal.compare("+inff") == 0)
+        _literal.resize(_literal.length() - 1);
+    if (_literal.compare("nan") == 0 )
         _nan = true;
-    else if (_literal.compare("inf") == 0)
+    else if (_literal.compare("inf") == 0 )
         _inf = true;
-    else if (_literal.compare("-inf") == 0)
+    else if (_literal.compare("-inf") == 0 )
         _infm = true;
-    else if (_literal.compare("+inf") == 0)
+    else if (_literal.compare("+inf") == 0 )
         _infp = true;
     else
     {
@@ -31,14 +33,18 @@ Convert::Convert(char *str)
         if (_literal.length() == 1 && !std::isdigit(str[0]))
         {
             _c = str[0];
-            _i = static_cast<long long>(_c);
+            _i = static_cast<int>(_c);
             _f = static_cast<float>(_c);
             _d = static_cast<double>(_c);
         }
         else if (ssFloat >> _d)
         {
+            if (_d < CHAR_MIN || _d > CHAR_MAX)
+                _c_imp = true;
+            if (_d < INT_MIN || _d > INT_MAX)
+                _i_imp = true;
             _c = static_cast<char>(_d);
-            _i = static_cast<long long>(_d);
+            _i = static_cast<int>(_d);
             _f = static_cast<float>(_d);
         }
         else
@@ -67,7 +73,7 @@ Convert &Convert::operator=(Convert const &convert)
 
 void    Convert::printChar() const
 {
-    if (_else || _nan || _inf || _infm || _infp)
+    if (_else || _nan || _inf || _infm || _infp || _c_imp)
         std::cout << "char: impossible" << std::endl;
     else if (std::isprint(_c))
         std::cout << "char: '" << _c << "'" << std::endl;
@@ -77,7 +83,7 @@ void    Convert::printChar() const
 
 void    Convert::printInt() const
 {
-    if (_else || _nan || _inf || _infm || _infp || _i > INT_MAX || _i < INT_MIN)
+    if (_else || _nan || _inf || _infm || _infp || _i_imp)
         std::cout << "int: impossible" << std::endl;
     else
         std::cout << "int: " << _i << std::endl;

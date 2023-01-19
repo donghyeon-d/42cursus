@@ -7,7 +7,7 @@ class Convert
     private:
         std::string _literal;
         char    _c;
-        long long    _i;
+        int     _i;
         float   _f;
         double  _d;
         bool    _nan;
@@ -15,6 +15,8 @@ class Convert
         bool    _infm;
         bool    _infp;
         bool    _else;
+        bool    _i_imp;
+        bool    _c_imp;
         void    printChar() const;
         void    printInt() const;
         void    printFloat() const;
