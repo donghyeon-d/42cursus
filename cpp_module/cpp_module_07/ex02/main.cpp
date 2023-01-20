@@ -1,61 +1,26 @@
-// #include <iostream>
-// #include "Array.hpp"
-
-// class A
-// {
-//     private :
-//         char _data;
-//     public :
-//         A() {}
-//         ~A() {}
-//         void setData(char c) { _data = c; }
-//         char getData() { return (_data); }
-// };
+#include <iostream>
+#include "Array.hpp"
 
 // int main()
 // {
-    // {
-    // int *a = new int();
-    // std::cout << *a << std::endl;
+//     Array<int> num1(5);
+//     for (int i = 0; i < 5; i++)
+//         num1[i] = i;
+//     num1.displayArray();
+//     Array<int> num2(num1);
+//     num2.displayArray();
 
-    // Array<int> arrA(5);
-    // for (int i = 0; i < 5; i++)
-    //     arrA[i] = i;
-    // const Array<int> arrB(arrA);
-    // arrA.displayArray();
-    // arrB.displayArray();
-    // std::cout << arrA[1] << std::endl;
-    // std::cout << arrB[1] << std::endl;
-    // arr.displayArray();
+//     const Array<int> cnum1(num1);
+//     num1.displayArray();
+//     const int ca1 = num1[1];
+//     const int ca2 = cnum1[1];
+//     int a1 = num1[1];
+//     int a2 = cnum1[1];
 
-    // }
-
-    // Array<int> arrInt(5);
-    // for (int i = 0; i < arrInt.size(); i++)
-    //     arrInt[i] = i * 10;
-    // for (int i = 0; i < arrInt.size(); i++)
-    //     std::cout << "[" << i << "] : " << arrInt[i] << std::endl;
-    
-    // Array<A> arrClass(5);
-    // for (int i = 0; i < arrClass.size(); i++)
-    //     arrClass[i].setData(i + 'a');
-    // for (int i = 0; i < arrClass.size(); i++)
-    //     std::cout << "[" << i << "] : " << arrClass[i].getData() << std::endl;
-
-
-    // const Array<int> arrInt(5);
-    // for (unsigned int i = 0; i < arrInt.size(); i++)
-    //     arrInt[i] = i * 10;
-    // for (unsigned int i = 0; i < arrInt.size(); i++)
-    //     std::cout << "[" << i << "] : " << arrInt[i] << std::endl;
+//     std::cout << "ca1 : " << ca1 << ", ca2 : " << ca2 << std::endl;
+//     std::cout << "a1 : " << a1 << ", a2 : " << a2 << std::endl;
 // }
 
-
-
-
-
-#include <iostream>
-#include "Array.hpp"
 
 #define MAX_VAL 10
 int main(int, char**)
@@ -75,7 +40,8 @@ int main(int, char**)
         Array<int> tmp = numbers;
         Array<int> test(tmp);
         for (int j = 0; j < MAX_VAL;j++)
-            std::cout << "numbers : " << numbers[j] << " | " << mirror[j] << std::endl;
+            std::cout << "numbers : " << numbers[j] << " | " << mirror[j] << " | " 
+            << tmp[j] << " | " << test[j] << std::endl;
     }
 
     for (int i = 0; i < MAX_VAL; i++)
@@ -92,7 +58,7 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "numbers[-2] : " << e.what() << '\n';
     }
     try
     {
@@ -100,13 +66,13 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << "numbers[MAX_VAL] : " << e.what() << '\n';
     }
 
     for (int i = 0; i < MAX_VAL; i++)
     {
         numbers[i] = rand();
     }
-    delete [] mirror;//
+    delete [] mirror;
     return 0;
 }

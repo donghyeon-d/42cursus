@@ -10,37 +10,11 @@ class Array
         unsigned int _size;
 
     public :
-        Array() : _arr(0), _size(0)
-        {
-            std::cout << "Array()" << std::endl;
-        }
-
-        Array(unsigned int n)  : _arr(new T[n]), _size(n)
-        {std::cout << "Array(n)" << std::endl;}
-
-        Array(const Array &array) : _arr(0), _size(0)
-        {
-            std::cout << "Array(copy)" << std::endl;
-            *this = array;
-        }
-
-        Array& operator=(const Array &array)
-        {
-            std::cout << "Array(==)" << std::endl;
-            if (_arr != 0)
-                delete[] _arr;
-            _size = array._size;
-            _arr = new T[_size];
-            for (unsigned int i = 0; i < array.size(); i++)
-                _arr[i] = array._arr[i];
-            return (*this);
-        }
-
-        ~Array()
-        {
-            if (_arr != 0)
-                delete[] _arr;
-        }
+        Array();
+        Array(const unsigned int n);
+        Array(const Array &array);
+        Array& operator=(const Array &array);
+        ~Array();
 
         class ArrayInvalidIndexException : public std::exception
         {
@@ -51,37 +25,12 @@ class Array
                 }
         };
 
-        const T& operator[](unsigned int idx) const
-        {
-            if (idx > _size - 1)
-                throw ArrayInvalidIndexException();
-            else
-                return (_arr[idx]);
-        }
-
-        T& operator[](unsigned int idx)
-        {
-            if (idx > _size - 1)
-                throw ArrayInvalidIndexException();
-            else
-                return (_arr[idx]);
-        }
-        
-
-        unsigned int size() const
-        {
-            return (_size);
-        }
-
-        void    displayArray() const
-        {
-            for (int i = 0; i < static_cast<int>(_size); i++)
-            {
-                std::cout << "[" << i << "] : " << _arr[i] << std::endl;
-            }
-        }
+        const T& operator[](const unsigned int idx) const;
+        T& operator[](const unsigned int idx);
+        unsigned int size() const;
+        void    displayArray() const;
 };
 
-
+#include "Array.tpp"
 
 #endif
