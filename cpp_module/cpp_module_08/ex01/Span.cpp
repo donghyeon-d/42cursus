@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Span.hpp"
 
 Span::Span() : max_size_(0)
@@ -8,17 +7,27 @@ Span::Span(unsigned int N) : max_size_(N)
 {}
 
 Span::Span(const Span &span) : max_size_(span.max_size_)
-{
-	arr_ = span.arr_;
-}
+{	arr_ = span.arr_;	}
+
+std::vector<int>::iterator Span::getBegin() 
+{	return (arr_.begin());	}
+
+std::vector<int>::const_iterator Span::getBegin() const
+{	return (arr_.begin());	}
+
+std::vector<int>::iterator Span::getEnd()
+{	return (arr_.end());	}
+
+std::vector<int>::const_iterator Span::getEnd() const
+{	return (arr_.end());	}
 
 Span &Span::operator=(const Span &span)
 {
 	if (this == &span)
 		return (*this);
-	if (max_size_ < span.max_size_)
-		throw exceptionFullStore();
-	arr_ = span.arr_;
+	setMaxSize(span.getMaxSize());
+	for (std::vector<int>::const_iterator itr = span.getBegin(); itr != span.getEnd(); itr++)
+		addNumber(*itr);
 	return (*this);
 }
 
@@ -31,9 +40,15 @@ void Span::addNumber(int number)
 		throw exceptionFullStore();
 }
 
-void Span::printAll()
+void Span::setMaxSize(unsigned int N)
+{	max_size_ = N;	}
+
+unsigned int Span::getMaxSize() const
+{	return (max_size_);	}
+
+void Span::printAll() const
 {
-	for (std::vector<int>::iterator itr = arr_.begin(); itr != arr_.end(); itr++)
+	for (std::vector<int>::const_iterator itr = getBegin(); itr != getEnd(); itr++)
 		std::cout << *itr << " ";
 	std::cout << std::endl;
 }
@@ -44,7 +59,6 @@ int Span::shortestSpan()
 		throw exceptionEmptyStore();
 	if (arr_.size() == 1)
 		throw exceptionNoSpan();
-
 	std::vector<int> temp = arr_;
 	sort(temp.begin(), temp.end());
 	int min(INT_MAX);
@@ -69,8 +83,8 @@ int Span::longestSpan()
 
 void Span::fillRange(unsigned int begin_idx, unsigned int end_idx, int num)
 {
-	if (max_size_ < end_idx + 1)
-		throw exceptionFullStore();
+	if (max_size_ < end_idx + 1 || begin_idx > end_idx)
+		throw exceptionWrongRange();
 	unsigned int count(end_idx - begin_idx + 1);
 	if (arr_.size() < begin_idx + count)
 		arr_.resize(begin_idx + count);

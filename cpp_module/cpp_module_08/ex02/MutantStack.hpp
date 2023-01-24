@@ -27,18 +27,14 @@ class MutantStack : public std::stack<T>
 		typedef typename std::deque<T>::iterator iterator;
 		iterator begin() { return (data_.begin()); }
 		iterator end() { return (data_.end()); }
+		typedef typename std::deque<T>::const_iterator const_iterator;
+		const_iterator begin() const { return (data_.begin()); }
+		const_iterator end() const { return (data_.end()); }
+		void printAllData() const
+		{
+			for (const_iterator itr = begin(); itr != end(); itr++)
+				std::cout << *itr << std::endl;
+		}
 };
-
-template <typename T>
-void printAll(MutantStack<T> mstack)
-{
-	MutantStack<int>::iterator it = mstack.begin();
-	MutantStack<int>::iterator ite = mstack.end();
-	while (it != ite)
-	{
-		std::cout << *it << std::endl;
-		++it;
-	}
-}
 
 #endif
