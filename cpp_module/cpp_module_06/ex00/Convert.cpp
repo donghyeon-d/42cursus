@@ -68,6 +68,8 @@ Convert &Convert::operator=(Convert const &convert)
     _infm = convert._infm;
     _infp = convert._infp;
     _else = convert._else;
+    _i_imp = convert._i_imp;
+    _c_imp = convert._c_imp;
     return (*this);
 }
 
