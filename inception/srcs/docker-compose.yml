@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+    mariadb:
+        container_name: mariadb
+        restart: always
+        build: ./mariadb
+        expose:
+            - "3306"
+        volumes:
+            - mariadb:/var/lib/mysql
+        networks:
+            - wp_blog
+        tty: true
+    nginx:
+        container_name: nginx
+        restart: always
+        build: ./nginx
+        depends_on:
+            - wordpress
+        extra_hosts:
+            - "dongchoi.42.fr:127.0.0.1"
+        ports:
+            - "443:443"
+        volumes:
+            - wordpress:/var/www/html
+        networks:
+            - wp_blog
+        tty: true
+    wordpress:
+        container_name: wordpress
+        restart: always
+        build: ./wordpress
+        depends_on:
+            - mariadb
+        volumes:
+            - wordpress:/var/www/html
+        expose:
+            - "9000"
+        networks:
+            - wp_blog
+        tty: true
+
+networks:
+    wp_blog:
+        driver: bridge
+
+volumes:
+    wordpress:
+        driver: local
+        driver_opts:
+            type: volume
+            o: bind
+            device: /home/dongchoi/data/wordpress
+    mariadb:
+        driver: local
+        driver_opts:
+            type: volume
+            o: bind
+            device: /home/dongchoi/data/mariadb
