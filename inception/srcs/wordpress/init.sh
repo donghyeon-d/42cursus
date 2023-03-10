@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-
+if [ ! -f "/var/www/html/wp-config.php" ]; then
 # wordpress 설치
 wget -O /tmp/wordpress.tar.gz "https://wordpress.org/latest.tar.gz"
 tar -xvzf /tmp/wordpress.tar.gz -C /tmp
@@ -10,31 +10,21 @@ chown -R www-data:www-data /var/www/html
 chmod -R 775 /var/www/html
 rm -r /tmp/wordpress /tmp/wordpress.tar.gz
 
-# wp-cli 설치
-wget -O /tmp/wp-cli.phar "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
-chmod +x /tmp/wp-cli.phar
-mv /tmp/wp-cli.phar /usr/local/bin/wp
-
 # config 생성
 wp config create --dbname="wordpress_db" --dbuser="dongchoi" --dbpass="123123" --dbhost="mariadb" --path="/var/www/html" --dbcharset="utf8" --allow-root
+fi
 
-echo "listen = 0.0.0.0:9000" >> /etc/php/7.3/fpm/pool.d/www.conf
-echo "env[MARIADB_HOST] = mariadb" >> /etc/php/7.3/fpm/pool.d/www.conf
-echo "env[MARIADB_ADMIN_USER] = dongchoi" >> /etc/php/7.3/fpm/pool.d/www.conf
-echo "env[MARIADB_ADMIN_PASSWORD] = 123123" >> /etc/php/7.3/fpm/pool.d/www.conf
-echo "env[MARIADB_DATABASE] = wordpress_db" >> /etc/php/7.3/fpm/pool.d/www.conf
+# log file 
 touch /var/log/fpm-php.www.log
 chown -R www-data:www-data /var/log/fpm-php.www.log
 chmod -R 775 /var/log/fpm-php.www.log
 touch /var/log/fpm-php.access.log
 chown -R www-data:www-data /var/log/fpm-php.access.log
 chmod -R 775 /var/log/fpm-php.access.log
-echo "access.log = /var/log/php7.3-fpm.access.log" >> /etc/php/7.3/fpm/pool.d/www.conf
-echo "php_flag[display_errors] = on" >> /etc/php/7.3/fpm/pool.d/www.conf
-echo "php_admin_value[error_log] = /var/log/php7.3-fpm.error.log" >> /etc/php/7.3/fpm/pool.d/www.conf
-echo "php_admin_flag[log_errors] = on" >> /etc/php/7.3/fpm/pool.d/www.conf
 
-service php7.3-fpm restart
+service php7.3-fpm start
+service php7.3-fpm stop
+php-fpm7.3 -F -R
 
 #echo "env[MARIADB_HOST] = \$MARIADB_HOST" >> /etc/php/7.4/fpm/pool.d/www.conf
 #echo "env[MARIADB_ADMIN_USER] = \$MARIADB_ADMIN_USER" >> /etc/php/7.4/fpm/pool.d/www.conf

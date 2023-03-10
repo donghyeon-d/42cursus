@@ -11,14 +11,24 @@ RUN apt-get update -y && \
 	curl \
 	php-mysql \
 	php-mbstring \
-	php-xml \
-	sendmail
+	php-xml 
+	#sendmail
 	#vim
 
+# wp-cli 설치
+RUN wget -O /tmp/wp-cli.phar "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar" && \
+	chmod +x /tmp/wp-cli.phar && \
+	mv /tmp/wp-cli.phar /usr/local/bin/wp
+
+COPY ./www.conf /etc/php/7.3/fpm/pool.d/www.conf
 COPY ./init.sh /init.sh
 
-RUN /bin/bash /init.sh
+#WORKDIR /var/www/html
 
+# RUN /bin/bash /init.sh
+
+# ENTRYPOINT [ "bash", "/init.sh" ]
+CMD [ "bash", "/init.sh" ]
 # CMD ["service", "php7.3-fpm", "start"]
 
 

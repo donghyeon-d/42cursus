@@ -5,6 +5,7 @@ services:
         container_name: mariadb
         restart: always
         build: ./mariadb
+            # progress: plain
         expose:
             - "3306"
         volumes:
@@ -16,6 +17,7 @@ services:
         container_name: nginx
         restart: always
         build: ./nginx
+            # progress: plain
         depends_on:
             - wordpress
         extra_hosts:
@@ -31,6 +33,7 @@ services:
         container_name: wordpress
         restart: always
         build: ./wordpress
+            # progress: plain
         depends_on:
             - mariadb
         volumes:
