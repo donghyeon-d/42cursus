@@ -9,7 +9,10 @@ int main(int argc, char **argv) {
 		// PmergeMe pmergeme(argv);
 		PmergeMe pmergeme;
 		pmergeme.setNumbers(argv);
-		pmergeme.diff();
+		pmergeme.timeCheckList();
+		pmergeme.timeCheckSet();
+		pmergeme.timeCheckVector();
+		pmergeme.printDiff();
 	}
 	catch (std::exception &exception)
 	{

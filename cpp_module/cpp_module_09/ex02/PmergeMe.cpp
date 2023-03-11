@@ -1,31 +1,13 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe() : _numbers(NULL), _vec_time(0), _list_time(0) {
+PmergeMe::PmergeMe() : _numbers(0), _vec_time(0), _list_time(0), _set_time(0) {
 	
 }
-
-// PmergeMe::PmergeMe(char **argv) : _vec_time(0), _list_time(0) {
-// 	_numbers = &(argv[1]);
-// 	if (numbersValidCheck() == false) {
-// 		throw InvalidArgvException();
-// 	}
-// 	int i(0);
-// 	while (_numbers[i] != NULL) {
-// 		_vec_before_sort.push_back(std::atoi(_numbers[i]));
-// 		_list_before_sort.push_back(std::atoi(_numbers[i]));
-// 	}
-// }
 
 void PmergeMe::setNumbers(char **argv) {
 	_numbers = &(argv[1]);
 	if (numbersValidCheck() == false) {
 		throw InvalidArgvException();
-	}
-	int i(0);
-	while (_numbers[i] != NULL) {
-		_vec_before_sort.push_back(std::atoi(_numbers[i]));
-		_list_before_sort.push_back(std::atoi(_numbers[i]));
-		i++;
 	}
 }
 
@@ -35,14 +17,12 @@ PmergeMe::PmergeMe(const PmergeMe& rhs) {
 
 PmergeMe &PmergeMe::operator=(const PmergeMe* rhs) {
 	_numbers = rhs->_numbers;
-	_vec_before_sort = rhs->_vec_before_sort;
 	_vec_sequence = rhs->_vec_sequence;
-	_vec_after_sort = rhs->_vec_after_sort;
-	_list_before_sort = rhs->_list_before_sort;
 	_list_sequence = rhs->_list_sequence;
-	_list_after_sort = rhs->_list_after_sort;
+	_set_sequence = rhs->_set_sequence;
 	_vec_time = rhs->_vec_time;
 	_list_time = rhs->_list_time;
+	_set_time = rhs->_set_time;
 	return *this;
 }
 
@@ -71,70 +51,81 @@ const char *PmergeMe::InvalidArgvException::what() const throw() {
 	return "Error: Invalid Argv";
 }
 
-void PmergeMe::diff() {
-	if (_numbers == NULL || numbersValidCheck() == false) {
+void PmergeMe::timeCheckSet() {
+	if (_numbers == NULL)
 		return ;
-	}
-	// vector time check
 	clock_t start(0), finish(0);
-	start = clock();
-	std::vector<int>::iterator vec_it = _vec_before_sort.begin();
-	std::vector<int>::iterator vec_it_next = _vec_before_sort.begin()++;
-	// while (vec_it != _vec_before_sort.end()) {
-	// 	std::merge(_vec_sequence.begin(), _vec_sequence.end(), vec_it, vec_it_next, _vec_after_sort.begin());
-	// 	_vec_sequence = _vec_after_sort;
-	// 	_vec_after_sort.clear();
-	// 	vec_it++;
-	// 	if (vec_it_next != _vec_before_sort.end())
-	// 		vec_it_next++;
-	// }
-	while (vec_it != _vec_before_sort.end()) {
-		std::merge(_vec_sequence.begin(), _vec_sequence.end(), vec_it, vec_it_next, _vec_after_sort.begin());
-		_vec_sequence = _vec_after_sort;
-		// _vec_after_sort.clear();
-		vec_it++;
-		if (vec_it_next != _vec_before_sort.end())
-			vec_it_next++;
+	start = std::clock();
+	int i(0);
+	while (_numbers[i] != NULL) {
+		_set_sequence.insert(std::atoi(_numbers[i]));
+		i++;
 	}
-	_vec_after_sort = _vec_sequence;
-	finish = clock();
-	_vec_time = start - finish;
+	finish = std::clock();
+	_set_time = static_cast<double>(finish - start);
+}
 
-	// list time check
-	start = clock();
-	std::list<int>::iterator list_it = _list_before_sort.begin();
-	std::list<int>::iterator list_it_next = (_list_before_sort.begin())++;
-	while (list_it != _list_before_sort.end()) {
-		std::merge(_list_sequence.begin(), _list_sequence.end(), list_it, list_it_next, _list_after_sort.begin());
-		_list_sequence = _list_after_sort;
-		_list_after_sort.clear();
-		list_it++;
-		if (list_it_next != _list_before_sort.end())
-			list_it_next++;
+void PmergeMe::timeCheckVector() {
+	if (_numbers == NULL)
+		return ;
+	clock_t start(0), finish(0);
+	start = std::clock();
+	int i(0);
+	while (_numbers[i] != NULL) {
+		_vec_sequence.push_back(std::atoi(_numbers[i]));
+		i++;
 	}
-	_vec_after_sort = _vec_sequence;
-	finish = clock();
-	_list_time = start - finish;
+	std::sort(_vec_sequence.begin(), _vec_sequence.end());
+	finish = std::clock();
+	_vec_time = static_cast<double>(finish - start);
+}
 
-	// print
+void PmergeMe::timeCheckList() {
+	if (_numbers == NULL)
+		return ;
+	clock_t start(0), finish(0);
+	start = std::clock();
+	int i(0);
+	while (_numbers[i] != NULL) {
+		_list_sequence.push_back(std::atoi(_numbers[i]));
+		i++;
+	}
+	_list_sequence.sort();
+	finish = std::clock();
+	_list_time = static_cast<double>(finish - start);
+}
+
+
+void PmergeMe::printDiff() {
 	std::cout << "Before: ";
-	for (std::vector<int>::iterator before_it = _vec_before_sort.begin(); before_it != _vec_before_sort.end(); before_it++) {
-		std::cout << *before_it << " ";
+	for (int i = 0; _numbers[i] != NULL; i++)
+		std::cout << _numbers[i] << " ";
+	std::cout << std::endl;
+
+	std::cout << "After: ";
+	for (std::vector<int>::iterator it = _vec_sequence.begin(); it != _vec_sequence.end(); it++) {
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+	std::cout.precision(3);
+	std::cout << "Time to process a range of " << _vec_sequence.size() << " elements with std::vector<int> : " << _vec_time << " ms" << std::endl;
+	std::cout << "\t=> ";
+	for (std::vector<int>::iterator it = _vec_sequence.begin(); it != _vec_sequence.end(); it++) {
+		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
 
-	std::cout << "vector After: ";
-	for (std::vector<int>::iterator after_it = _vec_after_sort.begin(); after_it != _vec_after_sort.end(); after_it++) {
-		std::cout << *after_it << " ";
-	}
-	std::cout << std::endl;
-	
-	std::cout << "list After: ";
-	for (std::list<int>::iterator after_it = _list_after_sort.begin(); after_it != _list_after_sort.end(); after_it++) {
-		std::cout << *after_it << " ";
+	std::cout << "Time to process a range of " << _list_sequence.size() << " elements with std::list<int> : " << _list_time << " ms" << std::endl;
+	std::cout << "\t=> ";
+	for (std::list<int>::iterator it = _list_sequence.begin(); it != _list_sequence.end(); it++) {
+		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
 
-	std::cout << "Time to process a range of " << _vec_after_sort.size() << " elements with std::vector<int> : " << _vec_time << " ms" << std::endl;
-	std::cout << "Time to process a range of " << _vec_after_sort.size() << " elements with std::list<int> : " << _list_time << " ms" << std::endl;
+	std::cout << "Time to process a range of " << _set_sequence.size() << " elements with std::set<int> : " << _set_time << " ms" << std::endl;
+	std::cout << "\t=> ";
+	for (std::set<int>::iterator it = _set_sequence.begin(); it != _set_sequence.end(); it++) {
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
 }
