@@ -7,7 +7,8 @@
 #include <fstream>
 #include <sstream>
 #include <cctype>
-#include <except>
+#include <stdexcept>
+#include <map>
 
 #define TRUE 1
 #define NOTPOSITIVE -1
@@ -17,35 +18,34 @@
 
 typedef struct s_data {
 	std::string date;
-	std::string value;
+	float value;
 	float exchanged_value;
 	int error;
 } t_data;
 
 class BitcoinExchange {
 	private:
-		std::deque<t_data> _data;
 		std::map<std::string, float> _rate;
-		bool valid_check_data_line(std::string &line);
-		t_data parse_input_line(std::string &line);
-		void	print_one_data(t_data data);
+		bool validCheckDataLine(std::string &line);
+		t_data parseInputLine(std::string &line);
+		void	printOneData(t_data &data);
 		void getCSV();
 		class InvalidFileException : public std::exception
         {
             public :
                 const char *what() const throw();
         };
+		void exchange(t_data &data);
+		float findRateValue(std::string &key);
 	public:
 		BitcoinExchange();
-		BitcoinExchange(char *file);
 		BitcoinExchange(const BitcoinExchange &ref);
 		BitcoinExchange &operator=(const BitcoinExchange &ref);
 		~BitcoinExchange();
-		bool exchange();
-		// bool is
-		void print_exchanging_result();
+		void exchangingPrint(char *file);
 };
 
-float ft_stof(std::string str);
+float ftStof(std::string str);
+bool isLeapYear(int year);
 
 #endif
