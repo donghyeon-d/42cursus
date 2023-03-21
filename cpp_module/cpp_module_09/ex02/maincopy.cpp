@@ -6,11 +6,13 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 	try {
+		// PmergeMe pmergeme(argv);
 		PmergeMe pmergeme;
-		if (pmergeme.setNumbers(argv) == false)
-			return 0;
-		pmergeme.insertSortVec();
-		pmergeme.insertSortDeq();
+		pmergeme.setNumbers(argv);
+		pmergeme.timeCheckList();
+		pmergeme.timeCheckSet();
+		pmergeme.timeCheckVector();
+		pmergeme.printDiff();
 	}
 	catch (std::exception &exception)
 	{

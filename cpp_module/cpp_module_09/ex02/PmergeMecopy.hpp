@@ -4,36 +4,36 @@
 #include <iostream>
 #include <exception>
 #include <ctime>
-#include <cctype>
-#include <deque>
+#include <algorithm>
+#include <list>
 #include <vector>
-#include <string>
-#include <sstream>
+#include <set>
 
 class PmergeMe {
 	private:
 		char **_numbers;
-		std::vector<int> _vec;
-		std::deque<int> _deq;
-		void printVec();
-		void printDeq();
-		void printNum();
+		std::vector<int> _vec_sequence;
+		std::list<int> _list_sequence;
+		std::set<int> _set_sequence;
+		double _vec_time;
+		double _list_time;
+		double _set_time;
+		bool numbersValidCheck();
 		class InvalidArgvException : public std::exception
         {
             public :
                 const char *what() const throw();
         };
 	public:
-		void insertSortVec();
-		void insertSortDeq();
 		PmergeMe();
 		PmergeMe(const PmergeMe& rhs);
 		PmergeMe &operator=(const PmergeMe* rhs);
 		~PmergeMe();
-		bool setNumbers(char **argv);
-		
+		void setNumbers(char **argv);
+		void printDiff();
+		void timeCheckSet();
+		void timeCheckVector();
+		void timeCheckList();
 };
-
-double ft_atod(char *str);
 
 #endif
