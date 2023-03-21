@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   paircheck.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:47:57 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/14 23:21:27 by choidongd        ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "a.h"
+#include "minishell.h"
 
 int	parentheses_pair_check(char *input)
 {

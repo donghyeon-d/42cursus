@@ -6,13 +6,13 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:30:39 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/12 16:40:48 by dongchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <limits.h>
-#include "a.h"
+#include "minishell.h"
 
 int	ft_isspace(char c)
 {

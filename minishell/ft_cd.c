@@ -6,13 +6,13 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:41:34 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/09/15 21:37:25 by dongchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "type.h"
-#include "a.h"
+#include "minishell.h"
 
 static void	replace_argv_with_home(t_cmd *cmd)
 {

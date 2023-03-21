@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhwang <hhwang@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:51:10 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/14 15:28:28 by hhwang           ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "a.h"
+#include "minishell.h"
 
 char	*ft_getenv(t_env *env, char *key)
 {

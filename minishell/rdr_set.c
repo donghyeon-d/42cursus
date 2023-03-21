@@ -6,7 +6,7 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 19:21:24 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/12 15:47:46 by hhwang           ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "a.h"
+#include "minishell.h"
 
 void	rdr_set_stdin(t_cmd *cmd, t_token *token)
 {

@@ -6,12 +6,12 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:58:24 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/12 19:01:36 by hhwang           ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "a.h"
+#include "minishell.h"
 
 int	is_numeric(char *str)
 {

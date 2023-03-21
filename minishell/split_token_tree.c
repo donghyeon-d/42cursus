@@ -6,12 +6,12 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:18:51 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/12 16:50:39 by dongchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "a.h"
+#include "minishell.h"
 
 void	add_and_split(t_tree_node *node, t_token_node *node_token)
 {

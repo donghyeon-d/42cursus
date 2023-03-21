@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhwang <hhwang@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 16:04:24 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/14 15:27:59 by hhwang           ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "a.h"
+#include "minishell.h"
 
 void	free_value_and_input(char *value, t_token_node *node)
 {

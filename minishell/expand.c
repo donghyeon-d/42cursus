@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhwang <hhwang@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:40:29 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/09/14 21:11:29 by hhwang           ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "a.h"
+#include "minishell.h"
 #include "type.h"
 
 void	expanding(t_token *token, t_env *env)

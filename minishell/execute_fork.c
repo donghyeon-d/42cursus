@@ -6,13 +6,13 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:23:09 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/09/14 18:42:29 by dongchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <signal.h>
-#include "a.h"
+#include "minishell.h"
 
 static void	execute_set_childfd(t_cmd *cmd, int prev_in)
 {

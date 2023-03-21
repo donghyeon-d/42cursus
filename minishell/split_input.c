@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   split_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:42:54 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/14 23:34:53 by choidongd        ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "a.h"
+#include "minishell.h"
 
 static int	is_input_separate(char *c)
 {

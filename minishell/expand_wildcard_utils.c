@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wildcard_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhwang <hhwang@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 10:45:22 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/15 10:54:09 by hhwang           ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include <sys/stat.h>
 #include <stdlib.h>
-#include "a.h"
+#include "minishell.h"
 
 void	wildcard_add_back(t_token_node *node, t_token_node *tmp)
 {

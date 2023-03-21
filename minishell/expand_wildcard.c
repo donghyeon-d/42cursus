@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wildcard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhwang <hhwang@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 15:46:00 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/15 10:53:16 by hhwang           ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "a.h"
+#include "minishell.h"
 
 void	find_pattern(t_token_node *node, t_token *token)
 {

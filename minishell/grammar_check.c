@@ -6,11 +6,11 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:56:21 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/12 15:58:35 by hhwang           ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "a.h"
+#include "minishell.h"
 #include <stdlib.h>
 
 int	check_rdr(t_token_node *node)

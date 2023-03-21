@@ -6,11 +6,11 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 09:37:40 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/09/12 14:54:40 by dongchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "a.h"
+#include "minishell.h"
 
 int	execute_built_in_func(t_cmd *cmd)
 {

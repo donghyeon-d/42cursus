@@ -6,14 +6,14 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:20:40 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/09/14 18:42:45 by dongchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "a.h"
+#include "minishell.h"
 
 static void	wait_cmd_pipe(t_cmd *cmd)
 {

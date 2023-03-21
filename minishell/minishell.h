@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   a.h                                                :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhwang <hhwang@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:53:02 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/15 10:51:08 by hhwang           ###   ########.fr       */
+/*   Updated: 2023/03/21 19:42:40 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef A_H
-# define A_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include "type.h"
 # define TRUE 1

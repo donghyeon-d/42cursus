@@ -6,14 +6,14 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 14:43:06 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/09/14 18:41:33 by dongchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <dirent.h>
 #include <sys/stat.h>
-#include "a.h"
+#include "minishell.h"
 #include "type.h"
 
 int	cmd_valid_check(char *cmd_with_path)

@@ -6,13 +6,13 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 14:16:07 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/09/14 18:41:07 by dongchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <signal.h>
-#include "a.h"
+#include "minishell.h"
 
 static t_cmd	*cmd_dup(t_info *info, t_cmd *cmd)
 {

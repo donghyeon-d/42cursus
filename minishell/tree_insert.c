@@ -6,11 +6,11 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 14:53:54 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/12 16:51:04 by dongchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "a.h"
+#include "minishell.h"
 
 void	insert_left_child(t_tree_node *parent_node, t_tree_node *child_node)
 {

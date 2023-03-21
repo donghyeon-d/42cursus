@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdr_set_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choidongd <choidongd@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 19:17:24 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/14 23:21:09 by choidongd        ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "a.h"
+#include "minishell.h"
 #include <signal.h>
 #include <sys/wait.h>
 

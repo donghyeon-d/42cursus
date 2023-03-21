@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhwang <hhwang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 15:44:17 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/12 19:06:48 by hhwang           ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <term.h>
 #include <readline/readline.h>
-#include "a.h"
+#include "minishell.h"
 
 void	rl_replace_line(const char *text, int clear_undo);
 

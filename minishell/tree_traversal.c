@@ -6,13 +6,13 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 14:47:08 by hhwang            #+#    #+#             */
-/*   Updated: 2022/09/12 16:31:40 by dongchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "a.h"
+#include "minishell.h"
 
 void	traversal_print(t_tree_node *node)
 {

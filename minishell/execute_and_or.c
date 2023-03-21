@@ -6,11 +6,11 @@
 /*   By: dongchoi <dongchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 13:34:57 by dongchoi          #+#    #+#             */
-/*   Updated: 2022/09/14 18:39:51 by dongchoi         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:43:17 by dongchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "a.h"
+#include "minishell.h"
 
 void	execute_and(t_cmd **cmd)
 {
