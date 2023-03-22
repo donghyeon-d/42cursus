@@ -1,3 +1,7 @@
+[학습 정리 노션 링크](https://helpful-eggplant-ec3.notion.site/Libft-1c6870c40ba74a1e82edd86eee5ff964)
+
+# libft
+
 # 1. 무엇을 하는 과제인가
 
 - 나만의 함수 라이브러리 만들기
