@@ -1,15 +1,14 @@
-[노션 링크](https://helpful-eggplant-ec3.notion.site/minishell-fa96dbd636744fe9b2f112f59f1730ce)
+[학습 정리 노션 링크](https://helpful-eggplant-ec3.notion.site/minishell-fa96dbd636744fe9b2f112f59f1730ce)
 
-# Philosopher
-# 과제 개요
-## 1. 무엇을 하는 과제인가?
+# minishell
+# 1. 무엇을 하는 과제인가?
 - bash shell 만들기 [(bash manual)](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)
 - 몇몇 명령어는 built-in 함수로 만들고, 나머지는 execve로 실행
 - 환경변수도 세팅해줄 수 있어야 함
 
 <br>
 
-## 2. 새롭게 배운 개념
+# 2. 새롭게 배운 개념
 - 부모-자식 process
 - pipe 통신
 - tree 구조 재귀하향파싱
@@ -17,7 +16,7 @@
 
 <br>
 
-## 3. 팀프로젝트에서 기여한 파트
+# 3. 팀프로젝트에서 기여한 파트
 - 재귀하향파싱
 - cmd 구조체 설계 및 파싱한 정보 넣기
 - 명령어 종류 및 상황별 분기처리 및 pipe line 세팅 (협업)
@@ -26,7 +25,7 @@
 <br>
 
 
-## 4. 결과물
+# 4. 결과물
 - 실행 방법  
 ```
 $ make all
@@ -37,7 +36,7 @@ $ ./minishell
 
 <br><br>
 
-# 어려웠던 점 및 해결
+# 5. 어려웠던 점 및 해결
 ## 설계
 - 처음 시작할 때 무엇부터 어떻게 해야할지 몰랐고, 파싱할 때 어떻게 해야할지 막막했음
 - bash 메뉴얼을 보면서 bash가 어떻게 동작하는지 살펴봤고, 재귀하향파서에 대한 레퍼런스들을 참고함
