@@ -72,36 +72,97 @@ double ft_atod(char *str) {
 	return value;
 }
 
-void PmergeMe::insertSortVec() {
-	int tmp;
+void PmergeMe::insertSortVec(std::vector<int> &vec, int left, int right) {
+	int pick;
+	int j(0);
 
-	for (unsigned int i = 1; i < _vec.size(); i++) {
-		for (unsigned int j = i; j > 0; j--) {
-			if (_vec[j] < _vec[j - 1]) {
-				tmp = _vec[j - 1];
-				_vec[j - 1] = _vec[j];
-				_vec[j] = tmp;
-			}
-			else
-				continue ;
-		}
+	std::cout << "l : " << left << ", r : " << right << " | ";
+	for (int i = left; i < right + 1; i++) {
+		std::cout << vec[i] << " ";
 	}
-	std::cout << "vec : "; printVec();
+	for (int i = left + 1; i < right + 1; i++) {
+		j = i;
+		pick = vec[j];
+		while (j > left && pick < vec[j - 1]) {
+			vec[j] = vec[j - 1];
+			j--;
+		}
+		if (i != j)
+			vec[j] = pick;
+	}
+	std::cout << " | insert : "; printVec();
 }
 
-void PmergeMe::insertSortDeq() {
-	int tmp;
+void PmergeMe::insertSortDeq(std::deque<int> &deq) {
+	int pick;
+	unsigned int j(0);
 
-	for (unsigned int i = 1; i < _deq.size(); i++) {
-		for (unsigned int j = i; j > 0; j--) {
-			if (_deq[j] < _deq[j - 1]) {
-				tmp = _deq[j - 1];
-				_deq[j - 1] = _deq[j];
-				_deq[j] = tmp;
-			}
-			else
-				continue ;
+	for (unsigned int i = 1; i < deq.size(); i++) {
+		j = i;
+		pick = deq[j];
+		while (j > 0 && pick < deq[j - 1]) {
+			deq[j] = deq[j - 1];
+			j--;
+		}
+		if (i != j)
+			deq[j] = pick;
+	}
+	// std::cout << "deq : "; printDeq();
+}
+
+void PmergeMe::sortVec(std::vector<int> &array, int left, int right) {
+    if (right - left > CNT) {
+        int mid = (left + right) / 2;
+        sortVec(array, left, mid);
+        sortVec(array, mid + 1, right);
+		// std::cout << "!!vec : "; printVec();
+        mergeVec(array, left, mid, right);
+    } else {
+        insertSortVec(array, left, right);
+    }
+	// void printVec();
+	// std::cout << "vec : "; printVec();
+}
+
+void PmergeMe::mergeVec(std::vector<int> &array, int left, int mid, int right) {
+	// 임시 array 만들기
+	std::vector<int> left_vec, right_vec;
+	for (int i = left; i < mid + 1; i++) {
+		left_vec.push_back(array[i]);
+	}
+	for (int i = mid + 1; i < right + 1; i++) {
+		right_vec.push_back(array[i]);
+	}
+
+	int left_idx(0);
+	int right_idx(0);
+	int left_end(left_vec.size());
+	int right_end(right_vec.size());
+	for (int i = left; i < right + 1; i++) {
+		if (left_idx == left_end) {
+			array[i] = right_vec[right_idx];
+			right_idx++;
+		}
+		else if (right_idx == right_end) {
+			array[i] = left_vec[left_idx];
+			left_idx++;
+		}
+		else if (left_vec[left_idx] < right_vec[right_idx]) {
+			array[i] = left_vec[left_idx];
+			left_idx++;
+		}
+		else {
+			array[i] = right_vec[right_idx];
+			right_idx++;
 		}
 	}
-	std::cout << "deq : "; printDeq();
+	// std::cout << " | merge : "; printVec();
+}
+
+std::vector<int> &PmergeMe::getVec() {
+	return _vec;
+}
+
+std::deque<int> &PmergeMe::getDeq() {
+	return _deq;
 }

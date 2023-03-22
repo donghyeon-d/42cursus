@@ -9,8 +9,10 @@ int main(int argc, char **argv) {
 		PmergeMe pmergeme;
 		if (pmergeme.setNumbers(argv) == false)
 			return 0;
-		pmergeme.insertSortVec();
-		pmergeme.insertSortDeq();
+		pmergeme.sortVec(pmergeme.getVec(), 0, pmergeme.getVec().size() - 1);
+		std::cout << "vec : "; pmergeme.printVec();
+		pmergeme.insertSortDeq(pmergeme.getDeq());
+		std::cout << "deq : "; pmergeme.printDeq();
 	}
 	catch (std::exception &exception)
 	{
