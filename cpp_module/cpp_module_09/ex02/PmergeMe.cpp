@@ -1,10 +1,10 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe() {
+PmergeMe::PmergeMe() : _numbers(NULL) {
 
 }
 
-PmergeMe::PmergeMe(const PmergeMe& rhs) {
+PmergeMe::PmergeMe(const PmergeMe& rhs) : _numbers(NULL) {
 	*this = rhs;
 }
 
@@ -12,6 +12,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe* rhs) {
 	this->_numbers = rhs->_numbers;
 	this->_vec = rhs->_vec;
 	this->_deq = rhs->_deq;
+	this->_set = rhs->_set;
 	return *this;
 }
 
@@ -49,7 +50,7 @@ void PmergeMe::printSet() {
 }
 
 bool PmergeMe::setNumbers(char **argv) {
-	int i(1), tmp(0);
+	int i(1);
 	double dtmp;
 	while (argv[i] != '\0') {
 		dtmp = ft_atod(argv[i]);
@@ -61,14 +62,38 @@ bool PmergeMe::setNumbers(char **argv) {
 			std::cout << "Error : argv[" << i << "]=" << argv[i] << " is not integer" << std::endl;
 			return false;
 		}
-		else
-			tmp = static_cast<int>(dtmp);
-		_vec.push_back(tmp);
-		_deq.push_back(tmp);
 		i++;
 	}
 	_numbers = &argv[1];
 	return true;
+}
+
+void PmergeMe::setVec() {
+	if (_numbers == NULL)
+		return ;
+	_set.clear();
+	int i(0), tmp(0);
+	double dtmp;
+	while (_numbers[i] != '\0') {
+		dtmp = ft_atod(_numbers[i]);
+		tmp = static_cast<int>(dtmp);
+		_vec.push_back(tmp);
+		i++;
+	}
+}
+
+void PmergeMe::setDeq() {
+	if (_numbers == NULL)
+		return ;
+	_set.clear();
+	int i(0), tmp(0);
+	double dtmp;
+	while (_numbers[i] != '\0') {
+		dtmp = ft_atod(_numbers[i]);
+		tmp = static_cast<int>(dtmp);
+		_deq.push_back(tmp);
+		i++;
+	}
 }
 
 double ft_atod(char *str) {

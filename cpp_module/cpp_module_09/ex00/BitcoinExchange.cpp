@@ -14,7 +14,6 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &ref) {
 }
 
 BitcoinExchange::~BitcoinExchange() {
-
 }
 
 void BitcoinExchange::getCSV() {
@@ -167,7 +166,7 @@ void	BitcoinExchange::printOneData(t_data &data) {
 			std::cout << "Error: not a positive number." << std::endl;
 			break ;
 		case BADINPUT:
-			std::cout << "Error: bad input" << " => " << data.date << std::endl;
+			std::cout << "Error: bad input" << " => \"" << data.date << "\"" << std::endl;
 			break ;
 		case TOOLARGE:
 			std::cout << "Error: too large a number." << std::endl;
@@ -249,6 +248,7 @@ void BitcoinExchange::exchangingPrint(char *file) {
 			if (line != "date | value") {
 				data.error = BADINPUT;
 				data.date = line;
+				std::cout << "[" << line_num << "] ";
 				printOneData(data);
 				return ;
 			}
