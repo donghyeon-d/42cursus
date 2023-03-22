@@ -41,6 +41,13 @@ void PmergeMe::printNum() {
 	std::cout << std::endl;
 }
 
+void PmergeMe::printSet() {
+	for (std::set<int>::iterator it = _set.begin(); it != _set.end(); it++) {
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+}
+
 bool PmergeMe::setNumbers(char **argv) {
 	int i(1), tmp(0);
 	double dtmp;
@@ -76,10 +83,6 @@ void PmergeMe::insertSortVec(std::vector<int> &vec, int left, int right) {
 	int pick;
 	int j(0);
 
-	std::cout << "l : " << left << ", r : " << right << " | ";
-	for (int i = left; i < right + 1; i++) {
-		std::cout << vec[i] << " ";
-	}
 	for (int i = left + 1; i < right + 1; i++) {
 		j = i;
 		pick = vec[j];
@@ -90,24 +93,22 @@ void PmergeMe::insertSortVec(std::vector<int> &vec, int left, int right) {
 		if (i != j)
 			vec[j] = pick;
 	}
-	std::cout << " | insert : "; printVec();
 }
 
-void PmergeMe::insertSortDeq(std::deque<int> &deq) {
+void PmergeMe::insertSortDeq(std::deque<int> &deq, int left, int right) {
 	int pick;
-	unsigned int j(0);
+	int j(0);
 
-	for (unsigned int i = 1; i < deq.size(); i++) {
+	for (int i = left + 1; i < right + 1; i++) {
 		j = i;
 		pick = deq[j];
-		while (j > 0 && pick < deq[j - 1]) {
+		while (j > left && pick < deq[j - 1]) {
 			deq[j] = deq[j - 1];
 			j--;
 		}
 		if (i != j)
 			deq[j] = pick;
 	}
-	// std::cout << "deq : "; printDeq();
 }
 
 void PmergeMe::sortVec(std::vector<int> &array, int left, int right) {
@@ -115,17 +116,24 @@ void PmergeMe::sortVec(std::vector<int> &array, int left, int right) {
         int mid = (left + right) / 2;
         sortVec(array, left, mid);
         sortVec(array, mid + 1, right);
-		// std::cout << "!!vec : "; printVec();
         mergeVec(array, left, mid, right);
     } else {
         insertSortVec(array, left, right);
     }
-	// void printVec();
-	// std::cout << "vec : "; printVec();
+}
+
+void PmergeMe::sortDeq(std::deque<int> &array, int left, int right) {
+    if (right - left > CNT) {
+        int mid = (left + right) / 2;
+        sortDeq(array, left, mid);
+        sortDeq(array, mid + 1, right);
+        mergeDeq(array, left, mid, right);
+    } else {
+        insertSortDeq(array, left, right);
+    }
 }
 
 void PmergeMe::mergeVec(std::vector<int> &array, int left, int mid, int right) {
-	// 임시 array 만들기
 	std::vector<int> left_vec, right_vec;
 	for (int i = left; i < mid + 1; i++) {
 		left_vec.push_back(array[i]);
@@ -156,7 +164,61 @@ void PmergeMe::mergeVec(std::vector<int> &array, int left, int mid, int right) {
 			right_idx++;
 		}
 	}
-	// std::cout << " | merge : "; printVec();
+}
+
+void PmergeMe::mergeDeq(std::deque<int> &array, int left, int mid, int right) {
+	std::deque<int> left_que, right_que;
+	for (int i = left; i < mid + 1; i++) {
+		left_que.push_back(array[i]);
+	}
+	for (int i = mid + 1; i < right + 1; i++) {
+		right_que.push_back(array[i]);
+	}
+
+	int left_idx(0);
+	int right_idx(0);
+	int left_end(left_que.size());
+	int right_end(right_que.size());
+	for (int i = left; i < right + 1; i++) {
+		if (left_idx == left_end) {
+			array[i] = right_que[right_idx];
+			right_idx++;
+		}
+		else if (right_idx == right_end) {
+			array[i] = left_que[left_idx];
+			left_idx++;
+		}
+		else if (left_que[left_idx] < right_que[right_idx]) {
+			array[i] = left_que[left_idx];
+			left_idx++;
+		}
+		else {
+			array[i] = right_que[right_idx];
+			right_idx++;
+		}
+	}
+}
+
+void PmergeMe::sortSet() {
+	int i(0), tmp(0);
+	double dtmp;
+	while (_numbers[i] != '\0') {
+		dtmp = ft_atod(_numbers[i]);
+		if (dtmp > 2147483647 || dtmp < -2147483648) {
+			std::cout << "Error : _numbers[" << i << "]=" << _numbers[i] << " is too large or too small" << std::endl;
+			_set.clear();
+			return ;
+		}
+		else if (dtmp == 0 && _numbers[i][0] != '0') {
+			std::cout << "Error : _numbers[" << i << "]=" << _numbers[i] << " is not integer" << std::endl;
+			_set.clear();
+			return ;
+		}
+		else
+			tmp = static_cast<int>(dtmp);
+		_set.insert(tmp);
+		i++;
+	}
 }
 
 std::vector<int> &PmergeMe::getVec() {
@@ -165,4 +227,8 @@ std::vector<int> &PmergeMe::getVec() {
 
 std::deque<int> &PmergeMe::getDeq() {
 	return _deq;
+}
+
+char **PmergeMe::getNumbers() {
+	return _numbers;
 }
