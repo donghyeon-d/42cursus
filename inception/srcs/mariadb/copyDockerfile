@@ -16,11 +16,10 @@ RUN	chmod +x ./init.sh
 
 # ENTRYPOINT	["bash", "./init.sh"]
 
+# CMD			["mysqld"]
 
-# RUN sh ./init.sh
-# CMD	["mysqld"]
 
-ENTRYPOINT ["sh", "./init.sh"]
+CMD ["sh", "./init.sh"]
 
 
 #config 위치 :  /etc/mysql/mariadb.cnf

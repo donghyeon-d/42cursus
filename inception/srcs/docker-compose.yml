@@ -1,9 +1,31 @@
 version: '3'
 
+
+networks:
+    wp_blog:
+        driver: bridge
+
+
+volumes:
+    wordpress:
+        driver: local
+        driver_opts:
+            type: volume
+            o: bind
+            device: /home/dongchoi/data/wordpress
+    mariadb:
+        driver: local
+        driver_opts:
+            type: volume
+            o: bind
+            device: /home/dongchoi/data/mariadb
+
 services:
     mariadb:
         container_name: mariadb
         restart: always
+        env_file:
+            - .env
         build: ./mariadb
             # progress: plain
         expose:
@@ -16,6 +38,8 @@ services:
     nginx:
         container_name: nginx
         restart: always
+        env_file:
+            - .env
         build: ./nginx
             # progress: plain
         depends_on:
@@ -32,6 +56,8 @@ services:
     wordpress:
         container_name: wordpress
         restart: always
+        env_file:
+            - .env
         build: ./wordpress
             # progress: plain
         depends_on:
@@ -43,21 +69,3 @@ services:
         networks:
             - wp_blog
         tty: true
-
-networks:
-    wp_blog:
-        driver: bridge
-
-volumes:
-    wordpress:
-        driver: local
-        driver_opts:
-            type: volume
-            o: bind
-            device: /home/dongchoi/data/wordpress
-    mariadb:
-        driver: local
-        driver_opts:
-            type: volume
-            o: bind
-            device: /home/dongchoi/data/mariadb

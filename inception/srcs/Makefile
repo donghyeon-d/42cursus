@@ -7,7 +7,7 @@ down :
 	sudo docker-compose down
 
 rm :
-	sudo rm -rf /home/dongchoi/src/src
+	sudo rm -rf /home/dongchoi/data
 
 re :
 	@$(MAKE) down

@@ -21,14 +21,14 @@ RUN wget -O /tmp/wp-cli.phar "https://raw.githubusercontent.com/wp-cli/builds/gh
 	mv /tmp/wp-cli.phar /usr/local/bin/wp
 
 COPY ./www.conf /etc/php/7.3/fpm/pool.d/www.conf
-COPY ./init.sh /init.sh
+COPY ./init.sh ./init.sh
 
 #WORKDIR /var/www/html
 
 # RUN /bin/bash /init.sh
 
 # ENTRYPOINT [ "bash", "/init.sh" ]
-CMD [ "bash", "/init.sh" ]
+CMD [ "sh", "./init.sh" ]
 # CMD ["service", "php7.3-fpm", "start"]
 
 
