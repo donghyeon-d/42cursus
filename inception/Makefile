@@ -15,4 +15,5 @@ rm :
 
 re :
 	@$(MAKE) down
+	@$(MAKE) rm
 	@$(MAKE) up

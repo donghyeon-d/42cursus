@@ -108,3 +108,18 @@ services:
         networks:
             - wp_blog
         tty: true
+    elementor:
+        container_name: elementor
+        restart: always
+        env_file:
+            - .env
+        build: ./requirements/bonus/elementor
+        depends_on:
+            - wordpress
+        volumes:
+            - wordpress:/var/www/html
+        expose:
+            - "7000"
+        networks:
+            - wp_blog
+        tty: true
