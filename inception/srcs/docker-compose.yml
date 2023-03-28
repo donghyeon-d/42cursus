@@ -78,18 +78,18 @@ services:
         networks:
             - wp_blog
         tty: true
-    # ftp:
-    #     container_name: ftp
-    #     restart: always
-    #     env_file:
-    #         - .env
-    #     build: ./requirements/bonus/ftp
-    #     depends_on:
-    #         - wordpress
-    #     volumes:
-    #         - wordpress:/var/www/html
-    #     expose:
-    #         - "21"
-    #     networks:
-    #         - wp_blog
-    #     tty: true
+    ftp:
+        container_name: ftp
+        restart: always
+        env_file:
+            - .env
+        build: ./requirements/bonus/ftp
+        depends_on:
+            - wordpress
+        volumes:
+            - wordpress:/var/www/html
+        expose:
+            - "21"
+        networks:
+            - wp_blog
+        tty: true
