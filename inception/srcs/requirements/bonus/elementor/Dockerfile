@@ -2,7 +2,7 @@ FROM debian:oldstable
 
 RUN apt-get -y update && \
 	apt-get -y upgrade && \
-	apt-get install -y php7.3 php-fpm php-cli wget
+	apt-get install -y php7.3 php7.3-fpm php-cli wget unzip
 
 RUN wget -O /tmp/wp-cli.phar "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar" && \
 	chmod +x /tmp/wp-cli.phar && \

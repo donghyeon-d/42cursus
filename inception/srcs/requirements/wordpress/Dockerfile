@@ -18,6 +18,8 @@ RUN wget -O /tmp/wp-cli.phar "https://raw.githubusercontent.com/wp-cli/builds/gh
 	mv /tmp/wp-cli.phar /usr/local/bin/wp
 
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY ./tools/website /var/www/html/website
+COPY ./tools/index.html /var/www/html/index.html
 COPY ./tools/init.sh ./init.sh
 
 ENTRYPOINT [ "sh", "./init.sh" ]

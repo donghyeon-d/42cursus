@@ -19,8 +19,6 @@ wp plugin install redis-cache --activate --allow-root --path=/var/www/html
 wp cache flush --allow-root --path=/var/www/html
 wp redis enable --allow-root --path=/var/www/html
 
-# wp config install
-
 service php7.3-fpm start
 service php7.3-fpm stop
 
