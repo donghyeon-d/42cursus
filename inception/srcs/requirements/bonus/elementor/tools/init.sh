@@ -4,7 +4,7 @@ while :
 do
     # FILECOUNT=`ls ${WP_PATH} | wc -l`
     # if [[ "${FILECOUNT}" != "0" ]]; then
-    if [ -f "/var/www/html/wp-config.php" ]
+    if [ -f "$WP_PATH/wp-config.php" ]
     then
 		echo "file check done."
         break
@@ -14,7 +14,7 @@ do
 done
 
 # chown -R www-data:www-data /var/www/html
-if [ ! -f "/var/www/html/wp-content/plugins/elementor/elementor.php" ]
+if [ ! -f "$WP_PATH/wp-content/plugins/elementor/elementor.php" ]
 then
 wget -O /tmp/elementor.zip https://downloads.wordpress.org/plugin/elementor.3.11.5.zip
 unzip /tmp/elementor.zip -d $WP_PATH/wp-content/plugins
