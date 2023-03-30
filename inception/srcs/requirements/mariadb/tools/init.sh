@@ -9,4 +9,4 @@ rm $MARIADB_DATABASE.sql;
 
 service mysql stop
 
-mysqld --bind-address=0.0.0.0
+exec mysqld --bind-address=0.0.0.0

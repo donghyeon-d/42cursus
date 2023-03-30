@@ -22,4 +22,4 @@ wp redis enable --allow-root --path=$WP_PATH
 service php7.3-fpm start
 service php7.3-fpm stop
 
-php-fpm7.3 -F -R
+exec php-fpm7.3 -F -R

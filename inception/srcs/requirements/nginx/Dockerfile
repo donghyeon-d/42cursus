@@ -1,4 +1,4 @@
-FROM debian:oldstable-20230202
+FROM debian:oldstable
 
 RUN apt-get -y update && \
 	apt-get -y upgrade && \
@@ -13,5 +13,3 @@ RUN mkdir -p /etc/ssl/private && \
 ADD ./conf/config.conf /etc/nginx/sites-available/default
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
-
-# sudo docker run -it -v /home/dongchoi/data/wordpress:/var/www/html --network my_docker --name my_nginx -p 8080:8080 debian:oldstable-20230202

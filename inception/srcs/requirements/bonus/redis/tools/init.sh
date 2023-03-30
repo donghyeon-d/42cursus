@@ -6,4 +6,4 @@ echo "requirepass $WP_REDIS_PASSWORD" >> /etc/redis/redis.conf
 chmod 777 /var/log/redis
 chmod 777 /var/log/redis/redis-server.log
 
-redis-server /etc/redis/redis.conf --daemonize no --protected-mode no
+exec redis-server /etc/redis/redis.conf --daemonize no --protected-mode no

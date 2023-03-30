@@ -1,4 +1,4 @@
-FROM debian:oldstable-20230202
+FROM debian:oldstable
 
 RUN apt-get -y update && \
 	apt-get -y upgrade && \

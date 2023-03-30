@@ -25,19 +25,20 @@ services:
         env_file:
             - .env
         build: ./requirements/mariadb
+        image: mariadb
         expose:
             - "3306"
         volumes:
             - mariadb:/var/lib/mysql
         networks:
             - wp_blog
-        tty: true
     nginx:
         container_name: nginx
         restart: always
         env_file:
             - .env
         build: ./requirements/nginx
+        image: nginx
         depends_on:
             - wordpress
         extra_hosts:
@@ -48,13 +49,13 @@ services:
             - wordpress:/var/www/html
         networks:
             - wp_blog
-        tty: true
     wordpress:
         container_name: wordpress
         restart: always
         env_file:
             - .env
         build: ./requirements/wordpress
+        image: wordpress
         depends_on:
             - mariadb
             - redis
@@ -64,13 +65,13 @@ services:
             - "9000"
         networks:
             - wp_blog
-        tty: true
     redis:
         container_name: redis
         restart: always
         env_file:
             - .env
         build: ./requirements/bonus/redis
+        image: redis
         volumes:
             - wordpress:/var/www/html
         expose:
@@ -84,6 +85,7 @@ services:
         env_file:
             - .env
         build: ./requirements/bonus/ftp
+        image: ftp
         depends_on:
             - wordpress
         volumes:
@@ -99,6 +101,7 @@ services:
         env_file:
             - .env
         build: ./requirements/bonus/adminer
+        image: adminer
         depends_on:
             - wordpress
         volumes:
@@ -107,13 +110,13 @@ services:
             - "8000"
         networks:
             - wp_blog
-        tty: true
     elementor:
         container_name: elementor
         restart: always
         env_file:
             - .env
         build: ./requirements/bonus/elementor
+        image: elementor
         depends_on:
             - wordpress
         volumes:
@@ -122,4 +125,3 @@ services:
             - "7000"
         networks:
             - wp_blog
-        tty: true
