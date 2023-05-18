@@ -63,6 +63,9 @@ int RPN::calc() {
 			numbers.push(res);
 		}
 	}
+	if (numbers.size() != 1) {
+		throw InvalidInputException();
+	}
 	res = numbers.top();
 	return res;
 }

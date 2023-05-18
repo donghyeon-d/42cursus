@@ -44,6 +44,8 @@ class PmergeMe {
 		PmergeMe &operator=(const PmergeMe* rhs);
 		~PmergeMe();
 		bool setNumbers(char **argv);
+		void setVec();
+		void setDeq();
 		char **getNumbers();
 };
 
