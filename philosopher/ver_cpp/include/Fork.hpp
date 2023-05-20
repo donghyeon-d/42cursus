@@ -11,7 +11,7 @@ class Fork
     public :
         Fork();
         ~Fork();
-        void Grab();
+        bool Grab();
         void PutDown();
 
     private :

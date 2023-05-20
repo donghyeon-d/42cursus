@@ -4,8 +4,8 @@
 class DiningRule
 {
     public :
-        DiningRule(int philoCount, int timeToDie, int timeToEat, int timeToSleep, int mustEat);
-        ~DiningRule();
+        static void SetDiningRule(int philoCount, int timeToDie, \
+                    int timeToEat, int timeToSleep, int mustEat);
         static int  PhiloCount;
         static int	TimeToDie;
         static int	TimeToEat;

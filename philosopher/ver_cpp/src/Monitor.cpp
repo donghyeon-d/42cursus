@@ -7,15 +7,16 @@ Monitor::Monitor(std::vector<Philo*> &philoList)
 
 void Monitor::StartMonitoring()
 {
-    Timer::SetStartTime();
     while (true)
     {
-        for (int philoNum = 0; philoNum < _philoList.size(); philoNum++)
+        for (int philoNum = 0; philoNum < (int)_philoList.size(); philoNum++)
         {
             if (IsPhiloDied(philoNum))
             {
+                Printer::Lock();
                 Printer::PrintStatus(philoNum, DIE);
                 ChengeAllPhiloStatusToEND();
+                Printer::Unlock();
                 return ;
             }
 
@@ -39,7 +40,7 @@ bool Monitor::IsPhiloEnd(int number)
 
 void Monitor::ChengeAllPhiloStatusToEND()
 {
-    for (int philoNum = 0; philoNum < _philoList.size(); philoNum++)
+    for (int philoNum = 0; philoNum < (int)_philoList.size(); philoNum++)
     {
         _philoList[philoNum]->SetStatus(END);
     }

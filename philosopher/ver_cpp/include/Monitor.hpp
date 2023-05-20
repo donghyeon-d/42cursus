@@ -17,4 +17,8 @@ class Monitor
         void ChengeAllPhiloStatusToEND();
 };
 
+bool IsInvalidCount(int argc);
+bool IsWrongType(int argc, char **argv);
+void InitDiningRule(int argc, char **argv);
+
 #endif

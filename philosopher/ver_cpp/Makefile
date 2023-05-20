@@ -1,28 +1,22 @@
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -pthread
-NAME = philosopher
-SRC = 
-OBJECT = $(SRC:.c=.o)
-c`:q
+CXXFLAGS = -Wall -Wextra -Werror -g3 -pthread -fsanitize=address
+NAME = philo
+SRC = ./src/DiningRule.cpp ./src/Fork.cpp ./src/Main.cpp ./src/Monitor.cpp \
+./src/Parser.cpp ./src/Philo.cpp ./src/Printer.cpp ./src/Timer.cpp ./src/PhiloThread.cpp
 
-%.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(HEADER_DIR)
+OBJECT = $(SRC:.cpp=.o)
+HEADER_DIR = ./include
 
-$(DIR_BONUS)%.o : $(DIR_BONUS)%.c
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(HEADER_DIR_BONUS)
+# %.o : %.cpp
+# 	$(CXX) $(CXXFLAGS) -c -I $(HEADER_DIR) $<
 
 all : $(NAME)
 
-bonus : $(NAME_BONUS)
-
 $(NAME) : $(OBJECT)
-	$(CC) $(CFLAGS) -o $@ $^
-
-$(NAME_BONUS) : $(OBJECT_BONUS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) $(OBJECT) -o $(NAME)
 
 clean :
-	rm -rf $(OBJECT) $(OBJECT_BONUS)
+	rm -rf $(OBJECT)
 
 fclean : clean
 	rm -rf $(NAME) $(NAME_BONUS)

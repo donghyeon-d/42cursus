@@ -8,10 +8,13 @@ class Parser
     public:
         Parser(int argc, char **argv);
         bool IsValidParm();
-        void SetDiningRuleFromParm();
+        void SetDiningRule();
     private:
         int _argc;
         char **_argv;
+        bool IsInvalidCount();
+        bool IsWrongType();
 };
+
 
 #endif
