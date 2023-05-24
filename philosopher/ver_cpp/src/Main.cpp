@@ -18,6 +18,10 @@ void GarbageCollect(std::vector<Philo*> &philos, std::vector<Fork*> &forks);
 int main(int argc, char **argv)
 {
     int philoCount = Parsing(argc, argv);
+    if (philoCount == -1)
+    {
+        return 0;
+    }
 
     std::vector<Fork*> forks = InitForkList(philoCount);
 
@@ -31,6 +35,9 @@ int main(int argc, char **argv)
 
     GarbageCollect(philos, forks);
 
+// leak 체크를 위한 코드
+//    system("leaks philo");
+
     return 0;
 }
 
@@ -41,7 +48,8 @@ int Parsing(int argc, char **argv)
     if (parser.IsValidParm() != true)
     {
         std::cerr << "Error : Invalid Parm" << std::endl;
-        exit(0);
+
+        return -1;
     }
 
     parser.SetDiningRule();
@@ -89,12 +97,14 @@ void GarbageCollect(std::vector<Philo*> &philos, std::vector<Fork*> &forks)
     {
         philos[philoNum]->ThreadJoin();
     }
+
     for (int philoNum = 0; philoNum < (int)philos.size(); philoNum++)
     {
-        free(philos[philoNum]);
+        philos[philoNum]->Free();
         free(forks[philoNum]);
     }
 
+    Timer::Free();
 }
 
 

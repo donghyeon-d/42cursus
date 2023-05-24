@@ -19,7 +19,6 @@ void Monitor::StartMonitoring()
                 Printer::Unlock();
                 return ;
             }
-
             if (IsPhiloEnd(philoNum))
             {
                 return ;

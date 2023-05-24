@@ -23,7 +23,6 @@ class Philo
         void SetStatus(PhiloStatus status); // mutex
         bool IsDied();
         void ThreadJoin();
-        void operator()() const ;
         void Act();
 
         void GrabForks();
@@ -32,9 +31,10 @@ class Philo
         void SpendTime(int milliseconds);
         bool IsOddNumber();
         bool IsFullEatCount();
-        int _number;
+        void Free();
 
     private:
+        int _number;
         pthread_t *_pthread;
         Fork *_leftFork;
         Fork *_rightFork;
@@ -43,7 +43,6 @@ class Philo
         std::mutex _lastEatTimeMutex;
         PhiloStatus _status;
         std::mutex _statusMutex;
-        // std::thread *_worker;
 
         bool GrabLeftFork();
         bool GrabRightFork();

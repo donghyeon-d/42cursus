@@ -5,7 +5,7 @@ std::mutex Printer::_printMutex;
 void Printer::PrintStatus(int id, PhiloStatus philoStatus)
 {
     time_t time = Timer::Now();
-    std::cout << time << " " << id;
+    std::cout << time << " " << id + 1;
     
     switch (philoStatus)
     {
@@ -27,7 +27,7 @@ void Printer::PrintStatus(int id, PhiloStatus philoStatus)
         default :
             break;
     }
-    std::cout << std::endl;
+    std::cout << "\n";
 }
 
 void Printer::Lock()

@@ -3,7 +3,6 @@
 void* ThreadMainFunc(void* parm)
 {
 	Philo* philo = reinterpret_cast<Philo*>(parm);
-    // philo->SpendTime(10);
     if (philo->IsOddNumber())
     {
         std::this_thread::sleep_until(std::chrono::system_clock::now() + \
@@ -11,8 +10,6 @@ void* ThreadMainFunc(void* parm)
     }
     while(DiningRule::PhiloCount != 1)
     {
-        // std::this_thread::sleep_until(std::chrono::system_clock::now() + \
-        //         std::chrono::microseconds(100));
         philo->GrabForks();
         philo->Eatting();
         philo->Sleeping();
@@ -21,10 +18,6 @@ void* ThreadMainFunc(void* parm)
             break;
         }
     }
-
-    Printer::Lock();
-    std::cout << philo->_number << " End" << std::endl;
-    Printer::Unlock();
 
     return NULL;
 }
@@ -47,7 +40,12 @@ Philo::Philo(int number, std::vector<Fork*> &forks)
 
 Philo::~Philo()
 {
+}
+
+void Philo::Free()
+{
     free(_pthread);
+    free(this);
 }
 
 void Philo::StartDining()
@@ -321,12 +319,11 @@ bool Philo::IsOddNumber()
 
 void Philo::PrintPhiloStatus(PhiloStatus philoStatus)
 {
-    if (CheckStatus(END))
-    {
-        return ;
-    }
     Printer::Lock();
-    Printer::PrintStatus(_number, philoStatus);
+    if (CheckStatus(END) == false)
+    {
+        Printer::PrintStatus(_number, philoStatus);
+    }
     Printer::Unlock();
 }
 

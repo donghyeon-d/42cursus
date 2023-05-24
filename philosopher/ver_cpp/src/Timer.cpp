@@ -1,7 +1,7 @@
 #include "../include/Timer.hpp"
 #include <iostream>
 
-timeval* Timer::_start;
+timeval* Timer::_start = NULL;
 
 void Timer::SetStartTime()
 {
@@ -22,4 +22,13 @@ time_t Timer::Now()
     time_t result = (currentTime.tv_sec * 1000) + (currentTime.tv_usec / 1000);
 
     return (result);
+}
+
+void Timer::Free()
+{
+    if (_start != NULL)
+    {
+        free(_start);
+        _start = NULL;
+    }
 }

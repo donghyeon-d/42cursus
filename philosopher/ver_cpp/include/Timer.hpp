@@ -9,6 +9,7 @@ class Timer
     public :
         static void SetStartTime();
         static time_t Now();
+        static void Free();
     private :
         static timeval* _start;
 };
