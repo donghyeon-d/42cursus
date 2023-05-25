@@ -19,9 +19,16 @@ void Monitor::StartMonitoring()
                 Printer::Unlock();
                 return ;
             }
+            
             if (IsPhiloEnd(philoNum))
             {
                 return ;
+            }
+            
+            if (philoNum % 20 == 0)
+            {
+                std::this_thread::sleep_until(std::chrono::system_clock::now() + \
+                std::chrono::microseconds(5000));
             }
         }
     }

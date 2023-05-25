@@ -17,21 +17,17 @@ class Philo
         Philo(int number, std::vector<Fork*> &forks);
         ~Philo();
         void StartDining();
-        void SetLastEatTimeAtNow(); // mutex
-        PhiloStatus GetStatus();
         bool CheckStatus(PhiloStatus status);
-        void SetStatus(PhiloStatus status); // mutex
+        void SetStatus(PhiloStatus status);
         bool IsDied();
         void ThreadJoin();
-        void Act();
-
         void GrabForks();
         void Eatting();
         void Sleeping();
-        void SpendTime(int milliseconds);
         bool IsOddNumber();
         bool IsFullEatCount();
         void Free();
+        void SpendTime(int milliseconds);
 
     private:
         int _number;
@@ -44,6 +40,7 @@ class Philo
         PhiloStatus _status;
         std::mutex _statusMutex;
 
+        void SetLastEatTimeAtNow();
         bool GrabLeftFork();
         bool GrabRightFork();
         void GrabForksLeftFirst();

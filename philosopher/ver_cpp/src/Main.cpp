@@ -2,7 +2,6 @@
 #include "../include/Fork.hpp"
 #include "../include/Monitor.hpp"
 #include "../include/Parser.hpp"
-#include "./PhiloThread.cpp"
 #include "../include/DiningRule.hpp"
 #include "../include/DiningRule.hpp"
 #include "../include/Printer.hpp"
@@ -35,8 +34,8 @@ int main(int argc, char **argv)
 
     GarbageCollect(philos, forks);
 
-// leak 체크를 위한 코드
-//    system("leaks philo");
+    // leak 체크를 위한 코드
+    // system("leaks philo");
 
     return 0;
 }

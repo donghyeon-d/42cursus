@@ -5,8 +5,7 @@ void* ThreadMainFunc(void* parm)
 	Philo* philo = reinterpret_cast<Philo*>(parm);
     if (philo->IsOddNumber())
     {
-        std::this_thread::sleep_until(std::chrono::system_clock::now() + \
-                std::chrono::microseconds(200));
+        philo->SpendTime(3);
     }
     while(DiningRule::PhiloCount != 1)
     {
@@ -17,6 +16,10 @@ void* ThreadMainFunc(void* parm)
         {
             break;
         }
+
+        
+    std::this_thread::sleep_until(std::chrono::system_clock::now() + \
+        std::chrono::microseconds(200));
     }
 
     return NULL;
@@ -53,23 +56,6 @@ void Philo::StartDining()
     pthread_create(_pthread, NULL, ThreadMainFunc, this);
 }
 
-// void Philo::Act()
-// {
-//     SpendTime(10);
-//     while(true)
-//     {
-//         GrabForks();
-//         Eatting();
-//         Sleeping();
-//         if (CheckStatus(END))
-//         {
-//             _leftFork->PutDown();
-//             _rightFork->PutDown();
-//             break;
-//         }
-//     }
-// }
-
 void Philo::GrabForks()
 {
     if (CheckStatus(THINKING) == false)
@@ -85,13 +71,13 @@ void Philo::GrabForks()
     {
         GrabForksRightFirst();
     }
-
 }
 
 void Philo::Eatting()
 {
     if (CheckStatus(GETFORK) == false)
     {
+        PutDownForks();
         return ;
     }
 
@@ -126,6 +112,7 @@ void Philo::Sleeping()
     
     SetStatus(THINKING);
     PrintPhiloStatus(THINKING);
+
 }
 
 bool Philo::IsDied()
@@ -133,7 +120,8 @@ bool Philo::IsDied()
     bool result = false;
 
     _lastEatTimeMutex.lock();
-    if (Timer::Now() - _lastEatTime > DiningRule::TimeToDie)
+    if (Timer::Now() > 1 && 
+        Timer::Now() - _lastEatTime > DiningRule::TimeToDie)
     {
         result = true;
     }
@@ -178,6 +166,7 @@ void Philo::GrabForksLeftFirst()
             break;
     }
     PrintPhiloStatus(GETFORK);
+
     while (!_rightFork->Grab())
     {
         if (CheckStatus(END))
@@ -188,15 +177,6 @@ void Philo::GrabForksLeftFirst()
     }
     PrintPhiloStatus(GETFORK);
     SetStatus(GETFORK);
-    // GrabLeftFork();
-    // PrintPhiloStatus(GETFORK);
-    // if (CheckStatus(END))
-    // {
-    //     _rightFork->PutDown();
-    // }
-    // GrabRightFork();
-    // PrintPhiloStatus(GETFORK);
-    // SetStatus(GETFORK);
 }
 
 void Philo::GrabForksRightFirst()
@@ -217,15 +197,6 @@ void Philo::GrabForksRightFirst()
     }
     PrintPhiloStatus(GETFORK);
     SetStatus(GETFORK);
-    // GrabLeftFork();
-    // PrintPhiloStatus(GETFORK);
-    // if (CheckStatus(END))
-    // {
-    //     _leftFork->PutDown();
-    // }
-    // GrabRightFork();
-    // PrintPhiloStatus(GETFORK);
-    // SetStatus(GETFORK);
 }
 
 bool Philo::GrabLeftFork()
@@ -236,8 +207,8 @@ bool Philo::GrabLeftFork()
         {
             return false;
         }
-        std::this_thread::sleep_until(std::chrono::system_clock::now() + \
-                std::chrono::milliseconds(1));
+        // std::this_thread::sleep_until(std::chrono::system_clock::now() + \
+        //         std::chrono::microseconds(300));
     }
     return true;
 }
@@ -250,8 +221,8 @@ bool Philo::GrabRightFork()
         {
             return false;
         }
-        std::this_thread::sleep_until(std::chrono::system_clock::now() + \
-                std::chrono::milliseconds(1));
+        // std::this_thread::sleep_until(std::chrono::system_clock::now() + \
+        //         std::chrono::microseconds(100));
     }
     return true;
 }
@@ -301,8 +272,12 @@ void Philo::ThreadJoin()
 
 void Philo::SpendTime(int milliseconds)
 {
-    std::this_thread::sleep_until(std::chrono::system_clock::now() + \
-                std::chrono::milliseconds(milliseconds));
+    time_t afterMilliseconds = Timer::Now() + milliseconds;
+    while (Timer::Now() < afterMilliseconds)
+    {
+        std::this_thread::sleep_until(std::chrono::system_clock::now() + \
+                std::chrono::microseconds(30));
+    }
 }
 
 bool Philo::IsOddNumber()

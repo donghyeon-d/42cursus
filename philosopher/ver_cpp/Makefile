@@ -2,7 +2,7 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror
 NAME = philo
 SRC = ./src/DiningRule.cpp ./src/Fork.cpp ./src/Main.cpp ./src/Monitor.cpp \
-./src/Parser.cpp ./src/Philo.cpp ./src/Printer.cpp ./src/Timer.cpp ./src/PhiloThread.cpp
+./src/Parser.cpp ./src/Philo.cpp ./src/Printer.cpp ./src/Timer.cpp
 
 OBJECT = $(SRC:.cpp=.o)
 HEADER_DIR = ./include

@@ -5,6 +5,10 @@ timeval* Timer::_start = NULL;
 
 void Timer::SetStartTime()
 {
+    if (_start != NULL)
+    {
+        return;
+    }
     _start = new timeval;
     gettimeofday(_start, NULL);
 }
