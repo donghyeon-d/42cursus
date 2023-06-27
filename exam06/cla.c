@@ -16,11 +16,11 @@ int main(int argc, char **argv)
 	int listen_fd, accepted_fd;
 	struct sockaddr_in host_addr, client_addr;
 
-	// if (argc != 2) 
-	// {
-	// 	write(2, "Wrong number of arguments\n", 26);
-	// 	exit(1);
-	// }
+	if (argc != 2) 
+	{
+		write(2, "Wrong number of arguments\n", 26);
+		exit(1);
+	}
 
 	bzero(&client_addr, sizeof(struct sockaddr_in));
 
@@ -32,23 +32,18 @@ int main(int argc, char **argv)
 	socklen_t addr_len = sizeof(addr);
 	addr.sin_family = AF_INET;
 	addr.sin_addr.s_addr = htonl(2130706433);
-	// addr.sin_port = htons(4444);
 	addr.sin_port = htons(atoi(argv[1]));
 
+	if (connect(sockfd, (struct sockaddr*)&addr, sizeof(struct sockaddr_in)) == -1) {
+		fatal_error();
+	};
 
-	if ((bind(sockfd, (const struct sockaddr *)&addr, sizeof(addr))) < 0)
-		fatal_error();
-	int ret_lis = listen(sockfd, 128);
-	if (ret_lis < 0)
-		fatal_error();
-	
-	int len = sizeof(client_addr);
-	int cla_sock = accept(sockfd, (struct sockaddr *)&client_addr, (socklen_t *)&len);
-	char str[100];
-	while (1) {
-		int l = recv(cla_sock, str, 100, 0);
-		if (l > 0) {
-			write(1, str, 100);
-		}
+	char msg[100];
+	while (1)
+	{
+		scanf("%s", msg);
+		printf("w %s\n", msg);
+		send(sockfd, msg, strlen(msg), 0);
 	}
+
 }
